@@ -241,7 +241,7 @@ void Scene::setSize(int width, int height)
 
 size_t Scene::carCount()
 {
-    return 12;
+    return 2;
 }
 
 void Scene::createMenus()
