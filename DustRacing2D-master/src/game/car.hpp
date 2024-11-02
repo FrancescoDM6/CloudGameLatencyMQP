@@ -30,6 +30,7 @@ class Gearbox;
 class MCSurface;
 class MCFrictionGenerator;
 class Route;
+class Track;
 
 //! Base class for race cars.
 class Car : public MCObject
@@ -250,6 +251,11 @@ private:
     bool m_trackAssistanceEnabled;
     float m_offTrackTimer;
     static constexpr float OFF_TRACK_ASSIST_DELAY = 1.0f; // Seconds before assistance kicks in
+
+    std::shared_ptr<Track> m_track;
+    size_t m_lastTargetNodeIndex;
+
+    std::shared_ptr<Race> m_race;
 };
 
 typedef std::shared_ptr<Car> CarPtr;

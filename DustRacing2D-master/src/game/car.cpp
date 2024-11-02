@@ -80,6 +80,7 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   , m_gearbox(std::make_unique<Gearbox>())
   , m_trackAssistanceEnabled(false)
   , m_offTrackTimer(0.0f)
+  , m_lastTargetNodeIndex(0)
 {
     // Override the default physics component to handle damage from impulses
     setPhysicsComponent(std::make_unique<CarPhysicsComponent>(*this));
@@ -332,28 +333,15 @@ void Car::updateTireWear(int step)
 
     if (m_isHuman)
     {
-        // Track assistance logic
-        if (isOffTrack())
+        if (m_track && isOffTrack())
         {
-            m_offTrackTimer += step / 1000.0f; // Convert step to seconds
+            m_offTrackTimer += step / 1000.0f;
             if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
             {
-                m_trackAssistanceEnabled = true;
-            }
-        }
-        else
-        {
-            m_offTrackTimer = 0.0f;
-            m_trackAssistanceEnabled = false;
-        }
+                const Route & route = m_track->trackData().route();
+                const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
 
-        // If track assistance is enabled, apply steering correction
-        if (m_trackAssistanceEnabled)
-        {
-            // Find nearest track node and steer towards it
-            if (const auto route = Game::instance().currentTrack()->trackData().route())
-            {
-                const auto targetNode = route->findNearestNode(location());
+                // Use AI-style steering control
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
                                  static_cast<float>(targetNode->location().y()));
                 target -= MCVector3dF(location());
@@ -377,6 +365,10 @@ void Car::updateTireWear(int step)
                     steer(Steer::Left, 0.5f);
                 }
             }
+        }
+        else
+        {
+            m_offTrackTimer = 0.0f;
         }
 
         if (isBraking() || (isAccelerating() && m_steer != Steer::Neutral))
@@ -571,6 +563,16 @@ void Car::setSoundEffectManager(CarSoundEffectManagerPtr soundEffectManager)
 CarSoundEffectManagerPtr Car::soundEffectManager() const
 {
     return m_soundEffectManager;
+}
+
+void Car::setTrack(std::shared_ptr<Track> track)
+{
+    m_track = track;
+}
+
+void Car::setRace(std::shared_ptr<Race> race)
+{
+    m_race = race;
 }
 
 Car::~Car()
