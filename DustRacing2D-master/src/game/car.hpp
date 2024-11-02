@@ -255,7 +255,7 @@ private:
 
     bool m_trackAssistanceEnabled;
     float m_offTrackTimer;
-    static constexpr float OFF_TRACK_ASSIST_DELAY = 1.0f; // Seconds before assistance kicks in
+    static constexpr float OFF_TRACK_ASSIST_DELAY = 0.1f; // Changed from 1.0f
 
     std::shared_ptr<Track> m_track;
     size_t m_lastTargetNodeIndex;

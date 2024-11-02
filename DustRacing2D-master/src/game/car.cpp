@@ -346,15 +346,14 @@ void Car::updateTireWear(int step)
             m_offTrackTimer += step / 1000.0f;
             if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
             {
+                fprintf(stderr, "Track assistance active! Angle diff: %f\n", diff);
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
                 const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
 
-                // Use AI-style steering control
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
                                  static_cast<float>(targetNode->location().y()));
                 target -= MCVector3dF(location());
-                L().info() << "Target " << target;
 
                 const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
                 const float cur = static_cast<int>(this->angle()) % 360;
@@ -364,15 +363,15 @@ void Car::updateTireWear(int step)
                 while (diff > 180) diff -= 360;
                 while (diff < -180) diff += 360;
 
-                // Apply stronger steering correction during assistance
-                const float maxDelta = 3.0;
+                // Make steering correction MUCH more aggressive
+                const float maxDelta = 0.1f;  // Reduced from 3.0 to trigger on smaller angles
                 if (diff < -maxDelta)
                 {
-                    steer(Steer::Right, 0.75f);
+                    steer(Steer::Right, 1.0f);  // Maximum steering
                 }
                 else if (diff > maxDelta)
                 {
-                    steer(Steer::Left, 0.75f);
+                    steer(Steer::Left, 1.0f);   // Maximum steering
                 }
             }
         }
