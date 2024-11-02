@@ -78,6 +78,8 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   , m_rightBrakeGlowPos(-21, -8, 0)
   , m_hadHardCrash(false)
   , m_gearbox(std::make_unique<Gearbox>())
+  , m_trackAssistanceEnabled(false)
+  , m_offTrackTimer(0.0f)
 {
     // Override the default physics component to handle damage from impulses
     setPhysicsComponent(std::make_unique<CarPhysicsComponent>(*this));
@@ -330,6 +332,53 @@ void Car::updateTireWear(int step)
 
     if (m_isHuman)
     {
+        // Track assistance logic
+        if (isOffTrack())
+        {
+            m_offTrackTimer += step / 1000.0f; // Convert step to seconds
+            if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
+            {
+                m_trackAssistanceEnabled = true;
+            }
+        }
+        else
+        {
+            m_offTrackTimer = 0.0f;
+            m_trackAssistanceEnabled = false;
+        }
+
+        // If track assistance is enabled, apply steering correction
+        if (m_trackAssistanceEnabled)
+        {
+            // Find nearest track node and steer towards it
+            if (const auto route = Game::instance().currentTrack()->trackData().route())
+            {
+                const auto targetNode = route->findNearestNode(location());
+                MCVector3dF target(static_cast<float>(targetNode->location().x()), 
+                                 static_cast<float>(targetNode->location().y()));
+                target -= MCVector3dF(location());
+
+                const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+                const float cur = static_cast<int>(this->angle()) % 360;
+                float diff = angle - cur;
+
+                // Normalize angle difference
+                while (diff > 180) diff -= 360;
+                while (diff < -180) diff += 360;
+
+                // Apply gentle steering correction
+                const float maxDelta = 3.0;
+                if (diff < -maxDelta)
+                {
+                    steer(Steer::Right, 0.5f);
+                }
+                else if (diff > maxDelta)
+                {
+                    steer(Steer::Left, 0.5f);
+                }
+            }
+        }
+
         if (isBraking() || (isAccelerating() && m_steer != Steer::Neutral))
         {
             const float brakingTireWearFactor = 0.05f;

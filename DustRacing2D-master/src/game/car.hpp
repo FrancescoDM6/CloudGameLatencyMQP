@@ -246,6 +246,10 @@ private:
     bool m_brakeEnabled = false;
 
     std::deque<std::pair<MCObject *, MCVector3dF>> m_collisionEffectStack;
+
+    bool m_trackAssistanceEnabled;
+    float m_offTrackTimer;
+    static constexpr float OFF_TRACK_ASSIST_DELAY = 1.0f; // Seconds before assistance kicks in
 };
 
 typedef std::shared_ptr<Car> CarPtr;
