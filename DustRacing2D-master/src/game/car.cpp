@@ -341,10 +341,8 @@ void Car::updateTireWear(int step)
 
     if (m_isHuman)
     {
-        fprintf(stderr, "Human car update. Off track: %d\n", isOffTrack());
-        if (isOffTrack())
+        if (m_track && isOffTrack())
         {
-            fprintf(stderr, "Off track. Timer: %f, Track: %p, Race: %p\n", m_offTrackTimer, (void*)m_track.get(), (void*)m_race.get());
             m_offTrackTimer += step / 1000.0f;
             if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
             {
@@ -352,6 +350,7 @@ void Car::updateTireWear(int step)
                 const Route & route = m_track->trackData().route();
                 const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
 
+                // Calculate target vector
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
                                  static_cast<float>(targetNode->location().y()));
                 target -= MCVector3dF(location());
@@ -360,21 +359,41 @@ void Car::updateTireWear(int step)
                 const float cur = static_cast<int>(this->angle()) % 360;
                 float diff = angle - cur;
 
-                // Normalize angle difference
-                while (diff > 180) diff -= 360;
-                while (diff < -180) diff += 360;
-                fprintf(stderr, "Track assistance active! Angle diff: %f\n", diff);
+                // Normalize angle difference (same way AI does it)
+                bool ok = false;
+                while (!ok)
+                {
+                    if (diff > 180)
+                    {
+                        diff = diff - 360;
+                        ok = false;
+                    }
+                    else if (diff < -180)
+                    {
+                        diff = diff + 360;
+                        ok = false;
+                    }
+                    else
+                    {
+                        ok = true;
+                    }
+                }
 
+                // Scale control by maximum possible steering angle
+                const float maxSteerAngle = 15.0f;
+                const float maxDelta = 0.1f;
+                float control = std::min(1.0f, std::abs(diff) / maxSteerAngle);
 
-                // Make steering correction MUCH more aggressive
-                const float maxDelta = 0.1f;  // Reduced from 3.0 to trigger on smaller angles
+                fprintf(stderr, "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n", 
+                        angle, cur, diff, control);
+
                 if (diff < -maxDelta)
                 {
-                    steer(Steer::Right, 1.0f);  // Maximum steering
+                    steer(Steer::Right, control);
                 }
                 else if (diff > maxDelta)
                 {
-                    steer(Steer::Left, 1.0f);   // Maximum steering
+                    steer(Steer::Left, control);
                 }
             }
         }
