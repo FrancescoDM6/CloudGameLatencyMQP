@@ -197,8 +197,11 @@ void Scene::createCars()
 
             setupAudio(*car, i);
 
-            m_cars.push_back(car);
+            car->setTrack(m_activeTrack);
+            car->setRace(m_race);
             m_race->addCar(*car);
+
+            m_cars.push_back(car);
         }
     }
 
