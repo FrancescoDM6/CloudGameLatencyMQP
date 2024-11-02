@@ -156,6 +156,10 @@ public:
 
     void setBrakeEnabled(bool brakeEnabled);
 
+    void setTrack(std::shared_ptr<Track> track);
+
+    void setRace(std::shared_ptr<Race> race);
+
 private:
     void accelerate(bool deccelerate = false);
 
