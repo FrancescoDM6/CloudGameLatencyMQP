@@ -363,28 +363,28 @@ void Car::updateTireWear(int step)
                 while (diff > 180) diff -= 360;
                 while (diff < -180) diff += 360;
 
-                // Use PID-style control like the AI does
-                float control = diff * 0.025f;  // Proportional term
+                // Much more aggressive control factor (0.025f -> 0.1f)
+                float control = diff * 0.1f;  // Increased from 0.025f
                 if (control < 0)
                 {
-                    control = -control;  // Make control positive
+                    control = -control;
                 }
-                control = std::min(control, 1.0f);  // Limit maximum control
+                control = std::min(control, 1.0f);
 
                 fprintf(stderr, "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n", 
                         angle, cur, diff, control);
 
-                // Apply steering with smaller threshold
-                const float maxDelta = 1.0f;  // Increased from 0.1f to be more responsive
+                // More aggressive steering response
+                const float maxDelta = 0.5f;  // Reduced threshold to steer more often
                 if (diff < -maxDelta)
                 {
-                    steer(Steer::Right, control);
-                    fprintf(stderr, "Steering RIGHT with control %f\n", control);
+                    steer(Steer::Right, control + 0.5f);  // Add base steering amount
+                    fprintf(stderr, "Steering RIGHT with control %f\n", control + 0.5f);
                 }
                 else if (diff > maxDelta)
                 {
-                    steer(Steer::Left, control);
-                    fprintf(stderr, "Steering LEFT with control %f\n", control);
+                    steer(Steer::Left, control + 0.5f);   // Add base steering amount
+                    fprintf(stderr, "Steering LEFT with control %f\n", control + 0.5f);
                 }
             }
         }
