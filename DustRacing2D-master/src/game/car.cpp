@@ -359,41 +359,32 @@ void Car::updateTireWear(int step)
                 const float cur = static_cast<int>(this->angle()) % 360;
                 float diff = angle - cur;
 
-                // Normalize angle difference (same way AI does it)
-                bool ok = false;
-                while (!ok)
-                {
-                    if (diff > 180)
-                    {
-                        diff = diff - 360;
-                        ok = false;
-                    }
-                    else if (diff < -180)
-                    {
-                        diff = diff + 360;
-                        ok = false;
-                    }
-                    else
-                    {
-                        ok = true;
-                    }
-                }
+                // Normalize angle difference
+                while (diff > 180) diff -= 360;
+                while (diff < -180) diff += 360;
 
-                // Scale control by maximum possible steering angle
-                const float maxSteerAngle = 15.0f;
-                const float maxDelta = 0.1f;
-                float control = std::min(1.0f, std::abs(diff) / maxSteerAngle);
+                // Use PID-style control like the AI does
+                float control = diff * 0.025f;  // Proportional term
+                if (control < 0)
+                {
+                    control = -control;  // Make control positive
+                }
+                control = std::min(control, 1.0f);  // Limit maximum control
 
                 fprintf(stderr, "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n", 
                         angle, cur, diff, control);
 
+                // Apply steering with smaller threshold
+                const float maxDelta = 1.0f;  // Increased from 0.1f to be more responsive
                 if (diff < -maxDelta)
                 {
                     steer(Steer::Right, control);
+                    fprintf(stderr, "Steering RIGHT with control %f\n", control);
                 }
                 else if (diff > maxDelta)
                 {
                     steer(Steer::Left, control);
+                    fprintf(stderr, "Steering LEFT with control %f\n", control);
                 }
             }
         }
