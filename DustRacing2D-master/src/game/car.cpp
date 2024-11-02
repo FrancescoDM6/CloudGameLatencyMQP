@@ -44,6 +44,13 @@
 #include <memory>
 #include <string>
 
+#include "../common/route.hpp"
+#include "../common/tracktilebase.hpp"
+#include "race.hpp"
+#include "track.hpp"
+#include "trackdata.hpp"
+#include "tracktile.hpp"
+
 using std::dynamic_pointer_cast;
 using std::static_pointer_cast;
 

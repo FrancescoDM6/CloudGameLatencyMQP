@@ -31,6 +31,11 @@ class MCSurface;
 class MCFrictionGenerator;
 class Route;
 class Track;
+class TrackTile;
+class Race;
+
+#include "../common/targetnodebase.hpp"
+
 
 //! Base class for race cars.
 class Car : public MCObject
