@@ -180,7 +180,8 @@ void Car::steer(Steer direction, float control)
     }
     else
     {
-        if (const float maxAngle = 15.0f * (direction == Steer::Left ? 1 : -1); !m_isHuman)
+        const float maxAngle = 15.0f * (direction == Steer::Left ? 1 : -1);
+        if (!m_isHuman || m_trackAssistanceEnabled)
         {
             m_tireAngle = static_cast<int>(maxAngle * control);
         }
@@ -189,7 +190,6 @@ void Car::steer(Steer direction, float control)
             m_tireAngle = m_tireAngle + (maxAngle - m_tireAngle) * 0.15f;
         }
     }
-
     m_steer = direction;
 }
 
@@ -345,6 +345,7 @@ void Car::updateTireWear(int step)
             m_offTrackTimer += step / 1000.0f;
             if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
             {
+                m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
                 const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
 
@@ -361,21 +362,22 @@ void Car::updateTireWear(int step)
                 while (diff > 180) diff -= 360;
                 while (diff < -180) diff += 360;
 
-                // Apply gentle steering correction
+                // Apply stronger steering correction during assistance
                 const float maxDelta = 3.0;
                 if (diff < -maxDelta)
                 {
-                    steer(Steer::Right, 0.5f);
+                    steer(Steer::Right, 0.75f);
                 }
                 else if (diff > maxDelta)
                 {
-                    steer(Steer::Left, 0.5f);
+                    steer(Steer::Left, 0.75f);
                 }
             }
         }
         else
         {
             m_offTrackTimer = 0.0f;
+            m_trackAssistanceEnabled = false;
         }
 
         if (isBraking() || (isAccelerating() && m_steer != Steer::Neutral))
