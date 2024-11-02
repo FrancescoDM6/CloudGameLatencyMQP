@@ -53,6 +53,7 @@
 
 using std::dynamic_pointer_cast;
 using std::static_pointer_cast;
+using juzzlin::L;
 
 Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   : MCObject(surface, "car")
@@ -353,6 +354,7 @@ void Car::updateTireWear(int step)
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
                                  static_cast<float>(targetNode->location().y()));
                 target -= MCVector3dF(location());
+                L().info() << "Target " << target;
 
                 const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
                 const float cur = static_cast<int>(this->angle()) % 360;
