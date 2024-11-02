@@ -53,7 +53,7 @@
 
 using std::dynamic_pointer_cast;
 using std::static_pointer_cast;
-using juzzlin::L;
+//using juzzlin::L;
 
 Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   : MCObject(surface, "car")
@@ -341,12 +341,13 @@ void Car::updateTireWear(int step)
 
     if (m_isHuman)
     {
-        if (m_track && isOffTrack())
+        fprintf(stderr, "Human car update. Off track: %d\n", isOffTrack());
+        if (isOffTrack())
         {
+            fprintf(stderr, "Off track. Timer: %f, Track: %p, Race: %p\n", m_offTrackTimer, (void*)m_track.get(), (void*)m_race.get());
             m_offTrackTimer += step / 1000.0f;
             if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
             {
-                fprintf(stderr, "Track assistance active! Angle diff: %f\n", diff);
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
                 const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
@@ -362,6 +363,8 @@ void Car::updateTireWear(int step)
                 // Normalize angle difference
                 while (diff > 180) diff -= 360;
                 while (diff < -180) diff += 360;
+                fprintf(stderr, "Track assistance active! Angle diff: %f\n", diff);
+
 
                 // Make steering correction MUCH more aggressive
                 const float maxDelta = 0.1f;  // Reduced from 3.0 to trigger on smaller angles
@@ -557,7 +560,9 @@ bool Car::rightSideOffTrack() const
 
 bool Car::isOffTrack() const
 {
-    return leftSideOffTrack() || rightSideOffTrack();
+    bool off = leftSideOffTrack() || rightSideOffTrack();
+    fprintf(stderr, "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
+    return off;
 }
 
 bool Car::isHuman() const
