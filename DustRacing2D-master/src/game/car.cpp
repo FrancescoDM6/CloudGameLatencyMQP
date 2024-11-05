@@ -371,20 +371,27 @@ void Car::updateTireWear(int step)
                 }
                 control = std::min(control, 1.0f);
 
-                fprintf(stderr, "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n", 
-                        angle, cur, diff, control);
+                FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
+                if (logfile == NULL) {
+                    // Handle error if the file couldn't be opened
+                    perror("Error opening log file");
+                }
 
+                // Write the log message to the file
+                fprintf(logfile, "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n", 
+                                    angle, cur, diff, control);
+                
                 // More aggressive steering response
                 const float maxDelta = 0.5f;  // Reduced threshold to steer more often
                 if (diff < -maxDelta)
                 {
                     steer(Steer::Right, control + 0.5f);  // Add base steering amount
-                    fprintf(stderr, "Steering RIGHT with control %f\n", control + 0.5f);
+                    fprintf(logfile, "Steering RIGHT with control %f\n", control + 0.5f);
                 }
                 else if (diff > maxDelta)
                 {
                     steer(Steer::Left, control + 0.5f);   // Add base steering amount
-                    fprintf(stderr, "Steering LEFT with control %f\n", control + 0.5f);
+                    fprintf(logfile, "Steering LEFT with control %f\n", control + 0.5f);
                 }
             }
         }
@@ -571,7 +578,13 @@ bool Car::rightSideOffTrack() const
 bool Car::isOffTrack() const
 {
     bool off = leftSideOffTrack() || rightSideOffTrack();
-    fprintf(stderr, "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
+    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
+    if (logfile == NULL) {
+        // Handle error if the file couldn't be opened
+        printf("Failed to open log file\n");
+        perror("Error opening log file");
+    }
+    fprintf(logfile, "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
     return off;
 }
 
