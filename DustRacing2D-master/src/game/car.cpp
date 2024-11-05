@@ -393,6 +393,7 @@ void Car::updateTireWear(int step)
                     steer(Steer::Left, control + 0.5f);   // Add base steering amount
                     fprintf(logfile, "Steering LEFT with control %f\n", control + 0.5f);
                 }
+                fclose(logfile);
             }
         }
         else
