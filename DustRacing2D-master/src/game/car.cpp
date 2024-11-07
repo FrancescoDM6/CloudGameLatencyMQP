@@ -380,20 +380,24 @@ void Car::updateTireWear(int step)
                 // Write the log message to the file
                 fprintf(logfile, "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n", 
                                     angle, cur, diff, control);
-                
+                fclose(logfile);
                 // More aggressive steering response
                 const float maxDelta = 0.5f;  // Reduced threshold to steer more often
                 if (diff < -maxDelta)
                 {
                     steer(Steer::Right, control + 0.5f);  // Add base steering amount
+                    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
                     fprintf(logfile, "Steering RIGHT with control %f\n", control + 0.5f);
+                    fclose(logfile);
+
                 }
                 else if (diff > maxDelta)
                 {
                     steer(Steer::Left, control + 0.5f);   // Add base steering amount
+                    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
                     fprintf(logfile, "Steering LEFT with control %f\n", control + 0.5f);
+                    fclose(logfile);
                 }
-                fclose(logfile);
             }
         }
         else
@@ -586,6 +590,7 @@ bool Car::isOffTrack() const
         perror("Error opening log file");
     }
     fprintf(logfile, "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
+    fclose(logfile);
     return off;
 }
 

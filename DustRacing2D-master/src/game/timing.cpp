@@ -151,7 +151,14 @@ int Timing::raceTime() const
     {
         return 0;
     }
-
+    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
+    if (logfile == NULL) {
+        // Handle error if the file couldn't be opened
+        perror("Error opening log file");
+    }
+    // Write the log message to the file
+    fprintf(logfile, "Lap Time Stamp: %d\n", m_time);
+    fclose(logfile);
     return m_time;
 }
 
@@ -243,12 +250,27 @@ std::wstring Timing::msecsToString(int msec)
     {
         return L"--:--.--";
     }
-
+    
     const int hr = msec % 3600000;
     const int mm = hr / 60000;
     const int mr = hr % 60000;
     const int ss = mr / 1000;
     const int ms = mr % 1000;
+    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
+    if (logfile == NULL) {
+        perror("Error opening log file");
+    }
 
-    return QString().asprintf("%02d:%02d.%02d", mm, ss, ms / 10).toStdWString();
+    // Generate the formatted string using QString
+    std::wstring formattedTime = QString().asprintf("%02d:%02d.%02d", mm, ss, ms / 10).toStdWString();
+
+    // Convert the std::wstring to std::string (narrow char string)
+    std::string narrowFormattedTime(formattedTime.begin(), formattedTime.end());
+
+    // Write the formatted time to the log file using fprintf
+    fprintf(logfile, "Lap Time Stamp: %s\n", narrowFormattedTime.c_str());
+
+    // Close the file
+    fclose(logfile);
+    return formattedTime;
 }
