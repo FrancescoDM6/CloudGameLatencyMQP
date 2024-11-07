@@ -5,14 +5,14 @@
 #include <stdio.h>
 
 // Engine includes.
-#include "manager.hpp"
+// #include "manager.hpp"
 #include <string>
 
-namespace df {
+// namespace df {
 
 const std::string LOGFILE_NAME = "dragonfly.log";
 
-class LogManager : public Manager {
+class LogManager {
 private:
     LogManager(); // Private since a singleton.
     LogManager(LogManager const&); // Don't allow copy.
@@ -41,6 +41,6 @@ public:
     int writeLog(const char* fmt, ...) const;
 };
 
-} // end of namespace df
+// } // end of namespace df
 
 #endif // LOG_MANAGER_H
