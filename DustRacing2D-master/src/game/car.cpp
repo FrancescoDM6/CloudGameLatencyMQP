@@ -575,14 +575,20 @@ bool Car::rightSideOffTrack() const
 bool Car::isOffTrack() const
 {
     bool off = leftSideOffTrack() || rightSideOffTrack();
-    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
-    if (logfile == NULL) {
-        // Handle error if the file couldn't be opened
-        printf("Failed to open log file\n");
-        perror("Error opening log file");
-    }
-    fprintf(logfile, "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
-    fclose(logfile);
+    // FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
+    // if (logfile == NULL) {
+    //     // Handle error if the file couldn't be opened
+    //     printf("Failed to open log file\n");
+    //     perror("Error opening log file");
+    // }
+    // fprintf(logfile, "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
+    // fclose(logfile);
+        // LogManager::getInstance().writeLog(
+        //             "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
+        //             angle, cur, diff, control);
+
+    LogManager::getInstance().writeLog(
+                    "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
     return off;
 }
 

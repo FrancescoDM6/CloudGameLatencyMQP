@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 
 const std::string LogManager::LOG_DIR = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
-const std::string LogManager::LOG_PREFIX = "cardata_";
+const std::string LogManager::LOG_PREFIX = "logfile_";
 const std::string LogManager::LOG_EXTENSION = ".log";
 
 LogManager::LogManager() 
