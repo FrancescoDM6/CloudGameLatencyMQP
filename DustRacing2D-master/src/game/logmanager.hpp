@@ -12,40 +12,32 @@ public:
     enum class LogType {
         CAR_DATA,
         AI_DATA,
-        LAP_TIME,
-        // Add more types as needed
+        LAP_TIME
     };
 
-    // Delete copy constructor and assignment operator
     LogManager(const LogManager&) = delete;
     LogManager& operator=(const LogManager&) = delete;
 
-    // Get singleton instance
     static LogManager& getInstance();
-
-    // Initialize logging system
     int startUp();
-
-    // Shutdown logging system
     void shutDown();
-
-    // Set whether to flush after each write
     void setFlush(bool do_flush);
-
-    // Write to specific log file with printf-style formatting
+    
+    // Default write method (uses CAR_DATA type)
+    int writeLog(const char* fmt, ...) const;
+    // Specific log type write method
     int writeLog(LogType type, const char* fmt, ...) const;
 
 private:
     LogManager();
     ~LogManager();
     
-    // Find next available log number for a specific type
     int findNextLogNumber(LogType type) const;
     std::string generateLogFileName(LogType type, int number) const;
     std::string getLogPrefix(LogType type) const;
 
     bool m_do_flush;
-    std::map<LogType, FILE*> m_files;  // Map to store multiple file pointers
+    std::map<LogType, FILE*> m_files;
     static const std::string LOG_DIR;
 };
 

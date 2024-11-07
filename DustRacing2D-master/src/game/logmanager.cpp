@@ -6,11 +6,17 @@
 
 const std::string LogManager::LOG_DIR = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
 
-LogManager::LogManager() : m_do_flush(true) {}
+LogManager::LogManager() : m_do_flush(false) {}
 
 LogManager::~LogManager()
 {
     shutDown();
+}
+
+LogManager& LogManager::getInstance()
+{
+    static LogManager instance;
+    return instance;
 }
 
 std::string LogManager::getLogPrefix(LogType type) const
@@ -27,6 +33,39 @@ std::string LogManager::getLogPrefix(LogType type) const
     }
 }
 
+int LogManager::findNextLogNumber(LogType type) const
+{
+    DIR* dir = opendir(LOG_DIR.c_str());
+    if (!dir)
+    {
+        mkdir(LOG_DIR.c_str(), 0777);
+        return 1;
+    }
+
+    int maxNumber = 0;
+    struct dirent* entry;
+    while ((entry = readdir(dir)) != NULL)
+    {
+        std::string name = entry->d_name;
+        std::string prefix = getLogPrefix(type);
+        if (name.find(prefix) == 0)
+        {
+            size_t numStart = prefix.length();
+            size_t numEnd = name.find(".log");
+            if (numEnd != std::string::npos)
+            {
+                try {
+                    int num = std::stoi(name.substr(numStart, numEnd - numStart));
+                    if (num > maxNumber)
+                        maxNumber = num;
+                } catch (...) {}
+            }
+        }
+    }
+    closedir(dir);
+    return maxNumber + 1;
+}
+
 std::string LogManager::generateLogFileName(LogType type, int number) const
 {
     std::ostringstream oss;
@@ -36,11 +75,10 @@ std::string LogManager::generateLogFileName(LogType type, int number) const
 
 int LogManager::startUp()
 {
-    // Create directory if it doesn't exist
     mkdir(LOG_DIR.c_str(), 0777);
 
     // Initialize all log files
-    for (int i = 0; i < 3; i++) {  // Assuming 3 LogTypes
+    for (int i = 0; i < 3; i++) {
         LogType type = static_cast<LogType>(i);
         int nextNumber = findNextLogNumber(type);
         std::string filename = generateLogFileName(type, nextNumber);
@@ -61,6 +99,17 @@ void LogManager::shutDown()
         }
     }
     m_files.clear();
+}
+
+void LogManager::setFlush(bool do_flush)
+{
+    m_do_flush = do_flush;
+}
+
+// Default logging method (uses CAR_DATA)
+int LogManager::writeLog(const char* fmt, ...) const
+{
+    return writeLog(LogType::CAR_DATA, fmt);
 }
 
 int LogManager::writeLog(LogType type, const char* fmt, ...) const
