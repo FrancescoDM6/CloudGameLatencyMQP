@@ -261,16 +261,14 @@ std::wstring Timing::msecsToString(int msec)
         perror("Error opening log file");
     }
 
-    // Generate the formatted string using QString
     std::wstring formattedTime = QString().asprintf("%02d:%02d.%02d", mm, ss, ms / 10).toStdWString();
-
-    // Convert the std::wstring to std::string (narrow char string)
     std::string narrowFormattedTime(formattedTime.begin(), formattedTime.end());
 
-    // Write the formatted time to the log file using fprintf
     fprintf(logfile, "Lap Time Stamp: %s\n", narrowFormattedTime.c_str());
-
-    // Close the file
     fclose(logfile);
+
+    FILE *aifile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/aidata.log", "a");
+    fprintf(aifile, "Lap Time Stamp: %s\n", narrowFormattedTime.c_str());
+    fclose(aifile);
     return formattedTime;
 }
