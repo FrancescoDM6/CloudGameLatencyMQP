@@ -10,7 +10,7 @@
 
 // namespace df {
 
-const std::string LOGFILE_NAME = "dragonfly.log";
+const std::string LOGFILE_NAME = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log";
 
 class LogManager {
 private:
