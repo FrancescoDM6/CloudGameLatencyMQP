@@ -3,10 +3,19 @@
 
 #include <string>
 #include <cstdio>
+#include <map>
 
 class LogManager
 {
 public:
+    // Enum for different log types
+    enum class LogType {
+        CAR_DATA,
+        AI_DATA,
+        LAP_TIME,
+        // Add more types as needed
+    };
+
     // Delete copy constructor and assignment operator
     LogManager(const LogManager&) = delete;
     LogManager& operator=(const LogManager&) = delete;
@@ -23,22 +32,21 @@ public:
     // Set whether to flush after each write
     void setFlush(bool do_flush);
 
-    // Write to log file with printf-style formatting
-    int writeLog(const char* fmt, ...) const;
+    // Write to specific log file with printf-style formatting
+    int writeLog(LogType type, const char* fmt, ...) const;
 
 private:
     LogManager();
     ~LogManager();
     
-    // Find next available log number
-    int findNextLogNumber() const;
-    std::string generateLogFileName(int number) const;
+    // Find next available log number for a specific type
+    int findNextLogNumber(LogType type) const;
+    std::string generateLogFileName(LogType type, int number) const;
+    std::string getLogPrefix(LogType type) const;
 
     bool m_do_flush;
-    FILE* m_p_f;
+    std::map<LogType, FILE*> m_files;  // Map to store multiple file pointers
     static const std::string LOG_DIR;
-    static const std::string LOG_PREFIX;
-    static const std::string LOG_EXTENSION;
 };
 
 #endif // LOGMANAGER_HPP

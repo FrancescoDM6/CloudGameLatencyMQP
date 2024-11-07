@@ -373,7 +373,7 @@ void Car::updateTireWear(int step)
                 }
                 control = std::min(control, 1.0f);
 
-                LogManager::getInstance().writeLog(
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
                     "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
 
@@ -382,13 +382,13 @@ void Car::updateTireWear(int step)
                 if (diff < -maxDelta)
                 {
                     steer(Steer::Right, control + 0.5f);  // Add base steering amount
-                    LogManager::getInstance().writeLog("Steering RIGHT with control %f\n", control + 0.5f);
+                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control + 0.5f);
 
                 }
                 else if (diff > maxDelta)
                 {
                     steer(Steer::Left, control + 0.5f);   // Add base steering amount
-                    LogManager::getInstance().writeLog("Steering LEFT with control %f\n", control + 0.5f);
+                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control + 0.5f);
                 }
             }
         }
@@ -587,7 +587,7 @@ bool Car::isOffTrack() const
         //             "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
         //             angle, cur, diff, control);
 
-    LogManager::getInstance().writeLog(
+    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
                     "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
     return off;
 }
