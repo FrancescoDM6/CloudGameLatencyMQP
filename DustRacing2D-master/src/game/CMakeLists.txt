@@ -43,6 +43,7 @@ set(HDR
 
 # Set sources
 set(SRC
+    logmanager.cpp
     ai.cpp
     application.cpp
     bridge.cpp
