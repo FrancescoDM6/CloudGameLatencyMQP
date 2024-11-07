@@ -1,46 +1,44 @@
-#ifndef __LOG_MANAGER_H__
-#define __LOG_MANAGER_H__
+#ifndef LOGMANAGER_HPP
+#define LOGMANAGER_HPP
 
-// System includes.
-#include <stdio.h>
-
-// Engine includes.
-// #include "manager.hpp"
 #include <string>
+#include <cstdio>
 
-// namespace df {
-
-const std::string LOGFILE_NAME = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log";
-
-class LogManager {
-private:
-    LogManager(); // Private since a singleton.
-    LogManager(LogManager const&); // Don't allow copy.
-    void operator=(LogManager const&); // Don't allow assignment.
-    bool m_do_flush; // True if flush to disk after each write.
-    FILE* m_p_f; // Pointer to log file struct.
-
+class LogManager
+{
 public:
-    // If log file is open, close it.
-    ~LogManager();
+    // Delete copy constructor and assignment operator
+    LogManager(const LogManager&) = delete;
+    LogManager& operator=(const LogManager&) = delete;
 
-    // Get the one and only instance of the LogManager.
+    // Get singleton instance
     static LogManager& getInstance();
 
-    // Start up the LogManager (open log file "dragonfly.log").
+    // Initialize logging system
     int startUp();
 
-    // Shut down the LogManager (close log file).
+    // Shutdown logging system
     void shutDown();
 
-    // Set flush of log file after each write.
-    void setFlush(bool do_flush = true);
+    // Set whether to flush after each write
+    void setFlush(bool do_flush);
 
-    // Write to log file. Supports sprintf() for formatting of strings.
-    // Return number of bytes written, -1 if error.
+    // Write to log file with printf-style formatting
     int writeLog(const char* fmt, ...) const;
+
+private:
+    LogManager();
+    ~LogManager();
+    
+    // Find next available log number
+    int findNextLogNumber() const;
+    std::string generateLogFileName(int number) const;
+
+    bool m_do_flush;
+    FILE* m_p_f;
+    static const std::string LOG_DIR;
+    static const std::string LOG_PREFIX;
+    static const std::string LOG_EXTENSION;
 };
 
-// } // end of namespace df
-
-#endif // LOG_MANAGER_H
+#endif // LOGMANAGER_HPP

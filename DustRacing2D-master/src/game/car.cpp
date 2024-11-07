@@ -51,6 +51,8 @@
 #include "trackdata.hpp"
 #include "tracktile.hpp"
 
+#include "logmanager.hpp"
+
 using std::dynamic_pointer_cast;
 using std::static_pointer_cast;
 //using juzzlin::L;
@@ -371,32 +373,22 @@ void Car::updateTireWear(int step)
                 }
                 control = std::min(control, 1.0f);
 
-                FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
-                if (logfile == NULL) {
-                    // Handle error if the file couldn't be opened
-                    perror("Error opening log file");
-                }
+                LogManager::getInstance().writeLog(
+                    "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
+                    angle, cur, diff, control);
 
-                // Write the log message to the file
-                fprintf(logfile, "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n", 
-                                    angle, cur, diff, control);
-                fclose(logfile);
                 // More aggressive steering response
                 const float maxDelta = 0.5f;  // Reduced threshold to steer more often
                 if (diff < -maxDelta)
                 {
                     steer(Steer::Right, control + 0.5f);  // Add base steering amount
-                    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
-                    fprintf(logfile, "Steering RIGHT with control %f\n", control + 0.5f);
-                    fclose(logfile);
+                    LogManager::getInstance().writeLog("Steering RIGHT with control %f\n", control + 0.5f);
 
                 }
                 else if (diff > maxDelta)
                 {
                     steer(Steer::Left, control + 0.5f);   // Add base steering amount
-                    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
-                    fprintf(logfile, "Steering LEFT with control %f\n", control + 0.5f);
-                    fclose(logfile);
+                    LogManager::getInstance().writeLog("Steering LEFT with control %f\n", control + 0.5f);
                 }
             }
         }
