@@ -22,6 +22,8 @@ LogManager& LogManager::getInstance()
 std::string LogManager::getLogPrefix(LogType type) const
 {
     switch(type) {
+        case LogType::DEFAULT:
+            return "logfile_";
         case LogType::CAR_DATA:
             return "cardata_";
         case LogType::AI_DATA:
@@ -109,7 +111,7 @@ void LogManager::setFlush(bool do_flush)
 // Default logging method (uses CAR_DATA)
 int LogManager::writeLog(const char* fmt, ...) const
 {
-    return writeLog(LogType::CAR_DATA, fmt);
+    return writeLog(LogType::DEFAULT, fmt);
 }
 
 int LogManager::writeLog(LogType type, const char* fmt, ...) const

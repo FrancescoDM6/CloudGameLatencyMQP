@@ -10,6 +10,7 @@ class LogManager
 public:
     // Enum for different log types
     enum class LogType {
+        DEFAULT,
         CAR_DATA,
         AI_DATA,
         LAP_TIME

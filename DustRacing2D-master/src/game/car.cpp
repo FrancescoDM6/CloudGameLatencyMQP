@@ -587,8 +587,7 @@ bool Car::isOffTrack() const
         //             "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
         //             angle, cur, diff, control);
 
-    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
-                    "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
+    LogManager::getInstance().writeLog("isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
     return off;
 }
 
