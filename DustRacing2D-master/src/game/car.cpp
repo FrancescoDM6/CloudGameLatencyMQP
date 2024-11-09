@@ -348,7 +348,6 @@ void Car::updateTireWear(int step)
             m_offTrackTimer += step / 1000.0f;
             if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
             {
-                // Force track assistance when off track
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
                 const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
@@ -356,33 +355,41 @@ void Car::updateTireWear(int step)
                 // Calculate target vector
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
                                  static_cast<float>(targetNode->location().y()));
-                MCVector3dF directionVector = target - MCVector3dF(location());
-                
-                // Calculate angles
-                const float targetAngle = MCTrigonom::radToDeg(std::atan2(directionVector.j(), directionVector.i()));
-                float currentAngle = static_cast<int>(angle()) % 360;
-                float angleDiff = targetAngle - currentAngle;
+                target -= MCVector3dF(location());
 
-                // Normalize angle difference to [-180, 180]
-                while (angleDiff > 180) angleDiff -= 360;
-                while (angleDiff < -180) angleDiff += 360;
+                const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+                const float cur = static_cast<int>(this->angle()) % 360;
+                float diff = angle - cur;
 
-                // Always apply steering when off track, ignoring player input
-                if (angleDiff < 0)
+                // Normalize angle difference
+                while (diff > 180) diff -= 360;
+                while (diff < -180) diff += 360;
+
+                // Much more aggressive control factor (0.025f -> 0.1f)
+                float control = diff * 0.1f;  // Increased from 0.025f
+                if (control < 0)
                 {
-                    steer(Steer::Right, 1.0f);  // Full steering force
-                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, 
-                        "Auto-steering RIGHT: angle_diff=%.2f\n", angleDiff);
+                    control = -control;
                 }
-                else
-                {
-                    steer(Steer::Left, 1.0f);   // Full steering force
-                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, 
-                        "Auto-steering LEFT: angle_diff=%.2f\n", angleDiff);
-                }
+                control = std::min(control, 1.0f);
 
-                // Optionally, force acceleration to help get back on track
-                //setAcceleratorEnabled(true);
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+                    "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
+                    angle, cur, diff, control);
+
+                // More aggressive steering response
+                const float maxDelta = 0.5f;  // Reduced threshold to steer more often
+                if (diff < -maxDelta)
+                {
+                    steer(Steer::Right, control + 0.5f);  // Add base steering amount
+                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control + 0.5f);
+
+                }
+                else if (diff > maxDelta)
+                {
+                    steer(Steer::Left, control + 0.5f);   // Add base steering amount
+                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control + 0.5f);
+                }
             }
         }
         else
