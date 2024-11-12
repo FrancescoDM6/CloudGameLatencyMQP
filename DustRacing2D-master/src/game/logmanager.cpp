@@ -130,8 +130,8 @@ int LogManager::writeLog(LogType type, const char* fmt, ...) const
     char timeBuffer[20];
     std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
 
-    // Get in-game time (milliseconds since game start)
-    int msec = TimingContext::getInstance().getElapsedTime();
+    // Get in-game time using Timing class
+    int msec = Timing::raceTime();
     const int hr = msec % 3600000;
     const int mm = hr / 60000;
     const int mr = hr % 60000;
