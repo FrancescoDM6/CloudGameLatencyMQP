@@ -43,6 +43,7 @@
 #include <MCSurfaceManager>
 
 #include "simple_logger.hpp"
+#include "logmanager.hpp"
 
 Race::Race(Game & game, size_t numCars)
   : m_humanPlayerIndex1(0)
