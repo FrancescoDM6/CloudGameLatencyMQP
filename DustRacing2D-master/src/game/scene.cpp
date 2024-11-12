@@ -37,7 +37,6 @@
 #include "startlights.hpp"
 #include "startlightsoverlay.hpp"
 #include "statemachine.hpp"
-#include "timing.hpp"
 #include "timingoverlay.hpp"
 #include "track.hpp"
 #include "trackdata.hpp"
@@ -97,7 +96,6 @@ Scene::Scene(Game & game, StateMachine & stateMachine, Renderer & renderer, MCWo
   , m_intro(std::make_unique<Intro>())
   , m_particleFactory(std::make_unique<ParticleFactory>())
   , m_fadeAnimation(std::make_unique<FadeAnimation>())
-  , m_timing(carCount())
 {
     initializeComponents();
 
