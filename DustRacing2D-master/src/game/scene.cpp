@@ -80,6 +80,7 @@ using std::dynamic_pointer_cast;
 // Default visible scene size.
 int Scene::m_width = 1024;
 int Scene::m_height = 768;
+int tickCount = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
 
@@ -345,9 +346,7 @@ void Scene::processUserInput(InputHandler & handler)
 {
     for (size_t i = 0; i < (m_game.hasTwoHumanPlayers() ? 2 : 1); i++)
     {
-        m_timing.tick();
-        int tickCount = m_race->getTickCounter();
-        std::cout << "Tick working " << tickCount << std::endl; 
+        tickCount++;
         // Handle accelerating / braking
         if (handler.getActionState(i, InputHandler::Action::Down))
         {

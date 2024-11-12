@@ -77,8 +77,6 @@ public:
     //! Get current position of a car.
     size_t position(const Car & car) const;
 
-    int getTickCounter();
-
 signals:
 
     void finished();
