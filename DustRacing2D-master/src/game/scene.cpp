@@ -366,11 +366,11 @@ void Scene::processUserInput(InputHandler & handler)
         {
             m_cars.at(i)->setAcceleratorEnabled(false);
         }
+
+
         if (!m_cars.at(i)->isOffTrack())
         {
-        
-        
-        
+
             // Handle turning
             if (handler.getActionState(i, InputHandler::Action::Left))
             {
