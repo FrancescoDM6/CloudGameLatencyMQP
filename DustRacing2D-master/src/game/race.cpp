@@ -650,7 +650,7 @@ void Race::moveCarOntoPreviousCheckPoint(Car & car)
     const double randRadius = TrackTile::width() / 4;
     std::mt19937 engine;
     std::uniform_real_distribution<double> dist(-randRadius, randRadius);
-    const float x = static_cast<float>(targetNode->location().x() + dist(engine));''
+    const float x = static_cast<float>(targetNode->location().x() + dist(engine));
     const float y = static_cast<float>(targetNode->location().y() + dist(engine));
     
     car.translate({ x, y });
