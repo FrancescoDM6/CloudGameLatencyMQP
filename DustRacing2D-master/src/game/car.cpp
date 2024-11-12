@@ -351,7 +351,7 @@ void Car::updateTireWear(int step)
             {
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
-                const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this) + 1);
+                const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
 
                 // Calculate target vector
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 

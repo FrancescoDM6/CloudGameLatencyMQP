@@ -1,8 +1,11 @@
 #include "logmanager.hpp"
+#include "timing.hpp"
 #include <dirent.h>
 #include <sstream>
 #include <stdarg.h>
 #include <sys/stat.h>
+#include <chrono>
+#include <ctime>
 
 const std::string LogManager::LOG_DIR = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
 
@@ -121,15 +124,27 @@ int LogManager::writeLog(LogType type, const char* fmt, ...) const
         return -1;
     }
 
-    // Get the current time and format it
+    // Get system time
     auto now = std::chrono::system_clock::now();
     std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
     char timeBuffer[20];
     std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
 
-    // Create a new format string with the timestamp prepended
-    std::string newFmt = "[" + std::string(timeBuffer) + "] " + fmt;
+    // Get in-game time (milliseconds since game start)
+    int msec = TimingContext::getInstance().getElapsedTime();
+    const int hr = msec % 3600000;
+    const int mm = hr / 60000;
+    const int mr = hr % 60000;
+    const int ss = mr / 1000;
+    const int ms = mr % 1000;
+    
+    char gameTimeBuffer[20];
+    snprintf(gameTimeBuffer, sizeof(gameTimeBuffer), "%02d:%02d.%02d", mm, ss, ms / 10);
 
+    // Write both timestamps first
+    fprintf(it->second, "[SYS: %s][GAME: %s] ", timeBuffer, gameTimeBuffer);
+
+    // Write the actual message
     va_list args;
     va_start(args, fmt);
     int bytes_written = vfprintf(it->second, fmt, args);

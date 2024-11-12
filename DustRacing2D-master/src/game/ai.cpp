@@ -110,13 +110,13 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     // Initial target coordinates
     MCVector3dF target(static_cast<float>(targetNode->location().x()), static_cast<float>(targetNode->location().y()));
     target -= MCVector3dF(m_car.location() + MCVector3dF(m_randomTolerance));
-    std::string timestamp = getCurrentTime();
-    std::string logEntry = "[" + timestamp + "] " + message;
-    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA, 
-                    "steerControl: IRL Timestamp: %s\n", timestamp.str());
-    double fps = getFrameRate();
-    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA, 
-                    "steerControl: FPS: %d\n", fps);
+    // std::string timestamp = getCurrentTime();
+    // std::string logEntry = "[" + timestamp + "] " + message;
+    // LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA, 
+    //                 "steerControl: IRL Timestamp: %s\n", timestamp.str());
+    // double fps = getFrameRate();
+    // LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA, 
+    //                 "steerControl: FPS: %d\n", fps);
     LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
                     "steerControl: targetNode X: %f\n", targetNode->location().x());
     LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
@@ -125,6 +125,7 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
                     "steerControl: car Location i: %f\n", m_car.location().i());
     LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
                     "steerControl: car Location j: %f\n", m_car.location().j());
+
     const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
     const float cur = static_cast<int>(m_car.angle()) % 360;
     float diff = angle - cur;
