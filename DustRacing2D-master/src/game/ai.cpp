@@ -27,6 +27,48 @@
 
 #include "logmanager.hpp"
 
+#include <string>
+#include <chrono>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+
+std::string getCurrentTime() {
+    // Get the current time from the system clock
+    auto now = std::chrono::system_clock::now();
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+
+    // Format the time as a string (e.g., "2024-11-12 14:30:15")
+    std::stringstream timeStream;
+    timeStream << std::put_time(std::localtime(&currentTime), "%d-%m-%Y %H:%M:%S");
+
+    // Return the formatted time string
+    return timeStream.str();
+}
+
+double getFrameRate() {
+    // Use static variables to persist across function calls
+    static auto lastTime = std::chrono::high_resolution_clock::now();
+    static double fps = 0.0;
+
+    // Get the current time
+    auto currentTime = std::chrono::high_resolution_clock::now();
+
+    // Calculate the time difference in seconds
+    std::chrono::duration<double> frameDuration = currentTime - lastTime;
+    double frameTime = frameDuration.count();
+
+    // Calculate FPS if frameTime is non-zero
+    if (frameTime > 0) {
+        fps = 1.0 / frameTime;
+    }
+
+    // Update lastTime to current time for the next frame
+    lastTime = currentTime;
+
+    return fps;
+}
+
 AI::AI(Car & car, std::shared_ptr<Race> race)
   : m_car(car)
   , m_race(race)
@@ -68,6 +110,13 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     // Initial target coordinates
     MCVector3dF target(static_cast<float>(targetNode->location().x()), static_cast<float>(targetNode->location().y()));
     target -= MCVector3dF(m_car.location() + MCVector3dF(m_randomTolerance));
+    std::string timestamp = getCurrentTime();
+    std::string logEntry = "[" + timestamp + "] " + message;
+    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA, 
+                    "steerControl: IRL Timestamp: %s\n", timestamp.str());
+    double fps = getFrameRate();
+    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA, 
+                    "steerControl: FPS: %d\n", fps);
     LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
                     "steerControl: targetNode X: %f\n", targetNode->location().x());
     LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,

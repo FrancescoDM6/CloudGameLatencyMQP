@@ -121,6 +121,15 @@ int LogManager::writeLog(LogType type, const char* fmt, ...) const
         return -1;
     }
 
+    // Get the current time and format it
+    auto now = std::chrono::system_clock::now();
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+    char timeBuffer[20];
+    std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
+
+    // Create a new format string with the timestamp prepended
+    std::string newFmt = "[" + std::string(timeBuffer) + "] " + fmt;
+
     va_list args;
     va_start(args, fmt);
     int bytes_written = vfprintf(it->second, fmt, args);
