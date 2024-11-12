@@ -75,6 +75,7 @@
 #include <memory>
 
 using std::dynamic_pointer_cast;
+#include <iostream>
 
 // Default visible scene size.
 int Scene::m_width = 1024;
@@ -346,7 +347,7 @@ void Scene::processUserInput(InputHandler & handler)
     {
         m_timing.tick();
         int tickCount = m_race->getTickCounter();
-        fprintf ("Tick working, %d", tickCount);
+        std::cout << "Tick working " << tickCount << std::endl; 
         // Handle accelerating / braking
         if (handler.getActionState(i, InputHandler::Action::Down))
         {

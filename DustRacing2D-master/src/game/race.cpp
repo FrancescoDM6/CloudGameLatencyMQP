@@ -41,6 +41,7 @@
 #include <MCShape>
 #include <MCShapeView>
 #include <MCSurfaceManager>
+#include <iostream>
 
 #include "simple_logger.hpp"
 
