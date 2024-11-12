@@ -118,6 +118,9 @@ void Race::initTiming()
     const auto raceRecord = Database::instance().loadRaceRecord(*m_track, static_cast<int>(m_lapCount), m_game.difficultyProfile().difficulty());
     m_timing.setRaceRecord(raceRecord.second ? raceRecord.first : -1);
     m_timing.reset();
+    
+    // Set the timing instance in LogManager
+    LogManager::getInstance().setTiming(&m_timing);
 }
 
 void Race::initCars()

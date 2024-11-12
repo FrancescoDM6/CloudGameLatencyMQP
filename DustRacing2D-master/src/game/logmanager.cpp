@@ -9,7 +9,7 @@
 
 const std::string LogManager::LOG_DIR = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
 
-LogManager::LogManager() : m_do_flush(false) {}
+LogManager::LogManager() : m_timing(nullptr), m_do_flush(false) {}
 
 LogManager::~LogManager()
 {
@@ -130,9 +130,8 @@ int LogManager::writeLog(LogType type, const char* fmt, ...) const
     char timeBuffer[20];
     std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
 
-    // Get in-game time using Timing class
-    Timing timing;
-    int msec = timing.raceTime();
+    // Get in-game time using the stored Timing pointer
+    int msec = m_timing ? m_timing->raceTime() : 0;
     const int hr = msec % 3600000;
     const int mm = hr / 60000;
     const int mr = hr % 60000;
