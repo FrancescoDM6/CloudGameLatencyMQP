@@ -37,6 +37,7 @@
 #include "startlights.hpp"
 #include "startlightsoverlay.hpp"
 #include "statemachine.hpp"
+#include "timing.hpp"
 #include "timingoverlay.hpp"
 #include "track.hpp"
 #include "trackdata.hpp"
@@ -78,6 +79,7 @@ using std::dynamic_pointer_cast;
 // Default visible scene size.
 int Scene::m_width = 1024;
 int Scene::m_height = 768;
+int tickCounter = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
 
@@ -94,6 +96,7 @@ Scene::Scene(Game & game, StateMachine & stateMachine, Renderer & renderer, MCWo
   , m_intro(std::make_unique<Intro>())
   , m_particleFactory(std::make_unique<ParticleFactory>())
   , m_fadeAnimation(std::make_unique<FadeAnimation>())
+  , m_timing(carCount())
 {
     initializeComponents();
 
@@ -342,6 +345,8 @@ void Scene::processUserInput(InputHandler & handler)
 {
     for (size_t i = 0; i < (m_game.hasTwoHumanPlayers() ? 2 : 1); i++)
     {
+        m_timing.tick();
+        tickCounter++;
         // Handle accelerating / braking
         if (handler.getActionState(i, InputHandler::Action::Down))
         {
@@ -368,17 +373,19 @@ void Scene::processUserInput(InputHandler & handler)
         }
 
         // Handle turning
-        if (handler.getActionState(i, InputHandler::Action::Left))
-        {
-            m_cars.at(i)->steer(Car::Steer::Left);
-        }
-        else if (handler.getActionState(i, InputHandler::Action::Right))
-        {
-            m_cars.at(i)->steer(Car::Steer::Right);
-        }
-        else
-        {
-            m_cars.at(i)->steer(Car::Steer::Neutral);
+        if (!m_cars.at(i)->isOffTrack() || tickCounter % 3 == 0) {
+            if (handler.getActionState(i, InputHandler::Action::Left))
+            {
+                m_cars.at(i)->steer(Car::Steer::Left);
+            }
+            else if (handler.getActionState(i, InputHandler::Action::Right))
+            {
+                m_cars.at(i)->steer(Car::Steer::Right);
+            }
+            else
+            {
+                m_cars.at(i)->steer(Car::Steer::Neutral);
+            }
         }
     }
 }

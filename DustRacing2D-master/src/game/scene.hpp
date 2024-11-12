@@ -20,6 +20,7 @@
 #include "car.hpp"
 #include "crashoverlay.hpp"
 #include "minimap.hpp"
+#include "timing.hpp"
 #include "timingoverlay.hpp"
 
 #include <MCCamera>
@@ -91,6 +92,8 @@ public:
 
     //! Return track selection menu.
     MTFH::MenuPtr trackSelectionMenu() const;
+
+    Timing & timing();
 
     void renderCommonHUD();
 
@@ -170,6 +173,8 @@ private:
     std::shared_ptr<Track> m_activeTrack;
 
     MCWorld & m_world;
+
+    Timing m_timing;
 
     std::array<CrashOverlay, 2> m_crashOverlay;
 

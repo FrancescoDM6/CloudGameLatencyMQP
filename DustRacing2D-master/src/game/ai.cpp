@@ -101,24 +101,24 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     if (diff < -maxDelta)
     {
         m_car.steer(Car::Steer::Right, control);
-        FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/aidata.log", "a");
+        /*FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/aidata.log", "a");
         fprintf(logfile, "Car turned/is turning right?\n");
-        fclose(logfile);
+        fclose(logfile);*/
     }
     else if (diff > maxDelta)
     {
         m_car.steer(Car::Steer::Left, control);
-        FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/aidata.log", "a");
+        /*FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/aidata.log", "a");
         fprintf(logfile, "Car turned/is turning left?\n");
-        fclose(logfile);
+        fclose(logfile);*/
     }
 
     // Store the last difference
     m_lastDiff = diff;
     
-    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/aidata.log", "a");
+    /*FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/aidata.log", "a");
     fprintf(logfile, "MaxDelta= %f, Diff= %f, Control= %f, Last Difference= %f\n", maxDelta, diff, control, m_lastDiff + 0.5f);
-    fclose(logfile);
+    fclose(logfile);*/
 }
 
 void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)

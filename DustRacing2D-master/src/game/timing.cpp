@@ -151,14 +151,14 @@ int Timing::raceTime() const
     {
         return 0;
     }
-    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
+    /*FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
     if (logfile == NULL) {
         // Handle error if the file couldn't be opened
         perror("Error opening log file");
     }
     // Write the log message to the file
     fprintf(logfile, "Lap Time Stamp: %d\n", m_time);
-    fclose(logfile);
+    fclose(logfile);*/
     return m_time;
 }
 
@@ -256,7 +256,7 @@ std::wstring Timing::msecsToString(int msec)
     const int mr = hr % 60000;
     const int ss = mr / 1000;
     const int ms = mr % 1000;
-    FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
+    /*FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
     if (logfile == NULL) {
         perror("Error opening log file");
     }
@@ -270,5 +270,5 @@ std::wstring Timing::msecsToString(int msec)
     FILE *aifile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/aidata.log", "a");
     fprintf(aifile, "Lap Time Stamp: %s\n", narrowFormattedTime.c_str());
     fclose(aifile);
-    return formattedTime;
+    return formattedTime;*/
 }
