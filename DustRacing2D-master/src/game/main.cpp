@@ -26,6 +26,7 @@
 #include "game.hpp"
 
 #include "simple_logger.hpp"
+#include "logmanager.hpp"
 
 #include <iostream>
 #include <string>
@@ -46,6 +47,11 @@ static void initLogger()
     L::enableEchoMode(true);
     L().info() << "Dust Racing 2D version " << VERSION;
     L().info() << "Compiled against Qt version " << QT_VERSION_STR;
+
+    if (LogManager::getInstance().startUp() < 0) {
+        L().fatal() << "Failed to initialize LogManager";
+    }
+    LogManager::getInstance().setFlush(true);
 }
 
 int main(int argc, char ** argv)
@@ -59,8 +65,10 @@ int main(int argc, char ** argv)
     try
     {
         initLogger();
-        return Game(argc, argv).run();
-    } //
+        int result = Game(argc, argv).run();
+        LogManager::getInstance().shutDown();
+        return result;
+    }
     catch (std::exception & e)
     {
         if (!dynamic_cast<UserException *>(&e))
@@ -68,6 +76,7 @@ int main(int argc, char ** argv)
             L().fatal() << e.what();
             L().fatal() << "Initializing the game failed!";
         }
+        LogManager::getInstance().shutDown();
         return EXIT_FAILURE;
     }
 }

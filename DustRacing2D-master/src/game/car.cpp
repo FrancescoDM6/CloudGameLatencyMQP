@@ -51,6 +51,8 @@
 #include "trackdata.hpp"
 #include "tracktile.hpp"
 
+#include "logmanager.hpp"
+
 using std::dynamic_pointer_cast;
 using std::static_pointer_cast;
 //using juzzlin::L;
@@ -349,7 +351,7 @@ void Car::updateTireWear(int step)
             {
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
-                const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this) +1);
+                const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this) + 1);
 
                 // Calculate target vector
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
@@ -376,20 +378,22 @@ void Car::updateTireWear(int step)
                 }
                 //control = std::min(control, 1.0f);
 
-                fprintf(stderr, "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n", 
-                        angle, cur, diff, control);
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+                    "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
+                    angle, cur, diff, control);
 
                 // More aggressive steering response
                 const float maxDelta = 3.0f;  // Reduced threshold to steer more often
                 if (diff < -maxDelta)
                 {
                     steer(Steer::Right, control + 0.5f);  // Add base steering amount
-                    fprintf(stderr, "Steering RIGHT with control %f\n", control + 0.5f);
+                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control + 0.5f);
+
                 }
                 else if (diff > maxDelta)
                 {
                     steer(Steer::Left, control + 0.5f);   // Add base steering amount
-                    fprintf(stderr, "Steering LEFT with control %f\n", control + 0.5f);
+                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control + 0.5f);
                 }
                 m_lastDiff = diff;
             }
@@ -577,7 +581,19 @@ bool Car::rightSideOffTrack() const
 bool Car::isOffTrack() const
 {
     bool off = leftSideOffTrack() || rightSideOffTrack();
-    fprintf(stderr, "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
+    // FILE *logfile = fopen("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/cardata.log", "a");
+    // if (logfile == NULL) {
+    //     // Handle error if the file couldn't be opened
+    //     printf("Failed to open log file\n");
+    //     perror("Error opening log file");
+    // }
+    // fprintf(logfile, "isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
+    // fclose(logfile);
+        // LogManager::getInstance().writeLog(
+        //             "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
+        //             angle, cur, diff, control);
+
+    LogManager::getInstance().writeLog("isOffTrack check: left=%d, right=%d, total=%d\n", leftSideOffTrack(), rightSideOffTrack(), off);
     return off;
 }
 

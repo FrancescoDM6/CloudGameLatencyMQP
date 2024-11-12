@@ -25,6 +25,8 @@
 #include <MCRandom>
 #include <MCTrigonom>
 
+#include "logmanager.hpp"
+
 AI::AI(Car & car, std::shared_ptr<Race> race)
   : m_car(car)
   , m_race(race)
@@ -66,7 +68,14 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     // Initial target coordinates
     MCVector3dF target(static_cast<float>(targetNode->location().x()), static_cast<float>(targetNode->location().y()));
     target -= MCVector3dF(m_car.location() + MCVector3dF(m_randomTolerance));
-
+    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+                    "steerControl: targetNode X: %f\n", targetNode->location().x());
+    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+                    "steerControl: targetNode Y: %f\n", targetNode->location().y());
+    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+                    "steerControl: car Location i: %f\n", m_car.location().i());
+    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+                    "steerControl: car Location j: %f\n", m_car.location().j());
     const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
     const float cur = static_cast<int>(m_car.angle()) % 360;
     float diff = angle - cur;
@@ -101,14 +110,20 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     if (diff < -maxDelta)
     {
         m_car.steer(Car::Steer::Right, control);
+        LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+                    "steerControl: Car turned/is turning right\n");
     }
     else if (diff > maxDelta)
     {
         m_car.steer(Car::Steer::Left, control);
+        LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+                    "steerControl: Car turned/is turning left\n");
     }
 
     // Store the last difference
     m_lastDiff = diff;
+    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+                    "steerControl: MaxDelta= %f, Diff= %f, Control= %f, Last Difference= %f\n", maxDelta, diff, control, m_lastDiff + 0.5f);
 }
 
 void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
