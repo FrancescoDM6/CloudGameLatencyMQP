@@ -175,6 +175,8 @@ private:
 
     void updateAnimations();
 
+    float m_lastDiff;
+
     void updateTireWear(int step);
 
     void wearOutTires(int step, float factor);

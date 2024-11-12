@@ -91,6 +91,7 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   , m_trackAssistanceEnabled(false)
   , m_offTrackTimer(0.0f)
   , m_lastTargetNodeIndex(0)
+  , m_lastDiff(0)
 {
     // Override the default physics component to handle damage from impulses
     setPhysicsComponent(std::make_unique<CarPhysicsComponent>(*this));
@@ -350,7 +351,7 @@ void Car::updateTireWear(int step)
             {
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
-                const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
+                const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this) + 1);
 
                 // Calculate target vector
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
@@ -366,30 +367,35 @@ void Car::updateTireWear(int step)
                 while (diff < -180) diff += 360;
 
                 // Much more aggressive control factor (0.025f -> 0.1f)
-                float control = diff * 0.1f;  // Increased from 0.025f
+                //float control = diff * 0.025f;  // Increased from 0.025f
+                float control = diff * 0.025f + (diff - m_lastDiff) * 0.025f;
+                const float maxControl = 1.5;
+                control = control < 0 ? -control : control;
+                control = control > maxControl ? maxControl : control;
                 if (control < 0)
                 {
                     control = -control;
                 }
-                control = std::min(control, 1.0f);
+                //control = std::min(control, 1.0f);
 
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
                     "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
 
                 // More aggressive steering response
-                const float maxDelta = 0.5f;  // Reduced threshold to steer more often
+                const float maxDelta = 3.0f;  // Reduced threshold to steer more often
                 if (diff < -maxDelta)
                 {
-                    steer(Steer::Right, control + 0.5f);  // Add base steering amount
+                    //steer(Steer::Right, control + 0.5f);  // Add base steering amount
                     LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control + 0.5f);
 
                 }
                 else if (diff > maxDelta)
                 {
-                    steer(Steer::Left, control + 0.5f);   // Add base steering amount
+                    //steer(Steer::Left, control + 0.5f);   // Add base steering amount
                     LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control + 0.5f);
                 }
+                m_lastDiff = diff;
             }
         }
         else
