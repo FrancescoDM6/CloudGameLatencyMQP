@@ -44,6 +44,8 @@
 
 #include "simple_logger.hpp"
 
+int tickCounter = 0;
+
 Race::Race(Game & game, size_t numCars)
   : m_humanPlayerIndex1(0)
   , m_humanPlayerIndex2(1)
@@ -369,6 +371,12 @@ void Race::update()
     }
 
     m_timing.tick();
+    getTickCounter();
+}
+
+int Race::getTickCounter() {
+    tickCounter++;
+    return tickCounter;
 }
 
 void Race::pitStop(Car & car)

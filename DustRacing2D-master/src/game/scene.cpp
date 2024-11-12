@@ -79,7 +79,6 @@ using std::dynamic_pointer_cast;
 // Default visible scene size.
 int Scene::m_width = 1024;
 int Scene::m_height = 768;
-int tickCounter = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
 
@@ -346,7 +345,8 @@ void Scene::processUserInput(InputHandler & handler)
     for (size_t i = 0; i < (m_game.hasTwoHumanPlayers() ? 2 : 1); i++)
     {
         m_timing.tick();
-        tickCounter++;
+        int tickCount = m_race->getTickCounter();
+        fprintf ("Tick working, %d", tickCount);
         // Handle accelerating / braking
         if (handler.getActionState(i, InputHandler::Action::Down))
         {
@@ -373,7 +373,7 @@ void Scene::processUserInput(InputHandler & handler)
         }
 
         // Handle turning
-        if (!m_cars.at(i)->isOffTrack() || tickCounter % 3 == 0) {
+        if (!m_cars.at(i)->isOffTrack() || tickCount % 3 == 0) {
             if (handler.getActionState(i, InputHandler::Action::Left))
             {
                 m_cars.at(i)->steer(Car::Steer::Left);
