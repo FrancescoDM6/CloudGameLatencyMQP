@@ -6,8 +6,8 @@ from pathlib import Path
 
 time_vals = []
 
-def game_time():
-    for i in range(1, 11):
+def game_time(end_val):
+    for i in range(1, end_val):
         aidata_i = []
         aidata_j = [] 
         times = []
@@ -49,8 +49,8 @@ def game_time():
         file_path = folder_path / f'AI Game Time{i}.csv'
         df.to_csv(file_path, index=False)
 
-def irl_time():
-    for i in range(1, 11):
+def irl_time(end_val):
+    for i in range(1, end_val):
         aidata_i = []
         aidata_j = [] 
         times = []
@@ -92,5 +92,9 @@ def irl_time():
         file_path = folder_path / f'AI IRL Time{i}.csv'
         df.to_csv(file_path, index=False)
 
-game_time()
-irl_time()
+def input_params(logs):   
+    game_time(logs + 1)
+    irl_time(logs + 1)
+
+#input however many log files there are for aidata
+input_params(10)

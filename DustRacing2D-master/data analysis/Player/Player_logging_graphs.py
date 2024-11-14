@@ -8,8 +8,8 @@ time_vals = []
 
 # Track assistance: angle=15.747364, cur=0.000000, diff=15.747364, control=0.377590
 
-def game_time():
-    for i in range(1, 11):
+def game_time(end_val):
+    for i in range(1, end_val):
         angle_vals = []
         cur_vals = []
         diff_vals = []
@@ -57,8 +57,8 @@ def game_time():
         file_path = folder_path / f'Player Game Time{i}.csv'
         df.to_csv(file_path, index=False)
 
-def irl_time():
-    for i in range(1, 11):
+def irl_time(end_val):
+    for i in range(1, end_val):
         angle_vals = []
         cur_vals = []
         diff_vals = []
@@ -106,5 +106,9 @@ def irl_time():
         file_path = folder_path / f'Player IRL Time{i}.csv'
         df.to_csv(file_path, index=False)
 
-game_time()
-irl_time()
+def input_params(logs):   
+    game_time(logs + 1)
+    irl_time(logs + 1)
+
+#input however many log files there are for cardata
+input_params(10)
