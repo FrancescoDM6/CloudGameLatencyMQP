@@ -370,7 +370,20 @@ void Scene::processUserInput(InputHandler & handler)
             m_cars.at(i)->setAcceleratorEnabled(false);
         }
 
-        
+        // if (handler.getActionState(i, InputHandler::Action::Left))
+        // {
+        //     m_cars.at(i)->steer(Car::Steer::Left);
+        // }
+        // else if (handler.getActionState(i, InputHandler::Action::Right))
+        // {
+        //     m_cars.at(i)->steer(Car::Steer::Right);
+        // }
+        // else
+        // {
+        //     m_cars.at(i)->steer(Car::Steer::Neutral);
+        // }
+
+
         if (handler.getActionState(i, InputHandler::Action::M)) {
             m_press++;
         }
