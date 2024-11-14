@@ -370,7 +370,7 @@ void Scene::processUserInput(InputHandler & handler)
         }
 
 
-        if (!m_cars.at(i)->isOffTrack() || tickCount % 2 == 0)
+        if (!m_cars.at(i)->isOffTrack() || tickCount % 2 == 0 || tickCount % 3 == 0)
         {
 
             // Handle turning
