@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include <sys/stat.h>
 
-const std::string LogManager::LOG_DIR = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
+const std::string LogManager::LOG_DIR = "/home/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
 
 LogManager::LogManager() : m_do_flush(false) {}
 

@@ -204,7 +204,8 @@ void Race::translateCarsToStartPositions()
         const float startTileX = static_cast<float>(finishLine->location().x());
         const float startTileY = static_cast<float>(finishLine->location().y());
         const int routeDirection = finishLine->rotation() % 360;
-        juzzlin::L().debug() << "Route direction: " << routeDirection;
+        // juzzlin::L().debug() << "Route direction: " << routeDirection;
+        juzzlin::L().info() << "Route direction: " << routeDirection;
         switch (routeDirection)
         {
         case 90:
@@ -652,7 +653,6 @@ void Race::moveCarOntoPreviousCheckPoint(Car & car)
     std::uniform_real_distribution<double> dist(-randRadius, randRadius);
     const float x = static_cast<float>(targetNode->location().x() + dist(engine));
     const float y = static_cast<float>(targetNode->location().y() + dist(engine));
-    
     car.translate({ x, y });
     car.physicsComponent().reset();
     juzzlin::L().debug() << "Moved stuck car " << car.index() << " to (" << x << ", " << y << ")";
