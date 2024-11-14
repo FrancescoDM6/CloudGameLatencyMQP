@@ -78,6 +78,7 @@ using std::dynamic_pointer_cast;
 // Default visible scene size.
 int Scene::m_width = 1024;
 int Scene::m_height = 768;
+int tickCount = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
 
@@ -297,6 +298,7 @@ void Scene::updateFrame(InputHandler & handler, int step)
         auto & glScene = MCWorld::instance().renderer().glScene();
         glScene.setFadeValue(m_renderer.fadeValue());
     }
+    tickCount++;
 }
 
 void Scene::updateOverlays()
@@ -368,7 +370,7 @@ void Scene::processUserInput(InputHandler & handler)
         }
 
 
-        if (!m_cars.at(i)->isOffTrack())
+        if (!m_cars.at(i)->isOffTrack() || tickCount % 2 == 0)
         {
 
             // Handle turning
