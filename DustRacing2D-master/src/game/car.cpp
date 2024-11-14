@@ -38,6 +38,7 @@
 
 #include <MCVector2d>
 #include <MCWorld>
+#include <MCRandom>
 
 #include <cassert>
 #include <cmath>
@@ -352,11 +353,12 @@ void Car::updateTireWear(int step)
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
                 const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
+                MCVector2dF m_randomTolerance = MCRandom::randomVector2d() * TrackTileBase::width() / 8;
 
                 // Calculate target vector
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
                                  static_cast<float>(targetNode->location().y()));
-                target -= MCVector3dF(location());
+                target -= MCVector3dF(location() + MCVector3dF(m_randomTolerance));
 
                 const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
                 const float cur = static_cast<int>(this->angle()) % 360;
@@ -386,13 +388,13 @@ void Car::updateTireWear(int step)
                 const float maxDelta = 3.0f;  // Reduced threshold to steer more often
                 if (diff < -maxDelta)
                 {
-                    steer(Steer::Right, control + 0.5f);  // Add base steering amount
+                    steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
                     LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control + 0.5f);
 
                 }
                 else if (diff > maxDelta)
                 {
-                    steer(Steer::Left, control + 0.5f);   // Add base steering amount
+                    steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
                     LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control + 0.5f);
                 }
                 m_lastDiff = diff;
