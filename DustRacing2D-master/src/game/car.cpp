@@ -344,7 +344,7 @@ void Car::updateTireWear(int step)
 
     if (m_isHuman)
     {
-        if (m_track && isOffTrack())
+        if (m_track /*&& isOffTrack()*/)
         {
             m_offTrackTimer += step / 1000.0f;
             if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)

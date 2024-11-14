@@ -369,8 +369,26 @@ void Scene::processUserInput(InputHandler & handler)
             m_cars.at(i)->setAcceleratorEnabled(false);
         }
 
+        if (!m_cars.at(i)->isOffTrack() && tickCount % 2 == 0)
+        {
 
-        if (!m_cars.at(i)->isOffTrack() || tickCount % 2 == 0 || tickCount % 3 == 0)
+            // Handle turning
+            if (handler.getActionState(i, InputHandler::Action::Left))
+            {
+                m_cars.at(i)->steer(Car::Steer::Left);
+            }
+            else if (handler.getActionState(i, InputHandler::Action::Right))
+            {
+                m_cars.at(i)->steer(Car::Steer::Right);
+            }
+            else
+            {
+                m_cars.at(i)->steer(Car::Steer::Neutral);
+            }
+        }
+
+        if (/*!m_cars.at(i)->isOffTrack() || */tickCount % 2 == 0 || tickCount % 3 == 0
+        || tickCount % 4 == 0 || tickCount % 5 == 0)
         {
 
             // Handle turning
