@@ -5,6 +5,8 @@
 #include <cstdio>
 #include <map>
 
+class Timing;
+
 class LogManager
 {
 public:
@@ -23,6 +25,7 @@ public:
     int startUp();
     void shutDown();
     void setFlush(bool do_flush);
+    void setTiming(Timing* timing) {m_timing = timing;}
     
     // Default write method (uses CAR_DATA type)
     int writeLog(const char* fmt, ...) const;
@@ -40,6 +43,7 @@ private:
     bool m_do_flush;
     std::map<LogType, FILE*> m_files;
     static const std::string LOG_DIR;
+    Timing* m_timing;
 };
 
 #endif // LOGMANAGER_HPP
