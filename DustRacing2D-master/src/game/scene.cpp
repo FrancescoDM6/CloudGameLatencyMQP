@@ -79,6 +79,7 @@ using std::dynamic_pointer_cast;
 int Scene::m_width = 1024;
 int Scene::m_height = 768;
 int tickCount = 0;
+int m_press = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
 
@@ -369,41 +370,49 @@ void Scene::processUserInput(InputHandler & handler)
             m_cars.at(i)->setAcceleratorEnabled(false);
         }
 
-        if (!m_cars.at(i)->isOffTrack() && tickCount % 2 == 0)
-        {
-
-            // Handle turning
-            if (handler.getActionState(i, InputHandler::Action::Left))
-            {
-                m_cars.at(i)->steer(Car::Steer::Left);
-            }
-            else if (handler.getActionState(i, InputHandler::Action::Right))
-            {
-                m_cars.at(i)->steer(Car::Steer::Right);
-            }
-            else
-            {
-                m_cars.at(i)->steer(Car::Steer::Neutral);
-            }
+        
+        if (handler.getActionState(i, InputHandler::Action::M)) {
+            m_press++;
         }
 
-        if (/*!m_cars.at(i)->isOffTrack() || */tickCount % 2 == 0 || tickCount % 3 == 0
-        || tickCount % 4 == 0 || tickCount % 5 == 0)
-        {
+        if (m_press % 2 == 0) {
+            //if (!m_cars.at(i)->isOffTrack() && tickCount % 2 == 0)
+            //{
 
-            // Handle turning
-            if (handler.getActionState(i, InputHandler::Action::Left))
-            {
-                m_cars.at(i)->steer(Car::Steer::Left);
-            }
-            else if (handler.getActionState(i, InputHandler::Action::Right))
-            {
-                m_cars.at(i)->steer(Car::Steer::Right);
-            }
-            else
-            {
-                m_cars.at(i)->steer(Car::Steer::Neutral);
-            }
+                // Handle turning
+                if (handler.getActionState(i, InputHandler::Action::Left))
+                {
+                    m_cars.at(i)->steer(Car::Steer::Left);
+                }
+                else if (handler.getActionState(i, InputHandler::Action::Right))
+                {
+                    m_cars.at(i)->steer(Car::Steer::Right);
+                }
+                else
+                {
+                    m_cars.at(i)->steer(Car::Steer::Neutral);
+                }
+            //}
+
+            //if (/*!m_cars.at(i)->isOffTrack() || tickCount % 2 == 0 || tickCount % 3 == 0
+            //|| tickCount % 4 == 0 || tickCount % 5 == 0 || tickCount % 6 == 0
+            //|| tickCount % 7 == 0 || tickCount % 8 == 0 || tickCount % 9 == 0*/)
+            //{
+
+                // Handle turning
+                if (handler.getActionState(i, InputHandler::Action::Left))
+                {
+                    m_cars.at(i)->steer(Car::Steer::Left);
+                }
+                else if (handler.getActionState(i, InputHandler::Action::Right))
+                {
+                    m_cars.at(i)->steer(Car::Steer::Right);
+                }
+                else
+                {
+                    m_cars.at(i)->steer(Car::Steer::Neutral);
+                }
+            //}
         }
     }
 }

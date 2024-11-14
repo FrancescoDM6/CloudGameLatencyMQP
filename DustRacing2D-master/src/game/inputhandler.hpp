@@ -30,6 +30,7 @@ public:
         Right,
         Up,
         Down,
+        M,
         EndOfEnum
     };
 
