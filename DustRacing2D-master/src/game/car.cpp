@@ -389,13 +389,13 @@ void Car::updateTireWear(int step)
                 if (diff < -maxDelta)
                 {
                     steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
-                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control + 0.5f);
+                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control);
 
                 }
                 else if (diff > maxDelta)
                 {
                     steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
-                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control + 0.5f);
+                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
                 }
                 m_lastDiff = diff;
             }
