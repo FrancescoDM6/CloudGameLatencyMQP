@@ -345,6 +345,10 @@ void Scene::processUserInput(InputHandler & handler)
 {
     for (size_t i = 0; i < (m_game.hasTwoHumanPlayers() ? 2 : 1); i++)
     {
+        if (handler.getActionState(i, InputHandler::Action::M)) {
+            m_press++;
+        }
+
         // Handle accelerating / braking
         if (handler.getActionState(i, InputHandler::Action::Down))
         {
@@ -370,13 +374,8 @@ void Scene::processUserInput(InputHandler & handler)
             m_cars.at(i)->setAcceleratorEnabled(false);
         }
 
-        
-        if (handler.getActionState(i, InputHandler::Action::M)) {
-            m_press++;
-        }
-
         if (m_press % 2 == 0) {
-            if (m_cars.at(i)->isOffTrack() && tickCount % 2 == 0)
+            if (m_cars.at(i)->isOffTrack() && tickCount % 5 == 0)
             {
 
                 // Handle turning
@@ -397,7 +396,7 @@ void Scene::processUserInput(InputHandler & handler)
             // if (/*!m_cars.at(i)->isOffTrack() || */tickCount % 2 == 0 || tickCount % 3 == 0
             // || tickCount % 4 == 0 || tickCount % 5 == 0 || tickCount % 6 == 0
             // || tickCount % 7 == 0 || tickCount % 8 == 0 || tickCount % 9 == 0)
-            if(!m_cars.at(i)->isOffTrack() && tickCount % 10 != 0)
+            if(!m_cars.at(i)->isOffTrack() && tickCount % 2 != 0)
             {
 
                 // Handle turning
