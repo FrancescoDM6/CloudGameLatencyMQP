@@ -111,4 +111,4 @@ def input_params(logs):
     irl_time(logs + 1)
 
 #input however many log files there are for cardata
-input_params(10)
+input_params(13)
