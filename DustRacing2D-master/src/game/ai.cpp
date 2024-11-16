@@ -173,7 +173,8 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     // Store the last difference
     m_lastDiff = diff;
     LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
-                    "steerControl: MaxDelta= %f, Diff= %f, Control= %f, Last Difference= %f\n", maxDelta, diff, control, m_lastDiff + 0.5f);
+                    "steerControl: angle=%f, cur=%f, diff=%f, control=%f\n",
+                    angle, cur, diff, control);
 }
 
 void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
