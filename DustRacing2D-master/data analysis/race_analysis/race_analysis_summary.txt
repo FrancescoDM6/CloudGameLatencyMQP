@@ -1,0 +1,26 @@
+Race Time Analysis Summary
+=========================
+
+No_Assist:
+  Average Time: 51.99 seconds
+  Best Time: 49.58 seconds
+  Worst Time: 58.52 seconds
+  Standard Deviation: 3.70 seconds
+
+Full_AI:
+  Average Time: 51.60 seconds
+  Best Time: 51.07 seconds
+  Worst Time: 52.17 seconds
+  Standard Deviation: 0.47 seconds
+
+With_Assist:
+  Average Time: 50.36 seconds
+  Best Time: 49.24 seconds
+  Worst Time: 53.55 seconds
+  Standard Deviation: 1.82 seconds
+
+
+Overall Analysis:
+Best Overall Time: 49.24 seconds (Run 14, With_Assist)
+Average Overall Time: 51.32 seconds
+Total Races Analyzed: 15
