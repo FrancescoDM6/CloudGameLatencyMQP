@@ -267,6 +267,9 @@ private:
     size_t m_lastTargetNodeIndex;
 
     std::shared_ptr<Race> m_race;
+
+    bool m_hasPreviousTargetAngle = false;
+    float m_continuousTargetAngle = 0.0f;
 };
 
 typedef std::shared_ptr<Car> CarPtr;
