@@ -7,8 +7,9 @@
 #include <chrono>
 #include <ctime>
 
-const std::string LogManager::LOG_DIR = "/home/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
-// const std::string LogManager::LOG_DIR = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
+// const std::string LogManager::LOG_DIR = "/home/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
+const std::string LogManager::LOG_DIR = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs/";
+
 
 LogManager::LogManager() : m_timing(nullptr), m_do_flush(false) {}
 
