@@ -61,6 +61,9 @@ private:
     size_t m_lastTargetNodeIndex;
 
     MCVector2dF m_randomTolerance;
+
+    bool m_hasPreviousTargetAngle = false;
+    float m_continuousTargetAngle = 0.0f;
 };
 
 typedef std::shared_ptr<AI> AIPtr;

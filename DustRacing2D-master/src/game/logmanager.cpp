@@ -31,8 +31,8 @@ std::string LogManager::getLogPrefix(LogType type) const
             return "logfile_";
         case LogType::CAR_DATA:
             return "cardata_";
-        case LogType::AI_DATA:
-            return "aidata_";
+        case LogType::BOT_DATA:
+            return "botdata_";
         case LogType::LAP_TIME:
             return "laptime_";
         default:
