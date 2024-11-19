@@ -75,7 +75,7 @@ def plot_player_data(start_val, end_val, condition):
                 plt.savefig(output_dir / f'player_steering_run_{i}.png', dpi=300, bbox_inches='tight')
                 plt.close()
                 print(f"Created plot for run {i} in {condition}")
-            
+                
         except FileNotFoundError:
             print(f"Log file {file_name} not found. Skipping...")
             continue

@@ -353,12 +353,13 @@ void Car::updateTireWear(int step)
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
                 const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
-                MCVector2dF m_randomTolerance = MCRandom::randomVector2d() * TrackTileBase::width() / 8;
+                // MCVector2dF m_randomTolerance = MCRandom::randomVector2d() * TrackTileBase::width() / 8;
 
                 // Calculate target vector
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
                                  static_cast<float>(targetNode->location().y()));
-                target -= MCVector3dF(location() + MCVector3dF(m_randomTolerance));
+                target -= MCVector3dF(location());
+                // + MCVector3dF(m_randomTolerance));
 
                 const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
                 const float cur = static_cast<int>(this->angle()) % 360;
