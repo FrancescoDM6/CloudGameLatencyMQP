@@ -353,15 +353,53 @@ void Car::updateTireWear(int step)
                 m_trackAssistanceEnabled = true;
                 const Route & route = m_track->trackData().route();
                 const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
-                MCVector2dF m_randomTolerance = MCRandom::randomVector2d() * TrackTileBase::width() / 8;
+                // MCVector2dF m_randomTolerance = MCRandom::randomVector2d() * TrackTileBase::width() / 8;
 
                 // Calculate target vector
                 MCVector3dF target(static_cast<float>(targetNode->location().x()), 
                                  static_cast<float>(targetNode->location().y()));
-                target -= MCVector3dF(location() + MCVector3dF(m_randomTolerance));
+                // target -= MCVector3dF(location() + MCVector3dF(m_randomTolerance));
 
-                const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
-                const float cur = static_cast<int>(this->angle()) % 360;
+                // const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+                // const float cur = static_cast<int>(this->angle()) % 360;
+                // float diff = angle - cur;
+
+                                // Get the raw current angle (continuously increasing/decreasing)
+                const float rawCurrentAngle = this->angle();
+                
+                // Get new target angle from atan2 (-180 to +180)
+                float newTargetAngle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+                
+                // If this is the first frame, initialize the continuous target angle
+                if (!m_hasPreviousTargetAngle)
+                {
+                    m_continuousTargetAngle = newTargetAngle;
+                    m_hasPreviousTargetAngle = true;
+                }
+                else
+                {
+                    // Adjust for angle wrapping
+                    while (newTargetAngle - m_continuousTargetAngle > 180)
+                    {
+                        newTargetAngle -= 360;
+                    }
+                    while (newTargetAngle - m_continuousTargetAngle < -180)
+                    {
+                        newTargetAngle += 360;
+                    }
+                    
+                    // Smoothly update the continuous target angle
+                    m_continuousTargetAngle = newTargetAngle;
+                }
+
+                // Log the continuous angles
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+                    "Continuous angles: target=%f, current=%f\n",
+                    m_continuousTargetAngle, rawCurrentAngle);
+
+                // Now proceed with normalized calculations for steering
+                const float angle = newTargetAngle;
+                const float cur = static_cast<int>(rawCurrentAngle) % 360;
                 float diff = angle - cur;
 
                 // Normalize angle difference
