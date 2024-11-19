@@ -370,7 +370,7 @@ void Car::updateTireWear(int step)
                 
                 // Get new target angle from atan2 (-180 to +180)
                 float newTargetAngle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
-                
+                const float angle = newTargetAngle;
                 // If this is the first frame, initialize the continuous target angle
                 if (!m_hasPreviousTargetAngle)
                 {
@@ -399,7 +399,7 @@ void Car::updateTireWear(int step)
                     m_continuousTargetAngle, rawCurrentAngle);
 
                 // Now proceed with normalized calculations for steering
-                const float angle = newTargetAngle;
+                // const float angle = static_cast<int>(newTargetAngle) % 180;
                 const float cur = static_cast<int>(rawCurrentAngle) % 360;
                 float diff = angle - cur;
 
