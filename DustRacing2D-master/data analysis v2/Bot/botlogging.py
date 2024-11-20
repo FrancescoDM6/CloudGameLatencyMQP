@@ -87,7 +87,7 @@ def plot_ai_data(start_val, end_val, condition):
                 plt.grid(True)
                 
                 # Save the plot in a condition-specific subfolder
-                output_dir = Path(f'DustRacing2D-master/data analysis/AI/plots/{condition}')
+                output_dir = Path(f'DustRacing2D-master\data analysis v2\Bot/{condition}')
                 output_dir.mkdir(parents=True, exist_ok=True)
                 plt.savefig(output_dir / f'ai_position_run_{i}.png', dpi=300, bbox_inches='tight')
                 plt.close()

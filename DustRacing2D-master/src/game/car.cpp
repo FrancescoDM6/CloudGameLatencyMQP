@@ -370,7 +370,13 @@ void Car::updateTireWear(int step)
                 
                 // Get new target angle from atan2 (-180 to +180)
                 float newTargetAngle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
-                const float angle = newTargetAngle;
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+                    "updateTireWear: car Location i= %f\n",
+                    target.i());
+                    
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+                    "updateTireWear: car Location j= %f\n",
+                    target.j());               
                 // If this is the first frame, initialize the continuous target angle
                 if (!m_hasPreviousTargetAngle)
                 {
