@@ -1,0 +1,19 @@
+condition,player,mean_time,std_time,type
+0.0 Control Assistance,F,49.82,0.3,player
+0.0 Control Assistance,F,49.82,0.3,bot
+0.2 Control Assistance,F,50.75,2.79,player
+0.2 Control Assistance,F,50.75,2.79,bot
+1.0 Control Assistance,F,51.01,2.39,player
+1.0 Control Assistance,F,51.01,2.39,bot
+0.0 Control Assistance,J,49.82,0.3,player
+0.0 Control Assistance,J,49.82,0.3,bot
+0.2 Control Assistance,J,50.75,2.79,player
+0.2 Control Assistance,J,50.75,2.79,bot
+1.0 Control Assistance,J,51.01,2.39,player
+1.0 Control Assistance,J,51.01,2.39,bot
+0.0 Control Assistance,M,49.82,0.3,player
+0.0 Control Assistance,M,49.82,0.3,bot
+0.2 Control Assistance,M,50.75,2.79,player
+0.2 Control Assistance,M,50.75,2.79,bot
+1.0 Control Assistance,M,51.01,2.39,player
+1.0 Control Assistance,M,51.01,2.39,bot
