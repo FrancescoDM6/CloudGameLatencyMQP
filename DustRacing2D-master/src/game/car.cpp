@@ -364,12 +364,15 @@ void Car::updateTireWear(int step)
                 // const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
                 // const float cur = static_cast<int>(this->angle()) % 360;
                 // float diff = angle - cur;
-
-                                // Get the raw current angle (continuously increasing/decreasing)
-                const float rawCurrentAngle = this->angle();
                 
                 // Get new target angle from atan2 (-180 to +180)
                 float newTargetAngle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+                const float angle = newTargetAngle;
+                
+                 // Get the raw current angle (continuously increasing/decreasing)
+                const float rawCurrentAngle = this->angle();
+
+
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
                     "updateTireWear: car Location i= %f\n",
                     target.i());
@@ -407,7 +410,7 @@ void Car::updateTireWear(int step)
                 // Now proceed with normalized calculations for steering
                 // const float angle = static_cast<int>(newTargetAngle) % 180;
                 const float cur = static_cast<int>(rawCurrentAngle) % 360;
-                float diff = angle() - cur;
+                float diff = angle - cur;
 
                 // Normalize angle difference
                 while (diff > 180) diff -= 360;
@@ -427,7 +430,7 @@ void Car::updateTireWear(int step)
 
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
                     "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
-                    angle(), cur, diff, control);
+                    angle, cur, diff, control);
 
                 // More aggressive steering response
                 const float maxDelta = 3.0f;  // Reduced threshold to steer more often

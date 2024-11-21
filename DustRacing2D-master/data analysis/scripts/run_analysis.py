@@ -519,8 +519,8 @@ def run_complete_analysis():
     
     analyzer = DataAnalyzer()
     
-    print("\n1. Setting up directory structure...")
-    analyzer.setup_directories()
+    # print("\n1. Setting up directory structure...")
+    # analyzer.setup_directories()
     
     print("\n2. Analyzing individual player runs...")
     for player in ['F', 'J', 'M']:
