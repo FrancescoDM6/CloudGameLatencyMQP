@@ -48,7 +48,6 @@ class DataAnalyzer:
         """Analyze a single player run and its corresponding bot run."""
         print(f"\nAnalyzing {player}'s {control_type} run #{run_number}")
         
-        # Only change is here - using cardata instead of playerdata in filename
         player_log = self.logs_dir / player / f'cardata_{run_number}.log'
         bot_log = self.logs_dir / player / f'botdata_{run_number}.log'
         
@@ -126,7 +125,6 @@ class DataAnalyzer:
                 
                 for run in range(1, 6):
                     try:
-                        # Only change is here - using cardata instead of playerdata
                         player_log = self.logs_dir / player / f'cardata_{run}.log'
                         bot_log = self.logs_dir / player / f'botdata_{run}.log'
                         
@@ -278,23 +276,221 @@ class DataAnalyzer:
 
     def _create_player_plots(self, data, output_dir, run_number):
         """Create individual player performance plots."""
-        pass
+        if data is None or data.empty:
+            print(f"No data available for run {run_number}")
+            return
+            
+        plt.style.use('default')
+        
+        # Plot 1: Angles and Control
+        plt.figure(figsize=(12, 10))
+        
+        # Target vs Current Angle
+        plt.subplot(2, 1, 1)
+        plt.plot(data['time'], data['target_angle'], 'r-', label='Target Angle', linewidth=2)
+        plt.plot(data['time'], data['current_angle'], 'b-', label='Current Angle', linewidth=2)
+        plt.title(f'Steering Angles - Run {run_number}')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Angle (degrees)')
+        plt.legend()
+        plt.grid(True)
+        
+        # Control Input and Difference
+        plt.subplot(2, 1, 2)
+        plt.plot(data['time'], data['diff'], 'g-', label='Angle Difference', alpha=0.7)
+        plt.plot(data['time'], data['control'], 'm-', label='Control Input', alpha=0.7)
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Value')
+        plt.legend()
+        plt.grid(True)
+        
+        plt.tight_layout()
+        plt.savefig(output_dir / f'run_{run_number}_steering.png', dpi=300, bbox_inches='tight')
+        plt.close()
 
     def _create_comparison_plots(self, player_data, bot_data, output_dir, run_number):
         """Create comparison plots between player and bot."""
-        pass
+        if player_data is None or bot_data is None or player_data.empty or bot_data.empty:
+            print(f"Missing data for comparison in run {run_number}")
+            return
+            
+        plt.style.use('default')
+        
+        # Plot 1: Control Comparison
+        plt.figure(figsize=(12, 8))
+        plt.plot(player_data['time'], player_data['control'], 'b-', label='Player Control', alpha=0.7)
+        plt.plot(bot_data['time'], bot_data['control'], 'r-', label='Bot Control', alpha=0.7)
+        plt.title(f'Control Input Comparison - Run {run_number}')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Control Value')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / f'run_{run_number}_control_comparison.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 2: Trajectory Comparison (for bot data only as it has position)
+        plt.figure(figsize=(12, 8))
+        plt.plot(bot_data['car_x'], bot_data['car_y'], 'b-', label='Actual Path', linewidth=2)
+        plt.plot(bot_data['target_x'], bot_data['target_y'], 'r--', label='Target Path', alpha=0.7)
+        plt.title(f'Bot Trajectory - Run {run_number}')
+        plt.xlabel('X Position')
+        plt.ylabel('Y Position')
+        plt.legend()
+        plt.grid(True)
+        plt.axis('equal')  # Equal aspect ratio
+        plt.savefig(output_dir / f'run_{run_number}_trajectory.png', dpi=300, bbox_inches='tight')
+        plt.close()
 
     def _create_summary_plots(self, player_data_list, bot_data_list, output_dir):
         """Create summary plots for a set of runs."""
-        pass
+        if not player_data_list or not bot_data_list:
+            print("No data available for summary plots")
+            return
+            
+        # Calculate average control values for each run
+        player_avg_control = [data['control'].mean() for data in player_data_list]
+        bot_avg_control = [data['control'].mean() for data in bot_data_list]
+        
+        # Calculate average completion times
+        player_completion = [data['time'].max() for data in player_data_list]
+        bot_completion = [data['time'].max() for data in bot_data_list]
+        
+        plt.style.use('default')
+        
+        # Plot 1: Average Control Values Comparison
+        plt.figure(figsize=(10, 6))
+        runs = range(1, len(player_data_list) + 1)
+        plt.plot(runs, player_avg_control, 'bo-', label='Player')
+        plt.plot(runs, bot_avg_control, 'ro-', label='Bot')
+        plt.title('Average Control Input by Run')
+        plt.xlabel('Run Number')
+        plt.ylabel('Average Control Value')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / 'average_control_summary.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 2: Completion Times
+        plt.figure(figsize=(10, 6))
+        plt.plot(runs, player_completion, 'bo-', label='Player')
+        plt.plot(runs, bot_completion, 'ro-', label='Bot')
+        plt.title('Completion Times by Run')
+        plt.xlabel('Run Number')
+        plt.ylabel('Time (seconds)')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / 'completion_times_summary.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Save summary statistics to CSV
+        summary_stats = pd.DataFrame({
+            'Run': runs,
+            'Player_Avg_Control': player_avg_control,
+            'Bot_Avg_Control': bot_avg_control,
+            'Player_Completion_Time': player_completion,
+            'Bot_Completion_Time': bot_completion
+        })
+        summary_stats.to_csv(output_dir / 'summary_statistics.csv', index=False)
 
     def _create_bot_analysis_plots(self, bot_data_list, output_dir):
         """Create comprehensive bot analysis plots."""
-        pass
+        if not bot_data_list:
+            print("No bot data available for analysis")
+            return
+            
+        # Collect statistics across all runs
+        completion_times = []
+        avg_controls = []
+        path_deviations = []  # Average distance from target path
+        
+        for data in bot_data_list:
+            if data is not None and not data.empty:
+                completion_times.append(data['time'].max())
+                avg_controls.append(data['control'].abs().mean())
+                
+                # Calculate average deviation from target path
+                path_dev = np.mean(np.sqrt(
+                    (data['target_x'] - data['car_x'])**2 + 
+                    (data['target_y'] - data['car_y'])**2
+                ))
+                path_deviations.append(path_dev)
+        
+        plt.style.use('default')
+        
+        # Plot 1: Distribution of Completion Times
+        plt.figure(figsize=(10, 6))
+        plt.hist(completion_times, bins=15, alpha=0.7)
+        plt.axvline(np.mean(completion_times), color='r', linestyle='--', label='Mean')
+        plt.title('Distribution of Bot Completion Times')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Frequency')
+        plt.legend()
+        plt.savefig(output_dir / 'bot_completion_times_dist.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 2: Control vs Path Deviation
+        plt.figure(figsize=(10, 6))
+        plt.scatter(avg_controls, path_deviations, alpha=0.6)
+        plt.title('Control Input vs Path Deviation')
+        plt.xlabel('Average Control Input')
+        plt.ylabel('Average Path Deviation')
+        plt.grid(True)
+        plt.savefig(output_dir / 'bot_control_vs_deviation.png', dpi=300, bbox_inches='tight')
+        plt.close()
 
     def _create_overall_analysis_plots(self, all_data, output_dir):
         """Create overall analysis plots comparing all players and conditions."""
-        pass
+        plt.style.use('default')
+        
+        # Prepare data for plotting
+        completion_times = {
+            'condition': [],
+            'player': [],
+            'time': [],
+            'type': []
+        }
+        
+        for data_type in ['player', 'bot']:
+            for player in all_data[data_type]:
+                for condition in all_data[data_type][player]:
+                    for run_data in all_data[data_type][player][condition]:
+                        if run_data is not None and not run_data.empty:
+                            completion_times['condition'].append(condition)
+                            completion_times['player'].append(player)
+                            completion_times['time'].append(run_data['time'].max())
+                            completion_times['type'].append(data_type)
+        
+        df = pd.DataFrame(completion_times)
+        
+        # Plot 1: Completion Times by Condition and Player
+        plt.figure(figsize=(15, 8))
+        positions = range(len(df['condition'].unique()))
+        
+        for i, player in enumerate(['F', 'J', 'M']):
+            player_data = df[df['player'] == player]
+            
+            # Plot player times
+            plt.boxplot([player_data[player_data['condition'] == cond]['time'] 
+                        for cond in df['condition'].unique()],
+                       positions=[p + i*0.3 for p in positions],
+                       widths=0.2,
+                       patch_artist=True,
+                       boxprops=dict(facecolor=f'C{i}', alpha=0.5))
+        
+        plt.xticks([p + 0.3 for p in positions], df['condition'].unique())
+        plt.title('Completion Times by Condition and Player')
+        plt.xlabel('Condition')
+        plt.ylabel('Time (seconds)')
+        plt.legend(['Player F', 'Player J', 'Player M'])
+        plt.grid(True, axis='y')
+        plt.savefig(output_dir / 'overall_completion_times.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Save overall statistics
+        stats = df.groupby(['condition', 'player', 'type'])['time'].agg([
+            'mean', 'std', 'min', 'max'
+        ]).round(2)
+        stats.to_csv(output_dir / 'overall_statistics.csv')
 
 def run_complete_analysis():
     """Run the complete analysis pipeline."""
