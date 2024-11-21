@@ -374,6 +374,7 @@ void Scene::processUserInput(InputHandler & handler)
             m_cars.at(i)->setAcceleratorEnabled(false);
         }
 
+        // Comment out/ Uncomment if you want manual steering
         // if (handler.getActionState(i, InputHandler::Action::Left))
         // {
         //     m_cars.at(i)->steer(Car::Steer::Left);
