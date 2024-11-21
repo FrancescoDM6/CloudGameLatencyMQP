@@ -14,7 +14,7 @@ public:
     enum class LogType {
         DEFAULT,
         CAR_DATA,
-        AI_DATA,
+        BOT_DATA,
         LAP_TIME
     };
 

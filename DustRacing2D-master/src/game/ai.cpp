@@ -112,22 +112,59 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     target -= MCVector3dF(m_car.location() + MCVector3dF(m_randomTolerance));
     // std::string timestamp = getCurrentTime();
     // std::string logEntry = "[" + timestamp + "] " + message;
-    // LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA, 
+    // LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA, 
     //                 "steerControl: IRL Timestamp: %s\n", timestamp.str());
     // double fps = getFrameRate();
-    // LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA, 
+    // LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA, 
     //                 "steerControl: FPS: %d\n", fps);
-    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: targetNode X: %f\n", targetNode->location().x());
-    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: targetNode Y: %f\n", targetNode->location().y());
-    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: car Location i: %f\n", m_car.location().i());
-    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: car Location j: %f\n", m_car.location().j());
 
-    const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
-    const float cur = static_cast<int>(m_car.angle()) % 360;
+    // const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+    // const float cur = static_cast<int>(m_car.angle()) % 360;
+    // float diff = angle - cur;
+
+    const float rawCurrentAngle = m_car.angle();
+                
+    // Get new target angle from atan2 (-180 to +180)
+    float newTargetAngle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+    const float angle = newTargetAngle;
+    // If this is the first frame, initialize the continuous target angle
+    if (!m_hasPreviousTargetAngle)
+    {
+        m_continuousTargetAngle = newTargetAngle;
+        m_hasPreviousTargetAngle = true;
+    }
+    else
+    {
+        // Adjust for angle wrapping
+        while (newTargetAngle - m_continuousTargetAngle > 180)
+        {
+            newTargetAngle -= 360;
+        }
+        while (newTargetAngle - m_continuousTargetAngle < -180)
+        {
+            newTargetAngle += 360;
+        }
+        
+        // Smoothly update the continuous target angle
+        m_continuousTargetAngle = newTargetAngle;
+    }
+
+    // Log the continuous angles
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
+        "Continuous angles: target=%f, current=%f\n",
+        m_continuousTargetAngle, rawCurrentAngle);
+
+    // Now proceed with normalized calculations for steering
+    // const float angle = static_cast<int>(newTargetAngle) % 180;
+    const float cur = static_cast<int>(rawCurrentAngle) % 360;
     float diff = angle - cur;
 
     bool ok = false;
@@ -160,19 +197,19 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     if (diff < -maxDelta)
     {
         m_car.steer(Car::Steer::Right, control);
-        LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+        LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: Car turned/is turning right\n");
     }
     else if (diff > maxDelta)
     {
         m_car.steer(Car::Steer::Left, control);
-        LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+        LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: Car turned/is turning left\n");
     }
 
     // Store the last difference
     m_lastDiff = diff;
-    LogManager::getInstance().writeLog(LogManager::LogType::AI_DATA,
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
 }
