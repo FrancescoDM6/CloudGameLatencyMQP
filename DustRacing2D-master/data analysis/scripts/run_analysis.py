@@ -419,47 +419,75 @@ class DataAnalyzer:
             'type': []
         }
         
+        # First collect and organize all the data
         for data_type in ['player', 'bot']:
             for player in all_data[data_type]:
                 for condition in all_data[data_type][player]:
-                    if all_data[data_type][player][condition]:
-                        times = [data['time'].max() for data in all_data[data_type][player][condition] 
-                               if data is not None and not data.empty]
-                        if times:
-                            stats_data['condition'].append(condition)
-                            stats_data['player'].append(player)
-                            stats_data['mean_time'].append(np.mean(times))
-                            stats_data['std_time'].append(np.std(times))
-                            stats_data['type'].append(data_type)
+                    if condition in all_data[data_type][player] and all_data[data_type][player][condition]:
+                        # Filter out None and empty DataFrames
+                        valid_data = [data for data in all_data[data_type][player][condition] 
+                                    if data is not None and not data.empty]
+                        
+                        if valid_data:  # Only process if we have valid data
+                            times = [data['time'].max() for data in valid_data]
+                            if times:  # Only add if we have times
+                                stats_data['condition'].append(condition)
+                                stats_data['player'].append(player)
+                                stats_data['mean_time'].append(np.mean(times))
+                                stats_data['std_time'].append(np.std(times))
+                                stats_data['type'].append(data_type)
         
         df = pd.DataFrame(stats_data)
         
-        # Plot: Completion Times by Condition and Player with Error Bars
-        plt.figure(figsize=(15, 8))
-        conditions = df['condition'].unique()
-        x = np.arange(len(conditions))
-        width = 0.25
-        
-        for i, player in enumerate(['F', 'J', 'M']):
-            player_data = df[df['player'] == player]
-            if not player_data.empty:
-                plt.errorbar(x + i*width, player_data['mean_time'], 
-                           yerr=player_data['std_time'],
-                           fmt='o', capsize=5, label=f'Player {player}')
-        
-        plt.xticks(x + width, conditions, rotation=45)
-        plt.title('Average Completion Times by Condition and Player')
-        plt.xlabel('Condition')
-        plt.ylabel('Time (seconds)')
-        plt.legend()
-        
-        plt.tight_layout()
-        plt.savefig(output_dir / 'overall_completion_times.png', dpi=300, bbox_inches='tight')
-        plt.close()
-        
-        # Save overall statistics
-        stats = df.copy()
-        stats.to_csv(output_dir / 'overall_statistics.csv', index=False)
+        if not df.empty:
+            # Plot: Completion Times by Condition and Player with Error Bars
+            plt.figure(figsize=(15, 8))
+            conditions = sorted(df['condition'].unique())
+            x = np.arange(len(conditions))
+            width = 0.25
+            
+            for i, player in enumerate(['F', 'J', 'M']):
+                player_data = df[df['player'] == player]
+                if not player_data.empty:
+                    # Ensure data aligns with conditions
+                    player_means = []
+                    player_stds = []
+                    for condition in conditions:
+                        condition_data = player_data[player_data['condition'] == condition]
+                        if not condition_data.empty:
+                            player_means.append(condition_data['mean_time'].iloc[0])
+                            player_stds.append(condition_data['std_time'].iloc[0])
+                        else:
+                            player_means.append(np.nan)
+                            player_stds.append(np.nan)
+                    
+                    # Only plot non-NaN values
+                    valid_indices = ~np.isnan(player_means)
+                    if np.any(valid_indices):
+                        valid_x = x[valid_indices] + i*width
+                        valid_means = np.array(player_means)[valid_indices]
+                        valid_stds = np.array(player_stds)[valid_indices]
+                        
+                        plt.errorbar(valid_x, valid_means, 
+                                   yerr=valid_stds,
+                                   fmt='o', capsize=5, 
+                                   label=f'Player {player}')
+            
+            plt.xticks(x + width, conditions, rotation=45)
+            plt.title('Average Completion Times by Condition and Player')
+            plt.xlabel('Condition')
+            plt.ylabel('Time (seconds)')
+            plt.legend()
+            
+            plt.tight_layout()
+            plt.savefig(output_dir / 'overall_completion_times.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            # Save overall statistics
+            stats = df.sort_values(['player', 'condition']).round(2)
+            stats.to_csv(output_dir / 'overall_statistics.csv', index=False)
+        else:
+            print("No valid data for overall analysis plots")
 
     def analyze_player_run(self, player, control_type, run_number):
         """Analyze a single player run and its corresponding bot run."""
