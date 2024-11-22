@@ -80,6 +80,7 @@ int Scene::m_width = 1024;
 int Scene::m_height = 768;
 int tickCount = 0;
 int m_press = 0;
+int n_press = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
 
@@ -347,6 +348,12 @@ void Scene::processUserInput(InputHandler & handler)
     {
         if (handler.getActionState(i, InputHandler::Action::M)) {
             m_press++;
+            n_press = 0;
+        }
+
+        if (handler.getActionState(i, InputHandler::Action::N)) {
+            n_press++;
+            m_press = 0;
         }
 
         // Handle accelerating / braking
@@ -375,25 +382,22 @@ void Scene::processUserInput(InputHandler & handler)
         }
 
         // Comment out/ Uncomment if you want manual steering
-        // if (handler.getActionState(i, InputHandler::Action::Left))
-        // {
-        //     m_cars.at(i)->steer(Car::Steer::Left);
-        // }
-        // else if (handler.getActionState(i, InputHandler::Action::Right))
-        // {
-        //     m_cars.at(i)->steer(Car::Steer::Right);
-        // }
-        // else
-        // {
-        //     m_cars.at(i)->steer(Car::Steer::Neutral);
-        // }
+        if (m_press % 2 == 0 && n_press % 2 == 0) {
+            if (handler.getActionState(i, InputHandler::Action::Left))
+            {
+                m_cars.at(i)->steer(Car::Steer::Left);
+            }
+            else if (handler.getActionState(i, InputHandler::Action::Right))
+            {
+                m_cars.at(i)->steer(Car::Steer::Right);
+            }
+            else
+            {
+                m_cars.at(i)->steer(Car::Steer::Neutral);
+            }
+        }
 
-
-        // if (handler.getActionState(i, InputHandler::Action::M)) {
-        //     m_press++;
-        // }
-
-        if (m_press % 2 == 0) {
+        if (m_press % 2 == 0 && n_press % 2 != 0 ) {
             if (m_cars.at(i)->isOffTrack() && tickCount % 5 == 0)
             {
 
