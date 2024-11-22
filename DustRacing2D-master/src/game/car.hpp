@@ -95,6 +95,10 @@ public:
     //! Get cached speed.
     float absSpeed() const;
 
+    int getMCount();
+
+    void setMCount(int m);
+
     void addDamage(float damage);
 
     //! \reimp
@@ -218,6 +222,8 @@ private:
     float m_dx, m_dy;
 
     bool m_isHuman;
+
+    int m_count;
 
     std::unique_ptr<CarParticleEffectManager> m_particleEffectManager;
 

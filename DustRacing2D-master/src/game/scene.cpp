@@ -347,8 +347,11 @@ void Scene::processUserInput(InputHandler & handler)
     {
         if (handler.getActionState(i, InputHandler::Action::M)) {
             m_press++;
+            m_cars.at(i)->setMCount(m_press);
         }
 
+        // Uncomment to enable acceleration assistance
+        if (m_press % 2 == 0) {
         // Handle accelerating / braking
         if (handler.getActionState(i, InputHandler::Action::Down))
         {
@@ -393,7 +396,8 @@ void Scene::processUserInput(InputHandler & handler)
         //     m_press++;
         // }
 
-        if (m_press % 2 == 0) {
+        // Uncomment to enable steering assist
+        // if (m_press % 2 == 0) {
             if (m_cars.at(i)->isOffTrack() && tickCount % 5 == 0)
             {
 

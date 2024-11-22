@@ -93,6 +93,7 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   , m_offTrackTimer(0.0f)
   , m_lastTargetNodeIndex(0)
   , m_lastDiff(0)
+  , m_count(0)
 {
     // Override the default physics component to handle damage from impulses
     setPhysicsComponent(std::make_unique<CarPhysicsComponent>(*this));
@@ -102,6 +103,14 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
     initForceGenerators(desc);
 
     createChildObjects(surface->maxZ(), index);
+}
+
+int Car::getMCount() {
+    return m_count;
+}
+
+void Car::setMCount(int m) {
+    m_count = m;
 }
 
 void Car::createChildObjects(float maxZ, size_t index)
@@ -376,7 +385,8 @@ void Car::updateTireWear(int step)
                     
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
                     "updateTireWear: car Location j= %f\n",
-                    target.j());               
+                    target.j());              
+                const float angle = newTargetAngle; 
                 // If this is the first frame, initialize the continuous target angle
                 if (!m_hasPreviousTargetAngle)
                 {
@@ -407,7 +417,7 @@ void Car::updateTireWear(int step)
                 // Now proceed with normalized calculations for steering
                 // const float angle = static_cast<int>(newTargetAngle) % 180;
                 const float cur = static_cast<int>(rawCurrentAngle) % 360;
-                float diff = angle() - cur;
+                float diff = angle - cur;
 
                 // Normalize angle difference
                 while (diff > 180) diff -= 360;
@@ -427,7 +437,7 @@ void Car::updateTireWear(int step)
 
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
                     "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
-                    angle(), cur, diff, control);
+                    angle, cur, diff, control);
 
                 // More aggressive steering response
                 const float maxDelta = 3.0f;  // Reduced threshold to steer more often
@@ -443,6 +453,55 @@ void Car::updateTireWear(int step)
                     LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
                 }
                 m_lastDiff = diff;
+
+                    // Acceleration
+                if (m_count % 2 != 0) {
+                    setAcceleratorEnabled(true);
+                    const float absspeed = absSpeed();
+                    TrackTile& currentTile = *m_track->trackTileAtLocation(location().i(), location().j());
+
+                    // The following speed limits are experimentally defined.
+                    float scale = 0.9f;
+                    if (currentTile.computerHint() == TrackTile::ComputerHint::Brake)
+                    {
+                        if (absspeed > 14.0f * scale)
+                        {
+                            setBrakeEnabled(true);
+                        }
+                    }
+
+                    if (currentTile.computerHint() == TrackTile::ComputerHint::BrakeHard)
+                    {
+                        if (absspeed > 9.5f * scale)
+                        {
+                            setBrakeEnabled(true);
+                        }
+                    }
+
+                    if (currentTile.tileTypeEnum() == TrackTile::TileType::Corner90)
+                    {
+                        if (absspeed > 7.0f * scale)
+                        {
+                            setAcceleratorEnabled(false);
+                            setBrakeEnabled(false);
+                        }
+                    }
+
+                    if (currentTile.tileTypeEnum() == TrackTile::TileType::Corner45Left || currentTile.tileTypeEnum() == TrackTile::TileType::Corner45Right)
+                    {
+                        if (absspeed > 8.3f * scale)
+                        {
+                            setAcceleratorEnabled(false);
+                            setBrakeEnabled(false);
+                        }
+                    }     
+
+                    if (absspeed < 3.6f * scale)
+                    {
+                        setAcceleratorEnabled(true);
+                        setBrakeEnabled(false);
+                    }
+                }
             }
         }
         else
