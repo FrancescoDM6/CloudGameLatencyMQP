@@ -85,7 +85,7 @@ int LogManager::startUp()
     mkdir(LOG_DIR.c_str(), 0777);
 
     // Initialize all log files
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         LogType type = static_cast<LogType>(i);
         int nextNumber = findNextLogNumber(type);
         std::string filename = generateLogFileName(type, nextNumber);

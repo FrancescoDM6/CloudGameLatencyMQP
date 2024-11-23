@@ -79,7 +79,7 @@ void Timing::setRaceCompleted(size_t index, bool state, bool isHuman)
 
     if (isHuman)
     {
-        LogManager::getInstance().writeLog(LogManager::LogType::LAP_TIME, "Player finish time: %f", times.raceTime);
+        LogManager::getInstance().writeLog(LogManager::LogType::LAP_TIME, "Player finish time: %f\n", times.raceTime);
 
         if (times.raceTime < m_raceRecord || m_raceRecord == -1)
         {
@@ -90,7 +90,7 @@ void Timing::setRaceCompleted(size_t index, bool state, bool isHuman)
     }
 
     if (!isHuman) {
-        LogManager::getInstance().writeLog(LogManager::LogType::LAP_TIME, "Bot finish time: %f", times.raceTime);
+        LogManager::getInstance().writeLog(LogManager::LogType::LAP_TIME, "Bot finish time: %f\n", times.raceTime);
     }
 }
 

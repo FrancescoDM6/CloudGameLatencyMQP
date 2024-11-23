@@ -15,7 +15,7 @@ public:
         DEFAULT,
         CAR_DATA,
         BOT_DATA,
-        LAP_TIME
+        LAP_TIME,
     };
 
     LogManager(const LogManager&) = delete;
