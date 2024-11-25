@@ -41,6 +41,9 @@ class DataAnalyzer:
         plt.style.use('default')
         plt.rcParams['axes.grid'] = False  # Remove grid
         plt.rcParams['axes.formatter.use_locale'] = True  # For proper number formatting
+        # Ensure no grids appear in any plot
+        plt.rcParams['grid.alpha'] = 0
+        plt.rcParams['grid.linewidth'] = 0
         
     def _convert_game_time(self, time_str):
         """Convert game time string to seconds."""
@@ -341,16 +344,16 @@ class DataAnalyzer:
                 player_time = None
                 
                 for line in file:
-                    print(f"Processing line: {line.strip()}")  # Debug print
+                    # print(f"Processing line: {line.strip()}")  # Debug print
                     time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
                     if time_match:
                         game_time = self._convert_game_time(time_match.group(1))
                         
                         if 'Bot finish time:' in line:
-                            print(f"Found bot time: {game_time}")  # Debug print
+                            # print(f"Found bot time: {game_time}")  # Debug print
                             bot_time = game_time
                         elif 'Player finish time:' in line:
-                            print(f"Found player time: {game_time}")  # Debug print
+                            # print(f"Found player time: {game_time}")  # Debug print
                             player_time = game_time
                 
                 if bot_time is None or player_time is None:
@@ -481,7 +484,7 @@ class DataAnalyzer:
         min_time, max_time = self._find_global_time_range()
         
         # Prepare data for plotting
-        stats_data = []  # Use a list of dictionaries for better control
+        stats_data = []
         
         # Process both player and bot data
         for data_type in ['player', 'bot']:
@@ -491,10 +494,6 @@ class DataAnalyzer:
                         times = []
                         start_run, end_run = self.run_mappings[player][control_type]
                         
-                        # Debug print
-                        print(f"Processing {player} - {lag_condition} - {control_type} - {data_type}")
-                        print(f"Run range: {start_run} to {end_run}")
-                        
                         for run in range(start_run, end_run + 1):
                             lap_log = self.logs_dir / player / lag_condition / f'laptime_{run}.log'
                             bot_time, player_time = self._process_lap_time(lap_log)
@@ -503,98 +502,101 @@ class DataAnalyzer:
                                 times.append(time_to_use)
                         
                         if times:
-                            mean_time = np.mean(times)
-                            std_time = np.std(times)
-                            # Debug print
-                            print(f"Found {len(times)} times, mean: {mean_time:.2f}, std: {std_time:.2f}")
-                            
                             stats_data.append({
                                 'condition': control_type,
                                 'player': player,
-                                'mean_time': mean_time,
-                                'std_time': std_time,
+                                'mean_time': np.mean(times),
+                                'std_time': np.std(times),
                                 'type': data_type,
-                                'lag': int(lag_condition.split()[0])
+                                'lag': lag_condition
                             })
         
         df = pd.DataFrame(stats_data)
         
-        # Debug print
-        print("\nDataFrame contents:")
-        print(df)
-        
-        # Plot 1: Control Type Comparison
-        plt.figure(figsize=(15, 8))
-        conditions = df['condition'].unique()
-        x = np.arange(len(conditions))
-        width = 0.15
-        
-        # Plot for each player and bot
-        for i, player in enumerate(self.players):
-            # Debug prints
-            print(f"\nProcessing player {player}")
+        # Create separate plots for each lag condition
+        for lag_condition in ['0 Lag', '100 Lag']:
+            plt.figure(figsize=(15, 8))
+            conditions = df['condition'].unique()
+            x = np.arange(len(conditions))
+            width = 0.15
             
-            # Plot player data
-            player_data = df[(df['player'] == player) & (df['type'] == 'player')]
-            print(f"Player data shape: {player_data.shape}")
-            if not player_data.empty:
-                means = [player_data[player_data['condition'] == cond]['mean_time'].mean() 
-                        for cond in conditions]
-                stds = [player_data[player_data['condition'] == cond]['std_time'].mean() 
-                       for cond in conditions]
-                print(f"Player means: {means}")
-                print(f"Player stds: {stds}")
-                plt.errorbar(x + i*width, means, yerr=stds,
-                           fmt='o', capsize=5, label=f'Player {player}')
+            # Filter data for current lag condition
+            lag_df = df[df['lag'] == lag_condition]
             
-            # Plot bot data
-            bot_data = df[(df['player'] == player) & (df['type'] == 'bot')]
-            print(f"Bot data shape: {bot_data.shape}")
-            if not bot_data.empty:
-                means = [bot_data[bot_data['condition'] == cond]['mean_time'].mean() 
-                        for cond in conditions]
-                stds = [bot_data[bot_data['condition'] == cond]['std_time'].mean() 
-                       for cond in conditions]
-                print(f"Bot means: {means}")
-                print(f"Bot stds: {stds}")
-                plt.errorbar(x + i*width + width/2, means, yerr=stds,
-                           fmt='s', capsize=5, label=f'Bot {player}')
+            # Plot for each player and bot
+            for i, player in enumerate(self.players):
+                # Plot player data
+                player_data = lag_df[(lag_df['player'] == player) & (lag_df['type'] == 'player')]
+                if not player_data.empty:
+                    means = [player_data[player_data['condition'] == cond]['mean_time'].mean() 
+                            for cond in conditions]
+                    stds = [player_data[player_data['condition'] == cond]['std_time'].mean() 
+                           for cond in conditions]
+                    plt.errorbar(x + i*width, means, yerr=stds,
+                               fmt='o', capsize=5, label=f'Player {player}')
+                
+                # Plot bot data
+                bot_data = lag_df[(lag_df['player'] == player) & (lag_df['type'] == 'bot')]
+                if not bot_data.empty:
+                    means = [bot_data[bot_data['condition'] == cond]['mean_time'].mean() 
+                            for cond in conditions]
+                    stds = [bot_data[bot_data['condition'] == cond]['std_time'].mean() 
+                           for cond in conditions]
+                    plt.errorbar(x + i*width + width/2, means, yerr=stds,
+                               fmt='s', capsize=5, label=f'Bot {player}')
+            
+            plt.xticks(x + width*1.5, conditions, rotation=45)
+            plt.title(f'Average Completion Times by Condition and Player - {lag_condition}')
+            plt.xlabel('Condition')
+            plt.ylabel('Time (seconds)')
+            plt.legend()
+            plt.ylim(min_time, max_time)
+            plt.tight_layout()
+            plt.savefig(output_dir / f'overall_completion_times_{lag_condition.replace(" ", "_")}.png', 
+                       dpi=300, bbox_inches='tight')
+            plt.close()
         
-        plt.xticks(x + width*1.5, conditions, rotation=45)
-        plt.title('Average Completion Times by Condition and Player')
-        plt.xlabel('Condition')
-        plt.ylabel('Time (seconds)')
-        plt.legend()
-        plt.ylim(min_time, max_time)
-        plt.tight_layout()
-        plt.savefig(output_dir / 'overall_completion_times.png', dpi=300, bbox_inches='tight')
-        plt.close()
-        
-        # Plot 2: Lag Comparison
+        # Performance vs Lag by Player plot
         plt.figure(figsize=(12, 8))
         for player in self.players:
-            # Debug print
-            print(f"\nProcessing lag comparison for {player}")
-            
             # Plot player performance vs lag
             player_data = df[(df['player'] == player) & (df['type'] == 'player')].groupby('lag')['mean_time'].mean()
-            print(f"Player lag data: {player_data}")
-            if not player_data.empty:
-                plt.plot([0, 100], [player_data[0], player_data[100]], 'o-', label=f'Player {player}')
+            plt.plot(['0 Lag', '100 Lag'], player_data.values, 'o-', label=f'Player {player}')
             
             # Plot bot performance vs lag
             bot_data = df[(df['player'] == player) & (df['type'] == 'bot')].groupby('lag')['mean_time'].mean()
-            print(f"Bot lag data: {bot_data}")
-            if not bot_data.empty:
-                plt.plot([0, 100], [bot_data[0], bot_data[100]], 's--', label=f'Bot {player}')
+            plt.plot(['0 Lag', '100 Lag'], bot_data.values, 's--', label=f'Bot {player}')
         
-        plt.title('Performance vs Lag')
-        plt.xlabel('Lag (ms)')
+        plt.title('Performance vs Lag by Player')
+        plt.xlabel('Lag Condition')
         plt.ylabel('Average Completion Time (seconds)')
         plt.legend()
         plt.ylim(min_time, max_time)
-        plt.grid(True)
-        plt.savefig(output_dir / 'lag_performance.png', dpi=300, bbox_inches='tight')
+        plt.savefig(output_dir / 'lag_performance_by_player.png', dpi=300, bbox_inches='tight')
+        plt.close()
+
+        # Performance vs Lag by Control Condition plot
+        plt.figure(figsize=(12, 8))
+        conditions = df['condition'].unique()
+        markers = ['o', 's', '^']  # Different markers for different control conditions
+        
+        for i, condition in enumerate(conditions):
+            # Plot player average across all players
+            player_data = df[(df['type'] == 'player') & (df['condition'] == condition)].groupby('lag')['mean_time'].mean()
+            plt.plot(['0 Lag', '100 Lag'], player_data.values, 
+                    f'{markers[i]}-', label=f'Players - {condition}', color=f'C{i}')
+            
+            # Plot bot average across all bots
+            bot_data = df[(df['type'] == 'bot') & (df['condition'] == condition)].groupby('lag')['mean_time'].mean()
+            plt.plot(['0 Lag', '100 Lag'], bot_data.values, 
+                    f'{markers[i]}--', label=f'Bots - {condition}', color=f'C{i}', alpha=0.7)
+
+        plt.title('Performance vs Lag by Control Condition')
+        plt.xlabel('Lag Condition')
+        plt.ylabel('Average Completion Time (seconds)')
+        plt.legend()
+        plt.ylim(min_time, max_time)
+        plt.savefig(output_dir / 'lag_performance_by_control.png', dpi=300, bbox_inches='tight')
         plt.close()
         
         # Save overall statistics
