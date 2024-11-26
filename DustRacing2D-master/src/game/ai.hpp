@@ -32,6 +32,8 @@ public:
     //! Constructor.
     AI(Car & car, std::shared_ptr<Race> race);
 
+    void laggedFunctionCall(std::function<void()> func, int delayMs);
+
     //! Update.
     void update(bool isRaceCompleted);
 

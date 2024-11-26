@@ -122,6 +122,7 @@ void Scene::connectComponents()
 
     connect(m_race.get(), &Race::finished, &m_stateMachine, &StateMachine::finishRace);
     connect(m_race.get(), &Race::messageRequested, m_messageOverlay.get(), static_cast<void (MessageOverlay::*)(QString)>(&MessageOverlay::addMessage));
+    connect(this, &Scene::messageRequested, m_messageOverlay.get(), static_cast<void (MessageOverlay::*)(QString)>(&MessageOverlay::addMessage));
 
     connect(m_startlights.get(), &Startlights::messageRequested, m_messageOverlay.get(), static_cast<void (MessageOverlay::*)(QString)>(&MessageOverlay::addMessage));
     connect(this, &Scene::listenerLocationChanged, &m_game.audioWorker(), &AudioWorker::setListenerLocation);
@@ -408,6 +409,7 @@ void Scene::processUserInput(InputHandler & handler)
                     if (!m_race->timing().raceCompleted(i))
                     {
                         m_cars.at(i)->setAcceleratorEnabled(true);
+                        emit messageRequested(QObject::tr("BUTTON PRESSED!!!"));
                     }
                 }
                 else
@@ -415,20 +417,6 @@ void Scene::processUserInput(InputHandler & handler)
                     m_cars.at(i)->setAcceleratorEnabled(false);
                 }
             }
-
-        // Comment out/ Uncomment if you want manual steering
-        // if (handler.getActionState(i, InputHandler::Action::Left))
-        // {
-        //     m_cars.at(i)->steer(Car::Steer::Left);
-        // }
-        // else if (handler.getActionState(i, InputHandler::Action::Right))
-        // {
-        //     m_cars.at(i)->steer(Car::Steer::Right);
-        // }
-        // else
-        // {
-        //     m_cars.at(i)->steer(Car::Steer::Neutral);
-        // }
 
         // Uncomment to enable steering assist
         if (n_press % 2 != 0) {

@@ -32,6 +32,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <thread>
 
 std::string getCurrentTime() {
     // Get the current time from the system clock
@@ -82,6 +83,11 @@ Car & AI::car() const
     return m_car;
 }
 
+void AI::laggedFunctionCall(std::function<void()> func, int delayMs) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+    func();
+}
+
 void AI::update(bool isRaceCompleted)
 {
     if (m_track)
@@ -92,6 +98,7 @@ void AI::update(bool isRaceCompleted)
         }
 
         const Route & route = m_track->trackData().route();
+
         steerControl(route.get(m_race->getCurrentTargetNodeIndex(m_car)));
 
         speedControl(*m_track->trackTileAtLocation(m_car.location().i(), m_car.location().j()), isRaceCompleted);
