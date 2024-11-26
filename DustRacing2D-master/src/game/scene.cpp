@@ -352,30 +352,36 @@ void Scene::processUserInput(InputHandler & handler)
 
         // Uncomment to enable acceleration assistance
         if (m_press % 2 == 0) {
-        // Handle accelerating / braking
-        if (handler.getActionState(i, InputHandler::Action::Down))
-        {
-            if (!m_race->timing().raceCompleted(i))
-            {
-                m_cars.at(i)->setBrakeEnabled(true);
-            }
-        }
-        else
-        {
-            m_cars.at(i)->setBrakeEnabled(false);
-        }
+            // Handle accelerating / braking
+            if (tickCount % 10 != 0) {
+                if (handler.getActionState(i, InputHandler::Action::Down))
+                {
+                    if (!m_race->timing().raceCompleted(i))
+                    {
+                        m_cars.at(i)->setBrakeEnabled(true);
+                    }
+                }
+                else
+                {
+                    m_cars.at(i)->setBrakeEnabled(false);
+                }
 
-        if (handler.getActionState(i, InputHandler::Action::Up))
-        {
-            if (!m_race->timing().raceCompleted(i))
-            {
-                m_cars.at(i)->setAcceleratorEnabled(true);
+                if (handler.getActionState(i, InputHandler::Action::Up))
+                {
+                    if (!m_race->timing().raceCompleted(i))
+                    {
+                        m_cars.at(i)->setAcceleratorEnabled(true);
+                    }
+                }
+                else
+                {
+                    m_cars.at(i)->setAcceleratorEnabled(false);
+                }
             }
-        }
-        else
-        {
-            m_cars.at(i)->setAcceleratorEnabled(false);
-        }
+            // Assistance active
+            else {
+                m_cars.at(i)->accelerationAssist();
+            }
 
         // Comment out/ Uncomment if you want manual steering
         // if (handler.getActionState(i, InputHandler::Action::Left))
@@ -415,6 +421,10 @@ void Scene::processUserInput(InputHandler & handler)
                     m_cars.at(i)->steer(Car::Steer::Neutral);
                 }
             }
+            // Assistance active
+            else {
+                m_cars.at(i)->steerAssist();
+            }
 
             // if (/*!m_cars.at(i)->isOffTrack() || */tickCount % 2 == 0 || tickCount % 3 == 0
             // || tickCount % 4 == 0 || tickCount % 5 == 0 || tickCount % 6 == 0
@@ -436,6 +446,14 @@ void Scene::processUserInput(InputHandler & handler)
                     m_cars.at(i)->steer(Car::Steer::Neutral);
                 }
             }
+            // Assistance active
+            else {
+                m_cars.at(i)->steerAssist();
+            }
+        }
+        else {
+            m_cars.at(i)->steerAssist();
+            m_cars.at(i)->accelerationAssist();
         }
     }
 }

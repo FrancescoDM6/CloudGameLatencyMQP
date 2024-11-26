@@ -298,6 +298,10 @@ void Race::start()
     {
         m_timing.start();
         m_started = true;
+        for (auto && car : m_cars)
+        {
+            car->setStart(1);
+        }
     }
 }
 

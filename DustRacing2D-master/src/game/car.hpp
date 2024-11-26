@@ -99,7 +99,15 @@ public:
 
     void setMCount(int m);
 
+    int getStart();
+    
+    void setStart(int start);
+
     void addDamage(float damage);
+
+    void steerAssist();
+
+    void accelerationAssist();
 
     //! \reimp
     virtual void collisionEvent(MCCollisionEvent & event) override;
@@ -224,6 +232,8 @@ private:
     bool m_isHuman;
 
     int m_count;
+
+    int m_start;
 
     std::unique_ptr<CarParticleEffectManager> m_particleEffectManager;
 
