@@ -31,6 +31,7 @@ public:
         Up,
         Down,
         M,
+        N,
         EndOfEnum
     };
 

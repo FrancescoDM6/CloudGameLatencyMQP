@@ -80,6 +80,7 @@ int Scene::m_width = 1024;
 int Scene::m_height = 768;
 int tickCount = 0;
 int m_press = 0;
+int n_press = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
 
@@ -347,13 +348,49 @@ void Scene::processUserInput(InputHandler & handler)
     {
         if (handler.getActionState(i, InputHandler::Action::M)) {
             m_press++;
-            m_cars.at(i)->setMCount(m_press);
+            n_press = 0;
+        }
+
+        if (handler.getActionState(i, InputHandler::Action::N)) {
+            n_press++;
+            m_press = 0;
         }
 
         // Uncomment to enable acceleration assistance
         if (m_press % 2 == 0) {
             // Handle accelerating / braking
-            if (tickCount % 10 != 0) {
+            if (n_press % 2 != 0) {
+                if (tickCount % 10 != 0) {
+                    if (handler.getActionState(i, InputHandler::Action::Down))
+                    {
+                        if (!m_race->timing().raceCompleted(i))
+                        {
+                            m_cars.at(i)->setBrakeEnabled(true);
+                        }
+                    }
+                    else
+                    {
+                        m_cars.at(i)->setBrakeEnabled(false);
+                    }
+
+                    if (handler.getActionState(i, InputHandler::Action::Up))
+                    {
+                        if (!m_race->timing().raceCompleted(i))
+                        {
+                            m_cars.at(i)->setAcceleratorEnabled(true);
+                        }
+                    }
+                    else
+                    {
+                        m_cars.at(i)->setAcceleratorEnabled(false);
+                    }
+                }
+                // Assistance active
+                else {
+                    m_cars.at(i)->accelerationAssist();
+                }
+            }
+            else {
                 if (handler.getActionState(i, InputHandler::Action::Down))
                 {
                     if (!m_race->timing().raceCompleted(i))
@@ -378,10 +415,6 @@ void Scene::processUserInput(InputHandler & handler)
                     m_cars.at(i)->setAcceleratorEnabled(false);
                 }
             }
-            // Assistance active
-            else {
-                m_cars.at(i)->accelerationAssist();
-            }
 
         // Comment out/ Uncomment if you want manual steering
         // if (handler.getActionState(i, InputHandler::Action::Left))
@@ -397,13 +430,8 @@ void Scene::processUserInput(InputHandler & handler)
         //     m_cars.at(i)->steer(Car::Steer::Neutral);
         // }
 
-
-        // if (handler.getActionState(i, InputHandler::Action::M)) {
-        //     m_press++;
-        // }
-
         // Uncomment to enable steering assist
-        // if (m_press % 2 == 0) {
+        if (n_press % 2 != 0) {
             if (m_cars.at(i)->isOffTrack() && tickCount % 5 == 0)
             {
 
@@ -421,15 +449,8 @@ void Scene::processUserInput(InputHandler & handler)
                     m_cars.at(i)->steer(Car::Steer::Neutral);
                 }
             }
-            // Assistance active
-            else {
-                m_cars.at(i)->steerAssist();
-            }
 
-            // if (/*!m_cars.at(i)->isOffTrack() || */tickCount % 2 == 0 || tickCount % 3 == 0
-            // || tickCount % 4 == 0 || tickCount % 5 == 0 || tickCount % 6 == 0
-            // || tickCount % 7 == 0 || tickCount % 8 == 0 || tickCount % 9 == 0)
-            if(!m_cars.at(i)->isOffTrack() && tickCount % 10 != 0)
+            if(!m_cars.at(i)->isOffTrack() && tickCount % 5 != 0)
             {
 
                 // Handle turning
@@ -452,10 +473,26 @@ void Scene::processUserInput(InputHandler & handler)
             }
         }
         else {
-            m_cars.at(i)->steerAssist();
-            m_cars.at(i)->accelerationAssist();
-        }
+            // Handle turning
+            if (handler.getActionState(i, InputHandler::Action::Left))
+            {
+                m_cars.at(i)->steer(Car::Steer::Left);
+            }
+            else if (handler.getActionState(i, InputHandler::Action::Right))
+            {
+                m_cars.at(i)->steer(Car::Steer::Right);
+            }
+            else
+            {
+                m_cars.at(i)->steer(Car::Steer::Neutral);
+            }
+        }    
     }
+    else {
+        m_cars.at(i)->steerAssist();
+        m_cars.at(i)->accelerationAssist();
+    }
+}
 }
 
 void Scene::updateAi()
