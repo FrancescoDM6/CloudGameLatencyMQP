@@ -476,6 +476,241 @@ class DataAnalyzer:
         plt.savefig(output_dir / 'bot_control_vs_deviation.png', dpi=300, bbox_inches='tight')
         plt.close()
 
+    # def _create_overall_analysis_plots(self, all_data, output_dir):
+    #     """Create overall analysis plots comparing all players and conditions."""
+    #     self._set_plot_style()
+        
+    #     # Previous code remains the same...
+        
+    #     # Calculate and plot win percentages
+    #     win_df = self._create_win_percentage_plots(output_dir)
+        
+    #     # Save overall statistics including win percentages
+    #     stats = df.sort_values(['player', 'condition', 'lag']).round(2)
+    #     stats.to_csv(output_dir / 'overall_statistics.csv', index=False)
+    #     win_df.to_csv(output_dir / 'win_percentages.csv', index=False)
+
+    def _calculate_win_percentages(self):
+        """Calculate win percentage from individual run comparisons."""
+        win_data = {
+            'player': [],
+            'condition': [],
+            'lag': [],
+            'win_percentage': []
+        }
+        
+        for player in self.players:
+            for lag_condition in ['0 Lag', '100 Lag']:
+                for control_type in ['1.0 Control Assistance', '0.0 Control Assistance', '0.2 Control Assistance']:
+                    start_run, end_run = self.run_mappings[player][control_type]
+                    
+                    wins = 0
+                    total_valid_runs = 0
+                    
+                    for run in range(start_run, end_run + 1):
+                        lap_log = self.logs_dir / player / lag_condition / f'laptime_{run}.log'
+                        bot_time, player_time = self._process_lap_time(lap_log)
+                        
+                        if bot_time is not None and player_time is not None:
+                            if player_time <= bot_time:  # Player wins if they finish before or at same time as bot
+                                wins += 1
+                            total_valid_runs += 1
+                    
+                    if total_valid_runs > 0:
+                        win_pct = (wins / total_valid_runs) * 100
+                    else:
+                        win_pct = 0
+                        
+                    win_data['player'].append(player)
+                    win_data['condition'].append(control_type)
+                    win_data['lag'].append(lag_condition)
+                    win_data['win_percentage'].append(win_pct)
+        
+        return pd.DataFrame(win_data)
+
+    def _create_win_percentage_plots(self, output_dir):
+        """Create win percentage visualization plots."""
+        condition_labels = {
+            '1.0 Control Assistance': '1.0',
+            '0.0 Control Assistance': '0.0',
+            '0.2 Control Assistance': '0.2'
+        }
+        
+        # Define distinct markers for each player
+        player_markers = {
+            'F': 'o',     # circle
+            'J': 's',     # square
+            'M': '^'      # triangle
+        }
+        
+        win_df = self._calculate_win_percentages()
+        
+        # Combined plot for all players for each lag condition
+        for lag_condition in ['0 Lag', '100 Lag']:
+            plt.figure(figsize=(12, 8))
+            lag_data = win_df[win_df['lag'] == lag_condition]
+            
+            for player in self.players:
+                player_data = lag_data[lag_data['player'] == player]
+                conditions = [condition_labels[c] for c in player_data['condition']]
+                plt.plot(conditions, player_data['win_percentage'], 
+                        marker=player_markers[player], 
+                        linestyle='none',  # Remove lines between points
+                        label=f'Player {player}', 
+                        markersize=10)
+            
+            plt.xlabel('Steering Assistance')
+            plt.ylabel('Win Percentage')
+            plt.title(f'Win Percentage by Player - {lag_condition}')
+            plt.ylim(-2, 105)  # Extend y-axis slightly above 100 to show full markers
+            plt.legend()
+            plt.savefig(output_dir / f'win_percentage_combined_{lag_condition.replace(" ", "_")}.png',
+                       dpi=300, bbox_inches='tight')
+            plt.close()
+        
+        # Individual plots for each player
+        for player in self.players:
+            plt.figure(figsize=(15, 6))
+            player_data = win_df[win_df['player'] == player]
+            
+            for i, lag_condition in enumerate(['0 Lag', '100 Lag']):
+                plt.subplot(1, 2, i+1)
+                lag_data = player_data[player_data['lag'] == lag_condition]
+                conditions = [condition_labels[c] for c in lag_data['condition']]
+                plt.plot(conditions, lag_data['win_percentage'], 
+                        marker=player_markers[player],
+                        linestyle='none',  # Remove lines between points
+                        markersize=10)
+                
+                plt.xlabel('Steering Assistance')
+                plt.ylabel('Win Percentage')
+                plt.title(f'{lag_condition}')
+                plt.ylim(-2, 105)  # Extend y-axis slightly above 100 to show full markers
+            
+            plt.suptitle(f'Win Percentage - Player {player}')
+            plt.tight_layout()
+            plt.savefig(output_dir / f'win_percentage_player_{player}.png',
+                       dpi=300, bbox_inches='tight')
+            plt.close()
+        
+        return win_df
+    
+
+    def _process_off_track_data(self, log_file):
+        """Process a log file to determine time spent off track."""
+        try:
+            off_track_periods = []
+            current_period_start = None
+            last_time = None
+            
+            with open(log_file, "r") as file:
+                for line in file:
+                    # Extract game time
+                    time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
+                    off_track_match = re.search(r'isOffTrack check: left=(\d), right=(\d)', line)
+                    
+                    if time_match and off_track_match:
+                        current_time = self._convert_game_time(time_match.group(1))
+                        left = int(off_track_match.group(1))
+                        right = int(off_track_match.group(2))
+                        
+                        is_off_track = (left == 1 or right == 1)
+                        
+                        # Track first off-track moment
+                        if is_off_track and current_period_start is None:
+                            current_period_start = current_time
+                        # Track return to track
+                        elif not is_off_track and current_period_start is not None:
+                            off_track_periods.append((current_period_start, current_time))
+                            current_period_start = None
+                        
+                        last_time = current_time
+            
+            # Handle case where run ends while off track
+            if current_period_start is not None:
+                off_track_periods.append((current_period_start, last_time))
+            
+            # Calculate total time off track
+            total_off_track_time = sum(end - start for start, end in off_track_periods)
+            
+            return {
+                'total_time': last_time,
+                'off_track_time': total_off_track_time,
+                'off_track_percentage': (total_off_track_time / last_time * 100) if last_time else 0,
+                'off_track_periods': off_track_periods
+            }
+            
+        except Exception as e:
+            print(f"Error processing log file {log_file}: {e}")
+            return None
+
+    def _calculate_off_track_stats(self):
+        """Calculate off track statistics for all runs."""
+        off_track_data = {
+            'player': [],
+            'condition': [],
+            'lag': [],
+            'off_track_percentage': []
+        }
+        
+        for player in self.players:
+            for lag_condition in ['0 Lag', '100 Lag']:
+                for control_type in ['1.0 Control Assistance', '0.0 Control Assistance', '0.2 Control Assistance']:
+                    start_run, end_run = self.run_mappings[player][control_type]
+                    
+                    run_percentages = []
+                    for run in range(start_run, end_run + 1):
+                        log_file = self.logs_dir / player / lag_condition / f'logfile_{run}.log'
+                        stats = self._process_off_track_data(log_file)
+                        
+                        if stats is not None:
+                            run_percentages.append(stats['off_track_percentage'])
+                    
+                    if run_percentages:
+                        off_track_data['player'].append(player)
+                        off_track_data['condition'].append(control_type)
+                        off_track_data['lag'].append(lag_condition)
+                        off_track_data['off_track_percentage'].append(np.mean(run_percentages))
+        
+        return pd.DataFrame(off_track_data)
+
+    def _create_off_track_plots(self, off_track_df, output_dir):
+        """Create visualizations for off track analysis."""
+        condition_labels = {
+            '1.0 Control Assistance': '1.0',
+            '0.0 Control Assistance': '0.0',
+            '0.2 Control Assistance': '0.2'
+        }
+        
+        # Find global min and max for consistent scaling
+        min_pct = off_track_df['off_track_percentage'].min()
+        max_pct = off_track_df['off_track_percentage'].max()
+        
+        # Add some padding to the limits (10% of range)
+        range_pad = (max_pct - min_pct) * 0.1
+        y_min = max(0, min_pct - range_pad)  # Don't go below 0
+        y_max = max_pct + range_pad
+        
+        # Plot for each lag condition
+        for lag_condition in ['0 Lag', '100 Lag']:
+            plt.figure(figsize=(10, 6))
+            lag_data = off_track_df[off_track_df['lag'] == lag_condition]
+            
+            for player in self.players:
+                player_data = lag_data[lag_data['player'] == player]
+                conditions = [condition_labels[c] for c in player_data['condition']]
+                plt.plot(conditions, player_data['off_track_percentage'], 
+                        'o', markersize=10, label=f'Player {player}')
+            
+            plt.xlabel('Steering Assistance')
+            plt.ylabel('Time Off Track (%)')
+            plt.title(f'Off Track Time - {lag_condition}')
+            plt.ylim(y_min, y_max)  # Set consistent y-axis limits
+            plt.legend()
+            plt.savefig(output_dir / f'off_track_percentage_{lag_condition.replace(" ", "_")}.png',
+                       dpi=300, bbox_inches='tight')
+            plt.close()
+
     def _create_overall_analysis_plots(self, all_data, output_dir):
         """Create overall analysis plots comparing all players and conditions."""
         self._set_plot_style()
@@ -504,7 +739,7 @@ class DataAnalyzer:
                         if times:
                             stats_data.append({
                                 'condition': control_type,
-                                'player': player,
+                                'player': player if data_type == 'player' else 'Bot',  # All bots combined
                                 'mean_time': np.mean(times),
                                 'std_time': np.std(times),
                                 'type': data_type,
@@ -512,62 +747,85 @@ class DataAnalyzer:
                             })
         
         df = pd.DataFrame(stats_data)
+
+        condition_labels = {
+            '1.0 Control Assistance': '1.0',
+            '0.0 Control Assistance': '0.0',
+            '0.2 Control Assistance': '0.2'
+        }
         
-        # Create separate plots for each lag condition
+    
         for lag_condition in ['0 Lag', '100 Lag']:
-            plt.figure(figsize=(15, 8))
+            fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 12), height_ratios=[1, 1])
             conditions = df['condition'].unique()
-            x = np.arange(len(conditions))
+            x = np.arange(len(conditions))  # Base x positions
             width = 0.15
             
             # Filter data for current lag condition
             lag_df = df[df['lag'] == lag_condition]
             
-            # Plot for each player and bot
+            # Plot player data in top subplot
             for i, player in enumerate(self.players):
-                # Plot player data
                 player_data = lag_df[(lag_df['player'] == player) & (lag_df['type'] == 'player')]
                 if not player_data.empty:
                     means = [player_data[player_data['condition'] == cond]['mean_time'].mean() 
                             for cond in conditions]
                     stds = [player_data[player_data['condition'] == cond]['std_time'].mean() 
-                           for cond in conditions]
-                    plt.errorbar(x + i*width, means, yerr=stds,
-                               fmt='o', capsize=5, label=f'Player {player}')
-                
-                # Plot bot data
-                bot_data = lag_df[(lag_df['player'] == player) & (lag_df['type'] == 'bot')]
-                if not bot_data.empty:
-                    means = [bot_data[bot_data['condition'] == cond]['mean_time'].mean() 
-                            for cond in conditions]
-                    stds = [bot_data[bot_data['condition'] == cond]['std_time'].mean() 
-                           for cond in conditions]
-                    plt.errorbar(x + i*width + width/2, means, yerr=stds,
-                               fmt='s', capsize=5, label=f'Bot {player}')
+                        for cond in conditions]
+                    ax1.errorbar(x + (i-1)*width, means, yerr=stds,
+                            fmt='o', capsize=5, label=f'Player {player}')
             
-            plt.xticks(x + width*1.5, conditions, rotation=45)
-            plt.title(f'Average Completion Times by Condition and Player - {lag_condition}')
-            plt.xlabel('Condition')
-            plt.ylabel('Time (seconds)')
-            plt.legend()
-            plt.ylim(min_time, max_time)
-            plt.tight_layout()
+            ax1.set_title(f'Player Completion Times - {lag_condition}')
+            ax1.set_ylabel('Time (seconds)')
+            ax1.legend()
+            ax1.set_ylim(min_time, max_time)
+            ax1.set_xticks(x)
+            ax1.set_xticklabels([condition_labels[c] for c in conditions])
+            ax1.set_xlabel('Steering Assistance')
+            
+            # Remove internal x-axis padding
+            ax1.margins(x=0.1)  # Reduce horizontal margins
+            
+            # Plot combined bot data in bottom subplot
+            bot_data = lag_df[lag_df['type'] == 'bot']
+            if not bot_data.empty:
+                means = [bot_data[bot_data['condition'] == cond]['mean_time'].mean() 
+                        for cond in conditions]
+                stds = [bot_data[bot_data['condition'] == cond]['std_time'].mean() 
+                    for cond in conditions]
+                ax2.errorbar(x, means, yerr=stds,
+                        fmt='s', capsize=5, label='Bot')
+            
+            ax2.set_title(f'Bot Completion Times - {lag_condition}')
+            ax2.set_xlabel('Steering Assistance')
+            ax2.set_ylabel('Time (seconds)')
+            ax2.legend()
+            ax2.set_ylim(min_time, max_time)
+            ax2.set_xticks(x)
+            ax2.set_xticklabels([condition_labels[c] for c in conditions])
+            
+            # Remove internal x-axis padding
+            ax2.margins(x=0.1)  # Reduce horizontal margins
+            
+            # Adjust layout to be tighter
+            plt.subplots_adjust(left=0.15, right=0.95)  # Reduce left and right margins
             plt.savefig(output_dir / f'overall_completion_times_{lag_condition.replace(" ", "_")}.png', 
-                       dpi=300, bbox_inches='tight')
+                    dpi=300, bbox_inches='tight')
             plt.close()
         
-        # Performance vs Lag by Player plot
+        # Performance vs Lag by Player plot (now with combined bot data)
         plt.figure(figsize=(12, 8))
+        
+        # Plot individual player data
         for player in self.players:
-            # Plot player performance vs lag
             player_data = df[(df['player'] == player) & (df['type'] == 'player')].groupby('lag')['mean_time'].mean()
             plt.plot(['0 Lag', '100 Lag'], player_data.values, 'o-', label=f'Player {player}')
-            
-            # Plot bot performance vs lag
-            bot_data = df[(df['player'] == player) & (df['type'] == 'bot')].groupby('lag')['mean_time'].mean()
-            plt.plot(['0 Lag', '100 Lag'], bot_data.values, 's--', label=f'Bot {player}')
         
-        plt.title('Performance vs Lag by Player')
+        # Plot combined bot data
+        bot_data = df[df['type'] == 'bot'].groupby('lag')['mean_time'].mean()
+        plt.plot(['0 Lag', '100 Lag'], bot_data.values, 's--', label='Bot', color='red', linewidth=2)
+        
+        plt.title('Performance vs Lag')
         plt.xlabel('Lag Condition')
         plt.ylabel('Average Completion Time (seconds)')
         plt.legend()
@@ -575,10 +833,10 @@ class DataAnalyzer:
         plt.savefig(output_dir / 'lag_performance_by_player.png', dpi=300, bbox_inches='tight')
         plt.close()
 
-        # Performance vs Lag by Control Condition plot
+        # Performance vs Lag by Control Condition plot (with combined bot data)
         plt.figure(figsize=(12, 8))
         conditions = df['condition'].unique()
-        markers = ['o', 's', '^']  # Different markers for different control conditions
+        markers = ['o', 's', '^']
         
         for i, condition in enumerate(conditions):
             # Plot player average across all players
@@ -586,10 +844,10 @@ class DataAnalyzer:
             plt.plot(['0 Lag', '100 Lag'], player_data.values, 
                     f'{markers[i]}-', label=f'Players - {condition}', color=f'C{i}')
             
-            # Plot bot average across all bots
+            # Plot combined bot data
             bot_data = df[(df['type'] == 'bot') & (df['condition'] == condition)].groupby('lag')['mean_time'].mean()
             plt.plot(['0 Lag', '100 Lag'], bot_data.values, 
-                    f'{markers[i]}--', label=f'Bots - {condition}', color=f'C{i}', alpha=0.7)
+                    f'{markers[i]}--', label=f'Bot - {condition}', color=f'C{i}', alpha=0.7)
 
         plt.title('Performance vs Lag by Control Condition')
         plt.xlabel('Lag Condition')
@@ -599,9 +857,18 @@ class DataAnalyzer:
         plt.savefig(output_dir / 'lag_performance_by_control.png', dpi=300, bbox_inches='tight')
         plt.close()
         
+        # Calculate and plot win percentages
+        win_df = self._create_win_percentage_plots(output_dir)
+
+        off_track_df = self._calculate_off_track_stats()
+        self._create_off_track_plots(off_track_df, output_dir)
+        off_track_df.to_csv(output_dir / 'off_track_statistics.csv', index=False)
+        
         # Save overall statistics
         stats = df.sort_values(['player', 'condition', 'lag']).round(2)
         stats.to_csv(output_dir / 'overall_statistics.csv', index=False)
+        win_df.to_csv(output_dir / 'win_percentages.csv', index=False)
+
 
     def analyze_player_run(self, player, lag_condition, control_type, run_number):
         """Analyze a single player run and its corresponding bot run."""
