@@ -32,6 +32,10 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <thread>
+#include <queue>
+#include <mutex>
+#include <condition_variable>
 
 std::string getCurrentTime() {
     // Get the current time from the system clock
@@ -92,6 +96,7 @@ void AI::update(bool isRaceCompleted)
         }
 
         const Route & route = m_track->trackData().route();
+
         steerControl(route.get(m_race->getCurrentTargetNodeIndex(m_car)));
 
         speedControl(*m_track->trackTileAtLocation(m_car.location().i(), m_car.location().j()), isRaceCompleted);
@@ -232,6 +237,7 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     {
         if (absSpeed > 14.0f * scale)
         {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(100));
             brake = true;
         }
     }
@@ -240,6 +246,7 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     {
         if (absSpeed > 9.5f * scale)
         {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(100));
             brake = true;
         }
     }
@@ -248,6 +255,7 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     {
         if (absSpeed > 7.0f * scale)
         {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(100));
             accelerate = false;
         }
     }
@@ -256,6 +264,7 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     {
         if (absSpeed > 8.3f * scale)
         {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(100));
             accelerate = false;
         }
     }
@@ -265,6 +274,7 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         // Cool down lap speed (should be greater than tire spin threshold)
         if (absSpeed > 5.0f)
         {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(100));
             accelerate = false;
         }
     }
@@ -272,6 +282,7 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     {
         if (absSpeed < 3.6f * scale)
         {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(100));
             accelerate = true;
             brake = false;
         }

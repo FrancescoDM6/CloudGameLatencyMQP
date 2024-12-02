@@ -106,6 +106,8 @@ signals:
 
     void listenerLocationChanged(float x, float y);
 
+    void messageRequested(QString message);
+
 private:
     void addCarsToWorld();
 
