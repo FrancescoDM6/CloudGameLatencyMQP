@@ -32,6 +32,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <thread>
 
 std::string getCurrentTime() {
     // Get the current time from the system clock
@@ -82,22 +83,29 @@ Car & AI::car() const
     return m_car;
 }
 
+// Alternative approach using a wrapper function
 void AI::update(bool isRaceCompleted)
 {
-    if (m_track)
-    {
-        if (m_lastTargetNodeIndex != m_race->getCurrentTargetNodeIndex(m_car))
+    // Create a thread to run the update with delay
+    std::thread delayedUpdate([this, isRaceCompleted]() {
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        
+        // Original update logic
+        if (m_track)
         {
-            setRandomTolerance();
+            if (m_lastTargetNodeIndex != m_race->getCurrentTargetNodeIndex(m_car))
+            {
+                setRandomTolerance();
+            }
+            const Route & route = m_track->trackData().route();
+            steerControl(route.get(m_race->getCurrentTargetNodeIndex(m_car)));
+            speedControl(*m_track->trackTileAtLocation(m_car.location().i(), m_car.location().j()), isRaceCompleted);
+            m_lastTargetNodeIndex = m_race->getCurrentTargetNodeIndex(m_car);
         }
+    });
 
-        const Route & route = m_track->trackData().route();
-        steerControl(route.get(m_race->getCurrentTargetNodeIndex(m_car)));
-
-        speedControl(*m_track->trackTileAtLocation(m_car.location().i(), m_car.location().j()), isRaceCompleted);
-
-        m_lastTargetNodeIndex = m_race->getCurrentTargetNodeIndex(m_car);
-    }
+    // Detach the thread so it runs independently
+    delayedUpdate.detach();
 }
 
 void AI::setRandomTolerance()
@@ -107,6 +115,9 @@ void AI::setRandomTolerance()
 
 void AI::steerControl(TargetNodeBasePtr targetNode)
 {
+    // Create a thread to run the update with delay
+    std::thread delayedUpdate([this, targetNode]() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
     // Initial target coordinates
     MCVector3dF target(static_cast<float>(targetNode->location().x()), static_cast<float>(targetNode->location().y()));
     target -= MCVector3dF(m_car.location() + MCVector3dF(m_randomTolerance));
@@ -212,6 +223,11 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
+
+    });
+
+    // Detach the thread so it runs independently
+    delayedUpdate.detach();
 }
 
 void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
@@ -220,6 +236,9 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     // the difference between current and target angles so that
     // computer hints wouldn't be needed anymore..?
 
+    // Create a thread to run the update with delay
+    std::thread delayedUpdate([this, &currentTile, isRaceCompleted]() {
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
     // Braking / acceleration logic
     bool accelerate = true;
     bool brake = false;
@@ -292,6 +311,10 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         m_car.setAcceleratorEnabled(false);
         m_car.setBrakeEnabled(false);
     }
+    });
+
+    // Detach the thread so it runs independently
+    delayedUpdate.detach();
 }
 
 void AI::setTrack(std::shared_ptr<Track> track)
