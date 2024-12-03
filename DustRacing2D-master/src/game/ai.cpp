@@ -87,8 +87,8 @@ Car & AI::car() const
 void AI::update(bool isRaceCompleted)
 {
     // Create a thread to run the update with delay
-    std::thread delayedUpdate([this, isRaceCompleted]() {
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    // std::thread delayedUpdate([this, isRaceCompleted]() {
+    //     std::this_thread::sleep_for(std::chrono::milliseconds(50));
         
         // Original update logic
         if (m_track)
@@ -102,10 +102,10 @@ void AI::update(bool isRaceCompleted)
             speedControl(*m_track->trackTileAtLocation(m_car.location().i(), m_car.location().j()), isRaceCompleted);
             m_lastTargetNodeIndex = m_race->getCurrentTargetNodeIndex(m_car);
         }
-    });
+    // });
 
     // Detach the thread so it runs independently
-    delayedUpdate.detach();
+    // delayedUpdate.detach();
 }
 
 void AI::setRandomTolerance()
@@ -116,8 +116,8 @@ void AI::setRandomTolerance()
 void AI::steerControl(TargetNodeBasePtr targetNode)
 {
     // Create a thread to run the update with delay
-    std::thread delayedUpdate([this, targetNode]() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    // std::thread delayedUpdate([this, targetNode]() {
+    // std::this_thread::sleep_for(std::chrono::milliseconds(200));
     // Initial target coordinates
     MCVector3dF target(static_cast<float>(targetNode->location().x()), static_cast<float>(targetNode->location().y()));
     target -= MCVector3dF(m_car.location() + MCVector3dF(m_randomTolerance));
@@ -224,10 +224,10 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
                     "steerControl: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
 
-    });
+    // });
 
     // Detach the thread so it runs independently
-    delayedUpdate.detach();
+    // delayedUpdate.detach();
 }
 
 void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
@@ -237,8 +237,8 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     // computer hints wouldn't be needed anymore..?
 
     // Create a thread to run the update with delay
-    std::thread delayedUpdate([this, &currentTile, isRaceCompleted]() {
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    // std::thread delayedUpdate([this, &currentTile, isRaceCompleted]() {
+    //     std::this_thread::sleep_for(std::chrono::milliseconds(200));
     // Braking / acceleration logic
     bool accelerate = true;
     bool brake = false;
@@ -311,10 +311,10 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         m_car.setAcceleratorEnabled(false);
         m_car.setBrakeEnabled(false);
     }
-    });
+    // });
 
     // Detach the thread so it runs independently
-    delayedUpdate.detach();
+    // delayedUpdate.detach();
 }
 
 void AI::setTrack(std::shared_ptr<Track> track)
