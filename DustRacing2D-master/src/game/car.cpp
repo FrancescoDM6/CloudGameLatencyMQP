@@ -495,6 +495,8 @@ void Car::collisionEvent(MCCollisionEvent & event)
     if (!event.collidingObject().isTriggerObject())
     {
         m_collisionEffectStack.push_back({ &event.collidingObject(), event.contactPoint() });
+        LogManager::getInstance().writeLog("Collision event");
+
     }
 
     event.accept();

@@ -20,19 +20,22 @@ class DataAnalyzer:
         # Updated run mappings
         self.run_mappings = {
             'J': {
-                '1.0 Control Assistance': (6, 10),    # runs 1-5
                 '0.0 Control Assistance': (1, 5),   # runs 6-10
-                '0.2 Control Assistance': (11, 15)   # runs 11-15
+                '0.2 Control Assistance': (11, 15),   # runs 11-15
+                '1.0 Control Assistance': (6, 10),    # runs 1-5
+                
             },
             'F': {
-                '1.0 Control Assistance': (1, 5),    # runs 6-10
-                '0.0 Control Assistance': (6, 10),     # runs 1-5
-                '0.2 Control Assistance': (11, 15)    # runs 11-15
+                '0.0 Control Assistance': (1, 5),     # runs 1-5
+                '0.2 Control Assistance': (11, 15),    # runs 11-15
+                '1.0 Control Assistance': (6, 10),    # runs 6-10
+                
             },
             'M': {
-                '1.0 Control Assistance': (1, 5),    # runs 6-10
-                '0.0 Control Assistance': (6, 10),     # runs 1-5
-                '0.2 Control Assistance': (11, 15)    # runs 11-15
+                '0.0 Control Assistance': (1, 5),     # runs 1-5
+                '0.2 Control Assistance': (11, 15),    # runs 11-15
+                '1.0 Control Assistance': (6, 10),    # runs 6-10
+                
             }
         }
         
@@ -530,11 +533,15 @@ class DataAnalyzer:
 
     def _create_win_percentage_plots(self, output_dir):
         """Create win percentage visualization plots."""
-        condition_labels = {
-            '1.0 Control Assistance': '1.0',
-            '0.0 Control Assistance': '0.0',
-            '0.2 Control Assistance': '0.2'
+        # Define x-axis positions that reflect proper numerical scaling
+        x_positions = {
+            '0.0 Control Assistance': 0.0,
+            '0.2 Control Assistance': 0.2,
+            '1.0 Control Assistance': 1.0
         }
+        
+        # Define x-axis labels
+        x_labels = ['0.0', '0.2', '1.0']
         
         # Define distinct markers for each player
         player_markers = {
@@ -552,17 +559,23 @@ class DataAnalyzer:
             
             for player in self.players:
                 player_data = lag_data[lag_data['player'] == player]
-                conditions = [condition_labels[c] for c in player_data['condition']]
-                plt.plot(conditions, player_data['win_percentage'], 
+                # Sort the data by assistance value
+                player_data = player_data.sort_values(by='condition', 
+                    key=lambda x: [x_positions[val] for val in x])
+                
+                x_vals = [x_positions[c] for c in player_data['condition']]
+                plt.plot(x_vals, player_data['win_percentage'], 
                         marker=player_markers[player], 
-                        linestyle='none',  # Remove lines between points
+                        linestyle='none',  # Add lines between points
                         label=f'Player {player}', 
                         markersize=10)
             
             plt.xlabel('Steering Assistance')
             plt.ylabel('Win Percentage')
             plt.title(f'Win Percentage by Player - {lag_condition}')
-            plt.ylim(-2, 105)  # Extend y-axis slightly above 100 to show full markers
+            plt.ylim(-2, 105)
+            plt.xlim(-0.1, 1.1)  # Add some padding around the x-axis
+            plt.xticks([0.0, 0.2, 1.0], x_labels)  # Set explicit tick positions and labels
             plt.legend()
             plt.savefig(output_dir / f'win_percentage_combined_{lag_condition.replace(" ", "_")}.png',
                        dpi=300, bbox_inches='tight')
@@ -576,16 +589,22 @@ class DataAnalyzer:
             for i, lag_condition in enumerate(['0 Lag', '100 Lag']):
                 plt.subplot(1, 2, i+1)
                 lag_data = player_data[player_data['lag'] == lag_condition]
-                conditions = [condition_labels[c] for c in lag_data['condition']]
-                plt.plot(conditions, lag_data['win_percentage'], 
+                # Sort the data by assistance value
+                lag_data = lag_data.sort_values(by='condition',
+                    key=lambda x: [x_positions[val] for val in x])
+                
+                x_vals = [x_positions[c] for c in lag_data['condition']]
+                plt.plot(x_vals, lag_data['win_percentage'], 
                         marker=player_markers[player],
-                        linestyle='none',  # Remove lines between points
+                        linestyle='none',  # Add lines between points
                         markersize=10)
                 
                 plt.xlabel('Steering Assistance')
                 plt.ylabel('Win Percentage')
                 plt.title(f'{lag_condition}')
-                plt.ylim(-2, 105)  # Extend y-axis slightly above 100 to show full markers
+                plt.ylim(-2, 105)
+                plt.xlim(-0.1, 1.1)
+                plt.xticks([0.0, 0.2, 1.0], x_labels)
             
             plt.suptitle(f'Win Percentage - Player {player}')
             plt.tight_layout()
@@ -676,11 +695,15 @@ class DataAnalyzer:
 
     def _create_off_track_plots(self, off_track_df, output_dir):
         """Create visualizations for off track analysis."""
-        condition_labels = {
-            '1.0 Control Assistance': '1.0',
-            '0.0 Control Assistance': '0.0',
-            '0.2 Control Assistance': '0.2'
+        # Define x-axis positions that reflect proper numerical scaling
+        x_positions = {
+            '0.0 Control Assistance': 0.0,
+            '0.2 Control Assistance': 0.2,
+            '1.0 Control Assistance': 1.0
         }
+        
+        # Define x-axis labels
+        x_labels = ['0.0', '0.2', '1.0']
         
         # Find global min and max for consistent scaling
         min_pct = off_track_df['off_track_percentage'].min()
@@ -688,7 +711,7 @@ class DataAnalyzer:
         
         # Add some padding to the limits (10% of range)
         range_pad = (max_pct - min_pct) * 0.1
-        y_min = max(0, min_pct - range_pad)  # Don't go below 0
+        y_min = max(0, min_pct - range_pad)
         y_max = max_pct + range_pad
         
         # Plot for each lag condition
@@ -698,14 +721,20 @@ class DataAnalyzer:
             
             for player in self.players:
                 player_data = lag_data[lag_data['player'] == player]
-                conditions = [condition_labels[c] for c in player_data['condition']]
-                plt.plot(conditions, player_data['off_track_percentage'], 
+                # Sort the data by assistance value
+                player_data = player_data.sort_values(by='condition',
+                    key=lambda x: [x_positions[val] for val in x])
+                
+                x_vals = [x_positions[c] for c in player_data['condition']]
+                plt.plot(x_vals, player_data['off_track_percentage'], 
                         'o', markersize=10, label=f'Player {player}')
             
             plt.xlabel('Steering Assistance')
             plt.ylabel('Time Off Track (%)')
             plt.title(f'Off Track Time - {lag_condition}')
-            plt.ylim(y_min, y_max)  # Set consistent y-axis limits
+            plt.ylim(y_min, y_max)
+            plt.xlim(-0.1, 1.1)
+            plt.xticks([0.0, 0.2, 1.0], x_labels)
             plt.legend()
             plt.savefig(output_dir / f'off_track_percentage_{lag_condition.replace(" ", "_")}.png',
                        dpi=300, bbox_inches='tight')
@@ -748,61 +777,69 @@ class DataAnalyzer:
         
         df = pd.DataFrame(stats_data)
 
-        condition_labels = {
-            '1.0 Control Assistance': '1.0',
-            '0.0 Control Assistance': '0.0',
-            '0.2 Control Assistance': '0.2'
+        x_positions = {
+            '0.0 Control Assistance': 0.0,
+            '0.2 Control Assistance': 0.2,
+            '1.0 Control Assistance': 1.0
         }
         
-    
+        # Define x-axis labels
+        x_labels = ['0.0', '0.2', '1.0']
+        
         for lag_condition in ['0 Lag', '100 Lag']:
             fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 12), height_ratios=[1, 1])
-            conditions = df['condition'].unique()
-            x = np.arange(len(conditions))  # Base x positions
-            width = 0.15
-            
-            # Filter data for current lag condition
+            conditions = sorted(df['condition'].unique(), key=lambda x: x_positions[x])
+
             lag_df = df[df['lag'] == lag_condition]
             
             # Plot player data in top subplot
             for i, player in enumerate(self.players):
                 player_data = lag_df[(lag_df['player'] == player) & (lag_df['type'] == 'player')]
                 if not player_data.empty:
+                    # Sort the data by assistance value
+                    player_data = player_data.sort_values(by='condition',
+                        key=lambda x: [x_positions[val] for val in x])
+                    
+                    x_vals = [x_positions[c] for c in conditions]
                     means = [player_data[player_data['condition'] == cond]['mean_time'].mean() 
                             for cond in conditions]
                     stds = [player_data[player_data['condition'] == cond]['std_time'].mean() 
-                        for cond in conditions]
-                    ax1.errorbar(x + (i-1)*width, means, yerr=stds,
-                            fmt='o', capsize=5, label=f'Player {player}')
+                           for cond in conditions]
+                    ax1.errorbar(x_vals, means, yerr=stds,
+                               fmt='o', capsize=5, label=f'Player {player}')
             
             ax1.set_title(f'Player Completion Times - {lag_condition}')
             ax1.set_ylabel('Time (seconds)')
             ax1.legend()
             ax1.set_ylim(min_time, max_time)
-            ax1.set_xticks(x)
-            ax1.set_xticklabels([condition_labels[c] for c in conditions])
+            ax1.set_xlim(-0.1, 1.1)
+            ax1.set_xticks([0.0, 0.2, 1.0])
+            ax1.set_xticklabels(x_labels)
             ax1.set_xlabel('Steering Assistance')
-            
-            # Remove internal x-axis padding
-            ax1.margins(x=0.1)  # Reduce horizontal margins
             
             # Plot combined bot data in bottom subplot
             bot_data = lag_df[lag_df['type'] == 'bot']
             if not bot_data.empty:
+                # Sort the data by assistance value
+                bot_data = bot_data.sort_values(by='condition',
+                    key=lambda x: [x_positions[val] for val in x])
+                
+                x_vals = [x_positions[c] for c in conditions]
                 means = [bot_data[bot_data['condition'] == cond]['mean_time'].mean() 
                         for cond in conditions]
                 stds = [bot_data[bot_data['condition'] == cond]['std_time'].mean() 
-                    for cond in conditions]
-                ax2.errorbar(x, means, yerr=stds,
-                        fmt='s', capsize=5, label='Bot')
+                       for cond in conditions]
+                ax2.errorbar(x_vals, means, yerr=stds,
+                           fmt='s', capsize=5, label='Bot')
             
             ax2.set_title(f'Bot Completion Times - {lag_condition}')
             ax2.set_xlabel('Steering Assistance')
             ax2.set_ylabel('Time (seconds)')
             ax2.legend()
             ax2.set_ylim(min_time, max_time)
-            ax2.set_xticks(x)
-            ax2.set_xticklabels([condition_labels[c] for c in conditions])
+            ax2.set_xlim(-0.1, 1.1)
+            ax2.set_xticks([0.0, 0.2, 1.0])
+            ax2.set_xticklabels(x_labels)
             
             # Remove internal x-axis padding
             ax2.margins(x=0.1)  # Reduce horizontal margins
