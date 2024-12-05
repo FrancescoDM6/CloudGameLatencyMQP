@@ -65,6 +65,7 @@
 
 #include <MCWorld>
 #include <MCWorldRenderer>
+#include <thread>
 
 #include <QApplication>
 #include <QObject>
@@ -409,7 +410,7 @@ void Scene::processUserInput(InputHandler & handler)
                     if (!m_race->timing().raceCompleted(i))
                     {
                         m_cars.at(i)->setAcceleratorEnabled(true);
-                        emit messageRequested(QObject::tr("BUTTON PRESSED!!!"));
+                        // emit messageRequested(QObject::tr("BUTTON PRESSED!!!"));
                     }
                 }
                 else

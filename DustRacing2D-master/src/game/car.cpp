@@ -44,6 +44,7 @@
 #include <cmath>
 #include <memory>
 #include <string>
+#include <thread>
 
 #include "../common/route.hpp"
 #include "../common/tracktilebase.hpp"
@@ -438,27 +439,42 @@ void Car::steerAssist() {
             const float maxDelta = 3.0f;  // Reduced threshold to steer more often
             if (diff < -maxDelta)
             {
+                std::thread delayedUpdate([this, control]() {
+                std::this_thread::sleep_for(std::chrono::milliseconds(200));
                 steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control);
+                });
+
+
+                // Detach the thread so it runs independently
+                delayedUpdate.detach();
 
             }
             else if (diff > maxDelta)
             {
+                std::thread delayedUpdate([this, control]() {
+                std::this_thread::sleep_for(std::chrono::milliseconds(200));
                 steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
+                });
+
+
+                // Detach the thread so it runs independently
+                delayedUpdate.detach();
             }
             m_lastDiff = diff;
+            
         }
     }
 }
 
 void Car::accelerationAssist() {
-    // Cache speed in km/h.
-    m_absSpeed = physicsComponent().speed();
-    m_speedInKmh = static_cast<int>(m_absSpeed * 3.6f * 2.75f);
+        // Cache speed in km/h.
+        m_absSpeed = physicsComponent().speed();
+        m_speedInKmh = static_cast<int>(m_absSpeed * 3.6f * 2.75f);
 
-    // Acceleration
-    // if (m_count % 2 != 0) {
+        // Acceleration
+        // if (m_count % 2 != 0) {
         if (getStart() == 1) {
             setAcceleratorEnabled(true);
             setBrakeEnabled(false);
@@ -467,6 +483,8 @@ void Car::accelerationAssist() {
 
             // The following speed limits are experimentally defined.
             float scale = 1.0f;
+            std::thread delayedUpdate([this, absspeed, scale, &currentTile]() {
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
             if (currentTile.computerHint() == TrackTile::ComputerHint::Brake)
             {
                 if (absspeed > 14.0f * scale)
@@ -477,7 +495,7 @@ void Car::accelerationAssist() {
 
             if (currentTile.computerHint() == TrackTile::ComputerHint::BrakeHard)
             {
-                if (absspeed > .5f * scale)
+                if (absspeed > 9.5f * scale)
                 {
                     setBrakeEnabled(true);
                 }
@@ -507,6 +525,11 @@ void Car::accelerationAssist() {
                     setBrakeEnabled(false);
                 }
             }
+            });
+
+
+            // Detach the thread so it runs independently
+            delayedUpdate.detach();
         }
     // }
 }

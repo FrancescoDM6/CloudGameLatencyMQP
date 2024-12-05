@@ -114,6 +114,8 @@ void AI::setRandomTolerance()
 
 void AI::steerControl(TargetNodeBasePtr targetNode)
 {
+    std::thread delayedUpdate([this, targetNode]() {
+       std::this_thread::sleep_for(std::chrono::milliseconds(200));
     // Initial target coordinates
     MCVector3dF target(static_cast<float>(targetNode->location().x()), static_cast<float>(targetNode->location().y()));
     target -= MCVector3dF(m_car.location() + MCVector3dF(m_randomTolerance));
@@ -219,6 +221,11 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
+    });
+
+
+   // Detach the thread so it runs independently
+   delayedUpdate.detach();
 }
 
 void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
@@ -227,6 +234,8 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     // the difference between current and target angles so that
     // computer hints wouldn't be needed anymore..?
 
+    std::thread delayedUpdate([this, &currentTile, isRaceCompleted]() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
     // Braking / acceleration logic
     bool accelerate = true;
     bool brake = false;
@@ -299,6 +308,11 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         m_car.setAcceleratorEnabled(false);
         m_car.setBrakeEnabled(false);
     }
+    });
+
+
+   // Detach the thread so it runs independently
+   delayedUpdate.detach();
 }
 
 void AI::setTrack(std::shared_ptr<Track> track)
