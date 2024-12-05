@@ -42,6 +42,8 @@ EventHandler::EventHandler(InputHandler & inputHandler)
     m_keyToActionMap[Qt::Key_S] = ActionMapping(1, InputHandler::Action::Down);
     m_keyToActionMap[Qt::Key_M] = ActionMapping(0, InputHandler::Action::M);
     m_keyToActionMap[Qt::Key_N] = ActionMapping(0, InputHandler::Action::N);
+    m_keyToActionMap[Qt::Key_P] = ActionMapping(0, InputHandler::Action::P);
+
 
 
     loadKeyMappings();

@@ -114,8 +114,6 @@ void AI::setRandomTolerance()
 
 void AI::steerControl(TargetNodeBasePtr targetNode)
 {
-    std::thread delayedUpdate([this, targetNode]() {
-       std::this_thread::sleep_for(std::chrono::milliseconds(200));
     // Initial target coordinates
     MCVector3dF target(static_cast<float>(targetNode->location().x()), static_cast<float>(targetNode->location().y()));
     target -= MCVector3dF(m_car.location() + MCVector3dF(m_randomTolerance));
@@ -203,6 +201,8 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     control = control > maxControl ? maxControl : control;
 
     const float maxDelta = 3.0;
+    std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle]() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (diff < -maxDelta)
     {
         m_car.steer(Car::Steer::Right, control);
@@ -234,8 +234,6 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     // the difference between current and target angles so that
     // computer hints wouldn't be needed anymore..?
 
-    std::thread delayedUpdate([this, &currentTile, isRaceCompleted]() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
     // Braking / acceleration logic
     bool accelerate = true;
     bool brake = false;
@@ -293,6 +291,8 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         }
     }
 
+    std::thread delayedUpdate([this, brake, accelerate]() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (brake)
     {
         m_car.setAcceleratorEnabled(false);

@@ -349,12 +349,19 @@ void Scene::processUserInput(InputHandler & handler)
     for (size_t i = 0; i < (m_game.hasTwoHumanPlayers() ? 2 : 1); i++)
     {
         if (handler.getActionState(i, InputHandler::Action::M)) {
-            m_press++;
+            m_press = 1;
             n_press = 0;
+            emit messageRequested(QObject::tr("m_press active"));
         }
 
         if (handler.getActionState(i, InputHandler::Action::N)) {
-            n_press++;
+            n_press = 1;
+            m_press = 0;
+            emit messageRequested(QObject::tr("n_press active"));
+        }
+
+        if (handler.getActionState(i, InputHandler::Action::P)) {
+            n_press = 0;
             m_press = 0;
         }
 

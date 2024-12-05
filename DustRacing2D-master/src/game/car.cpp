@@ -440,7 +440,7 @@ void Car::steerAssist() {
             if (diff < -maxDelta)
             {
                 std::thread delayedUpdate([this, control]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                std::this_thread::sleep_for(std::chrono::milliseconds(0));
                 steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control);
                 });
@@ -483,8 +483,8 @@ void Car::accelerationAssist() {
 
             // The following speed limits are experimentally defined.
             float scale = 1.0f;
-            std::thread delayedUpdate([this, absspeed, scale, &currentTile]() {
-            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+            // std::thread delayedUpdate([this, absspeed, scale, &currentTile]() {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(0));
             if (currentTile.computerHint() == TrackTile::ComputerHint::Brake)
             {
                 if (absspeed > 14.0f * scale)
@@ -506,7 +506,7 @@ void Car::accelerationAssist() {
                 if (absspeed > 7.0f * scale)
                 {
                     setAcceleratorEnabled(false);
-                    setBrakeEnabled(false);
+                    // setBrakeEnabled(false);
                 }
             }
 
@@ -515,7 +515,7 @@ void Car::accelerationAssist() {
                 if (absspeed > 8.3f * scale)
                 {
                     setAcceleratorEnabled(false);
-                    setBrakeEnabled(false);
+                    // setBrakeEnabled(false);
                 }
             }     
             else {
@@ -525,11 +525,11 @@ void Car::accelerationAssist() {
                     setBrakeEnabled(false);
                 }
             }
-            });
+            // });
 
 
-            // Detach the thread so it runs independently
-            delayedUpdate.detach();
+            // // Detach the thread so it runs independently
+            // delayedUpdate.detach();
         }
     // }
 }
