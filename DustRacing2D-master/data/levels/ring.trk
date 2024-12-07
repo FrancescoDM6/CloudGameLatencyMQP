@@ -160,7 +160,7 @@
  <t i="19" j="5" o="0" t="grass"/>
  <t i="19" j="6" o="0" t="grass"/>
  <t i="19" j="7" o="0" t="grass"/>
- <o x="2626" y="1160" o="0" r="grandstand" c="free"/>
+ <!-- <o x="2626" y="1160" o="0" r="grandstand" c="free"/>
  <o x="2495" y="1159" o="0" r="grandstand" c="free"/>
  <o x="2365" y="1160" o="0" r="grandstand" c="free"/>
  <o x="2757" y="1159" o="0" r="grandstand" c="free"/>
@@ -307,7 +307,7 @@
  <o x="3612" y="1012" o="0" r="tree" c="free"/>
  <o x="3594" y="1164" o="0" r="tree" c="free"/>
  <o x="3454" y="970" o="0" r="tree" c="free"/>
- <o x="2419" y="1343" o="180" r="pit" c="free"/>
+ <o x="2419" y="1343" o="180" r="pit" c="free"/> -->
  <n w="256" x="2695" y="1404" h="512" i="0"/>
  <n w="256" x="2955" y="1397" h="512" i="1"/>
  <n w="256" x="3884" y="1394" h="512" i="2"/>

@@ -56,7 +56,7 @@ void MainMenu::createMenuItems()
 
     const auto play = std::make_shared<MenuItem>(width(), itemHeight, tr("Play").toUpper().toStdWString());
     play->setView(std::make_shared<TextMenuItemView>(textSize, *play));
-    play->setMenuOpenAction("difficulty");
+    play->setMenuOpenAction("trackSelection");
 
     const auto help = std::make_shared<MenuItem>(width(), itemHeight, tr("Help").toUpper().toStdWString());
     help->setView(std::make_shared<TextMenuItemView>(textSize, *help));
@@ -78,10 +78,10 @@ void MainMenu::createMenuItems()
     settings->setView(std::make_shared<TextMenuItemView>(textSize, *settings));
     settings->setMenuOpenAction("settings");
 
-    addItem(quit);
-    addItem(credits);
-    addItem(settings);
-    addItem(help);
+    // addItem(quit);
+    // addItem(credits);
+    // addItem(settings);
+    // addItem(help);
     addItem(play);
 }
 
