@@ -351,13 +351,13 @@ void Scene::processUserInput(InputHandler & handler)
         if (handler.getActionState(i, InputHandler::Action::M)) {
             m_press = 1;
             n_press = 0;
-            emit messageRequested(QObject::tr("m_press active"));
+            // emit messageRequested(QObject::tr("m_press active"));
         }
 
         if (handler.getActionState(i, InputHandler::Action::N)) {
             n_press = 1;
             m_press = 0;
-            emit messageRequested(QObject::tr("n_press active"));
+            // emit messageRequested(QObject::tr("n_press active"));
         }
 
         if (handler.getActionState(i, InputHandler::Action::P)) {

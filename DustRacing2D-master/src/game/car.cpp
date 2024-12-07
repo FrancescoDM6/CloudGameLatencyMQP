@@ -370,7 +370,7 @@ void Car::steerAssist() {
             // const float cur = static_cast<int>(this->angle()) % 360;
             // float diff = angle - cur;
 
-                            // Get the raw current angle (continuously increasing/decreasing)
+            // Get the raw current angle (continuously increasing/decreasing)
             const float rawCurrentAngle = this->angle();
             
             // Get new target angle from atan2 (-180 to +180)
@@ -437,31 +437,23 @@ void Car::steerAssist() {
 
             // More aggressive steering response
             const float maxDelta = 3.0f;  // Reduced threshold to steer more often
+            // std::thread delayedUpdate([this, control, diff, maxDelta, angle, cur]() {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(0));
             if (diff < -maxDelta)
             {
-                std::thread delayedUpdate([this, control]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(0));
                 steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control);
-                });
-
-
-                // Detach the thread so it runs independently
-                delayedUpdate.detach();
-
             }
             else if (diff > maxDelta)
             {
-                std::thread delayedUpdate([this, control]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(200));
                 steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
-                });
-
-
-                // Detach the thread so it runs independently
-                delayedUpdate.detach();
             }
+            // });
+
+            // // Detach the thread so it runs independently
+            // delayedUpdate.detach();
+
             m_lastDiff = diff;
             
         }
