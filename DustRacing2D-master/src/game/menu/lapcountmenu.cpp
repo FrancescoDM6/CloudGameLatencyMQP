@@ -39,7 +39,7 @@ LapCountMenu::LapCountMenu(int width, int height)
   , m_font(MCAssetManager::textureFontManager().font(Game::instance().fontName()))
 {
     static int LAP_COUNTS[] = {
-        1, 3, 5, 10, 20, 50, 100
+        3
     };
 
     const int numLapCounts = sizeof(LAP_COUNTS) / sizeof(int);
