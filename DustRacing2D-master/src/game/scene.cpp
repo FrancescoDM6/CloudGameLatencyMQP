@@ -41,6 +41,7 @@
 #include "track.hpp"
 #include "trackdata.hpp"
 #include "trackobject.hpp"
+#include "trackselectionmenu.hpp"
 #include "tracktile.hpp"
 
 #include "../common/config.hpp"
@@ -262,6 +263,15 @@ void Scene::createMenus()
 
     m_menuManager->addMenu(m_mainMenu);
     m_menuManager->enterMenu(m_mainMenu);
+
+    // m_menuManager.reset(new MTFH::MenuManager);
+
+    // m_trackMenu = std::make_shared<TrackSelectionMenu>(*m_menuManager, *this, width(), height());
+    // connect(
+    //   std::static_pointer_cast<TrackSelectionMenu>(m_trackMenu).get(), /*TrackSelectionMenu::exitGameRequested,*/ &m_game, &Game::exitGame);
+
+    // m_menuManager->addMenu(m_trackMenu);
+    // m_menuManager->enterMenu(m_trackMenu);
 }
 
 void Scene::updateFrame(InputHandler & handler, int step)
@@ -694,6 +704,11 @@ std::shared_ptr<Track> Scene::activeTrack() const
 MTFH::MenuPtr Scene::trackSelectionMenu() const
 {
     return m_menuManager->getMenuById("trackSelection");
+}
+
+MTFH::MenuPtr Scene::mainMenu() const
+{
+    return m_menuManager->getMenuById("main");
 }
 
 void Scene::getSplitPositions(MCGLScene::SplitType & p0, MCGLScene::SplitType & p1)

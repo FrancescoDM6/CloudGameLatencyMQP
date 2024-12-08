@@ -23,6 +23,7 @@
 #include "eventhandler.hpp"
 #include "graphicsfactory.hpp"
 #include "inputhandler.hpp"
+#include "mainmenu.hpp"
 #include "renderer.hpp"
 #include "scene.hpp"
 #include "statemachine.hpp"
@@ -391,10 +392,14 @@ void Game::initScene()
     auto trackSelectionMenu = std::dynamic_pointer_cast<TrackSelectionMenu>(m_scene->trackSelectionMenu());
     assert(trackSelectionMenu);
 
+    auto mainMenu = std::dynamic_pointer_cast<MainMenu>(m_scene->mainMenu());
+    assert(mainMenu);
+
     // Add tracks to the menu.
     for (unsigned int i = 0; i < m_trackLoader->tracks(); i++)
     {
         trackSelectionMenu->addTrack(m_trackLoader->track(i));
+        mainMenu->addTrack(m_trackLoader->track(i));
     }
 
     // Set the current game scene. Renderer calls render()

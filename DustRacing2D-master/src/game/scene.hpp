@@ -48,6 +48,7 @@ class StartlightsOverlay;
 class StateMachine;
 class Track;
 class TrackSelectionMenu;
+class MainMenu;
 
 namespace MTFH {
 class Menu;
@@ -92,6 +93,8 @@ public:
 
     //! Return track selection menu.
     MTFH::MenuPtr trackSelectionMenu() const;
+
+    MTFH::MenuPtr mainMenu() const;
 
     void renderCommonHUD();
 
@@ -189,6 +192,8 @@ private:
     std::array<float, 2> m_cameraOffset;
 
     MTFH::MenuPtr m_mainMenu;
+
+    MTFH::MenuPtr m_trackMenu;
 
     std::unique_ptr<MTFH::MenuManager> m_menuManager;
 
