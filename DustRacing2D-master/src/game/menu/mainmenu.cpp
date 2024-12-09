@@ -281,74 +281,74 @@ void TrackItem2::renderLock()
 
 void TrackItem2::renderTrackProperties()
 {
-    std::wstringstream ss;
-    MCTextureText text(L"");
-    text.setGlyphSize(20, 20);
-    const int shadowY = -2;
-    const int shadowX = 2;
-    text.setShadowOffset(shadowX, shadowY);
+    // std::wstringstream ss;
+    // MCTextureText text(L"");
+    // text.setGlyphSize(20, 20);
+    // const int shadowY = -2;
+    // const int shadowX = 2;
+    // text.setShadowOffset(shadowX, shadowY);
 
-    std::vector<MCTextureText> texts;
+    // std::vector<MCTextureText> texts;
 
-    // Render track properties
-    ss.str(L"");
-    ss << QObject::tr("       Laps: ").toStdWString() << Game::instance().lapCount();
-    text.setText(ss.str());
-    text.setGlyphSize(20, 20);
-    float maxWidth = text.width(m_font);
-    texts.push_back(text);
+    // // Render track properties
+    // ss.str(L"");
+    // ss << QObject::tr("       Laps: ").toStdWString() << Game::instance().lapCount();
+    // text.setText(ss.str());
+    // text.setGlyphSize(20, 20);
+    // float maxWidth = text.width(m_font);
+    // texts.push_back(text);
 
-    ss.str(L"");
-    ss << QObject::tr("     Length: ").toStdWString()
-       << static_cast<int>(m_track->trackData().route().geometricLength() * MCWorld::metersPerUnit());
-    text.setText(ss.str());
-    maxWidth = std::fmax(maxWidth, text.width(m_font));
-    texts.push_back(text);
+    // ss.str(L"");
+    // ss << QObject::tr("     Length: ").toStdWString()
+    //    << static_cast<int>(m_track->trackData().route().geometricLength() * MCWorld::metersPerUnit());
+    // text.setText(ss.str());
+    // maxWidth = std::fmax(maxWidth, text.width(m_font));
+    // texts.push_back(text);
 
-    ss.str(L"");
-    ss << QObject::tr(" Lap Record: ").toStdWString() << Timing::msecsToString(m_lapRecord);
-    text.setText(ss.str());
-    maxWidth = std::fmax(maxWidth, text.width(m_font));
-    if (!m_track->trackData().isLocked())
-        texts.push_back(text);
+    // ss.str(L"");
+    // ss << QObject::tr(" Lap Record: ").toStdWString() << Timing::msecsToString(m_lapRecord);
+    // text.setText(ss.str());
+    // maxWidth = std::fmax(maxWidth, text.width(m_font));
+    // if (!m_track->trackData().isLocked())
+    //     texts.push_back(text);
 
-    ss.str(L"");
-    ss << QObject::tr("Race Record: ").toStdWString() << Timing::msecsToString(m_raceRecord);
-    text.setText(ss.str());
-    maxWidth = std::fmax(maxWidth, text.width(m_font));
-    if (!m_track->trackData().isLocked())
-        texts.push_back(text);
+    // ss.str(L"");
+    // ss << QObject::tr("Race Record: ").toStdWString() << Timing::msecsToString(m_raceRecord);
+    // text.setText(ss.str());
+    // maxWidth = std::fmax(maxWidth, text.width(m_font));
+    // if (!m_track->trackData().isLocked())
+    //     texts.push_back(text);
 
-    const float yPos = menu()->y() + y() - height() / 2;
-    const float lineHeight = text.height(m_font);
-    int line = 2;
-    for (auto && text : texts)
-    {
-        const auto textX = menu()->x() + x();
-        text.render(textX - maxWidth / 2, yPos - lineHeight * line, nullptr, m_font);
-        line++;
-    }
+    // const float yPos = menu()->y() + y() - height() / 2;
+    // const float lineHeight = text.height(m_font);
+    // int line = 2;
+    // for (auto && text : texts)
+    // {
+    //     const auto textX = menu()->x() + x();
+    //     text.render(textX - maxWidth / 2, yPos - lineHeight * line, nullptr, m_font);
+    //     line++;
+    // }
 
-    line++;
+    // line++;
 
-    if (m_track->trackData().isLocked())
-    {
-        ss.str(L"");
-        if (m_game.hasComputerPlayers())
-        {
-            //: Try to keep the translation as short as possible.
-            ss << QObject::tr("Finish previous track in TOP-6 to unlock!").toStdWString();
-        }
-        else
-        {
-            //: "it" = a locked track. Try to keep the translation as short as possible.
-            ss << QObject::tr("Unlock it in one/two player race!").toStdWString();
-        }
-        text.setText(ss.str());
-        maxWidth = std::fmax(maxWidth, text.width(m_font));
-        const auto textX = menu()->x() + x();
-        text.render(textX - maxWidth / 2, yPos - lineHeight * line, nullptr, m_font);
-    }
+    // if (m_track->trackData().isLocked())
+    // {
+    //     ss.str(L"");
+    //     if (m_game.hasComputerPlayers())
+    //     {
+    //         //: Try to keep the translation as short as possible.
+    //         ss << QObject::tr("Finish previous track in TOP-6 to unlock!").toStdWString();
+    //     }
+    //     else
+    //     {
+    //         //: "it" = a locked track. Try to keep the translation as short as possible.
+    //         ss << QObject::tr("Unlock it in one/two player race!").toStdWString();
+    //     }
+    //     text.setText(ss.str());
+    //     maxWidth = std::fmax(maxWidth, text.width(m_font));
+    //     const auto textX = menu()->x() + x();
+    //     text.render(textX - maxWidth / 2, yPos - lineHeight * line, nullptr, m_font);
+    // }
 }
 
 void TrackItem2::render()
