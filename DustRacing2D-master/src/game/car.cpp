@@ -487,7 +487,7 @@ void Car::accelerationAssist() {
 
             if (currentTile.computerHint() == TrackTile::ComputerHint::BrakeHard)
             {
-                if (absspeed > 9.5f * scale)
+                if (absspeed > 10.5f * scale) // default 9.5f
                 {
                     setBrakeEnabled(true);
                 }
