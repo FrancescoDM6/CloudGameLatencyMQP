@@ -160,6 +160,9 @@ class DataAnalyzer:
                 if player_runs:
                     all_data['player'][player][control_type] = player_runs
                     all_data['bot'][player][control_type] = bot_runs
+
+        self._create_comprehensive_control_analysis(all_data, overall_dir)
+        self._create_comprehensive_steering_analysis(all_data, overall_dir)
         
         self._create_overall_analysis_plots(all_data, overall_dir)
         print("Created overall analysis plots")
@@ -533,17 +536,13 @@ class DataAnalyzer:
 
     def _create_win_percentage_plots(self, output_dir):
         """Create win percentage visualization plots."""
-        # Define x-axis positions that reflect proper numerical scaling
         x_positions = {
             '0.0 Control Assistance': 0.0,
             '0.2 Control Assistance': 0.2,
             '1.0 Control Assistance': 1.0
         }
         
-        # Define x-axis labels
         x_labels = ['0.0', '0.2', '1.0']
-        
-        # Define distinct markers for each player
         player_markers = {
             'F': 'o',     # circle
             'J': 's',     # square
@@ -552,40 +551,66 @@ class DataAnalyzer:
         
         win_df = self._calculate_win_percentages()
         
-        # Combined plot for all players for each lag condition
-        for lag_condition in ['0 Lag', '200 Lag']:
-            plt.figure(figsize=(12, 8))
-            lag_data = win_df[win_df['lag'] == lag_condition]
-            
-            # Plot points in reverse order of players
-            # This ensures F's points (circles) appear on top
-            for player in reversed(self.players):
-                player_data = lag_data[lag_data['player'] == player]
-                if not player_data.empty:
-                    player_data = player_data.sort_values(by='condition',
-                        key=lambda x: [x_positions[val] for val in x])
-                    x_vals = [x_positions[c] for c in player_data['condition']]
-                    
-                    plt.plot(x_vals, player_data['win_percentage'],
-                            marker=player_markers[player],
-                            linestyle='none',
-                            label=f'Player {player}',
-                            markersize=10,
-                            zorder=3)  # Higher zorder means drawn on top
-            
-            plt.xlabel('Steering Assistance')
-            plt.ylabel('Win Percentage')
-            plt.title(f'Win Percentage by Player - {lag_condition}')
-            plt.ylim(-2, 105)
-            plt.xlim(-0.1, 1.1)
-            plt.xticks([0.0, 0.2, 1.0], x_labels)
-            plt.legend()
-            plt.grid(True, zorder=1)  # Grid below points
-            plt.savefig(output_dir / f'win_percentage_combined_{lag_condition.replace(" ", "_")}.png',
-                    dpi=300, bbox_inches='tight')
-            plt.close()
+        # Combined plot for all players - now stacked vertically
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 16), height_ratios=[1, 1])
         
-        # Individual plots (keep as is since it's working)
+        # Top subplot - 0 Lag
+        lag_data = win_df[win_df['lag'] == '0 Lag']
+        for player in reversed(self.players):
+            player_data = lag_data[lag_data['player'] == player]
+            if not player_data.empty:
+                player_data = player_data.sort_values(by='condition',
+                    key=lambda x: [x_positions[val] for val in x])
+                x_vals = [x_positions[c] for c in player_data['condition']]
+                
+                ax1.plot(x_vals, player_data['win_percentage'],
+                        marker=player_markers[player],
+                        linestyle='none',
+                        label=f'Player {player}',
+                        markersize=10,
+                        zorder=3)
+        
+        ax1.set_xlabel('Steering Assistance')
+        ax1.set_ylabel('Win Percentage')
+        ax1.set_title('Win Percentage by Player - 0 Lag')
+        ax1.set_ylim(-2, 105)
+        ax1.set_xlim(-0.1, 1.1)
+        ax1.set_xticks([0.0, 0.2, 1.0])
+        ax1.set_xticklabels(x_labels)
+        ax1.legend()
+        ax1.grid(True, zorder=1)
+        
+        # Bottom subplot - 200 Lag
+        lag_data = win_df[win_df['lag'] == '200 Lag']
+        for player in reversed(self.players):
+            player_data = lag_data[lag_data['player'] == player]
+            if not player_data.empty:
+                player_data = player_data.sort_values(by='condition',
+                    key=lambda x: [x_positions[val] for val in x])
+                x_vals = [x_positions[c] for c in player_data['condition']]
+                
+                ax2.plot(x_vals, player_data['win_percentage'],
+                        marker=player_markers[player],
+                        linestyle='none',
+                        label=f'Player {player}',
+                        markersize=10,
+                        zorder=3)
+        
+        ax2.set_xlabel('Steering Assistance')
+        ax2.set_ylabel('Win Percentage')
+        ax2.set_title('Win Percentage by Player - 200 Lag')
+        ax2.set_ylim(-2, 105)
+        ax2.set_xlim(-0.1, 1.1)
+        ax2.set_xticks([0.0, 0.2, 1.0])
+        ax2.set_xticklabels(x_labels)
+        ax2.legend()
+        ax2.grid(True, zorder=1)
+        
+        plt.tight_layout()
+        plt.savefig(output_dir / 'win_percentage_combined.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Individual plots remain the same since they're already using the desired format
         for player in self.players:
             plt.figure(figsize=(15, 6))
             player_data = win_df[win_df['player'] == player]
@@ -600,7 +625,8 @@ class DataAnalyzer:
                 plt.plot(x_vals, lag_data['win_percentage'], 
                         marker=player_markers[player],
                         linestyle='none',
-                        markersize=10)
+                        markersize=10,
+                        zorder=3)
                 
                 plt.xlabel('Steering Assistance')
                 plt.ylabel('Win Percentage')
@@ -608,6 +634,7 @@ class DataAnalyzer:
                 plt.ylim(-2, 105)
                 plt.xlim(-0.1, 1.1)
                 plt.xticks([0.0, 0.2, 1.0], x_labels)
+                plt.grid(True, zorder=1)
             
             plt.suptitle(f'Win Percentage - Player {player}')
             plt.tight_layout()
@@ -698,50 +725,154 @@ class DataAnalyzer:
 
     def _create_off_track_plots(self, off_track_df, output_dir):
         """Create visualizations for off track analysis."""
-        # Define x-axis positions that reflect proper numerical scaling
         x_positions = {
             '0.0 Control Assistance': 0.0,
             '0.2 Control Assistance': 0.2,
             '1.0 Control Assistance': 1.0
         }
-        
-        # Define x-axis labels
         x_labels = ['0.0', '0.2', '1.0']
         
-        # Find global min and max for consistent scaling
+        # Find global min and max for consistent scaling across both plots
         min_pct = off_track_df['off_track_percentage'].min()
         max_pct = off_track_df['off_track_percentage'].max()
-        
-        # Add some padding to the limits (10% of range)
         range_pad = (max_pct - min_pct) * 0.1
         y_min = max(0, min_pct - range_pad)
         y_max = max_pct + range_pad
         
-        # Plot for each lag condition
-        for lag_condition in ['0 Lag', '200 Lag']:
-            plt.figure(figsize=(10, 6))
-            lag_data = off_track_df[off_track_df['lag'] == lag_condition]
+        # Create stacked plots
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 16), height_ratios=[1, 1])
+        
+        # Top subplot - 0 Lag
+        lag_data = off_track_df[off_track_df['lag'] == '0 Lag']
+        for player in self.players:
+            player_data = lag_data[lag_data['player'] == player]
+            player_data = player_data.sort_values(by='condition',
+                key=lambda x: [x_positions[val] for val in x])
             
-            for player in self.players:
-                player_data = lag_data[lag_data['player'] == player]
-                # Sort the data by assistance value
-                player_data = player_data.sort_values(by='condition',
-                    key=lambda x: [x_positions[val] for val in x])
-                
-                x_vals = [x_positions[c] for c in player_data['condition']]
-                plt.plot(x_vals, player_data['off_track_percentage'], 
-                        'o', markersize=10, label=f'Player {player}')
+            x_vals = [x_positions[c] for c in player_data['condition']]
+            ax1.plot(x_vals, player_data['off_track_percentage'], 
+                    'o', markersize=10, label=f'Player {player}',
+                    zorder=3)
+        
+        ax1.set_xlabel('Steering Assistance')
+        ax1.set_ylabel('Time Off Track (%)')
+        ax1.set_title('Off Track Time - 0 Lag')
+        ax1.set_ylim(y_min, y_max)
+        ax1.set_xlim(-0.1, 1.1)
+        ax1.set_xticks([0.0, 0.2, 1.0])
+        ax1.set_xticklabels(x_labels)
+        ax1.legend()
+        ax1.grid(True, alpha=0.3, zorder=1)
+        
+        # Bottom subplot - 200 Lag
+        lag_data = off_track_df[off_track_df['lag'] == '200 Lag']
+        for player in self.players:
+            player_data = lag_data[lag_data['player'] == player]
+            player_data = player_data.sort_values(by='condition',
+                key=lambda x: [x_positions[val] for val in x])
             
-            plt.xlabel('Steering Assistance')
-            plt.ylabel('Time Off Track (%)')
-            plt.title(f'Off Track Time - {lag_condition}')
-            plt.ylim(y_min, y_max)
-            plt.xlim(-0.1, 1.1)
-            plt.xticks([0.0, 0.2, 1.0], x_labels)
-            plt.legend()
-            plt.savefig(output_dir / f'off_track_percentage_{lag_condition.replace(" ", "_")}.png',
-                       dpi=300, bbox_inches='tight')
-            plt.close()
+            x_vals = [x_positions[c] for c in player_data['condition']]
+            ax2.plot(x_vals, player_data['off_track_percentage'], 
+                    'o', markersize=10, label=f'Player {player}',
+                    zorder=3)
+        
+        ax2.set_xlabel('Steering Assistance')
+        ax2.set_ylabel('Time Off Track (%)')
+        ax2.set_title('Off Track Time - 200 Lag')
+        ax2.set_ylim(y_min, y_max)
+        ax2.set_xlim(-0.1, 1.1)
+        ax2.set_xticks([0.0, 0.2, 1.0])
+        ax2.set_xticklabels(x_labels)
+        ax2.legend()
+        ax2.grid(True, alpha=0.3, zorder=1)
+        
+        plt.tight_layout()
+        plt.savefig(output_dir / 'off_track_percentage.png', dpi=300, bbox_inches='tight')
+        plt.close()
+
+    def _create_lag_performance_plots(self, df, output_dir, min_time, max_time):
+        """Create lag performance plots."""
+        # Performance vs Lag by Player and Bot
+        plt.figure(figsize=(12, 8))
+        
+        # Plot player data
+        for player in self.players:
+            player_data = df[(df['player'] == player) & (df['type'] == 'player')]
+            lag_means = []
+            lag_stds = []
+            for lag in ['0 Lag', '200 Lag']:
+                lag_subset = player_data[player_data['lag'] == lag]
+                lag_means.append(lag_subset['mean_time'].mean())
+                lag_stds.append(np.sqrt((lag_subset['std_time']**2).mean()))
+            
+            plt.errorbar(['0 Lag', '200 Lag'], lag_means, yerr=lag_stds,
+                        fmt='o-', label=f'Player {player}',
+                        capsize=5, markersize=8, zorder=3)
+        
+        # Add bot data to same plot
+        bot_data = df[df['type'] == 'bot']
+        lag_means = []
+        lag_stds = []
+        for lag in ['0 Lag', '200 Lag']:
+            lag_subset = bot_data[bot_data['lag'] == lag]
+            lag_means.append(lag_subset['mean_time'].mean())
+            lag_stds.append(np.sqrt((lag_subset['std_time']**2).mean()))
+        
+        plt.errorbar(['0 Lag', '200 Lag'], lag_means, yerr=lag_stds,
+                    fmt='s-', label='Bot', color='red',
+                    capsize=5, markersize=8, zorder=3)
+        
+        plt.xlabel('Lag Condition')
+        plt.ylabel('Average Completion Time (seconds)')
+        plt.title('Performance vs Lag')
+        plt.legend()
+        plt.grid(True, alpha=0.3, zorder=1)
+        plt.ylim(min_time, max_time)
+        
+        plt.savefig(output_dir / 'lag_performance.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Performance vs Lag by Control Condition and Bot
+        plt.figure(figsize=(12, 8))
+        conditions = df['condition'].unique()
+        markers = ['o', 's', '^']
+        
+        # Plot player data by control condition
+        for i, condition in enumerate(conditions):
+            player_data = df[(df['type'] == 'player') & (df['condition'] == condition)]
+            lag_means = []
+            lag_stds = []
+            for lag in ['0 Lag', '200 Lag']:
+                lag_subset = player_data[player_data['lag'] == lag]
+                lag_means.append(lag_subset['mean_time'].mean())
+                lag_stds.append(np.sqrt((lag_subset['std_time']**2).mean()))
+            
+            plt.errorbar(['0 Lag', '200 Lag'], lag_means, yerr=lag_stds,
+                        fmt=f'{markers[i]}-', label=f'Control {condition}',
+                        capsize=5, markersize=8, zorder=3)
+        
+        # Add bot data
+        bot_data = df[df['type'] == 'bot']
+        lag_means = []
+        lag_stds = []
+        for lag in ['0 Lag', '200 Lag']:
+            lag_subset = bot_data[bot_data['lag'] == lag]
+            lag_means.append(lag_subset['mean_time'].mean())
+            lag_stds.append(np.sqrt((lag_subset['std_time']**2).mean()))
+        
+        plt.errorbar(['0 Lag', '200 Lag'], lag_means, yerr=lag_stds,
+                    fmt='d-', label='Bot', color='red',
+                    capsize=5, markersize=8, zorder=3)
+        
+        plt.xlabel('Lag Condition')
+        plt.ylabel('Average Completion Time (seconds)')
+        plt.title('Performance vs Lag by Control Level')
+        plt.legend()
+        plt.grid(True, alpha=0.3, zorder=1)
+        plt.ylim(min_time, max_time)
+        
+        plt.savefig(output_dir / 'lag_performance_by_control.png', dpi=300, bbox_inches='tight')
+        plt.close()
 
     def _create_overall_analysis_plots(self, all_data, output_dir):
         """Create overall analysis plots comparing all players and conditions."""
@@ -874,49 +1005,8 @@ class DataAnalyzer:
                     dpi=300, bbox_inches='tight')
             plt.close()
         
-        # Performance vs Lag by Player plot (now with combined bot data)
-        plt.figure(figsize=(12, 8))
-        
-        # Plot individual player data
-        for player in self.players:
-            player_data = df[(df['player'] == player) & (df['type'] == 'player')].groupby('lag')['mean_time'].mean()
-            plt.plot(['0 Lag', '200 Lag'], player_data.values, 'o-', label=f'Player {player}')
-        
-        # Plot combined bot data
-        bot_data = df[df['type'] == 'bot'].groupby('lag')['mean_time'].mean()
-        plt.plot(['0 Lag', '200 Lag'], bot_data.values, 's--', label='Bot', color='red', linewidth=2)
-        
-        plt.title('Performance vs Lag')
-        plt.xlabel('Lag Condition')
-        plt.ylabel('Average Completion Time (seconds)')
-        plt.legend()
-        plt.ylim(min_time, max_time)
-        plt.savefig(output_dir / 'lag_performance_by_player.png', dpi=300, bbox_inches='tight')
-        plt.close()
+        self._create_lag_performance_plots(df, output_dir, min_time, max_time)
 
-        # Performance vs Lag by Control Condition plot (with combined bot data)
-        plt.figure(figsize=(12, 8))
-        conditions = df['condition'].unique()
-        markers = ['o', 's', '^']
-        
-        for i, condition in enumerate(conditions):
-            # Plot player average across all players
-            player_data = df[(df['type'] == 'player') & (df['condition'] == condition)].groupby('lag')['mean_time'].mean()
-            plt.plot(['0 Lag', '200 Lag'], player_data.values, 
-                    f'{markers[i]}-', label=f'Players - {condition}', color=f'C{i}')
-            
-            # Plot combined bot data
-            bot_data = df[(df['type'] == 'bot') & (df['condition'] == condition)].groupby('lag')['mean_time'].mean()
-            plt.plot(['0 Lag', '200 Lag'], bot_data.values, 
-                    f'{markers[i]}--', label=f'Bot - {condition}', color=f'C{i}', alpha=0.7)
-
-        plt.title('Performance vs Lag by Control Condition')
-        plt.xlabel('Lag Condition')
-        plt.ylabel('Average Completion Time (seconds)')
-        plt.legend()
-        plt.ylim(min_time, max_time)
-        plt.savefig(output_dir / 'lag_performance_by_control.png', dpi=300, bbox_inches='tight')
-        plt.close()
         
         # Calculate and plot win percentages
         win_df = self._create_win_percentage_plots(output_dir)
@@ -930,6 +1020,233 @@ class DataAnalyzer:
         stats.to_csv(output_dir / 'overall_statistics.csv', index=False)
         win_df.to_csv(output_dir / 'win_percentages.csv', index=False)
 
+    def _create_comprehensive_control_analysis(self, all_data, output_dir):
+        """Create comprehensive control input analysis across all players."""
+        # Structure for aggregated data
+        aggregated_data = {
+            player: {
+                lag: {
+                    control: {
+                        'control_values': [],
+                        'times': []
+                    } for control in ['0.0 Control Assistance', '0.2 Control Assistance', '1.0 Control Assistance']
+                } for lag in ['0 Lag', '200 Lag']
+            } for player in self.players
+        }
+        
+        # Aggregate data from all runs
+        for player in self.players:
+            for lag in ['0 Lag', '200 Lag']:
+                for control in ['0.0 Control Assistance', '0.2 Control Assistance', '1.0 Control Assistance']:
+                    start_run, end_run = self.run_mappings[player][control]
+                    for run in range(start_run, end_run + 1):
+                        try:
+                            data = self._process_player_log(self.logs_dir / player / lag / f'cardata_{run}.log')
+                            if data is not None and not data.empty:
+                                aggregated_data[player][lag][control]['control_values'].extend(data['control'].tolist())
+                                aggregated_data[player][lag][control]['times'].extend(data['time'].tolist())
+                        except Exception as e:
+                            print(f"Error processing run {run} for {player} {lag} {control}: {e}")
+        
+        # Define x-axis positions and labels
+        x_positions = {
+            '0.0 Control Assistance': 0.0,
+            '0.2 Control Assistance': 0.2,
+            '1.0 Control Assistance': 1.0
+        }
+        x_labels = ['0.0', '0.2', '1.0']
+        
+        # Find global min/max for y-axis
+        all_means = []
+        for player in self.players:
+            for lag in ['0 Lag', '200 Lag']:
+                for control in sorted(x_positions.keys()):
+                    values = aggregated_data[player][lag][control]['control_values']
+                    if values:
+                        all_means.append(np.mean(np.abs(values)))
+        
+        y_min = min(all_means)
+        y_max = max(all_means)
+        range_pad = (y_max - y_min) * 0.1
+        y_min = max(0, y_min - range_pad)
+        y_max = y_max + range_pad
+        
+        # Create plot with both subplots sharing the same y-axis range
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 16), height_ratios=[1, 1])
+        
+        # Top subplot - 0 Lag
+        for player in self.players:
+            means = []
+            stds = []
+            x_vals = []
+            
+            for control in sorted(x_positions.keys()):
+                values = aggregated_data[player]['0 Lag'][control]['control_values']
+                if values:
+                    means.append(np.mean(np.abs(values)))
+                    stds.append(np.std(np.abs(values)) / np.sqrt(len(values)))
+                    x_vals.append(x_positions[control])
+            
+            ax1.errorbar(x_vals, means, yerr=stds, 
+                        fmt='o', label=f'Player {player}',
+                        capsize=5, markersize=8, zorder=3)
+        
+        ax1.set_xlabel('Steering Assistance')
+        ax1.set_ylabel('Average Control Input Magnitude')
+        ax1.set_title('Control Input Analysis - 0 Lag')
+        ax1.legend()
+        ax1.grid(True, alpha=0.3, zorder=1)
+        ax1.set_xticks([0.0, 0.2, 1.0])
+        ax1.set_xticklabels(x_labels)
+        ax1.set_ylim(y_min, y_max)
+        ax1.set_xlim(-0.1, 1.1)
+        
+        # Bottom subplot - 200 Lag
+        for player in self.players:
+            means = []
+            stds = []
+            x_vals = []
+            
+            for control in sorted(x_positions.keys()):
+                values = aggregated_data[player]['200 Lag'][control]['control_values']
+                if values:
+                    means.append(np.mean(np.abs(values)))
+                    stds.append(np.std(np.abs(values)) / np.sqrt(len(values)))
+                    x_vals.append(x_positions[control])
+            
+            ax2.errorbar(x_vals, means, yerr=stds, 
+                        fmt='o', label=f'Player {player}',
+                        capsize=5, markersize=8, zorder=3)
+        
+        ax2.set_xlabel('Steering Assistance')
+        ax2.set_ylabel('Average Control Input Magnitude')
+        ax2.set_title('Control Input Analysis - 200 Lag')
+        ax2.legend()
+        ax2.grid(True, alpha=0.3, zorder=1)
+        ax2.set_xticks([0.0, 0.2, 1.0])
+        ax2.set_xticklabels(x_labels)
+        ax2.set_ylim(y_min, y_max)
+        ax2.set_xlim(-0.1, 1.1)
+        
+        plt.tight_layout()
+        plt.savefig(output_dir / 'control_input_analysis.png', dpi=300, bbox_inches='tight')
+        plt.close()
+
+    def _create_comprehensive_steering_analysis(self, all_data, output_dir):
+        """Create comprehensive steering analysis across all players."""
+        # Structure for aggregated data
+        aggregated_data = {
+            player: {
+                lag: {
+                    control: {
+                        'target_angles': [],
+                        'current_angles': [],
+                        'angle_diffs': [],
+                        'times': []
+                    } for control in ['0.0 Control Assistance', '0.2 Control Assistance', '1.0 Control Assistance']
+                } for lag in ['0 Lag', '200 Lag']
+            } for player in self.players
+        }
+        
+        # Aggregate data from all runs
+        for player in self.players:
+            for lag in ['0 Lag', '200 Lag']:
+                for control in ['0.0 Control Assistance', '0.2 Control Assistance', '1.0 Control Assistance']:
+                    start_run, end_run = self.run_mappings[player][control]
+                    for run in range(start_run, end_run + 1):
+                        try:
+                            data = self._process_player_log(self.logs_dir / player / lag / f'cardata_{run}.log')
+                            if data is not None and not data.empty:
+                                agg_data = aggregated_data[player][lag][control]
+                                agg_data['target_angles'].extend(data['target_angle'].tolist())
+                                agg_data['current_angles'].extend(data['current_angle'].tolist())
+                                agg_data['angle_diffs'].extend(data['diff'].tolist())
+                                agg_data['times'].extend(data['time'].tolist())
+                        except Exception as e:
+                            print(f"Error processing run {run} for {player} {lag} {control}: {e}")
+        
+        x_positions = {
+            '0.0 Control Assistance': 0.0,
+            '0.2 Control Assistance': 0.2,
+            '1.0 Control Assistance': 1.0
+        }
+        x_labels = ['0.0', '0.2', '1.0']
+        
+        # Find global min/max for y-axis
+        all_means = []
+        for player in self.players:
+            for lag in ['0 Lag', '200 Lag']:
+                for control in sorted(x_positions.keys()):
+                    diffs = aggregated_data[player][lag][control]['angle_diffs']
+                    if diffs:
+                        all_means.append(np.mean(np.abs(diffs)))
+        
+        y_min = min(all_means)
+        y_max = max(all_means)
+        range_pad = (y_max - y_min) * 0.1
+        y_min = max(0, y_min - range_pad)
+        y_max = y_max + range_pad
+        
+        # Plot average angle difference - vertically stacked
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 16), height_ratios=[1, 1])
+        
+        # Top subplot - 0 Lag
+        for player in self.players:
+            means = []
+            stds = []
+            x_vals = []
+            
+            for control in sorted(x_positions.keys()):
+                diffs = aggregated_data[player]['0 Lag'][control]['angle_diffs']
+                if diffs:
+                    means.append(np.mean(np.abs(diffs)))
+                    stds.append(np.std(np.abs(diffs)) / np.sqrt(len(diffs)))
+                    x_vals.append(x_positions[control])
+            
+            ax1.errorbar(x_vals, means, yerr=stds, 
+                        fmt='o', label=f'Player {player}',
+                        capsize=5, markersize=8, zorder=3)
+        
+        ax1.set_xlabel('Steering Assistance')
+        ax1.set_ylabel('Average Angle Difference (degrees)')
+        ax1.set_title('Steering Angle Difference Analysis - 0 Lag')
+        ax1.legend()
+        ax1.grid(True, alpha=0.3, zorder=1)
+        ax1.set_xticks([0.0, 0.2, 1.0])
+        ax1.set_xticklabels(x_labels)
+        ax1.set_ylim(y_min, y_max)
+        ax1.set_xlim(-0.1, 1.1)
+        
+        # Bottom subplot - 200 Lag
+        for player in self.players:
+            means = []
+            stds = []
+            x_vals = []
+            
+            for control in sorted(x_positions.keys()):
+                diffs = aggregated_data[player]['200 Lag'][control]['angle_diffs']
+                if diffs:
+                    means.append(np.mean(np.abs(diffs)))
+                    stds.append(np.std(np.abs(diffs)) / np.sqrt(len(diffs)))
+                    x_vals.append(x_positions[control])
+            
+            ax2.errorbar(x_vals, means, yerr=stds, 
+                        fmt='o', label=f'Player {player}',
+                        capsize=5, markersize=8, zorder=3)
+        
+        ax2.set_xlabel('Steering Assistance')
+        ax2.set_ylabel('Average Angle Difference (degrees)')
+        ax2.set_title('Steering Angle Difference Analysis - 200 Lag')
+        ax2.legend()
+        ax2.grid(True, alpha=0.3, zorder=1)
+        ax2.set_xticks([0.0, 0.2, 1.0])
+        ax2.set_xticklabels(x_labels)
+        ax2.set_ylim(y_min, y_max)
+        ax2.set_xlim(-0.1, 1.1)
+        
+        plt.tight_layout()
+        plt.savefig(output_dir / 'steering_angle_difference.png', dpi=300, bbox_inches='tight')
+        plt.close()
 
     def analyze_player_run(self, player, lag_condition, control_type, run_number):
         """Analyze a single player run and its corresponding bot run."""
@@ -1004,22 +1321,22 @@ class DataAnalyzer:
             scripts_dir = self.analysis_dir / 'scripts'
             print("Preserving scripts directory...")
         
-        # Create analysis directories
+        # Create player-specific directories with lag conditions
         for player in self.players:
             for lag_condition in self.lag_conditions:
-                # Create player-specific directories
                 for control_type in self.control_types:
                     if control_type != 'Bot':
                         for subdir in ['Player', 'Comparisons', 'Summary']:
                             dir_path = self.analysis_dir / 'players' / player / lag_condition / control_type / subdir
                             dir_path.mkdir(parents=True, exist_ok=True)
                             print(f"Created {subdir} directory for {player}/{lag_condition}/{control_type}")
-                            
-        # Create bot and overall analysis directories for each lag condition
-        for lag_condition in self.lag_conditions:
-            (self.analysis_dir / 'bot' / lag_condition).mkdir(parents=True, exist_ok=True)
-            (self.analysis_dir / 'overall' / lag_condition).mkdir(parents=True, exist_ok=True)
-            print(f"Created bot and overall analysis directories for {lag_condition}")
+        
+        # Create single bot and overall directories without lag condition subdirectories
+        (self.analysis_dir / 'bot').mkdir(parents=True, exist_ok=True)
+        print("Created bot analysis directory")
+        
+        (self.analysis_dir / 'overall').mkdir(parents=True, exist_ok=True)
+        print("Created overall analysis directory")
 
 def run_complete_analysis():
     """Run the complete analysis pipeline."""
@@ -1039,10 +1356,11 @@ def run_complete_analysis():
                 analyzer.analyze_player_set(player, lag_condition, control_type)
     
     print("\n3. Analyzing bot performance...")
+    # Collect all bot data together instead of separating by lag condition
+    bot_dir = analyzer.analysis_dir / 'bot'
+    all_bot_data = []
+    
     for lag_condition in ['0 Lag', '200 Lag']:
-        bot_dir = analyzer.analysis_dir / 'bot' / lag_condition
-        all_bot_data = []
-        
         for player in ['F', 'J', 'M']:
             for run in range(1, 16):
                 try:
@@ -1052,19 +1370,24 @@ def run_complete_analysis():
                         all_bot_data.append(bot_data)
                 except Exception as e:
                     print(f"Error processing bot data for {player} {lag_condition} run {run}: {e}")
-        
-        if all_bot_data:
-            analyzer._create_bot_analysis_plots(all_bot_data, bot_dir)
-            print(f"Created bot analysis plots for {lag_condition}")
+    
+    if all_bot_data:
+        analyzer._create_bot_analysis_plots(all_bot_data, bot_dir)
+        print("Created bot analysis plots")
     
     print("\n4. Creating overall analysis...")
+    # Collect all data for both lag conditions
+    all_data = {
+        'player': {player: {} for player in ['F', 'J', 'M']},
+        'bot': {player: {} for player in ['F', 'J', 'M']}
+    }
+    
     for lag_condition in ['0 Lag', '200 Lag']:
-        all_data = {
-            'player': {player: {} for player in ['F', 'J', 'M']},
-            'bot': {player: {} for player in ['F', 'J', 'M']}
-        }
-        
         for player in ['F', 'J', 'M']:
+            if lag_condition not in all_data['player'][player]:
+                all_data['player'][player][lag_condition] = {}
+                all_data['bot'][player][lag_condition] = {}
+                
             for control_type in ['1.0 Control Assistance', '0.0 Control Assistance', '0.2 Control Assistance']:
                 player_runs = []
                 bot_runs = []
@@ -1082,12 +1405,18 @@ def run_complete_analysis():
                         print(f"Error processing {player} {lag_condition} {control_type} run {run}: {e}")
                 
                 if player_runs:
-                    all_data['player'][player][control_type] = player_runs
-                    all_data['bot'][player][control_type] = bot_runs
-        
-        overall_dir = analyzer.analysis_dir / 'overall' / lag_condition
-        analyzer._create_overall_analysis_plots(all_data, overall_dir)
-        print(f"Created overall analysis plots for {lag_condition}")
+                    all_data['player'][player][lag_condition][control_type] = player_runs
+                    all_data['bot'][player][lag_condition][control_type] = bot_runs
+    
+    # Create overall analysis plots with all data
+    overall_dir = analyzer.analysis_dir / 'overall'
+    analyzer._create_overall_analysis_plots(all_data, overall_dir)
+    print("Created overall analysis plots")
+    
+    # Create the new comprehensive analyses
+    analyzer._create_comprehensive_control_analysis(all_data, overall_dir)
+    analyzer._create_comprehensive_steering_analysis(all_data, overall_dir)
+    print("Created comprehensive analysis plots")
     
     end_time = time.time()
     duration = end_time - start_time

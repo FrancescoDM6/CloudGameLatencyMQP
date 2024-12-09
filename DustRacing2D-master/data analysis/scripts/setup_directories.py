@@ -33,35 +33,41 @@ def create_directory_structure():
         scripts_dir = analysis_dir / 'scripts'
         print("Preserving scripts directory...")
     
-    # Player directories in logs
+    # Configuration settings
     player_dirs = ['F', 'J', 'M']
-    for player in player_dirs:
-        (logs_dir / player).mkdir(parents=True, exist_ok=True)
-    
-    # Analysis directory structure
     control_types = ['1.0 Control Assistance', '0.0 Control Assistance', '0.2 Control Assistance', 'Bot']
+    lag_conditions = ['0 Lag', '200 Lag']
     player_analysis_subdirs = ['Player', 'Comparisons', 'Summary']
     
-    # Create player-specific analysis directories
-    players_dir = analysis_dir / 'players'
+    # Create logs directory structure
     for player in player_dirs:
-        player_base = players_dir / player
-        for control in control_types:
-            control_dir = player_base / control
-            if control != 'Bot':  # Bot doesn't need the same subdirectories
-                for subdir in player_analysis_subdirs:
-                    (control_dir / subdir).mkdir(parents=True, exist_ok=True)
-                    print(f"Created {subdir} directory for {player}/{control}")
-            else:
-                control_dir.mkdir(parents=True, exist_ok=True)
-                print(f"Created Bot directory for {player}")
+        # Create player directory for each lag condition
+        for lag in lag_conditions:
+            (logs_dir / player / lag).mkdir(parents=True, exist_ok=True)
+    
+    # Create analysis directory structure
+    players_dir = analysis_dir / 'players'
+    
+    # Create player-specific analysis directories
+    for player in player_dirs:
+        for lag in lag_conditions:
+            for control in control_types:
+                if control != 'Bot':  # Bot doesn't need the same subdirectories
+                    for subdir in player_analysis_subdirs:
+                        dir_path = players_dir / player / lag / control / subdir
+                        dir_path.mkdir(parents=True, exist_ok=True)
+                        print(f"Created {subdir} directory for {player}/{lag}/{control}")
+                else:
+                    dir_path = players_dir / player / lag / control
+                    dir_path.mkdir(parents=True, exist_ok=True)
+                    print(f"Created Bot directory for {player}/{lag}")
     
     # Create bot analysis directory
     bot_dir = analysis_dir / 'bot'
     bot_dir.mkdir(parents=True, exist_ok=True)
     print("Created bot analysis directory")
     
-    # Create overall analysis directory
+    # Create overall analysis directory for shared analysis results
     overall_dir = analysis_dir / 'overall'
     overall_dir.mkdir(parents=True, exist_ok=True)
     print("Created overall analysis directory")
