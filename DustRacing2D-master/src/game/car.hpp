@@ -175,6 +175,8 @@ public:
 private:
     void accelerate(bool deccelerate = false);
 
+    void playerAccelerate(bool deccelerate = false, float multiplier = 0);
+
     void createChildObjects(float maxZ, size_t index);
 
     void createTires();

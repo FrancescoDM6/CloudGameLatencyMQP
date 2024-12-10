@@ -248,6 +248,37 @@ void Car::accelerate(bool deccelerate)
     physicsComponent().addForce(direction * currentForce * damageFactor());
 }
 
+void Car::playerAccelerate(bool deccelerate, float multiplier)
+{
+    const float maxForce =
+      physicsComponent().mass() * (m_desc.accelerationFriction * multiplier) * std::fabs(MCWorld::instance().gravity().k());
+    float currentForce = maxForce;
+
+    if (const float velocity = physicsComponent().velocity().length(); velocity > 0.001f)
+    {
+        currentForce = m_desc.power / velocity;
+        if (currentForce > maxForce)
+        {
+            currentForce = maxForce;
+        }
+    }
+
+    MCVector2dF direction(m_dx, m_dy);
+    if (deccelerate)
+    {
+        if (std::abs(speedInKmh()) < 25)
+        {
+            direction *= -1;
+        }
+        else
+        {
+            direction *= 0;
+        }
+    }
+
+    physicsComponent().addForce(direction * currentForce * damageFactor());
+}
+
 void Car::doTireSpinEffect()
 {
     static_pointer_cast<Tire>(m_leftRearTire)->setSpinCoeff(1.0f);
@@ -840,7 +871,11 @@ void Car::onStepTime(int step)
 
     if (m_gearbox->gear() == Gearbox::Gear::Forward && m_acceleratorEnabled)
     {
-        accelerate();
+        accelerate(false);
+    }
+    if (m_gearbox->gear() == Gearbox::Gear::Forward && m_acceleratorEnabled && isHuman() == true)
+    {
+        playerAccelerate(false, 0.02); // default is 0
     }
     else if (m_gearbox->gear() == Gearbox::Gear::Reverse && m_brakeEnabled)
     {
