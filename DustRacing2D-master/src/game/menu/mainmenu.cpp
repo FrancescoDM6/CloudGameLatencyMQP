@@ -357,11 +357,11 @@ void TrackItem2::render()
 
     renderTitle();
 
-    renderStars();
+    // renderStars();
 
     renderLock();
 
-    renderTrackProperties();
+    // renderTrackProperties();
 }
 
 MainMenu::MainMenu(MTFH::MenuManager & menuManager, Scene & scene, int width, int height)
