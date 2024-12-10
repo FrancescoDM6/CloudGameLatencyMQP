@@ -875,7 +875,7 @@ void Car::onStepTime(int step)
     }
     if (m_gearbox->gear() == Gearbox::Gear::Forward && m_acceleratorEnabled && isHuman() == true)
     {
-        playerAccelerate(false, 0.02); // default is 0
+        playerAccelerate(false, 0.012); // default is 0
     }
     else if (m_gearbox->gear() == Gearbox::Gear::Reverse && m_brakeEnabled)
     {
