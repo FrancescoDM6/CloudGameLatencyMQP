@@ -644,6 +644,126 @@ class DataAnalyzer:
         
         return win_df
     
+    def _process_collision_data(self, log_file):
+        """Process a log file to count collision events."""
+        try:
+            collision_times = set()  # Using a set to automatically handle duplicates
+            last_time = None
+            
+            with open(log_file, "r") as file:
+                for line in file:
+                    time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
+                    if time_match and 'Collision event' in line:
+                        game_time = self._convert_game_time(time_match.group(1))
+                        collision_times.add(game_time)
+                        last_time = game_time
+            
+            return {
+                'total_time': last_time,
+                'collision_count': len(collision_times)  # Using set length to count unique collision times
+            }
+            
+        except Exception as e:
+            print(f"Error processing collision data from {log_file}: {e}")
+            return None
+
+    def _calculate_collision_stats(self):
+        """Calculate collision statistics for all runs."""
+        collision_data = {
+            'player': [],
+            'condition': [],
+            'lag': [],
+            'collision_count': []
+        }
+        
+        for player in self.players:
+            for lag_condition in ['0 Lag', '200 Lag']:
+                for control_type in ['1.0 Control Assistance', '0.0 Control Assistance', '0.2 Control Assistance']:
+                    start_run, end_run = self.run_mappings[player][control_type]
+                    
+                    run_collisions = []
+                    for run in range(start_run, end_run + 1):
+                        log_file = self.logs_dir / player / lag_condition / f'logfile_{run}.log'
+                        stats = self._process_collision_data(log_file)
+                        
+                        if stats is not None:
+                            run_collisions.append(stats['collision_count'])
+                    
+                    if run_collisions:
+                        collision_data['player'].append(player)
+                        collision_data['condition'].append(control_type)
+                        collision_data['lag'].append(lag_condition)
+                        collision_data['collision_count'].append(np.mean(run_collisions))
+        
+        return pd.DataFrame(collision_data)
+
+    def _create_collision_plots(self, collision_df, output_dir):
+        """Create visualizations for collision analysis."""
+        x_positions = {
+            '0.0 Control Assistance': 0.0,
+            '0.2 Control Assistance': 0.2,
+            '1.0 Control Assistance': 1.0
+        }
+        x_labels = ['0.0', '0.2', '1.0']
+        
+        # Find global min/max for y-axis scaling
+        min_count = collision_df['collision_count'].min()
+        max_count = collision_df['collision_count'].max()
+        range_pad = (max_count - min_count) * 0.1
+        y_min = max(0, min_count - range_pad)
+        y_max = max_count + range_pad
+        
+        # Create stacked plots
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 16), height_ratios=[1, 1])
+        
+        # Top subplot - 0 Lag
+        lag_data = collision_df[collision_df['lag'] == '0 Lag']
+        for player in self.players:
+            player_data = lag_data[lag_data['player'] == player]
+            player_data = player_data.sort_values(by='condition',
+                key=lambda x: [x_positions[val] for val in x])
+            
+            x_vals = [x_positions[c] for c in player_data['condition']]
+            ax1.errorbar(x_vals, player_data['collision_count'],
+                        fmt='o', label=f'Player {player}',
+                        capsize=5, markersize=8, zorder=3)
+        
+        ax1.set_xlabel('Steering Assistance')
+        ax1.set_ylabel('Average Collisions per Run')
+        ax1.set_title('Collision Analysis - 0 Lag')
+        ax1.set_ylim(y_min, y_max)
+        ax1.set_xlim(-0.1, 1.1)
+        ax1.set_xticks([0.0, 0.2, 1.0])
+        ax1.set_xticklabels(x_labels)
+        ax1.legend()
+        ax1.grid(True, alpha=0.3, zorder=1)
+        
+        # Bottom subplot - 200 Lag
+        lag_data = collision_df[collision_df['lag'] == '200 Lag']
+        for player in self.players:
+            player_data = lag_data[lag_data['player'] == player]
+            player_data = player_data.sort_values(by='condition',
+                key=lambda x: [x_positions[val] for val in x])
+            
+            x_vals = [x_positions[c] for c in player_data['condition']]
+            ax2.errorbar(x_vals, player_data['collision_count'],
+                        fmt='o', label=f'Player {player}',
+                        capsize=5, markersize=8, zorder=3)
+        
+        ax2.set_xlabel('Steering Assistance')
+        ax2.set_ylabel('Average Collisions per Run')
+        ax2.set_title('Collision Analysis - 200 Lag')
+        ax2.set_ylim(y_min, y_max)
+        ax2.set_xlim(-0.1, 1.1)
+        ax2.set_xticks([0.0, 0.2, 1.0])
+        ax2.set_xticklabels(x_labels)
+        ax2.legend()
+        ax2.grid(True, alpha=0.3, zorder=1)
+        
+        plt.tight_layout()
+        plt.savefig(output_dir / 'collision_analysis.png', dpi=300, bbox_inches='tight')
+        plt.close()
+    
 
     def _process_off_track_data(self, log_file):
         """Process a log file to determine time spent off track."""
@@ -1019,6 +1139,10 @@ class DataAnalyzer:
         stats = df.sort_values(['player', 'condition', 'lag']).round(2)
         stats.to_csv(output_dir / 'overall_statistics.csv', index=False)
         win_df.to_csv(output_dir / 'win_percentages.csv', index=False)
+
+        collision_df = self._calculate_collision_stats()
+        self._create_collision_plots(collision_df, output_dir)
+        collision_df.to_csv(output_dir / 'collision_statistics.csv', index=False)
 
     def _create_comprehensive_control_analysis(self, all_data, output_dir):
         """Create comprehensive control input analysis across all players."""
