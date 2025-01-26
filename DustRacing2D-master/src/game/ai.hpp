@@ -21,6 +21,7 @@
 #include <memory>
 
 class Car;
+class Game;
 class Race;
 class Track;
 class TrackTile;
@@ -30,7 +31,7 @@ class AI
 {
 public:
     //! Constructor.
-    AI(Car & car, std::shared_ptr<Race> race);
+    AI(Car & car, std::shared_ptr<Race> race, Game & game);
 
     void laggedFunctionCall(std::function<void()> func, int delayMs);
 
@@ -53,6 +54,8 @@ private:
     void setRandomTolerance();
 
     Car & m_car;
+
+    Game & m_game;
 
     std::shared_ptr<Race> m_race;
 

@@ -195,7 +195,7 @@ void Scene::createCars()
         {
             if (!car->isHuman())
             {
-                m_ai.push_back(std::make_shared<AI>(*car, m_race));
+                m_ai.push_back(std::make_shared<AI>(*car, m_race, m_game));
             }
 
             car->shape()->view()->setShaderProgram(m_renderer.program("car"));

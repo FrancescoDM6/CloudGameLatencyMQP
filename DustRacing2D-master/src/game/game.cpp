@@ -23,6 +23,7 @@
 #include "eventhandler.hpp"
 #include "graphicsfactory.hpp"
 #include "inputhandler.hpp"
+#include "logmanager.hpp"
 #include "mainmenu.hpp"
 #include "renderer.hpp"
 #include "scene.hpp"
@@ -34,6 +35,7 @@
 
 #include <MCCamera>
 #include <MCWorldRenderer>
+#include <iostream>
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -192,11 +194,23 @@ void Game::parseArgs(int argc, char ** argv)
       },
       false, "Set log level to trace.");
 
+    ae.addOption(
+      { "--lag" }, [&](std::string value) {
+        LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
+                    "value: %s\n", value.c_str());
+          evlag = value;
+      },
+      false, "Force lag: 0, 100, 200, 300, 400, 500");
+
     ae.setHelpText("\nUsage: " + std::string(argv[0]) + " [OPTIONS]");
 
     ae.parse();
 
     initTranslations(m_appTranslator, m_app, lang);
+}
+
+const char* Game::getEvLag() const {
+    return evlag.c_str();
 }
 
 void Game::createRenderer()

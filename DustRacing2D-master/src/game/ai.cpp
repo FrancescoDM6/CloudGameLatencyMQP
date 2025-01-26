@@ -17,6 +17,7 @@
 #include "../common/route.hpp"
 #include "../common/tracktilebase.hpp"
 #include "car.hpp"
+#include "game.hpp"
 #include "race.hpp"
 #include "track.hpp"
 #include "trackdata.hpp"
@@ -70,8 +71,9 @@ double getFrameRate() {
     return fps;
 }
 
-AI::AI(Car & car, std::shared_ptr<Race> race)
+AI::AI(Car & car, std::shared_ptr<Race> race, Game & game)
   : m_car(car)
+  , m_game(game)
   , m_race(race)
   , m_lastDiff(0)
   , m_lastTargetNodeIndex(0)
@@ -201,8 +203,12 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     control = control > maxControl ? maxControl : control;
 
     const float maxDelta = 3.0;
-    std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle]() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(0));
+
+    const char* evlag = m_game.getEvLag();
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
+                    "evlag value: %s\n", evlag);
+    std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
     if (diff < -maxDelta)
     {
         m_car.steer(Car::Steer::Right, control);
@@ -291,8 +297,11 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         }
     }
 
-    std::thread delayedUpdate([this, brake, accelerate]() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(0));
+    const char* evlag = m_game.getEvLag();
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
+                    "evlag value: %s\n", evlag);
+    std::thread delayedUpdate([this, brake, accelerate, evlag]() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
     if (brake)
     {
         m_car.setAcceleratorEnabled(false);
