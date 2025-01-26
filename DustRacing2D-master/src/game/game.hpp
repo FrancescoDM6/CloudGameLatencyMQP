@@ -101,6 +101,8 @@ public:
 
     const char* getEvLag() const;
 
+    const char* getAssist() const;
+
     //! Get the lap count.
     int lapCount() const;
 
@@ -121,6 +123,8 @@ public:
     QScreen * screen() const;
 
     std::string evlag;
+
+    std::string assist;
 
 public slots:
 

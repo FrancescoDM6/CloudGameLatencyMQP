@@ -197,10 +197,12 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
 
     // PID-controller. This makes the computer players to turn and react faster
     // than the human player, but hey...they are stupid.
+    const char* multiplier = m_game.getAssist();
     float control = diff * 0.025f + (diff - m_lastDiff) * 0.025f;
     const float maxControl = 1.5;
     control = control < 0 ? -control : control;
     control = control > maxControl ? maxControl : control;
+    control = control * std::stof(multiplier);
 
     const float maxDelta = 3.0;
 

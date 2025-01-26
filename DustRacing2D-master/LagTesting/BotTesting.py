@@ -4,9 +4,11 @@ import os
 import subprocess
 
 # Path to the directory where the 'Makefile' is located
-directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
+# directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
+directory = "/home/Claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
 
-log_directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+# log_directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+log_directory = "/home/Claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
 
 log_folder = os.path.join(log_directory, "logs")
 log_file_path = os.path.join(log_folder, "EVLag.log")
@@ -28,7 +30,7 @@ else:
     
     # Step 3: Run 'sudo evlag' in a new terminal during './dustrac-game'
     # Open a new terminal and run the evlag command in the background
-    command_evlag = ["gnome-terminal", "--", "bash", "-c", "sudo evlag -d /dev/input/event3 -l 200; exec bash"]
+    command_evlag = ["gnome-terminal", "--", "bafsh", "-c", "sudo evlag -d /dev/input/event3 -l 200; exec bash"]
     
     # Launch the evlag command in a new terminal window
     evlag_process = subprocess.Popen(command_evlag)

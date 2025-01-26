@@ -4,9 +4,13 @@ import os
 import subprocess
 
 # Path to the directory where the 'Makefile' is located
-directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
+# directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
+directory = "/home/Claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
 
-log_directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+
+# log_directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+log_directory = "/home/Claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+
 
 log_folder = os.path.join(log_directory, "logs")
 log_file_path = os.path.join(log_folder, "EVLag.log")

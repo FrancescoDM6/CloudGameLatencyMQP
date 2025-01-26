@@ -59,7 +59,7 @@ using std::dynamic_pointer_cast;
 using std::static_pointer_cast;
 //using juzzlin::L;
 
-Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
+Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman, Game & game)
   : MCObject(surface, "car")
   , m_desc(desc)
   , m_onTrackFriction(std::make_shared<MCFrictionGenerator>(desc.rollingFrictionOnTrack, 0.0))
@@ -79,6 +79,7 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   , m_absSpeed(0)
   , m_dx(0)
   , m_dy(0)
+  , m_game(game)
   , m_isHuman(isHuman)
   , m_particleEffectManager(std::make_unique<CarParticleEffectManager>(*this))
   , m_numberPos(-5, 0, 0)
@@ -452,10 +453,12 @@ void Car::steerAssist() {
 
             // Much more aggressive control factor (0.025f -> 0.1f)
             //float control = diff * 0.025f;  // Increased from 0.025f
+            const char* multiplier = m_game.getAssist();
             float control = diff * 0.025f + (diff - m_lastDiff) * 0.025f;
             const float maxControl = 1.5;
             control = control < 0 ? -control : control;
             control = control > maxControl ? maxControl : control;
+            control = control * std::stof(multiplier);
             if (control < 0)
             {
                 control = -control;
@@ -468,8 +471,9 @@ void Car::steerAssist() {
 
             // More aggressive steering response
             const float maxDelta = 3.0f;  // Reduced threshold to steer more often
-            // std::thread delayedUpdate([this, control, diff, maxDelta, angle, cur]() {
-            // std::this_thread::sleep_for(std::chrono::milliseconds(0));
+            const char* evlag = m_game.getEvLag();
+            std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
+            std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
             if (diff < -maxDelta)
             {
                 steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
@@ -480,10 +484,10 @@ void Car::steerAssist() {
                 steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
             }
-            // });
+            });
 
             // // Detach the thread so it runs independently
-            // delayedUpdate.detach();
+            delayedUpdate.detach();
 
             m_lastDiff = diff;
             
@@ -506,8 +510,9 @@ void Car::accelerationAssist() {
 
             // The following speed limits are experimentally defined.
             float scale = 1.0f;
-            // std::thread delayedUpdate([this, absspeed, scale, &currentTile]() {
-            // std::this_thread::sleep_for(std::chrono::milliseconds(0));
+            const char* evlag = m_game.getEvLag();
+            std::thread delayedUpdate([this, absspeed, scale, &currentTile, evlag]() {
+            std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
             if (currentTile.computerHint() == TrackTile::ComputerHint::Brake)
             {
                 if (absspeed > 14.0f * scale)
@@ -548,11 +553,11 @@ void Car::accelerationAssist() {
                     setBrakeEnabled(false);
                 }
             }
-            // });
+            });
 
 
             // // Detach the thread so it runs independently
-            // delayedUpdate.detach();
+            delayedUpdate.detach();
         }
     // }
 }

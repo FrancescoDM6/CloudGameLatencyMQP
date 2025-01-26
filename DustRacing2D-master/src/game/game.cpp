@@ -196,11 +196,26 @@ void Game::parseArgs(int argc, char ** argv)
 
     ae.addOption(
       { "--lag" }, [&](std::string value) {
-        LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "value: %s\n", value.c_str());
           evlag = value;
       },
       false, "Force lag: 0, 100, 200, 300, 400, 500");
+
+    ae.addOption(
+    { "--lagassist" }, [&](std::string value) {
+        // Split the value into lagvalue and assistvalue
+        size_t separator = value.find(':');
+        if (separator != std::string::npos) {
+            std::string lagvalue = value.substr(0, separator);
+            std::string assistvalue = value.substr(separator + 1);
+
+            evlag = lagvalue.c_str();
+            assist = assistvalue.c_str();
+        } else {
+            // Handle error: invalid format
+            std::cerr << "Invalid format for --lagassist. Use lagvalue:assistvalue." << std::endl;
+        }
+    },
+    false, "Force lag and assist in format lagvalue:assistvalue");
 
     ae.setHelpText("\nUsage: " + std::string(argv[0]) + " [OPTIONS]");
 
@@ -211,6 +226,10 @@ void Game::parseArgs(int argc, char ** argv)
 
 const char* Game::getEvLag() const {
     return evlag.c_str();
+}
+
+const char* Game::getAssist() const {
+    return assist.c_str();
 }
 
 void Game::createRenderer()

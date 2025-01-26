@@ -26,6 +26,7 @@
 
 class CarParticleEffectManager;
 class CarSoundEffectManager;
+class Game;
 class Gearbox;
 class MCSurface;
 class MCFrictionGenerator;
@@ -69,7 +70,7 @@ public:
     };
 
     //! Constructor.
-    Car(Description & desc, std::shared_ptr<MCSurface> surface, size_t index, bool isHuman);
+    Car(Description & desc, std::shared_ptr<MCSurface> surface, size_t index, bool isHuman, Game & game);
 
     //! Destructor.
     virtual ~Car() override;
@@ -202,6 +203,8 @@ private:
     bool m_leftSideOffTrack;
 
     bool m_rightSideOffTrack;
+
+    Game & m_game;
 
     bool m_skidding;
 
