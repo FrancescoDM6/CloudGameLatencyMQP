@@ -6,10 +6,10 @@ import subprocess
 
 # Path to the directory where the 'Makefile' is located
 # directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
-directory = "/home/Claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
+directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
 
 # log_directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
-log_directory = "/home/Claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+log_directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
 
 log_folder = os.path.join(log_directory, "logs")
 log_file_path = os.path.join(log_folder, "EVLag.log")
@@ -102,7 +102,7 @@ print(result_make.stdout)
 #             # Now run the game in the current terminal
 #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
 
-def load_test_cases(config_file='test_cases.json'):
+def load_test_cases(config_file='/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json'):
     with open(config_file) as f:
         return json.load(f)
 
