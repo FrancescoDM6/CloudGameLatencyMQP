@@ -25,46 +25,80 @@ print(result_make.stdout)
 if result_make.returncode != 0:
     print(f"Error running 'make': {result_make.stderr}")
 else:
-    # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-    command_game = ["./dustrac-game"]
+    for i in range(1300):
+        if i <= 100:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 0:1"]
     
-    # Step 3: Run 'sudo evlag' in a new terminal during './dustrac-game'
-    # Open a new terminal and run the evlag command in the background
-    command_evlag = ["gnome-terminal", "--", "bafsh", "-c", "sudo evlag -d /dev/input/event3 -l 200; exec bash"]
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 200:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 100:1"]
     
-    # Launch the evlag command in a new terminal window
-    evlag_process = subprocess.Popen(command_evlag)
-    # subprocess.Popen(command_evlag)
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 300:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 200:1"]
     
-    # Now run the game in the current terminal
-    result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
 
-    # Output the result of running './dustrac-game'
-    print("Output from './dustrac-game':")
-    print(result_game.stdout)
+        if i <= 400:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 300:1"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
 
-    # Handle errors from running './dustrac-game'
-    if result_game.returncode != 0:
-        print(f"Error running './dustrac-game': {result_game.stderr}")
-    else:
-        # Step 4: Log the evlag status to the existing log file (EVLag.log)
-        # Example: 'evlag -d /dev/input/event3 -l 500' -> '500' is the number to log
-        # Given     command_evlag = ["gnome-terminal", "--", "bash", "-c", "sudo evlag -d /dev/input/event3 -l 200; exec bash"], how can I set evlag_number to the number given?
-        evlag_number = 200  # You can set this dynamically if needed based on the command or output
+        if i <= 500:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 0:.5"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 600:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 100:.5"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 700:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 200:.5"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 800:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 300:.5"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 900:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 0:1.5"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 1000:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 100:1.5"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 1100:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 200:1.5"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+        if i <= 1200:
+            # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+            command_game = ["./dustrac-game --lagassist 300:1.5"]
+    
+            # Now run the game in the current terminal
+            result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
 
-        # Prepare the log message
-        log_message = f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - EVLag was ON with number: {evlag_number}\n"
-
-        # Check if the logs folder exists, if not, create it
-        if not os.path.exists(log_folder):
-            os.makedirs(log_folder)
-    if evlag_process.poll() is None:  # Check if evlag process is still running
-        print("Stopping EVlag...")
-        evlag_process.terminate()  # Terminate the evlag process
-        evlag_process.wait()  # Wait for the evlag process to fully terminate
-        print("EVlag stopped.")
-        # Open the log file and append the log message
-        with open(log_file_path, "a") as log_file:
-            log_file.write(log_message)
-
-        print(f"Logged EVLag status to {log_file_path}")
+            
