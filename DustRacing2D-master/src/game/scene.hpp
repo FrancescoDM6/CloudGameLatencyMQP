@@ -23,6 +23,7 @@
 #include "timingoverlay.hpp"
 
 #include <MCCamera>
+#include <QPointF>
 #include <QObject>
 #include <QString>
 #include <memory>

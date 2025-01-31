@@ -375,7 +375,7 @@ void Race::update()
     {
         emit finished();
         m_isfinishedSignalSent = true;
-        m_game.exitGame()
+        m_game.exitGame();
     }
 
     m_timing.tick();
