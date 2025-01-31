@@ -123,6 +123,7 @@ def run_test_case(test_case, directory):
         time.sleep(5)
         keyboard.press(Key.enter)
         keyboard.release(Key.enter)
+        result_game.terminate()
         # return result_game
 
 def main():
