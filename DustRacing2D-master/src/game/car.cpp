@@ -509,7 +509,7 @@ void Car::accelerationAssist() {
             TrackTile& currentTile = *m_track->trackTileAtLocation(location().i(), location().j());
 
             // The following speed limits are experimentally defined.
-            float scale = 1.0f;
+            float scale = 0.9f;
             const char* evlag = m_game.getEvLag();
             std::thread delayedUpdate([this, absspeed, scale, &currentTile, evlag]() {
             std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
@@ -523,7 +523,7 @@ void Car::accelerationAssist() {
 
             if (currentTile.computerHint() == TrackTile::ComputerHint::BrakeHard)
             {
-                if (absspeed > 10.5f * scale) // default 9.5f
+                if (absspeed > 9.5f * scale) // default 9.5f
                 {
                     setBrakeEnabled(true);
                 }

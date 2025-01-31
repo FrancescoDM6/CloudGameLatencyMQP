@@ -376,7 +376,8 @@ void Scene::processUserInput(InputHandler & handler)
         }
 
         // Uncomment to enable acceleration assistance
-        if (m_press % 2 == 0) {
+        // Change to 0 to get back to default settings
+        if (m_press % 2 == 1) {
             // Handle accelerating / braking
             if (n_press % 2 != 0) {
                 if (tickCount % 10 != 0) {

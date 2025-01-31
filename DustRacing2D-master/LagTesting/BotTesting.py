@@ -3,6 +3,10 @@ import datetime
 import json
 import os
 import subprocess
+from pynput.keyboard import Controller, Key
+import time
+
+keyboard = Controller()
 
 # Path to the directory where the 'Makefile' is located
 # directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
@@ -111,8 +115,15 @@ def run_test_case(test_case, directory):
         "./dustrac-game",
         "--lagassist", f"{test_case['lag']}:{test_case['steering_assist']}"
     ]
-    result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-    return result_game
+    result_game = None
+
+    if result_game is None or result_game.poll() is not None:
+        result_game == subprocess.Popen(command_game, cwd=directory)
+    # while result_game == subprocess.Popen(command_game, cwd=directory):
+        time.sleep(5)
+        keyboard.press(Key.enter)
+        keyboard.release(Key.enter)
+        # return result_game
 
 def main():
     if result_make.returncode == 0:
