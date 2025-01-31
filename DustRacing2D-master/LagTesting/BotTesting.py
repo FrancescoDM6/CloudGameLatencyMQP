@@ -128,7 +128,7 @@ def run_test_case(test_case, directory):
         keyboard.release(Key.enter)
         
         # Wait for game to complete
-        time.sleep(10)  # Adjust based on test duration
+        time.sleep(60)  # Adjust based on test duration
         
         # Properly terminate the process
         result_game.terminate()
@@ -148,10 +148,6 @@ def main():
             print(f"Running test case: {test_case['name']}")
             result = run_test_case(test_case, directory)
             
-            if result.returncode != 0:
-                print(f"Error running test case: {result.stderr}")
-            else:
-                print(f"Test case completed successfully")
 
 if __name__ == "__main__":
     main()
