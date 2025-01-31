@@ -115,16 +115,30 @@ def run_test_case(test_case, directory):
         "./dustrac-game",
         "--lagassist", f"{test_case['lag']}:{test_case['steering_assist']}"
     ]
-    result_game = None
-
-    if result_game is None or result_game.poll() is not None:
-        result_game == subprocess.Popen(command_game, cwd=directory)
-    # while result_game == subprocess.Popen(command_game, cwd=directory):
+    
+    try:
+        # Start the game process
+        result_game = subprocess.Popen(command_game, cwd=directory)
+        
+        # Wait for game to initialize
         time.sleep(5)
+        
+        # Send enter key
         keyboard.press(Key.enter)
         keyboard.release(Key.enter)
+        
+        # Wait for game to complete
+        time.sleep(10)  # Adjust based on test duration
+        
+        # Properly terminate the process
         result_game.terminate()
-        # return result_game
+        result_game.wait(timeout=5)  # Wait for process to exit
+        
+    except Exception as e:
+        print(f"Error running test case: {str(e)}")
+        if 'result_game' in locals():
+            result_game.terminate()
+        raise
 
 def main():
     if result_make.returncode == 0:
