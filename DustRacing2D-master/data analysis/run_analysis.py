@@ -492,33 +492,217 @@ class DataAnalyzer:
         ]).round(2)
         stats.to_csv(output_dir / 'overall_statistics.csv')
 
+
+class BotAnalyzer:
+    """Class for analyzing bot vs bot runs."""
+    def __init__(self, base_dir='DustRacing2D-master'):
+        self.base_dir = Path(base_dir)
+        self.logs_dir = self.base_dir / 'logs'
+        self.analysis_dir = self.base_dir / 'data analysis' / 'bot_vs_bot'
+
+    def setup_directories(self):
+        """Create all necessary directories for bot vs bot analysis."""
+        print("\nSetting up bot vs bot directory structure...")
+        
+        # Create bot vs bot analysis directories
+        self.analysis_dir.mkdir(parents=True, exist_ok=True)
+        print(f"Created bot vs bot analysis directory at {self.analysis_dir}")
+
+    def analyze_bot_run(self, run_number):
+        """Analyze a single bot vs bot run."""
+        print(f"\nAnalyzing bot vs bot run #{run_number}")
+        
+        bot1_log = self.logs_dir / f'cardata_{run_number}.log'  # Bot 1
+        bot2_log = self.logs_dir / f'botdata_{run_number}.log'  # Bot 2
+        
+        try:
+            bot1_data = self._process_bot_log(bot1_log)
+            bot2_data = self._process_bot_log(bot2_log)
+            
+            # Save individual plots
+            output_dir = self.analysis_dir / f'run_{run_number}'
+            output_dir.mkdir(parents=True, exist_ok=True)
+            self._create_bot_comparison_plots(bot1_data, bot2_data, output_dir, run_number)
+            
+            return bot1_data, bot2_data
+            
+        except Exception as e:
+            print(f"Error processing run: {e}")
+            return None, None
+
+    def analyze_bot_performance(self, num_runs):
+        """Analyze all bot vs bot runs."""
+        print("\nAnalyzing overall bot vs bot performance")
+        all_bot1_data = []
+        all_bot2_data = []
+        
+        for run in range(1, num_runs + 1):
+            try:
+                bot1_data, bot2_data = self.analyze_bot_run(run)
+                if bot1_data is not None and bot2_data is not None:
+                    all_bot1_data.append(bot1_data)
+                    all_bot2_data.append(bot2_data)
+            except Exception as e:
+                print(f"Error processing bot vs bot run {run}: {e}")
+        
+        if all_bot1_data and all_bot2_data:
+            self._create_bot_summary_plots(all_bot1_data, all_bot2_data)
+            print("Created bot vs bot analysis plots")
+
+    def _process_bot_log(self, log_file):
+        """Process a bot log file and extract relevant data."""
+        data = {
+            'time': [],
+            'target_angle': [],
+            'current_angle': [],
+            'diff': [],
+            'control': [],
+            'car_x': [],
+            'car_y': [],
+            'target_x': [],
+            'target_y': []
+        }
+        
+        with open(log_file, 'r') as f:
+            for line in f:
+                # Extract game time
+                time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
+                if time_match:
+                    current_time = self._convert_game_time(time_match.group(1))
+                    data['time'].append(current_time)
+                
+                # Extract angles and control
+                if 'Continuous angles:' in line:
+                    angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
+                    if angles_match:
+                        data['target_angle'].append(float(angles_match.group(1)))
+                        data['current_angle'].append(float(angles_match.group(2)))
+                
+                if 'steerControl: angle=' in line:
+                    control_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                    if control_match:
+                        data['diff'].append(float(control_match.group(1)))
+                        data['control'].append(float(control_match.group(2)))
+                
+                # Extract position data
+                if 'targetNode X:' in line:
+                    x_match = re.search(r'targetNode X:\s*([\d\.-]+)', line)
+                    if x_match:
+                        data['target_x'].append(float(x_match.group(1)))
+                
+                if 'targetNode Y:' in line:
+                    y_match = re.search(r'targetNode Y:\s*([\d\.-]+)', line)
+                    if y_match:
+                        data['target_y'].append(float(y_match.group(1)))
+                
+                if 'car Location i:' in line:
+                    i_match = re.search(r'car Location i:\s*([\d\.-]+)', line)
+                    if i_match:
+                        data['car_x'].append(float(i_match.group(1)))
+                
+                if 'car Location j:' in line:
+                    j_match = re.search(r'car Location j:\s*([\d\.-]+)', line)
+                    if j_match:
+                        data['car_y'].append(float(j_match.group(1)))
+                    
+        return pd.DataFrame(data)
+
+    def _convert_game_time(self, time_str):
+        """Convert game time string (MM:SS.ms) to seconds."""
+        minutes, seconds = time_str.split(':')
+        return float(minutes) * 60 + float(seconds)
+
+    def _create_bot_comparison_plots(self, bot1_data, bot2_data, output_dir, run_number):
+        """Create comparison plots for a bot vs bot run."""
+        if bot1_data is None or bot2_data is None:
+            return
+            
+        # Plot 1: Control comparison
+        plt.figure(figsize=(12, 6))
+        plt.plot(bot1_data['time'], bot1_data['control'], label='Bot 1 (cardata)')
+        plt.plot(bot2_data['time'], bot2_data['control'], label='Bot 2 (botdata)')
+        plt.title(f'Control Comparison - Run {run_number}')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Control Value')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / f'control_comparison.png')
+        plt.close()
+
+        # Plot 2: Path deviation comparison
+        bot1_deviation = np.sqrt((bot1_data['car_x'] - bot1_data['target_x'])**2 + 
+                                (bot1_data['car_y'] - bot1_data['target_y'])**2)
+        bot2_deviation = np.sqrt((bot2_data['car_x'] - bot2_data['target_x'])**2 + 
+                                (bot2_data['car_y'] - bot2_data['target_y'])**2)
+        
+        plt.figure(figsize=(12, 6))
+        plt.plot(bot1_data['time'], bot1_deviation, label='Bot 1 (cardata)')
+        plt.plot(bot2_data['time'], bot2_deviation, label='Bot 2 (botdata)')
+        plt.title(f'Path Deviation Comparison - Run {run_number}')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Deviation (units)')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / f'deviation_comparison.png')
+        plt.close()
+
+    def _create_bot_summary_plots(self, all_bot1_data, all_bot2_data):
+        """Create summary plots for all bot vs bot runs."""
+        # Calculate average control values for each run
+        bot1_avg_control = [data['control'].mean() for data in all_bot1_data]
+        bot2_avg_control = [data['control'].mean() for data in all_bot2_data]
+        
+        # Plot average control comparison
+        plt.figure(figsize=(10, 6))
+        runs = range(1, len(all_bot1_data) + 1)
+        plt.plot(runs, bot1_avg_control, 'bo-', label='Bot 1 (cardata)')
+        plt.plot(runs, bot2_avg_control, 'ro-', label='Bot 2 (botdata)')
+        plt.title('Average Control Input by Run')
+        plt.xlabel('Run Number')
+        plt.ylabel('Average Control Value')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(self.analysis_dir / 'average_control_summary.png')
+        plt.close()
+
+        # Save summary statistics to CSV
+        summary_stats = pd.DataFrame({
+            'Run': runs,
+            'Bot1_Avg_Control': bot1_avg_control,
+            'Bot2_Avg_Control': bot2_avg_control
+        })
+        summary_stats.to_csv(self.analysis_dir / 'summary_statistics.csv', index=False)
+
 def run_complete_analysis():
     """Run the complete analysis pipeline."""
     start_time = time.time()
     
-    print("=== Starting Complete Analysis ===")
+    print("=== Starting Analysis ===")
     
-    analyzer = DataAnalyzer()
+    # Comment out player-focused analysis
+    # analyzer = DataAnalyzer()
+    # print("\n1. Setting up directory structure...")
+    # analyzer.setup_directories()
     
-    print("\n1. Setting up directory structure...")
-    analyzer.setup_directories()
+    # print("\n2. Analyzing individual player runs...")
+    # for player in ['F', 'J', 'M']:
+    #     for control_type in ['Full AI', 'Full Player', 'Mixed']:
+    #         analyzer.analyze_player_set(player, control_type)
     
-    print("\n2. Analyzing individual player runs...")
-    for player in ['F', 'J', 'M']:
-        for control_type in ['Full AI', 'Full Player', 'Mixed']:
-            analyzer.analyze_player_set(player, control_type)
+    # Focus on bot vs bot analysis
+    bot_analyzer = BotAnalyzer()
+    print("\n1. Setting up bot vs bot directory structure...")
+    bot_analyzer.setup_directories()
     
-    print("\n3. Analyzing bot performance...")
-    analyzer.analyze_bot_performance()
-    
-    print("\n4. Creating overall analysis...")
-    analyzer.create_overall_analysis()
+    print("\n2. Analyzing bot performance...")
+    bot_analyzer.analyze_bot_performance(num_runs=5)  # Analyze 5 runs (adjust as needed)
     
     end_time = time.time()
     duration = end_time - start_time
     
     print("\n=== Analysis Complete ===")
     print(f"Total processing time: {duration:.2f} seconds")
+
 
 if __name__ == "__main__":
     try:
