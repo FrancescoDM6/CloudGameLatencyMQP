@@ -210,7 +210,7 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "evlag value: %s\n", evlag);
     std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+    std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (diff < -maxDelta)
     {
         m_car.steer(Car::Steer::Right, control);
@@ -303,7 +303,7 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "evlag value: %s\n", evlag);
     std::thread delayedUpdate([this, brake, accelerate, evlag]() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+    std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (brake)
     {
         m_car.setAcceleratorEnabled(false);
