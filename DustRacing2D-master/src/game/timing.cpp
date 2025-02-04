@@ -14,6 +14,7 @@
 // along with Dust Racing 2D. If not, see <http://www.gnu.org/licenses/>.
 
 #include "timing.hpp"
+#include "logmanager.hpp"
 #include "car.hpp"
 
 #include "simple_logger.hpp"
@@ -78,12 +79,18 @@ void Timing::setRaceCompleted(size_t index, bool state, bool isHuman)
 
     if (isHuman)
     {
+        LogManager::getInstance().writeLog(LogManager::LogType::LAP_TIME, "Player finish time: %f\n", times.raceTime);
+
         if (times.raceTime < m_raceRecord || m_raceRecord == -1)
         {
             m_raceRecord = times.raceTime;
 
             emit raceRecordAchieved(m_raceRecord);
         }
+    }
+
+    if (!isHuman) {
+        LogManager::getInstance().writeLog(LogManager::LogType::LAP_TIME, "Bot finish time: %f\n", times.raceTime);
     }
 }
 
