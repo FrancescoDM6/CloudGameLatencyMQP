@@ -207,8 +207,6 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     const float maxDelta = 3.0;
 
     const char* evlag = m_game.getEvLag();
-    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "evlag value: %s\n", evlag);
     std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
     std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (diff < -maxDelta)

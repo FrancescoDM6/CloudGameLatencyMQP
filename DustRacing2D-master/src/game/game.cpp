@@ -23,7 +23,6 @@
 #include "eventhandler.hpp"
 #include "graphicsfactory.hpp"
 #include "inputhandler.hpp"
-#include "logmanager.hpp"
 #include "mainmenu.hpp"
 #include "renderer.hpp"
 #include "scene.hpp"
