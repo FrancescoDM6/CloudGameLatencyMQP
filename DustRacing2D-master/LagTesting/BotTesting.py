@@ -124,7 +124,7 @@ def generate_expanded_test_cases():
     expanded_test_cases = []
     
     for test_case in base_test_cases:
-        for lag in range(0):  # 0 to 300ms in 10ms increments
+        for lag in range(0, 10, 10):  # 0 to 300ms in 10ms increments
             expanded_test_case = test_case.copy()
             expanded_test_case['lag'] = lag
             expanded_test_case['name'] = f"{test_case['name']} - {lag}ms lag"

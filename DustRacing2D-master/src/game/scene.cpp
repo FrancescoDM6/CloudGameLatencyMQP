@@ -83,7 +83,6 @@ int Scene::m_height = 768;
 int tickCount = 0;
 int m_press = 0;
 int n_press = 0;
-int n_press = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
 
