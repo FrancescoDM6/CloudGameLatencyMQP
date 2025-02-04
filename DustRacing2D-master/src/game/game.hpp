@@ -17,6 +17,7 @@
 #define GAME_HPP
 
 #include <QObject>
+#include <QString>
 #include <QTime>
 #include <QTimer>
 #include <QTranslator>
@@ -98,6 +99,10 @@ public:
     //! Set the lap count.
     void setLapCount(int lapCount);
 
+    const char* getEvLag() const;
+
+    const char* getAssist() const;
+
     //! Get the lap count.
     int lapCount() const;
 
@@ -116,6 +121,10 @@ public:
     const std::string & fontName() const;
 
     QScreen * screen() const;
+
+    std::string evlag;
+
+    std::string assist;
 
 public slots:
 

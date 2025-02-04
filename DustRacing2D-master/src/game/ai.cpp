@@ -17,6 +17,7 @@
 #include "../common/route.hpp"
 #include "../common/tracktilebase.hpp"
 #include "car.hpp"
+#include "game.hpp"
 #include "race.hpp"
 #include "track.hpp"
 #include "trackdata.hpp"
@@ -32,6 +33,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <thread>
 #include <thread>
 
 std::string getCurrentTime() {
@@ -70,8 +72,9 @@ double getFrameRate() {
     return fps;
 }
 
-AI::AI(Car & car, std::shared_ptr<Race> race)
+AI::AI(Car & car, std::shared_ptr<Race> race, Game & game)
   : m_car(car)
+  , m_game(game)
   , m_race(race)
   , m_lastDiff(0)
   , m_lastTargetNodeIndex(0)
@@ -83,29 +86,28 @@ Car & AI::car() const
     return m_car;
 }
 
-// Alternative approach using a wrapper function
+void AI::laggedFunctionCall(std::function<void()> func, int delayMs) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+    func();
+}
+
 void AI::update(bool isRaceCompleted)
 {
-    // Create a thread to run the update with delay
-    // std::thread delayedUpdate([this, isRaceCompleted]() {
-    //     std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        
-        // Original update logic
-        if (m_track)
+    if (m_track)
+    {
+        if (m_lastTargetNodeIndex != m_race->getCurrentTargetNodeIndex(m_car))
         {
-            if (m_lastTargetNodeIndex != m_race->getCurrentTargetNodeIndex(m_car))
-            {
-                setRandomTolerance();
-            }
-            const Route & route = m_track->trackData().route();
-            steerControl(route.get(m_race->getCurrentTargetNodeIndex(m_car)));
-            speedControl(*m_track->trackTileAtLocation(m_car.location().i(), m_car.location().j()), isRaceCompleted);
-            m_lastTargetNodeIndex = m_race->getCurrentTargetNodeIndex(m_car);
+            setRandomTolerance();
         }
-    // });
 
-    // Detach the thread so it runs independently
-    // delayedUpdate.detach();
+        const Route & route = m_track->trackData().route();
+
+        steerControl(route.get(m_race->getCurrentTargetNodeIndex(m_car)));
+
+        speedControl(*m_track->trackTileAtLocation(m_car.location().i(), m_car.location().j()), isRaceCompleted);
+
+        m_lastTargetNodeIndex = m_race->getCurrentTargetNodeIndex(m_car);
+    }
 }
 
 void AI::setRandomTolerance()
@@ -199,12 +201,18 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
 
     // PID-controller. This makes the computer players to turn and react faster
     // than the human player, but hey...they are stupid.
+    const char* multiplier = m_game.getAssist();
     float control = diff * 0.025f + (diff - m_lastDiff) * 0.025f;
     const float maxControl = 1.5;
     control = control < 0 ? -control : control;
     control = control > maxControl ? maxControl : control;
+    control = control * std::stof(multiplier);
 
     const float maxDelta = 3.0;
+
+    const char* evlag = m_game.getEvLag();
+    std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (diff < -maxDelta)
     {
         m_car.steer(Car::Steer::Right, control);
@@ -223,11 +231,11 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
+    });
 
-    // });
 
-    // Detach the thread so it runs independently
-    // delayedUpdate.detach();
+   // Detach the thread so it runs independently
+   delayedUpdate.detach();
 }
 
 void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
@@ -296,6 +304,11 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         }
     }
 
+    const char* evlag = m_game.getEvLag();
+    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
+                    "evlag value: %s\n", evlag);
+    std::thread delayedUpdate([this, brake, accelerate, evlag]() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (brake)
     {
         m_car.setAcceleratorEnabled(false);
@@ -311,10 +324,11 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         m_car.setAcceleratorEnabled(false);
         m_car.setBrakeEnabled(false);
     }
-    // });
+    });
 
-    // Detach the thread so it runs independently
-    // delayedUpdate.detach();
+
+   // Detach the thread so it runs independently
+   delayedUpdate.detach();
 }
 
 void AI::setTrack(std::shared_ptr<Track> track)

@@ -41,6 +41,7 @@
 #include "track.hpp"
 #include "trackdata.hpp"
 #include "trackobject.hpp"
+#include "trackselectionmenu.hpp"
 #include "tracktile.hpp"
 
 #include "../common/config.hpp"
@@ -65,6 +66,7 @@
 
 #include <MCWorld>
 #include <MCWorldRenderer>
+#include <thread>
 
 #include <QApplication>
 #include <QObject>
@@ -80,6 +82,7 @@ int Scene::m_width = 1024;
 int Scene::m_height = 768;
 int tickCount = 0;
 int m_press = 0;
+int n_press = 0;
 int n_press = 0;
 
 static const float METERS_PER_UNIT = 0.05f;
@@ -122,6 +125,7 @@ void Scene::connectComponents()
 
     connect(m_race.get(), &Race::finished, &m_stateMachine, &StateMachine::finishRace);
     connect(m_race.get(), &Race::messageRequested, m_messageOverlay.get(), static_cast<void (MessageOverlay::*)(QString)>(&MessageOverlay::addMessage));
+    connect(this, &Scene::messageRequested, m_messageOverlay.get(), static_cast<void (MessageOverlay::*)(QString)>(&MessageOverlay::addMessage));
 
     connect(m_startlights.get(), &Startlights::messageRequested, m_messageOverlay.get(), static_cast<void (MessageOverlay::*)(QString)>(&MessageOverlay::addMessage));
     connect(this, &Scene::listenerLocationChanged, &m_game.audioWorker(), &AudioWorker::setListenerLocation);
@@ -192,7 +196,7 @@ void Scene::createCars()
         {
             if (!car->isHuman())
             {
-                m_ai.push_back(std::make_shared<AI>(*car, m_race));
+                m_ai.push_back(std::make_shared<AI>(*car, m_race, m_game));
             }
 
             car->shape()->view()->setShaderProgram(m_renderer.program("car"));
@@ -260,6 +264,15 @@ void Scene::createMenus()
 
     m_menuManager->addMenu(m_mainMenu);
     m_menuManager->enterMenu(m_mainMenu);
+
+    // m_menuManager.reset(new MTFH::MenuManager);
+
+    // m_trackMenu = std::make_shared<TrackSelectionMenu>(*m_menuManager, *this, width(), height());
+    // connect(
+    //   std::static_pointer_cast<TrackSelectionMenu>(m_trackMenu).get(), /*TrackSelectionMenu::exitGameRequested,*/ &m_game, &Game::exitGame);
+
+    // m_menuManager->addMenu(m_trackMenu);
+    // m_menuManager->enterMenu(m_trackMenu);
 }
 
 void Scene::updateFrame(InputHandler & handler, int step)
@@ -347,57 +360,86 @@ void Scene::processUserInput(InputHandler & handler)
     for (size_t i = 0; i < (m_game.hasTwoHumanPlayers() ? 2 : 1); i++)
     {
         if (handler.getActionState(i, InputHandler::Action::M)) {
-            m_press++;
+            m_press = 1;
             n_press = 0;
+            // emit messageRequested(QObject::tr("m_press active"));
         }
 
         if (handler.getActionState(i, InputHandler::Action::N)) {
-            n_press++;
+            n_press = 1;
+            m_press = 0;
+            // emit messageRequested(QObject::tr("n_press active"));
+        }
+
+        if (handler.getActionState(i, InputHandler::Action::P)) {
+            n_press = 0;
             m_press = 0;
         }
 
-        // Handle accelerating / braking
-        if (handler.getActionState(i, InputHandler::Action::Down))
-        {
-            if (!m_race->timing().raceCompleted(i))
-            {
-                m_cars.at(i)->setBrakeEnabled(true);
-            }
-        }
-        else
-        {
-            m_cars.at(i)->setBrakeEnabled(false);
-        }
+        // Uncomment to enable acceleration assistance
+        // Change to 0 to get back to default settings
+        if (m_press % 2 == 1) {
+            // Handle accelerating / braking
+            if (n_press % 2 != 0) {
+                if (tickCount % 10 != 0) {
+                    if (handler.getActionState(i, InputHandler::Action::Down))
+                    {
+                        if (!m_race->timing().raceCompleted(i))
+                        {
+                            m_cars.at(i)->setBrakeEnabled(true);
+                        }
+                    }
+                    else
+                    {
+                        m_cars.at(i)->setBrakeEnabled(false);
+                    }
 
-        if (handler.getActionState(i, InputHandler::Action::Up))
-        {
-            if (!m_race->timing().raceCompleted(i))
-            {
-                m_cars.at(i)->setAcceleratorEnabled(true);
+                    if (handler.getActionState(i, InputHandler::Action::Up))
+                    {
+                        if (!m_race->timing().raceCompleted(i))
+                        {
+                            m_cars.at(i)->setAcceleratorEnabled(true);
+                        }
+                    }
+                    else
+                    {
+                        m_cars.at(i)->setAcceleratorEnabled(false);
+                    }
+                }
+                // Assistance active
+                else {
+                    m_cars.at(i)->accelerationAssist();
+                }
             }
-        }
-        else
-        {
-            m_cars.at(i)->setAcceleratorEnabled(false);
-        }
+            else {
+                if (handler.getActionState(i, InputHandler::Action::Down))
+                {
+                    if (!m_race->timing().raceCompleted(i))
+                    {
+                        m_cars.at(i)->setBrakeEnabled(true);
+                    }
+                }
+                else
+                {
+                    m_cars.at(i)->setBrakeEnabled(false);
+                }
 
-        // Comment out/ Uncomment if you want manual steering
-        if (m_press % 2 == 0 && n_press % 2 == 0) {
-            if (handler.getActionState(i, InputHandler::Action::Left))
-            {
-                m_cars.at(i)->steer(Car::Steer::Left);
+                if (handler.getActionState(i, InputHandler::Action::Up))
+                {
+                    if (!m_race->timing().raceCompleted(i))
+                    {
+                        m_cars.at(i)->setAcceleratorEnabled(true);
+                        // emit messageRequested(QObject::tr("BUTTON PRESSED!!!"));
+                    }
+                }
+                else
+                {
+                    m_cars.at(i)->setAcceleratorEnabled(false);
+                }
             }
-            else if (handler.getActionState(i, InputHandler::Action::Right))
-            {
-                m_cars.at(i)->steer(Car::Steer::Right);
-            }
-            else
-            {
-                m_cars.at(i)->steer(Car::Steer::Neutral);
-            }
-        }
 
-        if (m_press % 2 == 0 && n_press % 2 != 0 ) {
+        // Uncomment to enable steering assist
+        if (n_press % 2 != 0) {
             if (m_cars.at(i)->isOffTrack() && tickCount % 5 == 0)
             {
 
@@ -416,10 +458,7 @@ void Scene::processUserInput(InputHandler & handler)
                 }
             }
 
-            // if (/*!m_cars.at(i)->isOffTrack() || */tickCount % 2 == 0 || tickCount % 3 == 0
-            // || tickCount % 4 == 0 || tickCount % 5 == 0 || tickCount % 6 == 0
-            // || tickCount % 7 == 0 || tickCount % 8 == 0 || tickCount % 9 == 0)
-            if(!m_cars.at(i)->isOffTrack() && tickCount % 10 != 0)
+            if(!m_cars.at(i)->isOffTrack() && tickCount % 5 != 0)
             {
 
                 // Handle turning
@@ -436,8 +475,32 @@ void Scene::processUserInput(InputHandler & handler)
                     m_cars.at(i)->steer(Car::Steer::Neutral);
                 }
             }
+            // Assistance active
+            else {
+                m_cars.at(i)->steerAssist();
+            }
         }
+        else {
+            // Handle turning
+            if (handler.getActionState(i, InputHandler::Action::Left))
+            {
+                m_cars.at(i)->steer(Car::Steer::Left);
+            }
+            else if (handler.getActionState(i, InputHandler::Action::Right))
+            {
+                m_cars.at(i)->steer(Car::Steer::Right);
+            }
+            else
+            {
+                m_cars.at(i)->steer(Car::Steer::Neutral);
+            }
+        }    
     }
+    else {
+        m_cars.at(i)->steerAssist();
+        m_cars.at(i)->accelerationAssist();
+    }
+}
 }
 
 void Scene::updateAi()
@@ -643,6 +706,11 @@ std::shared_ptr<Track> Scene::activeTrack() const
 MTFH::MenuPtr Scene::trackSelectionMenu() const
 {
     return m_menuManager->getMenuById("trackSelection");
+}
+
+MTFH::MenuPtr Scene::mainMenu() const
+{
+    return m_menuManager->getMenuById("main");
 }
 
 void Scene::getSplitPositions(MCGLScene::SplitType & p0, MCGLScene::SplitType & p1)

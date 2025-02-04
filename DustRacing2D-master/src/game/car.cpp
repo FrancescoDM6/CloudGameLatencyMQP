@@ -44,6 +44,7 @@
 #include <cmath>
 #include <memory>
 #include <string>
+#include <thread>
 
 #include "../common/route.hpp"
 #include "../common/tracktilebase.hpp"
@@ -58,7 +59,7 @@ using std::dynamic_pointer_cast;
 using std::static_pointer_cast;
 //using juzzlin::L;
 
-Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
+Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman, Game & game)
   : MCObject(surface, "car")
   , m_desc(desc)
   , m_onTrackFriction(std::make_shared<MCFrictionGenerator>(desc.rollingFrictionOnTrack, 0.0))
@@ -78,6 +79,7 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   , m_absSpeed(0)
   , m_dx(0)
   , m_dy(0)
+  , m_game(game)
   , m_isHuman(isHuman)
   , m_particleEffectManager(std::make_unique<CarParticleEffectManager>(*this))
   , m_numberPos(-5, 0, 0)
@@ -93,6 +95,8 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
   , m_offTrackTimer(0.0f)
   , m_lastTargetNodeIndex(0)
   , m_lastDiff(0)
+  , m_count(0)
+  , m_start(0)
 {
     // Override the default physics component to handle damage from impulses
     setPhysicsComponent(std::make_unique<CarPhysicsComponent>(*this));
@@ -102,6 +106,22 @@ Car::Car(Description & desc, MCSurfacePtr surface, size_t index, bool isHuman)
     initForceGenerators(desc);
 
     createChildObjects(surface->maxZ(), index);
+}
+
+int Car::getMCount() {
+    return m_count;
+}
+
+void Car::setMCount(int m) {
+    m_count = m;
+}
+
+int Car::getStart() {
+    return m_start;
+}
+
+void Car::setStart(int start) {
+    m_start = start;
 }
 
 void Car::createChildObjects(float maxZ, size_t index)
@@ -202,6 +222,37 @@ void Car::accelerate(bool deccelerate)
 {
     const float maxForce =
       physicsComponent().mass() * m_desc.accelerationFriction * std::fabs(MCWorld::instance().gravity().k());
+    float currentForce = maxForce;
+
+    if (const float velocity = physicsComponent().velocity().length(); velocity > 0.001f)
+    {
+        currentForce = m_desc.power / velocity;
+        if (currentForce > maxForce)
+        {
+            currentForce = maxForce;
+        }
+    }
+
+    MCVector2dF direction(m_dx, m_dy);
+    if (deccelerate)
+    {
+        if (std::abs(speedInKmh()) < 25)
+        {
+            direction *= -1;
+        }
+        else
+        {
+            direction *= 0;
+        }
+    }
+
+    physicsComponent().addForce(direction * currentForce * damageFactor());
+}
+
+void Car::playerAccelerate(bool deccelerate, float multiplier)
+{
+    const float maxForce =
+      physicsComponent().mass() * (m_desc.accelerationFriction * multiplier) * std::fabs(MCWorld::instance().gravity().k());
     float currentForce = maxForce;
 
     if (const float velocity = physicsComponent().velocity().length(); velocity > 0.001f)
@@ -333,33 +384,19 @@ void Car::updateAnimations()
     m_rightBrakeGlow->setIsRenderable(brakingGlowVisible);
 }
 
-void Car::updateTireWear(int step)
-{
-    // Cache dx and dy.
-    m_dx = MCTrigonom::cos(angle());
-    m_dy = MCTrigonom::sin(angle());
+void Car::steerAssist() {
+    if (m_isHuman) {
+        if (m_track) {
+            m_trackAssistanceEnabled = true;
+            const Route & route = m_track->trackData().route();
+            const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
+            // MCVector2dF m_randomTolerance = MCRandom::randomVector2d() * TrackTileBase::width() / 8;
 
-    // Cache speed in km/h.
-    m_absSpeed = physicsComponent().speed();
-    m_speedInKmh = static_cast<int>(m_absSpeed * 3.6f * 2.75f);
-
-    if (m_isHuman)
-    {
-        if (m_track /*&& isOffTrack()*/)
-        {
-            m_offTrackTimer += step / 1000.0f;
-            if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
-            {
-                m_trackAssistanceEnabled = true;
-                const Route & route = m_track->trackData().route();
-                const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
-                // MCVector2dF m_randomTolerance = MCRandom::randomVector2d() * TrackTileBase::width() / 8;
-
-                // Calculate target vector
-                MCVector3dF target(static_cast<float>(targetNode->location().x()), 
-                                 static_cast<float>(targetNode->location().y()));
-                target -= MCVector3dF(location());
-                // + MCVector3dF(m_randomTolerance));
+            // Calculate target vector
+            MCVector3dF target(static_cast<float>(targetNode->location().x()), 
+                                static_cast<float>(targetNode->location().y()));
+            target -= MCVector3dF(location());
+            // + MCVector3dF(m_randomTolerance));
 
                 // const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
                 // const float cur = static_cast<int>(this->angle()) % 360;
@@ -402,57 +439,302 @@ void Car::updateTireWear(int step)
                     m_continuousTargetAngle = newTargetAngle;
                 }
 
-                // Log the continuous angles
-                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
-                    "Continuous angles: target=%f, current=%f\n",
-                    m_continuousTargetAngle, rawCurrentAngle);
+            // Log the continuous angles
+            LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+                "Continuous angles: target=%f, current=%f\n",
+                m_continuousTargetAngle, rawCurrentAngle);
 
                 // Now proceed with normalized calculations for steering
                 // const float angle = static_cast<int>(newTargetAngle) % 180;
                 const float cur = static_cast<int>(rawCurrentAngle) % 360;
                 float diff = angle - cur;
 
-                // Normalize angle difference
-                while (diff > 180) diff -= 360;
-                while (diff < -180) diff += 360;
+            // Normalize angle difference
+            while (diff > 180) diff -= 360;
+            while (diff < -180) diff += 360;
 
-                // Much more aggressive control factor (0.025f -> 0.1f)
-                //float control = diff * 0.025f;  // Increased from 0.025f
-                float control = diff * 0.025f + (diff - m_lastDiff) * 0.025f;
-                const float maxControl = 1.5;
-                control = control < 0 ? -control : control;
-                control = control > maxControl ? maxControl : control;
-                if (control < 0)
-                {
-                    control = -control;
-                }
-                //control = std::min(control, 1.0f);
+            // Much more aggressive control factor (0.025f -> 0.1f)
+            //float control = diff * 0.025f;  // Increased from 0.025f
+            const char* multiplier = m_game.getAssist();
+            float control = diff * 0.025f + (diff - m_lastDiff) * 0.025f;
+            const float maxControl = 1.5;
+            control = control < 0 ? -control : control;
+            control = control > maxControl ? maxControl : control;
+            control = control * std::stof(multiplier);
+            if (control < 0)
+            {
+                control = -control;
+            }
+            //control = std::min(control, 1.0f);
 
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
                     "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
 
-                // More aggressive steering response
-                const float maxDelta = 3.0f;  // Reduced threshold to steer more often
-                if (diff < -maxDelta)
-                {
-                    steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
-                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control);
-
-                }
-                else if (diff > maxDelta)
-                {
-                    steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
-                    LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
-                }
-                m_lastDiff = diff;
+            // More aggressive steering response
+            const float maxDelta = 3.0f;  // Reduced threshold to steer more often
+            const char* evlag = m_game.getEvLag();
+            std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
+            std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+            if (diff < -maxDelta)
+            {
+                steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control);
             }
+            else if (diff > maxDelta)
+            {
+                steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
+            }
+            });
+
+            // // Detach the thread so it runs independently
+            delayedUpdate.detach();
+
+            m_lastDiff = diff;
+            
         }
-        else
-        {
-            m_offTrackTimer = 0.0f;
-            m_trackAssistanceEnabled = false;
+    }
+}
+
+void Car::accelerationAssist() {
+        // Cache speed in km/h.
+        m_absSpeed = physicsComponent().speed();
+        m_speedInKmh = static_cast<int>(m_absSpeed * 3.6f * 2.75f);
+
+        // Acceleration
+        // if (m_count % 2 != 0) {
+        if (getStart() == 1) {
+            setAcceleratorEnabled(true);
+            setBrakeEnabled(false);
+            const float absspeed = absSpeed();
+            TrackTile& currentTile = *m_track->trackTileAtLocation(location().i(), location().j());
+
+            // The following speed limits are experimentally defined.
+            float scale = 0.9f;
+            const char* evlag = m_game.getEvLag();
+            std::thread delayedUpdate([this, absspeed, scale, &currentTile, evlag]() {
+            std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+            if (currentTile.computerHint() == TrackTile::ComputerHint::Brake)
+            {
+                if (absspeed > 14.0f * scale)
+                {
+                    setBrakeEnabled(true);
+                }
+            }
+
+            if (currentTile.computerHint() == TrackTile::ComputerHint::BrakeHard)
+            {
+                if (absspeed > 9.5f * scale) // default 9.5f
+                {
+                    setBrakeEnabled(true);
+                }
+            }
+
+            if (currentTile.tileTypeEnum() == TrackTile::TileType::Corner90)
+            {
+                if (absspeed > 7.0f * scale)
+                {
+                    setAcceleratorEnabled(false);
+                    // setBrakeEnabled(false);
+                }
+            }
+
+            if (currentTile.tileTypeEnum() == TrackTile::TileType::Corner45Left || currentTile.tileTypeEnum() == TrackTile::TileType::Corner45Right)
+            {
+                if (absspeed > 8.3f * scale)
+                {
+                    setAcceleratorEnabled(false);
+                    // setBrakeEnabled(false);
+                }
+            }     
+            else {
+                if (absspeed < 3.6f * scale)
+                {
+                    setAcceleratorEnabled(true);
+                    setBrakeEnabled(false);
+                }
+            }
+            });
+
+
+            // // Detach the thread so it runs independently
+            delayedUpdate.detach();
         }
+    // }
+}
+
+void Car::updateTireWear(int step)
+{
+    // Cache dx and dy.
+    m_dx = MCTrigonom::cos(angle());
+    m_dy = MCTrigonom::sin(angle());
+
+    // Cache speed in km/h.
+    m_absSpeed = physicsComponent().speed();
+    m_speedInKmh = static_cast<int>(m_absSpeed * 3.6f * 2.75f);
+
+    if (m_isHuman)
+    {
+        // if (m_track /*&& isOffTrack()*/)
+        // {
+        //     m_offTrackTimer += step / 1000.0f;
+        //     if (m_offTrackTimer >= OFF_TRACK_ASSIST_DELAY)
+        //     {
+        //         m_trackAssistanceEnabled = true;
+        //         const Route & route = m_track->trackData().route();
+        //         const auto targetNode = route.get(m_race->getCurrentTargetNodeIndex(*this));
+        //         // MCVector2dF m_randomTolerance = MCRandom::randomVector2d() * TrackTileBase::width() / 8;
+
+        //         // Calculate target vector
+        //         MCVector3dF target(static_cast<float>(targetNode->location().x()), 
+        //                          static_cast<float>(targetNode->location().y()));
+        //         target -= MCVector3dF(location());
+        //         // + MCVector3dF(m_randomTolerance));
+
+        //         // const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+        //         // const float cur = static_cast<int>(this->angle()) % 360;
+        //         // float diff = angle - cur;
+
+        //                         // Get the raw current angle (continuously increasing/decreasing)
+        //         const float rawCurrentAngle = this->angle();
+                
+        //         // Get new target angle from atan2 (-180 to +180)
+        //         float newTargetAngle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
+        //         LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+        //             "updateTireWear: car Location i= %f\n",
+        //             target.i());
+                    
+        //         LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+        //             "updateTireWear: car Location j= %f\n",
+        //             target.j());              
+        //         const float angle = newTargetAngle; 
+        //         // If this is the first frame, initialize the continuous target angle
+        //         if (!m_hasPreviousTargetAngle)
+        //         {
+        //             m_continuousTargetAngle = newTargetAngle;
+        //             m_hasPreviousTargetAngle = true;
+        //         }
+        //         else
+        //         {
+        //             // Adjust for angle wrapping
+        //             while (newTargetAngle - m_continuousTargetAngle > 180)
+        //             {
+        //                 newTargetAngle -= 360;
+        //             }
+        //             while (newTargetAngle - m_continuousTargetAngle < -180)
+        //             {
+        //                 newTargetAngle += 360;
+        //             }
+                    
+        //             // Smoothly update the continuous target angle
+        //             m_continuousTargetAngle = newTargetAngle;
+        //         }
+
+        //         // Log the continuous angles
+        //         LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+        //             "Continuous angles: target=%f, current=%f\n",
+        //             m_continuousTargetAngle, rawCurrentAngle);
+
+        //         // Now proceed with normalized calculations for steering
+        //         // const float angle = static_cast<int>(newTargetAngle) % 180;
+        //         const float cur = static_cast<int>(rawCurrentAngle) % 360;
+        //         float diff = angle - cur;
+
+        //         // Normalize angle difference
+        //         while (diff > 180) diff -= 360;
+        //         while (diff < -180) diff += 360;
+
+        //         // Much more aggressive control factor (0.025f -> 0.1f)
+        //         //float control = diff * 0.025f;  // Increased from 0.025f
+        //         float control = diff * 0.025f + (diff - m_lastDiff) * 0.025f;
+        //         const float maxControl = 1.5;
+        //         control = control < 0 ? -control : control;
+        //         control = control > maxControl ? maxControl : control;
+        //         if (control < 0)
+        //         {
+        //             control = -control;
+        //         }
+        //         //control = std::min(control, 1.0f);
+
+        //         LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+        //             "Track assistance: angle=%f, cur=%f, diff=%f, control=%f\n",
+        //             angle, cur, diff, control);
+
+        //         // More aggressive steering response
+        //         const float maxDelta = 3.0f;  // Reduced threshold to steer more often
+        //         if (diff < -maxDelta)
+        //         {
+        //             steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
+        //             LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control);
+
+        //         }
+        //         else if (diff > maxDelta)
+        //         {
+        //             steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
+        //             LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
+        //         }
+        //         m_lastDiff = diff;
+
+        //             // Acceleration
+        //         // if (m_count % 2 != 0) {
+        //             if (getStart() == 1) {
+        //                 setAcceleratorEnabled(true);
+        //                 setBrakeEnabled(false);
+        //                 const float absspeed = absSpeed();
+        //                 TrackTile& currentTile = *m_track->trackTileAtLocation(location().i(), location().j());
+
+        //                 // The following speed limits are experimentally defined.
+        //                 float scale = 1.0f;
+        //                 if (currentTile.computerHint() == TrackTile::ComputerHint::Brake)
+        //                 {
+        //                     if (absspeed > 14.0f * scale)
+        //                     {
+        //                         setBrakeEnabled(true);
+        //                     }
+        //                 }
+
+        //                 if (currentTile.computerHint() == TrackTile::ComputerHint::BrakeHard)
+        //                 {
+        //                     if (absspeed > .5f * scale)
+        //                     {
+        //                         setBrakeEnabled(true);
+        //                     }
+        //                 }
+
+        //                 if (currentTile.tileTypeEnum() == TrackTile::TileType::Corner90)
+        //                 {
+        //                     if (absspeed > 7.0f * scale)
+        //                     {
+        //                         setAcceleratorEnabled(false);
+        //                         setBrakeEnabled(false);
+        //                     }
+        //                 }
+
+        //                 if (currentTile.tileTypeEnum() == TrackTile::TileType::Corner45Left || currentTile.tileTypeEnum() == TrackTile::TileType::Corner45Right)
+        //                 {
+        //                     if (absspeed > 8.3f * scale)
+        //                     {
+        //                         setAcceleratorEnabled(false);
+        //                         setBrakeEnabled(false);
+        //                     }
+        //                 }     
+        //                 else {
+        //                     if (absspeed < 3.6f * scale)
+        //                     {
+        //                         setAcceleratorEnabled(true);
+        //                         setBrakeEnabled(false);
+        //                     }
+        //                 }
+        //             }
+        //         // }
+        //     }
+        // }
+        // else
+        // {
+        //     m_offTrackTimer = 0.0f;
+        //     m_trackAssistanceEnabled = false;
+        // }
 
         if (isBraking() || (isAccelerating() && m_steer != Steer::Neutral))
         {
@@ -598,7 +880,11 @@ void Car::onStepTime(int step)
 
     if (m_gearbox->gear() == Gearbox::Gear::Forward && m_acceleratorEnabled)
     {
-        accelerate();
+        accelerate(false);
+    }
+    if (m_gearbox->gear() == Gearbox::Gear::Forward && m_acceleratorEnabled && isHuman() == true)
+    {
+        playerAccelerate(false, 0.012); // default is 0
     }
     else if (m_gearbox->gear() == Gearbox::Gear::Reverse && m_brakeEnabled)
     {

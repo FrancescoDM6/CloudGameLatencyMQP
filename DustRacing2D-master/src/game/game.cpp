@@ -23,6 +23,7 @@
 #include "eventhandler.hpp"
 #include "graphicsfactory.hpp"
 #include "inputhandler.hpp"
+#include "mainmenu.hpp"
 #include "renderer.hpp"
 #include "scene.hpp"
 #include "statemachine.hpp"
@@ -33,6 +34,7 @@
 
 #include <MCCamera>
 #include <MCWorldRenderer>
+#include <iostream>
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -191,11 +193,42 @@ void Game::parseArgs(int argc, char ** argv)
       },
       false, "Set log level to trace.");
 
+    ae.addOption(
+      { "--lag" }, [&](std::string value) {
+          evlag = value;
+      },
+      false, "Force lag: 0, 100, 200, 300, 400, 500");
+
+    ae.addOption(
+    { "--lagassist" }, [&](std::string value) {
+        // Split the value into lagvalue and assistvalue
+        size_t separator = value.find(':');
+        if (separator != std::string::npos) {
+            std::string lagvalue = value.substr(0, separator);
+            std::string assistvalue = value.substr(separator + 1);
+
+            evlag = lagvalue.c_str();
+            assist = assistvalue.c_str();
+        } else {
+            // Handle error: invalid format
+            std::cerr << "Invalid format for --lagassist. Use lagvalue:assistvalue." << std::endl;
+        }
+    },
+    false, "Force lag and assist in format lagvalue:assistvalue");
+
     ae.setHelpText("\nUsage: " + std::string(argv[0]) + " [OPTIONS]");
 
     ae.parse();
 
     initTranslations(m_appTranslator, m_app, lang);
+}
+
+const char* Game::getEvLag() const {
+    return evlag.c_str();
+}
+
+const char* Game::getAssist() const {
+    return assist.c_str();
 }
 
 void Game::createRenderer()
@@ -391,10 +424,14 @@ void Game::initScene()
     auto trackSelectionMenu = std::dynamic_pointer_cast<TrackSelectionMenu>(m_scene->trackSelectionMenu());
     assert(trackSelectionMenu);
 
+    auto mainMenu = std::dynamic_pointer_cast<MainMenu>(m_scene->mainMenu());
+    assert(mainMenu);
+
     // Add tracks to the menu.
     for (unsigned int i = 0; i < m_trackLoader->tracks(); i++)
     {
         trackSelectionMenu->addTrack(m_trackLoader->track(i));
+        mainMenu->addTrack(m_trackLoader->track(i));
     }
 
     // Set the current game scene. Renderer calls render()

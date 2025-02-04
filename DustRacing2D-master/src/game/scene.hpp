@@ -23,7 +23,9 @@
 #include "timingoverlay.hpp"
 
 #include <MCCamera>
+#include <QPointF>
 #include <QObject>
+#include <QString>
 #include <memory>
 #include <vector>
 
@@ -47,6 +49,7 @@ class StartlightsOverlay;
 class StateMachine;
 class Track;
 class TrackSelectionMenu;
+class MainMenu;
 
 namespace MTFH {
 class Menu;
@@ -92,6 +95,8 @@ public:
     //! Return track selection menu.
     MTFH::MenuPtr trackSelectionMenu() const;
 
+    MTFH::MenuPtr mainMenu() const;
+
     void renderCommonHUD();
 
     void renderHUD();
@@ -105,6 +110,8 @@ public:
 signals:
 
     void listenerLocationChanged(float x, float y);
+
+    void messageRequested(QString message);
 
 private:
     void addCarsToWorld();
@@ -186,6 +193,8 @@ private:
     std::array<float, 2> m_cameraOffset;
 
     MTFH::MenuPtr m_mainMenu;
+
+    MTFH::MenuPtr m_trackMenu;
 
     std::unique_ptr<MTFH::MenuManager> m_menuManager;
 

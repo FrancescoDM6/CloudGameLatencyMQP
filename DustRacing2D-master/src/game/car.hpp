@@ -26,6 +26,7 @@
 
 class CarParticleEffectManager;
 class CarSoundEffectManager;
+class Game;
 class Gearbox;
 class MCSurface;
 class MCFrictionGenerator;
@@ -69,7 +70,7 @@ public:
     };
 
     //! Constructor.
-    Car(Description & desc, std::shared_ptr<MCSurface> surface, size_t index, bool isHuman);
+    Car(Description & desc, std::shared_ptr<MCSurface> surface, size_t index, bool isHuman, Game & game);
 
     //! Destructor.
     virtual ~Car() override;
@@ -95,7 +96,19 @@ public:
     //! Get cached speed.
     float absSpeed() const;
 
+    int getMCount();
+
+    void setMCount(int m);
+
+    int getStart();
+    
+    void setStart(int start);
+
     void addDamage(float damage);
+
+    void steerAssist();
+
+    void accelerationAssist();
 
     //! \reimp
     virtual void collisionEvent(MCCollisionEvent & event) override;
@@ -163,6 +176,8 @@ public:
 private:
     void accelerate(bool deccelerate = false);
 
+    void playerAccelerate(bool deccelerate = false, float multiplier = 0);
+
     void createChildObjects(float maxZ, size_t index);
 
     void createTires();
@@ -188,6 +203,8 @@ private:
     bool m_leftSideOffTrack;
 
     bool m_rightSideOffTrack;
+
+    Game & m_game;
 
     bool m_skidding;
 
@@ -218,6 +235,10 @@ private:
     float m_dx, m_dy;
 
     bool m_isHuman;
+
+    int m_count;
+
+    int m_start;
 
     std::unique_ptr<CarParticleEffectManager> m_particleEffectManager;
 

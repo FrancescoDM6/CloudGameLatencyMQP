@@ -2,21 +2,29 @@
 import datetime
 import json
 import os
+import shutil
 import subprocess
-from pynput.keyboard import Controller, Key
 import time
+from pathlib import Path
+from pynput.keyboard import Controller, Key
 
+# Initialize keyboard controller
 keyboard = Controller()
 
 # Path to the directory where the 'Makefile' is located
 # directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
 directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
+log_directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs"
+
+# Ensure logs directory exists
+log_folder = Path(log_directory)
+log_folder.mkdir(parents=True, exist_ok=True)
 
 # log_directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
-log_directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+# log_directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
 
-log_folder = os.path.join(log_directory, "logs")
-log_file_path = os.path.join(log_folder, "EVLag.log")
+# log_folder = os.path.join(log_directory, "logs")
+# log_file_path = os.path.join(log_folder, "EVLag.log")
 
 # Step 1: Run 'make' in the specified directory
 command_make = ["make"]
@@ -110,6 +118,29 @@ def load_test_cases(config_file='/home/claypool/Desktop/CloudGameLatencyMQP/Dust
     with open(config_file) as f:
         return json.load(f)
 
+# Generate expanded test cases with lag increments
+def generate_expanded_test_cases():
+    base_test_cases = load_test_cases()
+    expanded_test_cases = []
+    
+    for test_case in base_test_cases:
+        for lag in range(0, 310, 10):  # 0 to 300ms in 10ms increments
+            expanded_test_case = test_case.copy()
+            expanded_test_case['lag'] = lag
+            expanded_test_case['name'] = f"{test_case['name']} - {lag}ms lag"
+            expanded_test_cases.append(expanded_test_case)
+    
+    return expanded_test_cases
+
+# Move runs of an assist value to a dedicated directory
+def move_runs_to_directory(assist_value, logs_dir):
+    assist_dir = logs_dir / f"assist_{assist_value}"
+    assist_dir.mkdir(parents=True, exist_ok=True)
+    
+    for file in logs_dir.glob(f"*_assist_{assist_value}_*"):
+        shutil.move(file, assist_dir)
+
+# Run a single test case
 def run_test_case(test_case, directory):
     command_game = [
         "./dustrac-game",
@@ -140,14 +171,19 @@ def run_test_case(test_case, directory):
             result_game.terminate()
         raise
 
+# Main testing logic
 def main():
     if result_make.returncode == 0:
-        test_cases = load_test_cases()
+        # Load and expand test cases
+        test_cases = generate_expanded_test_cases()
         
         for test_case in test_cases:
             print(f"Running test case: {test_case['name']}")
-            result = run_test_case(test_case, directory)
+            run_test_case(test_case, directory)
             
+            # After all runs for an assist value are complete, move the logs
+            if test_case['lag'] == 300:  # Last lag value for this assist
+                move_runs_to_directory(test_case['steering_assist'], log_folder)
 
 if __name__ == "__main__":
     main()

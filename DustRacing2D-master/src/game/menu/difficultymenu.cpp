@@ -69,8 +69,8 @@ DifficultyMenu::DifficultyMenu(int width, int height)
         MenuManager::instance().pushMenu(LapCountMenu::MenuId);
     });
 
-    addItem(hardItem);
-    addItem(mediumItem);
+    // addItem(hardItem);
+    // addItem(mediumItem);
     addItem(easyItem);
 
     const DifficultyProfile::Difficulty difficulty = Game::instance().difficultyProfile().difficulty();

@@ -25,6 +25,7 @@
 #include "track.hpp"
 #include "trackdata.hpp"
 #include "tracktile.hpp"
+#include "logmanager.hpp"
 
 #include <MenuItem>
 #include <MenuManager>

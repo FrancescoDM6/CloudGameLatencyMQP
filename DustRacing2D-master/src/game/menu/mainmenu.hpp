@@ -24,6 +24,8 @@ namespace MTFH {
 class MenuManager;
 }
 class Scene;
+class Track;
+class TrackItem2;
 
 //! The main menu of the game.
 class MainMenu : public QObject, public SurfaceMenu
@@ -35,6 +37,24 @@ public:
 
     //! Constructor.
     MainMenu(MTFH::MenuManager & menuManager, Scene & scene, int width, int height);
+
+    void addTrack(std::shared_ptr<Track> track);
+
+    void selectCurrentItem();
+
+    std::shared_ptr<Track> selectedTrack() const;
+
+    //! \reimp
+    virtual void left() override;
+
+    //! \reimp
+    virtual void right() override;
+
+    //! \reimp
+    virtual void up() override;
+
+    //! \reimp
+    virtual void down() override;
 
 signals:
 
@@ -48,6 +68,8 @@ private:
     MTFH::MenuManager & m_menuManager;
 
     Scene & m_scene;
+
+    std::shared_ptr<Track> m_selectedTrack;
 };
 
 #endif // MAINMENU_HPP
