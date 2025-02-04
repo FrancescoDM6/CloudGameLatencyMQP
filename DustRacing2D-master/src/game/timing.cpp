@@ -14,6 +14,7 @@
 // along with Dust Racing 2D. If not, see <http://www.gnu.org/licenses/>.
 
 #include "timing.hpp"
+#include "logmanager.hpp"
 #include "car.hpp"
 #include "logmanager.hpp"
 

@@ -305,8 +305,6 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
     }
 
     const char* evlag = m_game.getEvLag();
-    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "evlag value: %s\n", evlag);
     std::thread delayedUpdate([this, brake, accelerate, evlag]() {
     std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (brake)
