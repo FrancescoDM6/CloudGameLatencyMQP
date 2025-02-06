@@ -138,12 +138,8 @@ def move_runs_to_directory(assist_value, logs_dir):
     assist_dir = logs_dir / f"assist_{assist_value}"
     assist_dir.mkdir(parents=True, exist_ok=True)
     
-    # Move all relevant log files
-    for run_file in logs_dir.glob(f"*_{assist_value}_*"):
-        shutil.move(run_file, assist_dir)
-    
     # Move cardata, logfile, botdata, and laptime files
-    for run_number in range(1):  # Adjust range based on expected number of runs
+    for run_number in range(1, 101):  # Adjust range based on expected number of runs
         for prefix in ["cardata", "logfile", "botdata", "laptime"]:
             source_file = logs_dir / f"{prefix}_{run_number}.log"
             if source_file.exists():

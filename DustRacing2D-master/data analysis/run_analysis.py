@@ -199,80 +199,100 @@ class DataAnalyzer:
 
 
     def _process_bot_log(self, log_file):
-        """Process a bot log file and return structured data."""
+        """Process a bot log file and extract relevant data."""
         data = {
             'time': [],
-            'target_x': [],
-            'target_y': [],
-            'car_x': [],
-            'car_y': [],
             'target_angle': [],
             'current_angle': [],
             'diff': [],
-            'control': []
+            'control': [],
+            'car_x': [],
+            'car_y': [],
+            'target_x': [],
+            'target_y': []
         }
         
-        try:
-            with open(log_file, "r") as file:
-                current_set = {}
+        current_time = None
+        current_set = {}  # Temporary storage for a single timestep's data
+        
+        print(f"Processing log file: {log_file}")
+        
+        with open(log_file, 'r') as f:
+            for line in f:
+                # Extract game time
+                time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
+                if time_match:
+                    if current_time is not None and len(current_set) == 8:  # All fields collected
+                        data['time'].append(current_time)
+                        data['target_angle'].append(current_set['target_angle'])
+                        data['current_angle'].append(current_set['current_angle'])
+                        data['diff'].append(current_set['diff'])
+                        data['control'].append(current_set['control'])
+                        data['car_x'].append(current_set['car_x'])
+                        data['car_y'].append(current_set['car_y'])
+                        data['target_x'].append(current_set['target_x'])
+                        data['target_y'].append(current_set['target_y'])
+                        current_set = {}  # Reset for the next timestep
+                    
+                    current_time = self._convert_game_time(time_match.group(1))
+                    print(f"Found time: {current_time}")
                 
-                for line in file:
-                    # Extract game time
-                    time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
-                    if time_match:
-                        current_time = self._convert_game_time(time_match.group(1))
-                        
-                        # Extract different types of data based on line content
-                        if 'targetNode X:' in line:
-                            x_match = re.search(r'targetNode X:\s*([\d\.-]+)', line)
-                            if x_match:
-                                current_set['target_x'] = float(x_match.group(1))
-                                
-                        elif 'targetNode Y:' in line:
-                            y_match = re.search(r'targetNode Y:\s*([\d\.-]+)', line)
-                            if y_match:
-                                current_set['target_y'] = float(y_match.group(1))
-                                
-                        elif 'car Location i:' in line:
-                            i_match = re.search(r'car Location i:\s*([\d\.-]+)', line)
-                            if i_match:
-                                current_set['car_x'] = float(i_match.group(1))
-                                
-                        elif 'car Location j:' in line:
-                            j_match = re.search(r'car Location j:\s*([\d\.-]+)', line)
-                            if j_match:
-                                current_set['car_y'] = float(j_match.group(1))
-                                
-                        elif 'Continuous angles:' in line:
-                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                            if angles_match:
-                                current_set['target_angle'] = float(angles_match.group(1))
-                                current_set['current_angle'] = float(angles_match.group(2))
-                                
-                        elif 'steerControl: angle=' in line:
-                            control_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
-                            if control_match:
-                                current_set['diff'] = float(control_match.group(1))
-                                current_set['control'] = float(control_match.group(2))
-                                
-                                # If we have all data for this timestep, add it to our main data structure
-                                if len(current_set) == 8:  # All values except time
-                                    data['time'].append(current_time)
-                                    data['target_x'].append(current_set['target_x'])
-                                    data['target_y'].append(current_set['target_y'])
-                                    data['car_x'].append(current_set['car_x'])
-                                    data['car_y'].append(current_set['car_y'])
-                                    data['target_angle'].append(current_set['target_angle'])
-                                    data['current_angle'].append(current_set['current_angle'])
-                                    data['diff'].append(current_set['diff'])
-                                    data['control'].append(current_set['control'])
-                                    current_set = {}
-                                    
-            return pd.DataFrame(data)
-            
-        except Exception as e:
-            print(f"Error processing bot log {log_file}: {e}")
-            return None
+                # Extract target position
+                if 'steerControl: targetNode X:' in line:
+                    x_match = re.search(r'targetNode X:\s*([\d\.-]+)', line)
+                    if x_match:
+                        current_set['target_x'] = float(x_match.group(1))
+                        print(f"Found target_x: {current_set['target_x']}")
+                
+                if 'steerControl: targetNode Y:' in line:
+                    y_match = re.search(r'targetNode Y:\s*([\d\.-]+)', line)
+                    if y_match:
+                        current_set['target_y'] = float(y_match.group(1))
+                        print(f"Found target_y: {current_set['target_y']}")
+                
+                # Extract car position
+                if 'steerControl: car Location i:' in line:
+                    i_match = re.search(r'car Location i:\s*([\d\.-]+)', line)
+                    if i_match:
+                        current_set['car_x'] = float(i_match.group(1))
+                        print(f"Found car_x: {current_set['car_x']}")
+                
+                if 'steerControl: car Location j:' in line:
+                    j_match = re.search(r'car Location j:\s*([\d\.-]+)', line)
+                    if j_match:
+                        current_set['car_y'] = float(j_match.group(1))
+                        print(f"Found car_y: {current_set['car_y']}")
+                
+                # Extract angles
+                if 'Continuous angles:' in line:
+                    angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
+                    if angles_match:
+                        current_set['target_angle'] = float(angles_match.group(1))
+                        current_set['current_angle'] = float(angles_match.group(2))
+                        print(f"Found angles: target={current_set['target_angle']}, current={current_set['current_angle']}")
+                
+                # Extract control values
+                if 'steerControl: angle=' in line:
+                    control_match = re.search(r'angle=([\d\.-]+), cur=([\d\.-]+), diff=([\d\.-]+), control=([\d\.-]+)', line)
+                    if control_match:
+                        current_set['diff'] = float(control_match.group(3))
+                        current_set['control'] = float(control_match.group(4))
+                        print(f"Found control: diff={current_set['diff']}, control={current_set['control']}")
+        
+        # Add the last timestep's data if it's complete
+        if current_time is not None and len(current_set) == 8:
+            data['time'].append(current_time)
+            data['target_angle'].append(current_set['target_angle'])
+            data['current_angle'].append(current_set['current_angle'])
+            data['diff'].append(current_set['diff'])
+            data['control'].append(current_set['control'])
+            data['car_x'].append(current_set['car_x'])
+            data['car_y'].append(current_set['car_y'])
+            data['target_x'].append(current_set['target_x'])
+            data['target_y'].append(current_set['target_y'])
+        
+        print(f"Processed {len(data['time'])} timesteps from {log_file}")
+        return pd.DataFrame(data)
 
     def _create_player_plots(self, data, output_dir, run_number):
         """Create individual player performance plots."""
@@ -492,65 +512,189 @@ class DataAnalyzer:
         ]).round(2)
         stats.to_csv(output_dir / 'overall_statistics.csv')
 
+    def _convert_game_time(self, time_str):
+        """Convert game time string (MM:SS.ms) to seconds."""
+        minutes, seconds = time_str.split(':')
+        return float(minutes) * 60 + float(seconds)
+    
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from pathlib import Path
+import re
+import time
+import sys
 
 class BotAnalyzer:
-    """Class for analyzing bot vs bot runs."""
     def __init__(self, base_dir='DustRacing2D-master'):
         self.base_dir = Path(base_dir)
         self.logs_dir = self.base_dir / 'logs'
         self.analysis_dir = self.base_dir / 'data analysis' / 'bot_vs_bot'
-
+        self.assist_values = ['0.5', '1.0', '1.5']
+        
     def setup_directories(self):
         """Create all necessary directories for bot vs bot analysis."""
-        print("\nSetting up bot vs bot directory structure...")
+        print("\nSetting up directory structure...")
         
-        # Create bot vs bot analysis directories
-        self.analysis_dir.mkdir(parents=True, exist_ok=True)
-        print(f"Created bot vs bot analysis directory at {self.analysis_dir}")
+        # Create analysis directories for each assistance level
+        for assist in self.assist_values:
+            assist_dir = self.analysis_dir / f'assist_{assist}'
+            for subdir in ['Individual', 'Comparisons', 'Summary']:
+                (assist_dir / subdir).mkdir(parents=True, exist_ok=True)
+                print(f"Created {subdir} directory for assist_{assist}")
+        
+        # Create overall analysis directory
+        (self.analysis_dir / 'overall').mkdir(parents=True, exist_ok=True)
+        print("Created overall analysis directory")
 
-    def analyze_bot_run(self, run_number):
-        """Analyze a single bot vs bot run."""
-        print(f"\nAnalyzing bot vs bot run #{run_number}")
+    def analyze_assist_level(self, assist_value):
+        """Analyze all runs for a specific assistance level."""
+        print(f"\nAnalyzing complete set for assistance level {assist_value}")
+        all_bot1_data = []
+        all_bot2_data = []
         
-        bot1_log = self.logs_dir / f'cardata_{run_number}.log'  # Bot 1
-        bot2_log = self.logs_dir / f'botdata_{run_number}.log'  # Bot 2
+        # Find all available cardata files for this assist level
+        assist_dir = self.logs_dir / f'assist_{assist_value}'
+        if not assist_dir.exists():
+            print(f"No directory found for assist value {assist_value}")
+            return
+            
+        print(f"\nScanning directory: {assist_dir}")
+        cardata_files = list(assist_dir.glob('cardata_*.log'))
+        print(f"Found cardata files: {[f.name for f in cardata_files]}")
+        
+        run_numbers = sorted([int(f.stem.split('_')[1]) for f in cardata_files])
+        print(f"Identified run numbers: {run_numbers}")
+        
+        for run in run_numbers:
+            print(f"\nProcessing run {run}:")
+            bot1_data, bot2_data = self.analyze_bot_run(assist_value, run)
+            if bot1_data is not None and bot2_data is not None:
+                all_bot1_data.append(bot1_data)
+                all_bot2_data.append(bot2_data)
+        
+        if all_bot1_data:
+            # Create summary plots
+            summary_dir = self.analysis_dir / f'assist_{assist_value}' / 'Summary'
+            self._create_summary_plots(all_bot1_data, all_bot2_data, summary_dir)
+            print(f"Created summary plots for assistance level {assist_value}")
+
+    def analyze_bot_run(self, assist_value, run_number):
+        """Analyze a single bot vs bot run."""
+        print(f"\nAnalyzing bot vs bot run #{run_number} with assist value {assist_value}")
+        
+        bot1_log = self.logs_dir / f'assist_{assist_value}' / f'cardata_{run_number}.log'
+        bot2_log = self.logs_dir / f'assist_{assist_value}' / f'botdata_{run_number}.log'
         
         try:
-            bot1_data = self._process_bot_log(bot1_log)
-            bot2_data = self._process_bot_log(bot2_log)
+            # Process logs using appropriate methods for each file type
+            bot1_data = self._process_player_log(bot1_log)  # Use player log format for cardata
+            bot2_data = self._process_bot_log(bot2_log)     # Use bot log format for botdata
             
-            # Save individual plots
-            output_dir = self.analysis_dir / f'run_{run_number}'
-            output_dir.mkdir(parents=True, exist_ok=True)
-            self._create_bot_comparison_plots(bot1_data, bot2_data, output_dir, run_number)
-            
-            return bot1_data, bot2_data
+            if bot1_data is not None and bot2_data is not None:
+                # Create plots for individual run
+                output_dir = self.analysis_dir / f'assist_{assist_value}' / 'Individual'
+                self._create_bot_plots(bot1_data, bot2_data, output_dir, run_number)
+                
+                # Create comparison plots
+                comp_dir = self.analysis_dir / f'assist_{assist_value}' / 'Comparisons'
+                self._create_comparison_plots(bot1_data, bot2_data, comp_dir, run_number)
+                
+                return bot1_data, bot2_data
             
         except Exception as e:
             print(f"Error processing run: {e}")
             return None, None
 
-    def analyze_bot_performance(self, num_runs):
-        """Analyze all bot vs bot runs."""
-        print("\nAnalyzing overall bot vs bot performance")
-        all_bot1_data = []
-        all_bot2_data = []
+    def create_overall_analysis(self):
+        """Create comprehensive comparison plots across all assistance levels."""
+        print("\nCreating overall analysis")
+        overall_dir = self.analysis_dir / 'overall'
         
-        for run in range(1, num_runs + 1):
-            try:
-                bot1_data, bot2_data = self.analyze_bot_run(run)
-                if bot1_data is not None and bot2_data is not None:
-                    all_bot1_data.append(bot1_data)
-                    all_bot2_data.append(bot2_data)
-            except Exception as e:
-                print(f"Error processing bot vs bot run {run}: {e}")
+        # Collect all data
+        all_data = {assist: {'bot1': [], 'bot2': []} for assist in self.assist_values}
         
-        if all_bot1_data and all_bot2_data:
-            self._create_bot_summary_plots(all_bot1_data, all_bot2_data)
-            print("Created bot vs bot analysis plots")
+        for assist in self.assist_values:
+            assist_dir = self.logs_dir / f'assist_{assist}'
+            if not assist_dir.exists():
+                continue
+                
+            cardata_files = list(assist_dir.glob('cardata_*.log'))
+            run_numbers = sorted([int(f.stem.split('_')[1]) for f in cardata_files])
+            
+            for run in run_numbers:
+                try:
+                    bot1_data = self._process_player_log(assist_dir / f'cardata_{run}.log')
+                    bot2_data = self._process_bot_log(assist_dir / f'botdata_{run}.log')
+                    
+                    if bot1_data is not None and bot2_data is not None:
+                        all_data[assist]['bot1'].append(bot1_data)
+                        all_data[assist]['bot2'].append(bot2_data)
+                except Exception as e:
+                    print(f"Error processing assist {assist} run {run}: {e}")
+        
+        self._create_overall_analysis_plots(all_data, overall_dir)
+        print("Created overall analysis plots")
+
+    def _process_player_log(self, log_file):
+        """Process a car log file using the player format."""
+        data = {
+            'time': [],
+            'target_angle': [],
+            'current_angle': [],
+            'diff': [],
+            'control': [],
+            'steering_direction': []
+        }
+        
+        try:
+            with open(log_file, "r") as file:
+                current_time = None
+                current_set = {}
+                
+                for line in file:
+                    # Extract game time
+                    time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
+                    if time_match:
+                        current_time = self._convert_game_time(time_match.group(1))
+                        
+                        # Extract different types of data based on line content
+                        if 'Continuous angles:' in line:
+                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
+                            if angles_match:
+                                current_set['target_angle'] = float(angles_match.group(1))
+                                current_set['current_angle'] = float(angles_match.group(2))
+                                
+                        elif 'Track assistance:' in line:
+                            assist_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                            if assist_match:
+                                current_set['diff'] = float(assist_match.group(1))
+                                current_set['control'] = float(assist_match.group(2))
+                                
+                        elif 'Steering' in line:
+                            direction_match = re.search(r'Steering (LEFT|RIGHT)', line)
+                            if direction_match:
+                                current_set['steering_direction'] = direction_match.group(1)
+                                
+                                # If we have all data for this timestep, add it to our main data structure
+                                if len(current_set) == 5:  # All values except time
+                                    data['time'].append(current_time)
+                                    data['target_angle'].append(current_set['target_angle'])
+                                    data['current_angle'].append(current_set['current_angle'])
+                                    data['diff'].append(current_set['diff'])
+                                    data['control'].append(current_set['control'])
+                                    data['steering_direction'].append(current_set['steering_direction'])
+                                    current_set = {}
+                                    
+            return pd.DataFrame(data)
+            
+        except Exception as e:
+            print(f"Error processing car log {log_file}: {e}")
+            return None
 
     def _process_bot_log(self, log_file):
-        """Process a bot log file and extract relevant data."""
+        """Process a bot log file."""
         data = {
             'time': [],
             'target_angle': [],
@@ -563,139 +707,348 @@ class BotAnalyzer:
             'target_y': []
         }
         
-        with open(log_file, 'r') as f:
-            for line in f:
-                # Extract game time
-                time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
-                if time_match:
-                    current_time = self._convert_game_time(time_match.group(1))
-                    data['time'].append(current_time)
+        try:
+            with open(log_file, "r") as file:
+                lines = file.readlines()
                 
-                # Extract angles and control
-                if 'Continuous angles:' in line:
-                    angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                    if angles_match:
-                        data['target_angle'].append(float(angles_match.group(1)))
-                        data['current_angle'].append(float(angles_match.group(2)))
+                current_time = None
+                current_set = {}
                 
-                if 'steerControl: angle=' in line:
-                    control_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
-                    if control_match:
-                        data['diff'].append(float(control_match.group(1)))
-                        data['control'].append(float(control_match.group(2)))
-                
-                # Extract position data
-                if 'targetNode X:' in line:
-                    x_match = re.search(r'targetNode X:\s*([\d\.-]+)', line)
-                    if x_match:
-                        data['target_x'].append(float(x_match.group(1)))
-                
-                if 'targetNode Y:' in line:
-                    y_match = re.search(r'targetNode Y:\s*([\d\.-]+)', line)
-                    if y_match:
-                        data['target_y'].append(float(y_match.group(1)))
-                
-                if 'car Location i:' in line:
-                    i_match = re.search(r'car Location i:\s*([\d\.-]+)', line)
-                    if i_match:
-                        data['car_x'].append(float(i_match.group(1)))
-                
-                if 'car Location j:' in line:
-                    j_match = re.search(r'car Location j:\s*([\d\.-]+)', line)
-                    if j_match:
-                        data['car_y'].append(float(j_match.group(1)))
+                for line in lines:
+                    # Extract game time
+                    time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
+                    if time_match:
+                        if current_time is not None and len(current_set) == 8:
+                            data['time'].append(current_time)
+                            for key in current_set:
+                                data[key].append(current_set[key])
+                            current_set = {}
+                        
+                        current_time = self._convert_game_time(time_match.group(1))
                     
-        return pd.DataFrame(data)
+                    # Extract positions and angles
+                    if 'targetNode X:' in line:
+                        x_match = re.search(r'targetNode X:\s*([\d\.-]+)', line)
+                        if x_match:
+                            current_set['target_x'] = float(x_match.group(1))
+                    
+                    elif 'targetNode Y:' in line:
+                        y_match = re.search(r'targetNode Y:\s*([\d\.-]+)', line)
+                        if y_match:
+                            current_set['target_y'] = float(y_match.group(1))
+                    
+                    elif 'car Location i:' in line:
+                        x_match = re.search(r'car Location i:\s*([\d\.-]+)', line)
+                        if x_match:
+                            current_set['car_x'] = float(x_match.group(1))
+                    
+                    elif 'car Location j:' in line:
+                        y_match = re.search(r'car Location j:\s*([\d\.-]+)', line)
+                        if y_match:
+                            current_set['car_y'] = float(y_match.group(1))
+                    
+                    elif 'Continuous angles:' in line:
+                        angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
+                        if angles_match:
+                            current_set['target_angle'] = float(angles_match.group(1))
+                            current_set['current_angle'] = float(angles_match.group(2))
+                    
+                    elif 'steerControl: angle=' in line:
+                        control_match = re.search(r'diff=([\d\.-]+), control=([\d\.-]+)', line)
+                        if control_match:
+                            current_set['diff'] = float(control_match.group(1))
+                            current_set['control'] = float(control_match.group(2))
+            
+            return pd.DataFrame(data)
+            
+        except Exception as e:
+            print(f"Error processing bot log {log_file}: {e}")
+            return None
 
-    def _convert_game_time(self, time_str):
-        """Convert game time string (MM:SS.ms) to seconds."""
-        minutes, seconds = time_str.split(':')
-        return float(minutes) * 60 + float(seconds)
-
-    def _create_bot_comparison_plots(self, bot1_data, bot2_data, output_dir, run_number):
-        """Create comparison plots for a bot vs bot run."""
+    def _create_bot_plots(self, bot1_data, bot2_data, output_dir, run_number):
+        """Create individual performance plots for both bots."""
         if bot1_data is None or bot2_data is None:
+            print(f"No data available for run {run_number}")
             return
             
-        # Plot 1: Control comparison
-        plt.figure(figsize=(12, 6))
-        plt.plot(bot1_data['time'], bot1_data['control'], label='Bot 1 (cardata)')
-        plt.plot(bot2_data['time'], bot2_data['control'], label='Bot 2 (botdata)')
-        plt.title(f'Control Comparison - Run {run_number}')
+        plt.style.use('default')
+        
+        # Plot 1: Control Values
+        plt.figure(figsize=(12, 8))
+        plt.plot(bot1_data['time'], bot1_data['control'], 'b-', label='Bot 1 Control', linewidth=2)
+        plt.plot(bot2_data['time'], bot2_data['control'], 'r-', label='Bot 2 Control', linewidth=2)
+        plt.title(f'Control Values Comparison - Run {run_number}')
         plt.xlabel('Time (seconds)')
         plt.ylabel('Control Value')
         plt.legend()
         plt.grid(True)
-        plt.savefig(output_dir / f'control_comparison.png')
+        plt.savefig(output_dir / f'run_{run_number}_control.png', dpi=300, bbox_inches='tight')
         plt.close()
-
-        # Plot 2: Path deviation comparison
-        bot1_deviation = np.sqrt((bot1_data['car_x'] - bot1_data['target_x'])**2 + 
-                                (bot1_data['car_y'] - bot1_data['target_y'])**2)
-        bot2_deviation = np.sqrt((bot2_data['car_x'] - bot2_data['target_x'])**2 + 
-                                (bot2_data['car_y'] - bot2_data['target_y'])**2)
         
-        plt.figure(figsize=(12, 6))
-        plt.plot(bot1_data['time'], bot1_deviation, label='Bot 1 (cardata)')
-        plt.plot(bot2_data['time'], bot2_deviation, label='Bot 2 (botdata)')
-        plt.title(f'Path Deviation Comparison - Run {run_number}')
+        # Plot 2: Angle Differences
+        plt.figure(figsize=(12, 8))
+        plt.plot(bot1_data['time'], bot1_data['diff'], 'b-', label='Bot 1 Angle Diff', alpha=0.7)
+        plt.plot(bot2_data['time'], bot2_data['diff'], 'r-', label='Bot 2 Angle Diff', alpha=0.7)
+        plt.title(f'Angle Differences - Run {run_number}')
         plt.xlabel('Time (seconds)')
-        plt.ylabel('Deviation (units)')
+        plt.ylabel('Angle Difference')
         plt.legend()
         plt.grid(True)
-        plt.savefig(output_dir / f'deviation_comparison.png')
+        plt.savefig(output_dir / f'run_{run_number}_angles.png', dpi=300, bbox_inches='tight')
         plt.close()
-
-    def _create_bot_summary_plots(self, all_bot1_data, all_bot2_data):
-        """Create summary plots for all bot vs bot runs."""
-        # Calculate average control values for each run
-        bot1_avg_control = [data['control'].mean() for data in all_bot1_data]
-        bot2_avg_control = [data['control'].mean() for data in all_bot2_data]
         
-        # Plot average control comparison
+        # Plot 3: Bot2 Trajectory (since only Bot2 has position data)
+        if all(col in bot2_data.columns for col in ['car_x', 'car_y', 'target_x', 'target_y']):
+            plt.figure(figsize=(12, 8))
+            plt.plot(bot2_data['car_x'], bot2_data['car_y'], 'r-', label='Bot 2 Path', linewidth=2)
+            plt.plot(bot2_data['target_x'], bot2_data['target_y'], 'k--', label='Target Path', alpha=0.7)
+            plt.title(f'Bot 2 Trajectory - Run {run_number}')
+            plt.xlabel('X Position')
+            plt.ylabel('Y Position')
+            plt.legend()
+            plt.grid(True)
+            plt.axis('equal')
+            plt.savefig(output_dir / f'run_{run_number}_trajectory.png', dpi=300, bbox_inches='tight')
+            plt.close()
+
+    def _create_comparison_plots(self, bot1_data, bot2_data, output_dir, run_number):
+        """Create comparison plots between both bots."""
+        if bot1_data is None or bot2_data is None:
+            print(f"Missing data for comparison in run {run_number}")
+            return
+            
+        plt.style.use('default')
+        
+        # Plot 1: Target vs Current Angles
+        plt.figure(figsize=(12, 8))
+        plt.subplot(2, 1, 1)
+        plt.plot(bot1_data['time'], bot1_data['target_angle'], 'b-', label='Bot 1 Target', alpha=0.7)
+        plt.plot(bot1_data['time'], bot1_data['current_angle'], 'b--', label='Bot 1 Current', alpha=0.7)
+        plt.title(f'Angle Tracking - Bot 1 - Run {run_number}')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Angle')
+        plt.legend()
+        plt.grid(True)
+        
+        plt.subplot(2, 1, 2)
+        plt.plot(bot2_data['time'], bot2_data['target_angle'], 'r-', label='Bot 2 Target', alpha=0.7)
+        plt.plot(bot2_data['time'], bot2_data['current_angle'], 'r--', label='Bot 2 Current', alpha=0.7)
+        plt.title('Angle Tracking - Bot 2')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Angle')
+        plt.legend()
+        plt.grid(True)
+        
+        plt.tight_layout()
+        plt.savefig(output_dir / f'run_{run_number}_angle_tracking.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 2: Control Comparison
+        plt.figure(figsize=(12, 6))
+        plt.plot(bot1_data['time'], bot1_data['control'], 'b-', label='Bot 1', alpha=0.7)
+        plt.plot(bot2_data['time'], bot2_data['control'], 'r-', label='Bot 2', alpha=0.7)
+        plt.title(f'Control Input Comparison - Run {run_number}')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Control Value')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / f'run_{run_number}_control_comparison.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 3: Steering Direction Distribution (Bot 1 only)
+        if 'steering_direction' in bot1_data.columns:
+            plt.figure(figsize=(8, 6))
+            direction_counts = bot1_data['steering_direction'].value_counts()
+            plt.bar(direction_counts.index, direction_counts.values)
+            plt.title(f'Bot 1 Steering Direction Distribution - Run {run_number}')
+            plt.xlabel('Direction')
+            plt.ylabel('Count')
+            plt.savefig(output_dir / f'run_{run_number}_steering_distribution.png', dpi=300, bbox_inches='tight')
+            plt.close()
+
+    def _create_summary_plots(self, bot1_data_list, bot2_data_list, output_dir):
+        """Create summary plots for a set of runs."""
+        if not bot1_data_list or not bot2_data_list:
+            print("No data available for summary plots")
+            return
+            
+        # Calculate metrics
+        bot1_completion = [data['time'].max() for data in bot1_data_list]
+        bot2_completion = [data['time'].max() for data in bot2_data_list]
+        
+        bot1_avg_control = [data['control'].abs().mean() for data in bot1_data_list]
+        bot2_avg_control = [data['control'].abs().mean() for data in bot2_data_list]
+        
+        plt.style.use('default')
+        
+        # Plot 1: Completion Times
         plt.figure(figsize=(10, 6))
-        runs = range(1, len(all_bot1_data) + 1)
-        plt.plot(runs, bot1_avg_control, 'bo-', label='Bot 1 (cardata)')
-        plt.plot(runs, bot2_avg_control, 'ro-', label='Bot 2 (botdata)')
+        runs = range(1, len(bot1_data_list) + 1)
+        plt.plot(runs, bot1_completion, 'bo-', label='Bot 1')
+        plt.plot(runs, bot2_completion, 'ro-', label='Bot 2')
+        plt.title('Completion Times by Run')
+        plt.xlabel('Run Number')
+        plt.ylabel('Time (seconds)')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / 'completion_times_summary.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 2: Average Control Values
+        plt.figure(figsize=(10, 6))
+        plt.plot(runs, bot1_avg_control, 'bo-', label='Bot 1')
+        plt.plot(runs, bot2_avg_control, 'ro-', label='Bot 2')
         plt.title('Average Control Input by Run')
         plt.xlabel('Run Number')
         plt.ylabel('Average Control Value')
         plt.legend()
         plt.grid(True)
-        plt.savefig(self.analysis_dir / 'average_control_summary.png')
+        plt.savefig(output_dir / 'control_summary.png', dpi=300, bbox_inches='tight')
         plt.close()
-
-        # Save summary statistics to CSV
+        
+        # Save summary statistics
         summary_stats = pd.DataFrame({
             'Run': runs,
+            'Bot1_Completion_Time': bot1_completion,
+            'Bot2_Completion_Time': bot2_completion,
             'Bot1_Avg_Control': bot1_avg_control,
             'Bot2_Avg_Control': bot2_avg_control
         })
-        summary_stats.to_csv(self.analysis_dir / 'summary_statistics.csv', index=False)
+        summary_stats.to_csv(output_dir / 'summary_statistics.csv', index=False)
 
-def run_complete_analysis():
-    """Run the complete analysis pipeline."""
+    def _create_overall_analysis_plots(self, all_data, output_dir):
+        """Create overall analysis plots comparing all assistance levels."""
+        plt.style.use('default')
+        
+        # Prepare data for plotting
+        completion_times = {
+            'assist': [],
+            'bot': [],
+            'time': []
+        }
+        
+        control_values = {
+            'assist': [],
+            'bot': [],
+            'avg_control': []
+        }
+        
+        for assist in self.assist_values:
+            for bot_type in ['bot1', 'bot2']:
+                for data in all_data[assist][bot_type]:
+                    if data is not None and not data.empty:
+                        # Add completion time
+                        completion_times['assist'].append(assist)
+                        completion_times['bot'].append(bot_type)
+                        completion_times['time'].append(data['time'].max())
+                        
+                        # Calculate and add average control value
+                        avg_control = data['control'].abs().mean()
+                        control_values['assist'].append(assist)
+                        control_values['bot'].append(bot_type)
+                        control_values['avg_control'].append(avg_control)
+        
+        # Convert to DataFrames for easier plotting
+        completion_df = pd.DataFrame(completion_times)
+        control_df = pd.DataFrame(control_values)
+        
+        # Plot 1: Completion Times by Assistance Level
+        plt.figure(figsize=(12, 8))
+        positions = range(len(self.assist_values))
+        
+        for i, bot in enumerate(['bot1', 'bot2']):
+            bot_data = completion_df[completion_df['bot'] == bot]
+            plt.boxplot([bot_data[bot_data['assist'] == assist]['time'] 
+                        for assist in self.assist_values],
+                       positions=[p + i*0.3 for p in positions],
+                       widths=0.2,
+                       patch_artist=True,
+                       boxprops=dict(facecolor=f'C{i}', alpha=0.5))
+        
+        plt.xticks([p + 0.15 for p in positions], self.assist_values)
+        plt.title('Completion Times by Assistance Level')
+        plt.xlabel('Assistance Level')
+        plt.ylabel('Time (seconds)')
+        plt.legend(['Bot 1', 'Bot 2'])
+        plt.grid(True, axis='y')
+        plt.savefig(output_dir / 'overall_completion_times.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 2: Control Values by Assistance Level
+        plt.figure(figsize=(12, 8))
+        for i, bot in enumerate(['bot1', 'bot2']):
+            bot_data = control_df[control_df['bot'] == bot]
+            plt.boxplot([bot_data[bot_data['assist'] == assist]['avg_control'] 
+                        for assist in self.assist_values],
+                       positions=[p + i*0.3 for p in positions],
+                       widths=0.2,
+                       patch_artist=True,
+                       boxprops=dict(facecolor=f'C{i}', alpha=0.5))
+        
+        plt.xticks([p + 0.15 for p in positions], self.assist_values)
+        plt.title('Average Control Values by Assistance Level')
+        plt.xlabel('Assistance Level')
+        plt.ylabel('Average Control Value')
+        plt.legend(['Bot 1', 'Bot 2'])
+        plt.grid(True, axis='y')
+        plt.savefig(output_dir / 'overall_control_values.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Save overall statistics
+        stats = pd.DataFrame({
+            'Assistance_Level': [],
+            'Bot': [],
+            'Avg_Completion_Time': [],
+            'Std_Completion_Time': [],
+            'Avg_Control_Value': [],
+            'Std_Control_Value': []
+        })
+        
+        for assist in self.assist_values:
+            for bot in ['bot1', 'bot2']:
+                completion_stats = completion_df[
+                    (completion_df['assist'] == assist) & 
+                    (completion_df['bot'] == bot)
+                ]['time']
+                
+                control_stats = control_df[
+                    (control_df['assist'] == assist) & 
+                    (control_df['bot'] == bot)
+                ]['avg_control']
+                
+                stats = pd.concat([stats, pd.DataFrame({
+                    'Assistance_Level': [assist],
+                    'Bot': [bot],
+                    'Avg_Completion_Time': [completion_stats.mean()],
+                    'Std_Completion_Time': [completion_stats.std()],
+                    'Avg_Control_Value': [control_stats.mean()],
+                    'Std_Control_Value': [control_stats.std()]
+                })])
+        
+        stats.to_csv(output_dir / 'overall_statistics.csv', index=False)
+        
+    def _convert_game_time(self, time_str):
+        """Convert game time string (MM:SS.ms) to seconds."""
+        minutes, seconds = time_str.split(':')
+        return float(minutes) * 60 + float(seconds)
+
+
+def run_bot_analysis():
+    """Run the complete bot vs bot analysis pipeline."""
     start_time = time.time()
     
-    print("=== Starting Analysis ===")
+    print("=== Starting Bot vs Bot Analysis ===")
     
-    # Comment out player-focused analysis
-    # analyzer = DataAnalyzer()
-    # print("\n1. Setting up directory structure...")
-    # analyzer.setup_directories()
+    analyzer = BotAnalyzer()
+    print("\n1. Setting up directory structure...")
+    analyzer.setup_directories()
     
-    # print("\n2. Analyzing individual player runs...")
-    # for player in ['F', 'J', 'M']:
-    #     for control_type in ['Full AI', 'Full Player', 'Mixed']:
-    #         analyzer.analyze_player_set(player, control_type)
+    print("\n2. Analyzing individual assistance levels...")
+    for assist in analyzer.assist_values:
+        analyzer.analyze_assist_level(assist)
     
-    # Focus on bot vs bot analysis
-    bot_analyzer = BotAnalyzer()
-    print("\n1. Setting up bot vs bot directory structure...")
-    bot_analyzer.setup_directories()
-    
-    print("\n2. Analyzing bot performance...")
-    bot_analyzer.analyze_bot_performance(num_runs=5)  # Analyze 5 runs (adjust as needed)
+    print("\n3. Creating overall analysis...")
+    analyzer.create_overall_analysis()
     
     end_time = time.time()
     duration = end_time - start_time
@@ -706,10 +1059,53 @@ def run_complete_analysis():
 
 if __name__ == "__main__":
     try:
-        run_complete_analysis()
+        run_bot_analysis()
     except KeyboardInterrupt:
         print("\nAnalysis interrupted by user")
         sys.exit(1)
     except Exception as e:
         print(f"\nAn error occurred during analysis: {e}")
         sys.exit(1)
+
+
+
+# def run_complete_analysis():
+#     """Run the complete analysis pipeline."""
+#     start_time = time.time()
+    
+#     print("=== Starting Analysis ===")
+    
+#     # Comment out player-focused analysis
+#     # analyzer = DataAnalyzer()
+#     # print("\n1. Setting up directory structure...")
+#     # analyzer.setup_directories()
+    
+#     # print("\n2. Analyzing individual player runs...")
+#     # for player in ['F', 'J', 'M']:
+#     #     for control_type in ['Full AI', 'Full Player', 'Mixed']:
+#     #         analyzer.analyze_player_set(player, control_type)
+    
+#     # Focus on bot vs bot analysis
+#     bot_analyzer = BotAnalyzer()
+#     print("\n1. Setting up bot vs bot directory structure...")
+#     bot_analyzer.setup_directories()
+    
+#     print("\n2. Analyzing bot performance...")
+#     bot_analyzer.analyze_bot_performance()
+    
+#     end_time = time.time()
+#     duration = end_time - start_time
+    
+#     print("\n=== Analysis Complete ===")
+#     print(f"Total processing time: {duration:.2f} seconds")
+
+
+# if __name__ == "__main__":
+#     try:
+#         run_complete_analysis()
+#     except KeyboardInterrupt:
+#         print("\nAnalysis interrupted by user")
+#         sys.exit(1)
+#     except Exception as e:
+#         print(f"\nAn error occurred during analysis: {e}")
+#         sys.exit(1)
