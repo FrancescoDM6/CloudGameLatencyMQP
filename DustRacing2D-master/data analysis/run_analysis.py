@@ -985,129 +985,203 @@ class BotAnalyzer:
         
         df = pd.DataFrame(plot_data)
         
-        # Plot completion times vs lag for each assistance level
-        plt.figure(figsize=(12, 8))
+        # Completion Times vs Lag (trend)
+        plt.figure(figsize=(15, 8))
         for assist in self.assist_values:
             assist_data = df[df['assist'] == assist]
             for bot in ['bot1', 'bot2']:
                 bot_data = assist_data[assist_data['bot'] == bot]
-                plt.plot(bot_data['lag'], bot_data['completion_time'], 'o-',
-                        label=f'Assist {assist} - {bot}')
+                label = f'Assist {assist} - {"Bot 1" if bot == "bot1" else "Bot 2"}'
+                plt.plot(bot_data['lag'], bot_data['completion_time'], 'o-', label=label, markersize=4)
         
         plt.title('Completion Times vs Lag by Assistance Level')
         plt.xlabel('Lag (ms)')
         plt.ylabel('Completion Time (seconds)')
-        plt.legend()
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.grid(True)
-        plt.savefig(output_dir / 'overall_completion_times.png', dpi=300, bbox_inches='tight')
+        plt.tight_layout()
+        plt.savefig(output_dir / 'overall_completion_vs_lag.png', dpi=300, bbox_inches='tight')
         plt.close()
         
-        # Prepare data for plotting
-        completion_times = {
-            'assist': [],
-            'bot': [],
-            'time': []
-        }
-        
-        control_values = {
-            'assist': [],
-            'bot': [],
-            'avg_control': []
-        }
-        
+        # Average Control vs Lag (trend)
+        plt.figure(figsize=(15, 8))
         for assist in self.assist_values:
-            for bot_type in ['bot1', 'bot2']:
-                for data in all_data[assist][bot_type]:
-                    if data is not None and not data.empty:
-                        # Add completion time
-                        completion_times['assist'].append(assist)
-                        completion_times['bot'].append(bot_type)
-                        completion_times['time'].append(data['time'].max())
-                        
-                        # Calculate and add average control value
-                        avg_control = data['control'].abs().mean()
-                        control_values['assist'].append(assist)
-                        control_values['bot'].append(bot_type)
-                        control_values['avg_control'].append(avg_control)
-        
-        # Convert to DataFrames for easier plotting
-        completion_df = pd.DataFrame(completion_times)
-        control_df = pd.DataFrame(control_values)
-        
-        # Plot 1: Completion Times by Assistance Level
-        plt.figure(figsize=(12, 8))
-        positions = range(len(self.assist_values))
-        
-        for i, bot in enumerate(['bot1', 'bot2']):
-            bot_data = completion_df[completion_df['bot'] == bot]
-            plt.boxplot([bot_data[bot_data['assist'] == assist]['time'] 
-                        for assist in self.assist_values],
-                       positions=[p + i*0.3 for p in positions],
-                       widths=0.2,
-                       patch_artist=True,
-                       boxprops=dict(facecolor=f'C{i}', alpha=0.5))
-        
-        plt.xticks([p + 0.15 for p in positions], self.assist_values)
-        plt.title('Completion Times by Assistance Level')
-        plt.xlabel('Assistance Level')
-        plt.ylabel('Time (seconds)')
-        plt.legend(['Bot 1', 'Bot 2'])
-        plt.grid(True, axis='y')
-        plt.savefig(output_dir / 'overall_completion_times.png', dpi=300, bbox_inches='tight')
-        plt.close()
-        
-        # Plot 2: Control Values by Assistance Level
-        plt.figure(figsize=(12, 8))
-        for i, bot in enumerate(['bot1', 'bot2']):
-            bot_data = control_df[control_df['bot'] == bot]
-            plt.boxplot([bot_data[bot_data['assist'] == assist]['avg_control'] 
-                        for assist in self.assist_values],
-                       positions=[p + i*0.3 for p in positions],
-                       widths=0.2,
-                       patch_artist=True,
-                       boxprops=dict(facecolor=f'C{i}', alpha=0.5))
-        
-        plt.xticks([p + 0.15 for p in positions], self.assist_values)
-        plt.title('Average Control Values by Assistance Level')
-        plt.xlabel('Assistance Level')
-        plt.ylabel('Average Control Value')
-        plt.legend(['Bot 1', 'Bot 2'])
-        plt.grid(True, axis='y')
-        plt.savefig(output_dir / 'overall_control_values.png', dpi=300, bbox_inches='tight')
-        plt.close()
-        
-        # Save overall statistics
-        stats = pd.DataFrame({
-            'Assistance_Level': [],
-            'Bot': [],
-            'Avg_Completion_Time': [],
-            'Std_Completion_Time': [],
-            'Avg_Control_Value': [],
-            'Std_Control_Value': []
-        })
-        
-        for assist in self.assist_values:
+            assist_data = df[df['assist'] == assist]
             for bot in ['bot1', 'bot2']:
-                completion_stats = completion_df[
-                    (completion_df['assist'] == assist) & 
-                    (completion_df['bot'] == bot)
-                ]['time']
-                
-                control_stats = control_df[
-                    (control_df['assist'] == assist) & 
-                    (control_df['bot'] == bot)
-                ]['avg_control']
-                
-                stats = pd.concat([stats, pd.DataFrame({
-                    'Assistance_Level': [assist],
-                    'Bot': [bot],
-                    'Avg_Completion_Time': [completion_stats.mean()],
-                    'Std_Completion_Time': [completion_stats.std()],
-                    'Avg_Control_Value': [control_stats.mean()],
-                    'Std_Control_Value': [control_stats.std()]
-                })])
+                bot_data = assist_data[assist_data['bot'] == bot]
+                label = f'Assist {assist} - {"Bot 1" if bot == "bot1" else "Bot 2"}'
+                plt.plot(bot_data['lag'], bot_data['avg_control'], 'o-', label=label, markersize=4)
         
-        stats.to_csv(output_dir / 'overall_statistics.csv', index=False)
+        plt.title('Average Control Values vs Lag by Assistance Level')
+        plt.xlabel('Lag (ms)')
+        plt.ylabel('Average Control Value')
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.savefig(output_dir / 'overall_control_vs_lag.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Angle Error vs Lag (trend)
+        plt.figure(figsize=(15, 8))
+        for assist in self.assist_values:
+            assist_data = df[df['assist'] == assist]
+            for bot in ['bot1', 'bot2']:
+                bot_data = assist_data[assist_data['bot'] == bot]
+                label = f'Assist {assist} - {"Bot 1" if bot == "bot1" else "Bot 2"}'
+                plt.plot(bot_data['lag'], bot_data['avg_angle_error'], 'o-', label=label, markersize=4)
+        
+        plt.title('Average Angle Error vs Lag by Assistance Level')
+        plt.xlabel('Lag (ms)')
+        plt.ylabel('Average Angle Error (degrees)')
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.savefig(output_dir / 'overall_angle_error_vs_lag.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Boxplots for distributions
+        lag_ranges = [(0, 100), (100, 200), (200, 300)]
+        positions = range(len(lag_ranges))
+        legend_elements = [
+            plt.Line2D([0], [0], color=f'C{i*2+j}', label=f'Assist {assist} - {"Bot 1" if j==0 else "Bot 2"}')
+            for i, assist in enumerate(self.assist_values)
+            for j in range(2)
+        ]
+        
+        # Completion Time Boxplots
+        plt.figure(figsize=(15, 8))
+        for i, assist in enumerate(self.assist_values):
+            assist_data = df[df['assist'] == assist]
+            for j, bot in enumerate(['bot1', 'bot2']):
+                bot_data = assist_data[assist_data['bot'] == bot]
+                
+                plot_data = []
+                for low, high in lag_ranges:
+                    range_data = bot_data[
+                        (bot_data['lag'] >= low) & 
+                        (bot_data['lag'] < high)
+                    ]['completion_time']
+                    plot_data.append(range_data)
+                
+                pos = [p + (i*0.25) + (j*0.1) for p in positions]
+                plt.boxplot(plot_data, positions=pos, widths=0.1,
+                          patch_artist=True,
+                          boxprops=dict(facecolor=f'C{i*2 + j}', alpha=0.5))
+        
+        plt.xticks([p + 0.25 for p in positions], 
+                  ['0-100ms', '100-200ms', '200-300ms'])
+        plt.title('Completion Time Distribution by Lag Range')
+        plt.xlabel('Lag Range')
+        plt.ylabel('Completion Time (seconds)')
+        plt.legend(handles=legend_elements, bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.grid(True, axis='y')
+        plt.tight_layout()
+        plt.savefig(output_dir / 'completion_time_boxplots.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Control Value Boxplots
+        plt.figure(figsize=(15, 8))
+        for i, assist in enumerate(self.assist_values):
+            assist_data = df[df['assist'] == assist]
+            for j, bot in enumerate(['bot1', 'bot2']):
+                bot_data = assist_data[assist_data['bot'] == bot]
+                
+                plot_data = []
+                for low, high in lag_ranges:
+                    range_data = bot_data[
+                        (bot_data['lag'] >= low) & 
+                        (bot_data['lag'] < high)
+                    ]['avg_control']
+                    plot_data.append(range_data)
+                
+                pos = [p + (i*0.25) + (j*0.1) for p in positions]
+                plt.boxplot(plot_data, positions=pos, widths=0.1,
+                          patch_artist=True,
+                          boxprops=dict(facecolor=f'C{i*2 + j}', alpha=0.5))
+        
+        plt.xticks([p + 0.25 for p in positions], 
+                  ['0-100ms', '100-200ms', '200-300ms'])
+        plt.title('Control Value Distribution by Lag Range')
+        plt.xlabel('Lag Range')
+        plt.ylabel('Average Control Value')
+        plt.legend(handles=legend_elements, bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.grid(True, axis='y')
+        plt.tight_layout()
+        plt.savefig(output_dir / 'control_value_boxplots.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Angle Error Boxplots
+        plt.figure(figsize=(15, 8))
+        for i, assist in enumerate(self.assist_values):
+            assist_data = df[df['assist'] == assist]
+            for j, bot in enumerate(['bot1', 'bot2']):
+                bot_data = assist_data[assist_data['bot'] == bot]
+                
+                plot_data = []
+                for low, high in lag_ranges:
+                    range_data = bot_data[
+                        (bot_data['lag'] >= low) & 
+                        (bot_data['lag'] < high)
+                    ]['avg_angle_error']
+                    plot_data.append(range_data)
+                
+                pos = [p + (i*0.25) + (j*0.1) for p in positions]
+                plt.boxplot(plot_data, positions=pos, widths=0.1,
+                          patch_artist=True,
+                          boxprops=dict(facecolor=f'C{i*2 + j}', alpha=0.5))
+        
+        plt.xticks([p + 0.25 for p in positions], 
+                  ['0-100ms', '100-200ms', '200-300ms'])
+        plt.title('Angle Error Distribution by Lag Range')
+        plt.xlabel('Lag Range')
+        plt.ylabel('Average Angle Error (degrees)')
+        plt.legend(handles=legend_elements, bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.grid(True, axis='y')
+        plt.tight_layout()
+        plt.savefig(output_dir / 'angle_error_boxplots.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Relationship Plots (colored scatter plots)
+        plt.figure(figsize=(12, 8))
+        scatter = plt.scatter(df['avg_control'], df['completion_time'], 
+                            c=df['lag'], cmap='viridis',
+                            s=100, alpha=0.6)
+        plt.colorbar(scatter, label='Lag (ms)')
+        plt.title('Control vs Completion Time (colored by lag)')
+        plt.xlabel('Average Control Value')
+        plt.ylabel('Completion Time (seconds)')
+        plt.grid(True)
+        plt.savefig(output_dir / 'control_vs_completion_lag.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        plt.figure(figsize=(12, 8))
+        scatter = plt.scatter(df['avg_angle_error'], df['completion_time'], 
+                            c=df['lag'], cmap='viridis',
+                            s=100, alpha=0.6)
+        plt.colorbar(scatter, label='Lag (ms)')
+        plt.title('Angle Error vs Completion Time (colored by lag)')
+        plt.xlabel('Average Angle Error (degrees)')
+        plt.ylabel('Completion Time (seconds)')
+        plt.grid(True)
+        plt.savefig(output_dir / 'angle_error_vs_completion_lag.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Save overall statistics with lag information
+        stats = df.groupby(['assist', 'bot', 'lag']).agg({
+            'completion_time': ['mean', 'std'],
+            'avg_control': ['mean', 'std'],
+            'avg_angle_error': ['mean', 'std']
+        }).reset_index()
+        
+        # Flatten column names
+        stats.columns = [
+            'assist', 'bot', 'lag',
+            'completion_time_mean', 'completion_time_std',
+            'control_mean', 'control_std',
+            'angle_error_mean', 'angle_error_std'
+        ]
+        
+        stats.to_csv(output_dir / 'overall_lag_statistics.csv', index=False)
         
     def _convert_game_time(self, time_str):
         """Convert game time string (MM:SS.ms) to seconds."""
