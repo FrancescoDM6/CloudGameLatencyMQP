@@ -124,7 +124,7 @@ def generate_expanded_test_cases():
     expanded_test_cases = []
     
     for test_case in base_test_cases:
-        for lag in range(0, 10, 10):  # 0 to 300ms in 10ms increments
+        for lag in range(0, 300, 10):  # 0 to 300ms in 10ms increments
             expanded_test_case = test_case.copy()
             expanded_test_case['lag'] = lag
             expanded_test_case['name'] = f"{test_case['name']} - {lag}ms lag"
@@ -143,7 +143,7 @@ def move_runs_to_directory(assist_value, logs_dir):
         shutil.move(run_file, assist_dir)
     
     # Move cardata, logfile, botdata, and laptime files
-    for run_number in range(1):  # Adjust range based on expected number of runs
+    for run_number in range(93):  # Adjust range based on expected number of runs
         for prefix in ["cardata", "logfile", "botdata", "laptime"]:
             source_file = logs_dir / f"{prefix}_{run_number}.log"
             if source_file.exists():
