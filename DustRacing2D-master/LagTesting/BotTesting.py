@@ -8,194 +8,311 @@ import time
 from pathlib import Path
 from pynput.keyboard import Controller, Key
 
-# Initialize keyboard controller
-keyboard = Controller()
+class GameTestConfig:
+    def __init__(self, config_path=None):
+        self.keyboard = Controller()
+        self.directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build")
+        self.log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs")
+        self.test_cases_file = config_path or Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
+        self.init_wait_time = 5  # seconds
+        self.test_duration = 60  # seconds
 
-# Path to the directory where the 'Makefile' is located
-# directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
-directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build"
-log_directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs"
+class GameTester:
+    def __init__(self, config: GameTestConfig):
+        self.config = config
+        self.ensure_directories()
 
-# Ensure logs directory exists
-log_folder = Path(log_directory)
-log_folder.mkdir(parents=True, exist_ok=True)
+    def ensure_directories(self):
+        self.config.log_directory.mkdir(parents=True, exist_ok=True)
 
-# log_directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
-# log_directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+    def compile_game(self):
+        print("Compiling game...")
+        result = subprocess.run(
+            ["make"],
+            capture_output=True,
+            text=True,
+            cwd=self.config.directory
+        )
+        if result.returncode != 0:
+            raise RuntimeError(f"Compilation failed: {result.stderr}")
+        print("Compilation successful")
+        return result.returncode == 0
 
-# log_folder = os.path.join(log_directory, "logs")
-# log_file_path = os.path.join(log_folder, "EVLag.log")
+    def generate_test_cases(self):
+        """Generate test cases for a single assist value with varying lag values"""
+        test_cases = []
+        assist_value = 1.0  # Fixed assist value
+        
+        # Generate lag values from 0 to 150 in steps of 10
+        for run_number, lag in enumerate(range(0, 151, 10), 1):
+            test_case = {
+                'steering_assist': assist_value,
+                'lag': lag,
+                'run_number': run_number,
+                'name': f"Assist {assist_value} - Lag {lag}ms"
+            }
+            test_cases.append(test_case)
+        
+        return test_cases
 
-# Step 1: Run 'make' in the specified directory
-command_make = ["make"]
-result_make = subprocess.run(command_make, capture_output=True, text=True, cwd=directory)
-
-# Output the result of running 'make'
-print("Output from 'make' command:")
-print(result_make.stdout)
-
-# # Handle errors from 'make'
-# if result_make.returncode != 0:
-#     print(f"Error running 'make': {result_make.stderr}")
-# else:
-#     for i in range(1300):
-#         if i <= 100:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 0:1"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 200:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 100:1"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 300:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 200:1"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-
-#         if i <= 400:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 300:1"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-
-#         if i <= 500:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 0:.5"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 600:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 100:.5"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 700:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 200:.5"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 800:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 300:.5"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 900:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 0:1.5"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 1000:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 100:1.5"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 1100:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 200:1.5"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-#         if i <= 1200:
-#             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
-#             command_game = ["./dustrac-game --lagassist 300:1.5"]
-    
-#             # Now run the game in the current terminal
-#             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
-
-def load_test_cases(config_file='/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json'):
-    with open(config_file) as f:
-        return json.load(f)
-
-# Generate expanded test cases with lag increments
-def generate_expanded_test_cases():
-    base_test_cases = load_test_cases()
-    expanded_test_cases = []
-    
-    for test_case in base_test_cases:
-        for lag in range(0, 300, 10):  # 0 to 300ms in 10ms increments
-            expanded_test_case = test_case.copy()
-            expanded_test_case['lag'] = lag
-            expanded_test_case['name'] = f"{test_case['name']} - {lag}ms lag"
-            expanded_test_cases.append(expanded_test_case)
-    
-    return expanded_test_cases
-
-# Move runs of an assist value to a dedicated directory
-def move_runs_to_directory(assist_value, logs_dir):
-    """Move all relevant log files for a specific assist value to a dedicated directory."""
-    assist_dir = logs_dir / f"assist_{assist_value}"
-    assist_dir.mkdir(parents=True, exist_ok=True)
-    
-    # Move all relevant log files
-    for run_file in logs_dir.glob(f"*_{assist_value}_*"):
-        shutil.move(run_file, assist_dir)
-    
-    # Move cardata, logfile, botdata, and laptime files
-    for run_number in range(93):  # Adjust range based on expected number of runs
+    def move_run_logs(self, test_case):
+        """
+        Move log files for a specific test run.
+        
+        Args:
+            test_case (dict): The test case containing assist value, lag value, and run number
+        """
+        assist_dir = self.config.log_directory / f"assist_{test_case['steering_assist']}"
+        assist_dir.mkdir(parents=True, exist_ok=True)
+        
+        # The game creates files with simple run numbers
         for prefix in ["cardata", "logfile", "botdata", "laptime"]:
-            source_file = logs_dir / f"{prefix}_{run_number}.log"
+            source_file = self.config.log_directory / f"{prefix}_{test_case['run_number']}.log"
             if source_file.exists():
-                shutil.move(source_file, assist_dir)
-                print(f"Moved {source_file} to {assist_dir}")
+                # Keep the original run number in the filename
+                new_filename = f"{prefix}_{test_case['run_number']}.log"
+                shutil.move(source_file, assist_dir / new_filename)
+                print(f"Moved run {test_case['run_number']} ({test_case['lag']}ms lag) to {assist_dir}/{new_filename}")
 
-# Run a single test case
-def run_test_case(test_case, directory):
-    command_game = [
-        "./dustrac-game",
-        "--lagassist", f"{test_case['lag']}:{test_case['steering_assist']}"
-    ]
-    
-    try:
-        # Start the game process
-        result_game = subprocess.Popen(command_game, cwd=directory)
+    def run_test_case(self, test_case):
+        """
+        Run a single test case with the given configuration.
         
-        # Wait for game to initialize
-        time.sleep(5)
+        Args:
+            test_case (dict): The test case configuration containing assist value, lag value, and run number
+        """
+        command = [
+            "./dustrac-game",
+            "--lagassist", f"{test_case['lag']}:{test_case['steering_assist']}"
+        ]
         
-        # Send enter key
-        keyboard.press(Key.enter)
-        keyboard.release(Key.enter)
-        
-        # Wait for game to complete
-        time.sleep(60)  # Adjust based on test duration
-        
-        # Properly terminate the process
-        result_game.terminate()
-        result_game.wait(timeout=5)  # Wait for process to exit
-        
-    except Exception as e:
-        print(f"Error running test case: {str(e)}")
-        if 'result_game' in locals():
-            result_game.terminate()
-        raise
-
-# Main testing logic
-def main():
-    if result_make.returncode == 0:
-        # Load and expand test cases
-        test_cases = generate_expanded_test_cases()
-        
-        for test_case in test_cases:
-            print(f"Running test case: {test_case['name']}")
-            run_test_case(test_case, directory)
+        try:
+            print(f"Starting test case: {test_case['name']} (Run {test_case['run_number']})")
+            process = subprocess.Popen(command, cwd=self.config.directory)
             
-            # After all runs for an assist value are complete, move the logs
-            if test_case['lag'] == 0:  # Last lag value for this assist
-                move_runs_to_directory(test_case['steering_assist'], log_folder)
+            time.sleep(self.config.init_wait_time)
+            
+            try:
+                self.config.keyboard.press(Key.enter)
+                self.config.keyboard.release(Key.enter)
+            except Exception as e:
+                print(f"Failed to simulate keyboard input: {e}")
+                raise
+            
+            time.sleep(self.config.test_duration)
+            
+            process.terminate()
+            process.wait(timeout=5)
+            
+            # Move the logs immediately after the run while we know which configuration it was
+            self.move_run_logs(test_case)
+            print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
+            
+            # Add a small delay between runs
+            time.sleep(2)
+            
+        except Exception as e:
+            print(f"Test case failed: {test_case['name']} - {str(e)}")
+            if 'process' in locals():
+                process.terminate()
+            raise
+
+def main():
+    try:
+        config = GameTestConfig()
+        tester = GameTester(config)
+        
+        if not tester.compile_game():
+            return
+        
+        test_cases = tester.generate_test_cases()
+        for test_case in test_cases:
+            try:
+                tester.run_test_case(test_case)
+            except Exception as e:
+                print(f"Failed to run test case {test_case['name']}: {e}")
+                continue
+
+    except Exception as e:
+        print(f"Test execution failed: {e}")
 
 if __name__ == "__main__":
     main()
+
+# # log_directory = "/home/parallels/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+# # log_directory = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master"
+
+# # log_folder = os.path.join(log_directory, "logs")
+# # log_file_path = os.path.join(log_folder, "EVLag.log")
+
+# # Step 1: Run 'make' in the specified directory
+# command_make = ["make"]
+# result_make = subprocess.run(command_make, capture_output=True, text=True, cwd=directory)
+
+# # Output the result of running 'make'
+# print("Output from 'make' command:")
+# print(result_make.stdout)
+
+# # # Handle errors from 'make'
+# # if result_make.returncode != 0:
+# #     print(f"Error running 'make': {result_make.stderr}")
+# # else:
+# #     for i in range(1300):
+# #         if i <= 100:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 0:1"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 200:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 100:1"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 300:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 200:1"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+
+# #         if i <= 400:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 300:1"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+
+# #         if i <= 500:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 0:.5"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 600:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 100:.5"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 700:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 200:.5"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 800:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 300:.5"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 900:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 0:1.5"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 1000:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 100:1.5"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 1100:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 200:1.5"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+# #         if i <= 1200:
+# #             # Step 2: Run './dustrac-game' in the same terminal (after 'make' is done)
+# #             command_game = ["./dustrac-game --lagassist 300:1.5"]
+    
+# #             # Now run the game in the current terminal
+# #             result_game = subprocess.run(command_game, capture_output=True, text=True, cwd=directory)
+
+# def load_test_cases(config_file='/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json'):
+#     with open(config_file) as f:
+#         return json.load(f)
+
+# # Generate expanded test cases with lag increments
+# def generate_expanded_test_cases():
+#     base_test_cases = load_test_cases()
+#     expanded_test_cases = []
+    
+#     for test_case in base_test_cases:
+#         for lag in range(0, 10, 10):  # 0 to 300ms in 10ms increments
+#             expanded_test_case = test_case.copy()
+#             expanded_test_case['lag'] = lag
+#             expanded_test_case['name'] = f"{test_case['name']} - {lag}ms lag"
+#             expanded_test_cases.append(expanded_test_case)
+    
+#     return expanded_test_cases
+
+# # Move runs of an assist value to a dedicated directory
+# def move_runs_to_directory(assist_value, logs_dir):
+#     """Move all relevant log files for a specific assist value to a dedicated directory."""
+#     # Create directory with only assist value in the name
+#     assist_dir = logs_dir / f"assist_{assist_value}"
+#     assist_dir.mkdir(parents=True, exist_ok=True)
+    
+#     # Move cardata, logfile, botdata, and laptime files
+#     for run_number in range(1, 2):  # Adjust range based on expected number of runs
+#         for prefix in ["cardata", "logfile", "botdata", "laptime"]:
+#             source_file = logs_dir / f"{prefix}_{run_number}.log"
+#             if source_file.exists():
+#                 # Create new filename with only assist value
+#                 new_filename = f"{prefix}_assist_{assist_value}_{run_number}.log"
+#                 shutil.move(source_file, assist_dir / new_filename)
+#                 print(f"Moved {source_file} to {assist_dir}/{new_filename}")
+
+# # Run a single test case
+# def run_test_case(test_case, directory):
+#     command_game = [
+#         "./dustrac-game",
+#         "--lagassist", f"{test_case['lag']}:{test_case['steering_assist']}"
+#     ]
+    
+#     try:
+#         # Start the game process
+#         result_game = subprocess.Popen(command_game, cwd=directory)
+        
+#         # Wait for game to initialize
+#         time.sleep(5)
+        
+#         # Send enter key
+#         keyboard.press(Key.enter)
+#         keyboard.release(Key.enter)
+        
+#         # Wait for game to complete
+#         time.sleep(60)  # Adjust based on test duration
+        
+#         # Properly terminate the process
+#         result_game.terminate()
+#         result_game.wait(timeout=5)  # Wait for process to exit
+        
+#     except Exception as e:
+#         print(f"Error running test case: {str(e)}")
+#         if 'result_game' in locals():
+#             result_game.terminate()
+#         raise
+
+# # Main testing logic
+# def main():
+#     if result_make.returncode == 0:
+#         # Load and expand test cases
+#         test_cases = generate_expanded_test_cases()
+        
+#         for test_case in test_cases:
+#             print(f"Running test case: {test_case['name']}")
+#             run_test_case(test_case, directory)
+            
+#             # After each run, move the logs with only assist value
+#             move_runs_to_directory(test_case['steering_assist'], log_folder)
+
+# if __name__ == "__main__":
+#     main()
 
             
