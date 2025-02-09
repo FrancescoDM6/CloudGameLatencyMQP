@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import time
 import sys
+import seaborn as sns
 
 class DataAnalyzer:
     def __init__(self, base_dir='DustRacing2D-master'):
@@ -531,18 +532,11 @@ class BotAnalyzer:
         self.base_dir = Path(base_dir)
         self.logs_dir = self.base_dir / 'logs'
         self.analysis_dir = self.base_dir / 'data analysis' / 'bot_vs_bot'
-        self.assist_values = ['0.5', '1.0', '1.5']
-        
-        # Map assistance levels to run number ranges
-        self.run_ranges = {
-            '1.0': range(1, 32),      # First 31 runs
-            '0.5': range(32, 63),     # Next 31 runs
-            '1.5': range(63, 94)      # Last 31 runs
-        }
-        
-        # Lag values (0 to 300 by steps of 10)
-        self.lag_values = list(range(0, 301, 10))
-        
+        # self.assist_values = ['0.5', '1.0', '1.5']
+        self.assist_values = ['1.0']
+        self.lag_values = list(range(0, 151, 10))  # 0 to 150 ms
+        self.run_count = 16
+
     def setup_directories(self):
         """Create all necessary directories for bot vs bot analysis."""
         print("\nSetting up directory structure...")
@@ -559,27 +553,16 @@ class BotAnalyzer:
         print("Created overall analysis directory")
 
     def analyze_assist_level(self, assist_value):
-        """Analyze all runs for a specific assistance level."""
-        print(f"\nAnalyzing complete set for assistance level {assist_value}")
         all_bot1_data = []
         all_bot2_data = []
         
-        # Find all available cardata files for this assist level
-        assist_dir = self.logs_dir / f'assist_{assist_value}'
-        if not assist_dir.exists():
-            print(f"No directory found for assist value {assist_value}")
-            return
+        for run_num, lag in zip(range(0, self.run_count), self.lag_values):
+            bot1_log = self.logs_dir / f'assist_{assist_value}' / f'cardata_{run_num}.log'
+            bot2_log = self.logs_dir / f'assist_{assist_value}' / f'botdata_{run_num}.log'
             
-        print(f"\nScanning directory: {assist_dir}")
-        cardata_files = list(assist_dir.glob('cardata_*.log'))
-        print(f"Found cardata files: {[f.name for f in cardata_files]}")
-        
-        run_numbers = sorted([int(f.stem.split('_')[1]) for f in cardata_files])
-        print(f"Identified run numbers: {run_numbers}")
-        
-        for run in run_numbers:
-            print(f"\nProcessing run {run}:")
-            bot1_data, bot2_data = self.analyze_bot_run(assist_value, run)
+            bot1_data = self._process_player_log(bot1_log)
+            bot2_data = self._process_bot_log(bot2_log)
+            
             if bot1_data is not None and bot2_data is not None:
                 all_bot1_data.append(bot1_data)
                 all_bot2_data.append(bot2_data)
@@ -607,7 +590,6 @@ class BotAnalyzer:
                 output_dir = self.analysis_dir / f'assist_{assist_value}' / 'Individual'
                 self._create_bot_plots(bot1_data, bot2_data, output_dir, run_number)
                 
-                # Create comparison plots
                 comp_dir = self.analysis_dir / f'assist_{assist_value}' / 'Comparisons'
                 self._create_comparison_plots(bot1_data, bot2_data, comp_dir, run_number)
                 
@@ -954,11 +936,7 @@ class BotAnalyzer:
         summary_stats.to_csv(output_dir / 'summary_statistics.csv', index=False)
 
     def _create_overall_analysis_plots(self, all_data, output_dir):
-        """Create overall analysis plots comparing all assistance levels."""
-        plt.style.use('default')
-        
-        # Prepare data for plotting
-        plot_data = {
+        metrics = {
             'assist': [],
             'lag': [],
             'bot': [],
@@ -970,20 +948,30 @@ class BotAnalyzer:
         for assist in self.assist_values:
             run_count = len(all_data[assist]['bot1'])
             assist_lag_values = self.lag_values[:run_count]
+
+            # for bot1_data, bot2_data in zip(all_data['1.0']['bot1'], all_data['1.0']['bot2']):
+            #     if bot1_data is not None and bot2_data is not None:
+            #         metrics['assist'].append('1.0')
+            #         metrics['lag'].append(self.lag_values[len(metrics['lag'])])
+            #         metrics['completion_time'].append(max(bot1_data['time'].max(), bot2_data['time'].max()))
+            #         metrics['avg_control'].append(bot1_data['control'].abs().mean())
+            #         metrics['avg_angle_error'].append(
+            #             (bot1_data['target_angle'] - bot1_data['current_angle']).abs().mean()
+            #         )
             
             for bot_type in ['bot1', 'bot2']:
                 for data, lag in zip(all_data[assist][bot_type], assist_lag_values):
                     if data is not None and not data.empty:
-                        plot_data['assist'].append(assist)
-                        plot_data['lag'].append(lag)
-                        plot_data['bot'].append(bot_type)
-                        plot_data['completion_time'].append(data['time'].max())
-                        plot_data['avg_control'].append(data['control'].abs().mean())
-                        plot_data['avg_angle_error'].append(
+                        metrics['assist'].append(assist)
+                        metrics['lag'].append(lag)
+                        metrics['bot'].append(bot_type)
+                        metrics['completion_time'].append(data['time'].max())
+                        metrics['avg_control'].append(data['control'].abs().mean())
+                        metrics['avg_angle_error'].append(
                             (data['target_angle'] - data['current_angle']).abs().mean()
                         )
         
-        df = pd.DataFrame(plot_data)
+        df = pd.DataFrame(metrics)
         
         # Completion Times vs Lag (trend)
         plt.figure(figsize=(15, 8))
@@ -994,6 +982,15 @@ class BotAnalyzer:
                 label = f'Assist {assist} - {"Bot 1" if bot == "bot1" else "Bot 2"}'
                 plt.plot(bot_data['lag'], bot_data['completion_time'], 'o-', label=label, markersize=4)
         
+        # Create heatmap
+        plt.figure(figsize=(10, 6))
+        df = pd.DataFrame(metrics)
+        pivot = df.pivot_table(index='lag', values=['completion_time', 'avg_control', 'avg_angle_error'])
+        sns.heatmap(pivot, annot=True, fmt=".2f", cmap="YlGnBu")
+        plt.title('Performance Metrics Heatmap')
+        plt.savefig(output_dir / 'metrics_heatmap.png', dpi=300, bbox_inches='tight')
+        plt.close()
+
         plt.title('Completion Times vs Lag by Assistance Level')
         plt.xlabel('Lag (ms)')
         plt.ylabel('Completion Time (seconds)')
@@ -1055,16 +1052,16 @@ class BotAnalyzer:
             for j, bot in enumerate(['bot1', 'bot2']):
                 bot_data = assist_data[assist_data['bot'] == bot]
                 
-                plot_data = []
+                metrics = []
                 for low, high in lag_ranges:
                     range_data = bot_data[
                         (bot_data['lag'] >= low) & 
                         (bot_data['lag'] < high)
                     ]['completion_time']
-                    plot_data.append(range_data)
+                    metrics.append(range_data)
                 
                 pos = [p + (i*0.25) + (j*0.1) for p in positions]
-                plt.boxplot(plot_data, positions=pos, widths=0.1,
+                plt.boxplot(metrics, positions=pos, widths=0.1,
                           patch_artist=True,
                           boxprops=dict(facecolor=f'C{i*2 + j}', alpha=0.5))
         
@@ -1086,16 +1083,16 @@ class BotAnalyzer:
             for j, bot in enumerate(['bot1', 'bot2']):
                 bot_data = assist_data[assist_data['bot'] == bot]
                 
-                plot_data = []
+                metrics = []
                 for low, high in lag_ranges:
                     range_data = bot_data[
                         (bot_data['lag'] >= low) & 
                         (bot_data['lag'] < high)
                     ]['avg_control']
-                    plot_data.append(range_data)
+                    metrics.append(range_data)
                 
                 pos = [p + (i*0.25) + (j*0.1) for p in positions]
-                plt.boxplot(plot_data, positions=pos, widths=0.1,
+                plt.boxplot(metrics, positions=pos, widths=0.1,
                           patch_artist=True,
                           boxprops=dict(facecolor=f'C{i*2 + j}', alpha=0.5))
         
@@ -1117,16 +1114,16 @@ class BotAnalyzer:
             for j, bot in enumerate(['bot1', 'bot2']):
                 bot_data = assist_data[assist_data['bot'] == bot]
                 
-                plot_data = []
+                metrics = []
                 for low, high in lag_ranges:
                     range_data = bot_data[
                         (bot_data['lag'] >= low) & 
                         (bot_data['lag'] < high)
                     ]['avg_angle_error']
-                    plot_data.append(range_data)
+                    metrics.append(range_data)
                 
                 pos = [p + (i*0.25) + (j*0.1) for p in positions]
-                plt.boxplot(plot_data, positions=pos, widths=0.1,
+                plt.boxplot(metrics, positions=pos, widths=0.1,
                           patch_artist=True,
                           boxprops=dict(facecolor=f'C{i*2 + j}', alpha=0.5))
         
@@ -1187,6 +1184,8 @@ class BotAnalyzer:
         """Convert game time string (MM:SS.ms) to seconds."""
         minutes, seconds = time_str.split(':')
         return float(minutes) * 60 + float(seconds)
+    
+
 
 
 def run_bot_analysis():
@@ -1226,15 +1225,19 @@ class LagAnalyzer:
         self.base_dir = Path(base_dir)
         self.logs_dir = self.base_dir / 'logs'
         self.analysis_dir = self.base_dir / 'data analysis' / 'lag_analysis'
-        self.assist_values = ['1.0', '0.5', '1.5']  # In order of runs
-        self.lag_values = list(range(0, 301, 10))  # 0 to 300 by steps of 10
+        # self.assist_values = ['1.0', '0.5', '1.5']  # In order of runs
+        # self.lag_values = list(range(0, 301, 10))  # 0 to 300 by steps of 10
         
-        # Map assistance levels to run number ranges
-        self.run_ranges = {
-            '1.0': range(1, 32),      # First 31 runs
-            '0.5': range(32, 63),     # Next 31 runs
-            '1.5': range(63, 94)      # Last 31 runs
-        }
+        # # Map assistance levels to run number ranges
+        # self.run_ranges = {
+        #     '1.0': range(1, 32),      # First 31 runs
+        #     '0.5': range(32, 63),     # Next 31 runs
+        #     '1.5': range(63, 94)      # Last 31 runs
+        # }
+
+        self.assist_values = ['1.0']
+        self.lag_values = list(range(0, 151, 10))
+        self.run_count = 16
         
     def setup_directories(self):
         """Create all necessary directories for lag analysis."""
@@ -1252,59 +1255,35 @@ class LagAnalyzer:
         print("Created overall analysis directory")
 
     def analyze_assist_level(self, assist_value):
-        """Analyze all lag values for a specific assistance level."""
-        print(f"\nAnalyzing lag data for assistance level {assist_value}")
-        
-        # Map assistance levels to run number ranges
-        run_ranges = {
-            '1.0': range(1, 32),      # First 31 runs
-            '0.5': range(32, 63),     # Next 31 runs
-            '1.5': range(63, 94)      # Last 31 runs
-        }
-        
-        # Data structures to collect metrics across lag values
         lag_data = {
             'lag': [],
             'completion_time': [],
             'avg_control': [],
-            'avg_angle_error': [],
-            'max_angle_error': []
+            'avg_angle_error': []
         }
         
-        run_range = run_ranges[assist_value]
-        for run_num, lag in zip(run_range, self.lag_values):
-            print(f"\nProcessing lag value: {lag}ms (Run #{run_num})")
-            
-            # Find the corresponding log files for this run
-            bot1_log = self.logs_dir / f'cardata_{run_num}.log'
-            bot2_log = self.logs_dir / f'botdata_{run_num}.log'
+        for run_num, lag in zip(range(0, self.run_count), self.lag_values):
+            bot1_log = self.logs_dir / f'assist_{assist_value}' / f'cardata_{run_num}.log'
+            bot2_log = self.logs_dir / f'assist_{assist_value}' / f'botdata_{run_num}.log'
             
             try:
-                # Process logs
                 bot1_data = self._process_player_log(bot1_log)
                 bot2_data = self._process_bot_log(bot2_log)
                 
                 if bot1_data is not None and bot2_data is not None:
-                    # Calculate metrics
-                    completion_time = max(bot1_data['time'].max(), bot2_data['time'].max())
-                    avg_control = bot1_data['control'].abs().mean()
-                    angle_error = (bot1_data['target_angle'] - bot1_data['current_angle']).abs()
-                    
-                    # Store metrics
                     lag_data['lag'].append(lag)
-                    lag_data['completion_time'].append(completion_time)
-                    lag_data['avg_control'].append(avg_control)
-                    lag_data['avg_angle_error'].append(angle_error.mean())
-                    lag_data['max_angle_error'].append(angle_error.max())
+                    lag_data['completion_time'].append(max(bot1_data['time'].max(), bot2_data['time'].max()))
+                    lag_data['avg_control'].append(bot1_data['control'].abs().mean())
+                    lag_data['avg_angle_error'].append(
+                        (bot1_data['target_angle'] - bot1_data['current_angle']).abs().mean()
+                    )
             
             except Exception as e:
                 print(f"Error processing lag {lag}ms: {e}")
         
         if lag_data['lag']:
-            # Create summary plots
             summary_dir = self.analysis_dir / f'assist_{assist_value}' / 'Summary'
             self._create_lag_summary_plots(lag_data, summary_dir, assist_value)
-            print(f"Created summary plots for assistance level {assist_value}")
 
     def _create_lag_summary_plots(self, lag_data, output_dir, assist_value):
         """Create summary plots showing the effect of lag."""
@@ -1312,6 +1291,14 @@ class LagAnalyzer:
         
         # Convert data to DataFrame for easier plotting
         df = pd.DataFrame(lag_data)
+
+        # Create heatmap
+        plt.figure(figsize=(10, 6))
+        pivot = df.pivot_table(index='lag', values=['completion_time', 'avg_control', 'avg_angle_error'])
+        sns.heatmap(pivot, annot=True, fmt=".2f", cmap="YlGnBu")
+        plt.title('Lag Analysis Heatmap')
+        plt.savefig(output_dir / 'lag_heatmap.png', dpi=300, bbox_inches='tight')
+        plt.close()
         
         # Plot 1: Completion Time vs Lag
         plt.figure(figsize=(12, 6))
@@ -1335,12 +1322,10 @@ class LagAnalyzer:
         
         # Plot 3: Angle Error vs Lag
         plt.figure(figsize=(12, 6))
-        plt.plot(df['lag'], df['avg_angle_error'], 'b-o', label='Average Error')
-        plt.plot(df['lag'], df['max_angle_error'], 'r-o', label='Maximum Error')
+        plt.plot(df['lag'], df['avg_angle_error'], 'b-o')
         plt.title(f'Angle Error vs Lag (Assist={assist_value})')
         plt.xlabel('Lag (ms)')
         plt.ylabel('Angle Error (degrees)')
-        plt.legend()
         plt.grid(True)
         plt.savefig(output_dir / 'angle_error_vs_lag.png', dpi=300, bbox_inches='tight')
         plt.close()
@@ -1552,6 +1537,7 @@ class LagAnalyzer:
         return float(minutes) * 60 + float(seconds)
 
 
+
 def run_lag_analysis():
     """Run the complete lag analysis pipeline."""
     start_time = time.time()
@@ -1590,6 +1576,7 @@ def run_lag_analysis():
 if __name__ == "__main__":
     try:
         run_bot_analysis()
+        run_lag_analysis()
     except KeyboardInterrupt:
         print("\nAnalysis interrupted by user")
         sys.exit(1)
@@ -1597,45 +1584,3 @@ if __name__ == "__main__":
         print(f"\nAn error occurred during analysis: {e}")
         sys.exit(1)
 
-
-
-# def run_complete_analysis():
-#     """Run the complete analysis pipeline."""
-#     start_time = time.time()
-    
-#     print("=== Starting Analysis ===")
-    
-#     # Comment out player-focused analysis
-#     # analyzer = DataAnalyzer()
-#     # print("\n1. Setting up directory structure...")
-#     # analyzer.setup_directories()
-    
-#     # print("\n2. Analyzing individual player runs...")
-#     # for player in ['F', 'J', 'M']:
-#     #     for control_type in ['Full AI', 'Full Player', 'Mixed']:
-#     #         analyzer.analyze_player_set(player, control_type)
-    
-#     # Focus on bot vs bot analysis
-#     bot_analyzer = BotAnalyzer()
-#     print("\n1. Setting up bot vs bot directory structure...")
-#     bot_analyzer.setup_directories()
-    
-#     print("\n2. Analyzing bot performance...")
-#     bot_analyzer.analyze_bot_performance()
-    
-#     end_time = time.time()
-#     duration = end_time - start_time
-    
-#     print("\n=== Analysis Complete ===")
-#     print(f"Total processing time: {duration:.2f} seconds")
-
-
-# if __name__ == "__main__":
-#     try:
-#         run_complete_analysis()
-#     except KeyboardInterrupt:
-#         print("\nAnalysis interrupted by user")
-#         sys.exit(1)
-#     except Exception as e:
-#         print(f"\nAn error occurred during analysis: {e}")
-#         sys.exit(1)
