@@ -12,10 +12,17 @@ class GameTestConfig:
     def __init__(self, config_path=None):
         self.keyboard = Controller()
         self.directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build")
+        # self.directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/build")
         self.log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs")
+        # self.log_directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/logs")
+        # Temporary, only for no steering sharpness change
+        self.lag_log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/logs/assist_1.0")
+        # self.lag_log_directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/logs/assist_1.0")
         self.test_cases_file = config_path or Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
-        self.init_wait_time = 5  # seconds
+        # self.test_cases_file = config_path or Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
+        self.init_wait_time = 7  # seconds
         self.test_duration = 60  # seconds
+        self.num_runs = 0
 
 class GameTester:
     def __init__(self, config: GameTestConfig):
@@ -44,14 +51,16 @@ class GameTester:
         assist_value = 1.0  # Fixed assist value
         
         # Generate lag values from 0 to 150 in steps of 10
-        for run_number, lag in enumerate(range(0, 151, 10), 1):
-            test_case = {
-                'steering_assist': assist_value,
-                'lag': lag,
-                'run_number': run_number,
-                'name': f"Assist {assist_value} - Lag {lag}ms"
-            }
-            test_cases.append(test_case)
+        # Set to 11 for testing
+        for run_number, lag in enumerate(range(0, 11, 10), 1):
+            for i in range(0, 2):
+                test_case = {
+                    'steering_assist': assist_value,
+                    'lag': lag,
+                    'run_number': run_number,
+                    'name': f"Assist {assist_value} - Lag {lag}ms"
+                }
+                test_cases.append(test_case)
         
         return test_cases
 
@@ -64,15 +73,14 @@ class GameTester:
         """
         assist_dir = self.config.log_directory / f"assist_{test_case['steering_assist']}"
         assist_dir.mkdir(parents=True, exist_ok=True)
+        lag_dir = self.config.lag_log_directory / f"lag_{test_case['lag']}"
+        lag_dir.mkdir(parents=True, exist_ok=True)
         
-        # The game creates files with simple run numbers
-        for prefix in ["cardata", "logfile", "botdata", "laptime"]:
-            source_file = self.config.log_directory / f"{prefix}_{test_case['run_number']}.log"
-            if source_file.exists():
-                # Keep the original run number in the filename
-                new_filename = f"{prefix}_{test_case['run_number']}.log"
-                shutil.move(source_file, assist_dir / new_filename)
-                print(f"Moved run {test_case['run_number']} ({test_case['lag']}ms lag) to {assist_dir}/{new_filename}")
+        # Move all .log files into the assist directory
+        for log_file in self.config.log_directory.glob("*.log"):
+            new_filename = log_file.name
+            shutil.move(log_file, lag_dir / new_filename)
+            print(f"Moved {log_file} to {lag_dir}/{new_filename}")
 
     def run_test_case(self, test_case):
         """
@@ -90,10 +98,12 @@ class GameTester:
             print(f"Starting test case: {test_case['name']} (Run {test_case['run_number']})")
             process = subprocess.Popen(command, cwd=self.config.directory)
             
-            time.sleep(self.config.init_wait_time)
+            # time.sleep(self.config.init_wait_time)
+            time.sleep(10)
             
             try:
                 self.config.keyboard.press(Key.enter)
+                print(f"Hurray!")
                 self.config.keyboard.release(Key.enter)
             except Exception as e:
                 print(f"Failed to simulate keyboard input: {e}")
@@ -103,10 +113,14 @@ class GameTester:
             
             process.terminate()
             process.wait(timeout=5)
+
+            self.config.num_runs += 1
             
-            # Move the logs immediately after the run while we know which configuration it was
-            self.move_run_logs(test_case)
-            print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
+            if self.config.num_runs == 3:
+                # Move the logs immediately after the run while we know which configuration it was
+                self.move_run_logs(test_case)
+                print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
+                self.config.num_runs = 0
             
             # Add a small delay between runs
             time.sleep(2)
