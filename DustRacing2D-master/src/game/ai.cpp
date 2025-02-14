@@ -131,13 +131,13 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     // LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA, 
     //                 "steerControl: FPS: %d\n", fps);
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "steerControl: targetNode X: %f\n", targetNode->location().x());
+                    "steerControl: targetNode X= %f\n", targetNode->location().x());
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "steerControl: targetNode Y: %f\n", targetNode->location().y());
+                    "steerControl: targetNode Y= %f\n", targetNode->location().y());
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "steerControl: car Location i: %f\n", m_car.location().i());
+                    "steerControl: car Location i= %f\n", m_car.location().i());
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "steerControl: car Location j: %f\n", m_car.location().j());
+                    "steerControl: car Location j= %f\n", m_car.location().j());
 
     // const float angle = MCTrigonom::radToDeg(std::atan2(target.j(), target.i()));
     // const float cur = static_cast<int>(m_car.angle()) % 360;
@@ -170,10 +170,10 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
         m_continuousTargetAngle = newTargetAngle;
     }
 
-    // Log the continuous angles
-    LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-        "Continuous angles: target=%f, current=%f\n",
-        m_continuousTargetAngle, rawCurrentAngle);
+    // Log the continuous angles (No longer logging due to overlap with track assistance recordings)
+    // LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
+    //     "Continuous angles: target=%f, current=%f\n",
+    //     m_continuousTargetAngle, rawCurrentAngle);
 
     // Now proceed with normalized calculations for steering
     // const float angle = static_cast<int>(newTargetAngle) % 180;
@@ -213,24 +213,25 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
     const char* evlag = m_game.getEvLag();
     std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
     std::this_thread::sleep_for(std::chrono::milliseconds(0));
-    if (diff < -maxDelta)
-    {
-        m_car.steer(Car::Steer::Right, control);
-        LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "steerControl: Car turned/is turning right\n");
-    }
-    else if (diff > maxDelta)
-    {
-        m_car.steer(Car::Steer::Left, control);
-        LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
-                    "steerControl: Car turned/is turning left\n");
-    }
 
     // Store the last difference
     m_lastDiff = diff;
     LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "steerControl: angle=%f, cur=%f, diff=%f, control=%f\n",
                     angle, cur, diff, control);
+
+    if (diff < -maxDelta)
+    {
+        m_car.steer(Car::Steer::Right, control);
+        LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
+                    "Steering RIGHT with control= %f\n", control);
+    }
+    else if (diff > maxDelta)
+    {
+        m_car.steer(Car::Steer::Left, control);
+        LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
+                    "Steering LEFT with control= %f\n", control);
+    }   
     });
 
 
