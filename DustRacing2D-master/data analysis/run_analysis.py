@@ -143,7 +143,7 @@ class DataAnalyzer:
 
     # Placeholder methods - to be implemented based on actual log formats
     def _process_player_log(self, log_file):
-        """Process a car log file and return structured data."""
+        """Process a player log file."""
         data = {
             'time': [],
             'target_angle': [],
@@ -195,105 +195,87 @@ class DataAnalyzer:
             return pd.DataFrame(data)
             
         except Exception as e:
-            print(f"Error processing car log {log_file}: {e}")
+            print(f"Error processing player log {log_file}: {e}")
             return None
 
-
     def _process_bot_log(self, log_file):
-        """Process a bot log file and extract relevant data."""
+        """Process a bot log file."""
         data = {
             'time': [],
             'target_angle': [],
             'current_angle': [],
             'diff': [],
             'control': [],
-            'car_x': [],
-            'car_y': [],
-            'target_x': [],
-            'target_y': []
+            'steering_direction': []
         }
         
-        current_time = None
-        current_set = {}  # Temporary storage for a single timestep's data
-        
-        print(f"Processing log file: {log_file}")
-        
-        with open(log_file, 'r') as f:
-            for line in f:
-                # Extract game time
-                time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
-                if time_match:
-                    if current_time is not None and len(current_set) == 8:  # All fields collected
-                        data['time'].append(current_time)
-                        data['target_angle'].append(current_set['target_angle'])
-                        data['current_angle'].append(current_set['current_angle'])
-                        data['diff'].append(current_set['diff'])
-                        data['control'].append(current_set['control'])
-                        data['car_x'].append(current_set['car_x'])
-                        data['car_y'].append(current_set['car_y'])
-                        data['target_x'].append(current_set['target_x'])
-                        data['target_y'].append(current_set['target_y'])
-                        current_set = {}  # Reset for the next timestep
-                    
-                    current_time = self._convert_game_time(time_match.group(1))
-                    print(f"Found time: {current_time}")
+        try:
+            with open(log_file, "r") as file:
+                current_time = None
+                current_set = {}
                 
-                # Extract target position
-                if 'steerControl: targetNode X:' in line:
-                    x_match = re.search(r'targetNode X:\s*([\d\.-]+)', line)
-                    if x_match:
-                        current_set['target_x'] = float(x_match.group(1))
-                        print(f"Found target_x: {current_set['target_x']}")
+                for line in file:
+                    # Extract game time
+                    time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
+                    if time_match:
+                        current_time = self._convert_game_time(time_match.group(1))
+                        
+                        # Extract different types of data based on line content
+                        if 'Continuous angles:' in line:
+                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
+                            if angles_match:
+                                current_set['target_angle'] = float(angles_match.group(1))
+                                current_set['current_angle'] = float(angles_match.group(2))
+                                
+                        elif 'steerControl:' in line:
+                            assist_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                            if assist_match:
+                                current_set['diff'] = float(assist_match.group(1))
+                                current_set['control'] = float(assist_match.group(2))
+                                
+                        elif 'Car turned/is turning' in line:
+                            direction_match = re.search(r'Car turned/is turning (LEFT|RIGHT)', line)
+                            if direction_match:
+                                current_set['steering_direction'] = direction_match.group(1)
+                                
+                                # If we have all data for this timestep, add it to our main data structure
+                                if len(current_set) == 5:  # All values except time
+                                    data['time'].append(current_time)
+                                    data['target_angle'].append(current_set['target_angle'])
+                                    data['current_angle'].append(current_set['current_angle'])
+                                    data['diff'].append(current_set['diff'])
+                                    data['control'].append(current_set['control'])
+                                    data['steering_direction'].append(current_set['steering_direction'])
+                                    current_set = {}
+                                    
+            return pd.DataFrame(data)
+            
+        except Exception as e:
+            print(f"Error processing bot log {log_file}: {e}")
+            return None
+
+    def _parse_laptime_log(self, log_file):
+        """Parse the laptime log file to get finish times."""
+        try:
+            with open(log_file, "r") as file:
+                bot_time = None
+                player_time = None
                 
-                if 'steerControl: targetNode Y:' in line:
-                    y_match = re.search(r'targetNode Y:\s*([\d\.-]+)', line)
-                    if y_match:
-                        current_set['target_y'] = float(y_match.group(1))
-                        print(f"Found target_y: {current_set['target_y']}")
+                for line in file:
+                    if 'Bot finish time:' in line:
+                        bot_match = re.search(r'Bot finish time:\s*([\d\.]+)', line)
+                        if bot_match:
+                            bot_time = float(bot_match.group(1))
+                    elif 'Player finish time:' in line:
+                        player_match = re.search(r'Player finish time:\s*([\d\.]+)', line)
+                        if player_match:
+                            player_time = float(player_match.group(1))
+                            
+                return player_time, bot_time
                 
-                # Extract car position
-                if 'steerControl: car Location i:' in line:
-                    i_match = re.search(r'car Location i:\s*([\d\.-]+)', line)
-                    if i_match:
-                        current_set['car_x'] = float(i_match.group(1))
-                        print(f"Found car_x: {current_set['car_x']}")
-                
-                if 'steerControl: car Location j:' in line:
-                    j_match = re.search(r'car Location j:\s*([\d\.-]+)', line)
-                    if j_match:
-                        current_set['car_y'] = float(j_match.group(1))
-                        print(f"Found car_y: {current_set['car_y']}")
-                
-                # Extract angles
-                if 'Continuous angles:' in line:
-                    angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                    if angles_match:
-                        current_set['target_angle'] = float(angles_match.group(1))
-                        current_set['current_angle'] = float(angles_match.group(2))
-                        print(f"Found angles: target={current_set['target_angle']}, current={current_set['current_angle']}")
-                
-                # Extract control values
-                if 'steerControl: angle=' in line:
-                    control_match = re.search(r'angle=([\d\.-]+), cur=([\d\.-]+), diff=([\d\.-]+), control=([\d\.-]+)', line)
-                    if control_match:
-                        current_set['diff'] = float(control_match.group(3))
-                        current_set['control'] = float(control_match.group(4))
-                        print(f"Found control: diff={current_set['diff']}, control={current_set['control']}")
-        
-        # Add the last timestep's data if it's complete
-        if current_time is not None and len(current_set) == 8:
-            data['time'].append(current_time)
-            data['target_angle'].append(current_set['target_angle'])
-            data['current_angle'].append(current_set['current_angle'])
-            data['diff'].append(current_set['diff'])
-            data['control'].append(current_set['control'])
-            data['car_x'].append(current_set['car_x'])
-            data['car_y'].append(current_set['car_y'])
-            data['target_x'].append(current_set['target_x'])
-            data['target_y'].append(current_set['target_y'])
-        
-        print(f"Processed {len(data['time'])} timesteps from {log_file}")
-        return pd.DataFrame(data)
+        except Exception as e:
+            print(f"Error processing laptime log {log_file}: {e}")
+            return None, None
 
     def _create_player_plots(self, data, output_dir, run_number):
         """Create individual player performance plots."""
@@ -793,7 +775,7 @@ class BotAnalyzer:
         print("Created overall analysis plots")
 
     def _process_player_log(self, log_file):
-        """Process a car log file using the player format."""
+        """Process a player log file."""
         data = {
             'time': [],
             'target_angle': [],
@@ -845,7 +827,7 @@ class BotAnalyzer:
             return pd.DataFrame(data)
             
         except Exception as e:
-            print(f"Error processing car log {log_file}: {e}")
+            print(f"Error processing player log {log_file}: {e}")
             return None
 
     def _process_bot_log(self, log_file):
@@ -856,69 +838,76 @@ class BotAnalyzer:
             'current_angle': [],
             'diff': [],
             'control': [],
-            'car_x': [],
-            'car_y': [],
-            'target_x': [],
-            'target_y': []
+            'steering_direction': []
         }
         
         try:
             with open(log_file, "r") as file:
-                lines = file.readlines()
-                
                 current_time = None
                 current_set = {}
                 
-                for line in lines:
+                for line in file:
                     # Extract game time
                     time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
                     if time_match:
-                        if current_time is not None and len(current_set) == 8:
-                            data['time'].append(current_time)
-                            for key in current_set:
-                                data[key].append(current_set[key])
-                            current_set = {}
-                        
                         current_time = self._convert_game_time(time_match.group(1))
-                    
-                    # Extract positions and angles
-                    if 'targetNode X:' in line:
-                        x_match = re.search(r'targetNode X:\s*([\d\.-]+)', line)
-                        if x_match:
-                            current_set['target_x'] = float(x_match.group(1))
-                    
-                    elif 'targetNode Y:' in line:
-                        y_match = re.search(r'targetNode Y:\s*([\d\.-]+)', line)
-                        if y_match:
-                            current_set['target_y'] = float(y_match.group(1))
-                    
-                    elif 'car Location i:' in line:
-                        x_match = re.search(r'car Location i:\s*([\d\.-]+)', line)
-                        if x_match:
-                            current_set['car_x'] = float(x_match.group(1))
-                    
-                    elif 'car Location j:' in line:
-                        y_match = re.search(r'car Location j:\s*([\d\.-]+)', line)
-                        if y_match:
-                            current_set['car_y'] = float(y_match.group(1))
-                    
-                    elif 'Continuous angles:' in line:
-                        angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                        if angles_match:
-                            current_set['target_angle'] = float(angles_match.group(1))
-                            current_set['current_angle'] = float(angles_match.group(2))
-                    
-                    elif 'steerControl: angle=' in line:
-                        control_match = re.search(r'diff=([\d\.-]+), control=([\d\.-]+)', line)
-                        if control_match:
-                            current_set['diff'] = float(control_match.group(1))
-                            current_set['control'] = float(control_match.group(2))
-            
+                        
+                        # Extract different types of data based on line content
+                        if 'Continuous angles:' in line:
+                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
+                            if angles_match:
+                                current_set['target_angle'] = float(angles_match.group(1))
+                                current_set['current_angle'] = float(angles_match.group(2))
+                                
+                        elif 'steerControl:' in line:
+                            assist_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                            if assist_match:
+                                current_set['diff'] = float(assist_match.group(1))
+                                current_set['control'] = float(assist_match.group(2))
+                                
+                        elif 'Car turned/is turning' in line:
+                            direction_match = re.search(r'Car turned/is turning (LEFT|RIGHT)', line)
+                            if direction_match:
+                                current_set['steering_direction'] = direction_match.group(1)
+                                
+                                # If we have all data for this timestep, add it to our main data structure
+                                if len(current_set) == 5:  # All values except time
+                                    data['time'].append(current_time)
+                                    data['target_angle'].append(current_set['target_angle'])
+                                    data['current_angle'].append(current_set['current_angle'])
+                                    data['diff'].append(current_set['diff'])
+                                    data['control'].append(current_set['control'])
+                                    data['steering_direction'].append(current_set['steering_direction'])
+                                    current_set = {}
+                                    
             return pd.DataFrame(data)
             
         except Exception as e:
             print(f"Error processing bot log {log_file}: {e}")
             return None
+
+    def _parse_laptime_log(self, log_file):
+        """Parse the laptime log file to get finish times."""
+        try:
+            with open(log_file, "r") as file:
+                bot_time = None
+                player_time = None
+                
+                for line in file:
+                    if 'Bot finish time:' in line:
+                        bot_match = re.search(r'Bot finish time:\s*([\d\.]+)', line)
+                        if bot_match:
+                            bot_time = float(bot_match.group(1))
+                    elif 'Player finish time:' in line:
+                        player_match = re.search(r'Player finish time:\s*([\d\.]+)', line)
+                        if player_match:
+                            player_time = float(player_match.group(1))
+                            
+                return player_time, bot_time
+                
+        except Exception as e:
+            print(f"Error processing laptime log {log_file}: {e}")
+            return None, None
 
     def _create_bot_plots(self, bot1_data, bot2_data, output_dir, run_number, bot1_time, bot2_time):
         """Create individual performance plots for both bots with correct completion times."""
@@ -1465,7 +1454,7 @@ class LagAnalyzer:
 
     # Include the _process_player_log and _process_bot_log methods from BotAnalyzer
     def _process_player_log(self, log_file):
-        """Process a car log file using the player format."""
+        """Process a player log file."""
         data = {
             'time': [],
             'target_angle': [],
@@ -1517,7 +1506,7 @@ class LagAnalyzer:
             return pd.DataFrame(data)
             
         except Exception as e:
-            print(f"Error processing car log {log_file}: {e}")
+            print(f"Error processing player log {log_file}: {e}")
             return None
 
     def _process_bot_log(self, log_file):
@@ -1528,69 +1517,214 @@ class LagAnalyzer:
             'current_angle': [],
             'diff': [],
             'control': [],
-            'car_x': [],
-            'car_y': [],
-            'target_x': [],
-            'target_y': []
+            'steering_direction': []
         }
         
         try:
             with open(log_file, "r") as file:
-                lines = file.readlines()
-                
                 current_time = None
                 current_set = {}
                 
-                for line in lines:
+                for line in file:
                     # Extract game time
                     time_match = re.search(r'\[GAME:\s*(\d{2}:\d{2}\.\d{2})\]', line)
                     if time_match:
-                        if current_time is not None and len(current_set) == 8:
-                            data['time'].append(current_time)
-                            for key in current_set:
-                                data[key].append(current_set[key])
-                            current_set = {}
-                        
                         current_time = self._convert_game_time(time_match.group(1))
-                    
-                    # Extract positions and angles
-                    if 'targetNode X:' in line:
-                        x_match = re.search(r'targetNode X:\s*([\d\.-]+)', line)
-                        if x_match:
-                            current_set['target_x'] = float(x_match.group(1))
-                    
-                    elif 'targetNode Y:' in line:
-                        y_match = re.search(r'targetNode Y:\s*([\d\.-]+)', line)
-                        if y_match:
-                            current_set['target_y'] = float(y_match.group(1))
-                    
-                    elif 'car Location i:' in line:
-                        x_match = re.search(r'car Location i:\s*([\d\.-]+)', line)
-                        if x_match:
-                            current_set['car_x'] = float(x_match.group(1))
-                    
-                    elif 'car Location j:' in line:
-                        y_match = re.search(r'car Location j:\s*([\d\.-]+)', line)
-                        if y_match:
-                            current_set['car_y'] = float(y_match.group(1))
-                    
-                    elif 'Continuous angles:' in line:
-                        angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                        if angles_match:
-                            current_set['target_angle'] = float(angles_match.group(1))
-                            current_set['current_angle'] = float(angles_match.group(2))
-                    
-                    elif 'steerControl: angle=' in line:
-                        control_match = re.search(r'diff=([\d\.-]+), control=([\d\.-]+)', line)
-                        if control_match:
-                            current_set['diff'] = float(control_match.group(1))
-                            current_set['control'] = float(control_match.group(2))
-            
+                        
+                        # Extract different types of data based on line content
+                        if 'Continuous angles:' in line:
+                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
+                            if angles_match:
+                                current_set['target_angle'] = float(angles_match.group(1))
+                                current_set['current_angle'] = float(angles_match.group(2))
+                                
+                        elif 'steerControl:' in line:
+                            assist_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                            if assist_match:
+                                current_set['diff'] = float(assist_match.group(1))
+                                current_set['control'] = float(assist_match.group(2))
+                                
+                        elif 'Car turned/is turning' in line:
+                            direction_match = re.search(r'Car turned/is turning (LEFT|RIGHT)', line)
+                            if direction_match:
+                                current_set['steering_direction'] = direction_match.group(1)
+                                
+                                # If we have all data for this timestep, add it to our main data structure
+                                if len(current_set) == 5:  # All values except time
+                                    data['time'].append(current_time)
+                                    data['target_angle'].append(current_set['target_angle'])
+                                    data['current_angle'].append(current_set['current_angle'])
+                                    data['diff'].append(current_set['diff'])
+                                    data['control'].append(current_set['control'])
+                                    data['steering_direction'].append(current_set['steering_direction'])
+                                    current_set = {}
+                                    
             return pd.DataFrame(data)
             
         except Exception as e:
             print(f"Error processing bot log {log_file}: {e}")
             return None
+
+    def _parse_laptime_log(self, log_file):
+        """Parse the laptime log file to get finish times."""
+        try:
+            with open(log_file, "r") as file:
+                bot_time = None
+                player_time = None
+                
+                for line in file:
+                    if 'Bot finish time:' in line:
+                        bot_match = re.search(r'Bot finish time:\s*([\d\.]+)', line)
+                        if bot_match:
+                            bot_time = float(bot_match.group(1))
+                    elif 'Player finish time:' in line:
+                        player_match = re.search(r'Player finish time:\s*([\d\.]+)', line)
+                        if player_match:
+                            player_time = float(player_match.group(1))
+                            
+                return player_time, bot_time
+                
+        except Exception as e:
+            print(f"Error processing laptime log {log_file}: {e}")
+            return None, None
+
+    def _create_lag_summary_plots(self, lag_data, output_dir, assist_value):
+        """Create summary plots showing the effect of lag."""
+        plt.style.use('default')
+        
+        # Convert data to DataFrame for easier plotting
+        df = pd.DataFrame(lag_data)
+
+        # Only create plots if we have valid data
+        if not df.empty:
+            # Create heatmap
+            plt.figure(figsize=(10, 6))
+            pivot = df.pivot_table(index='lag', values=['bot1_completion_time', 'bot2_completion_time', 'avg_control', 'avg_angle_error'])
+            sns.heatmap(pivot, annot=True, fmt=".2f", cmap="YlGnBu")
+            plt.title('Lag Analysis Heatmap')
+            plt.savefig(output_dir / 'lag_heatmap.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            # Plot 1: Completion Time vs Lag
+            plt.figure(figsize=(12, 6))
+            plt.plot(df['lag'], df['bot1_completion_time'], 'b-o', label='Bot 1')
+            plt.plot(df['lag'], df['bot2_completion_time'], 'r-o', label='Bot 2')
+            plt.title(f'Completion Time vs Lag (Assist={assist_value})')
+            plt.xlabel('Lag (ms)')
+            plt.ylabel('Completion Time (seconds)')
+            plt.legend()
+            plt.grid(True)
+            plt.savefig(output_dir / 'completion_time_vs_lag.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            # Plot 2: Control Effort vs Lag
+            plt.figure(figsize=(12, 6))
+            plt.plot(df['lag'], df['avg_control'], 'g-o')
+            plt.title(f'Average Control Effort vs Lag (Assist={assist_value})')
+            plt.xlabel('Lag (ms)')
+            plt.ylabel('Average Control Value')
+            plt.grid(True)
+            plt.savefig(output_dir / 'control_vs_lag.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            # Plot 3: Angle Error vs Lag
+            plt.figure(figsize=(12, 6))
+            plt.plot(df['lag'], df['avg_angle_error'], 'm-o')
+            plt.title(f'Angle Error vs Lag (Assist={assist_value})')
+            plt.xlabel('Lag (ms)')
+            plt.ylabel('Angle Error (degrees)')
+            plt.grid(True)
+            plt.savefig(output_dir / 'angle_error_vs_lag.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            # Save metrics to CSV
+            df.to_csv(output_dir / 'lag_metrics.csv', index=False)
+        else:
+            print("No valid data to create plots")
+
+    def create_overall_analysis(self):
+        """Create comprehensive comparison plots across all assistance levels."""
+        print("\nCreating overall lag analysis")
+        overall_dir = self.analysis_dir / 'overall'
+        
+        # Collect data for all assistance levels
+        all_data = []
+        
+        for assist in self.assist_values:
+            metrics_file = self.analysis_dir / f'assist_{assist}' / 'Summary' / 'lag_metrics.csv'
+            if metrics_file.exists():
+                df = pd.read_csv(metrics_file)
+                df['assist'] = assist
+                all_data.append(df)
+        
+        if all_data:
+            combined_df = pd.concat(all_data, ignore_index=True)
+            self._create_overall_lag_plots(combined_df, overall_dir)
+            print("Created overall lag analysis plots")
+
+    def _create_overall_lag_plots(self, df, output_dir):
+        """Create overall analysis plots comparing lag effects across assistance levels."""
+        plt.style.use('default')
+        
+        # Ensure we have the required columns
+        if not {'lag', 'bot1_completion_time', 'bot2_completion_time', 'avg_control', 'avg_angle_error'}.issubset(df.columns):
+            print("Missing required columns in data")
+            return
+        
+        # Plot 1: Completion Time vs Lag (all assistance levels)
+        plt.figure(figsize=(12, 6))
+        for assist in self.assist_values:
+            assist_data = df[df['assist'] == assist]
+            plt.plot(assist_data['lag'], assist_data['bot1_completion_time'], 'o-', 
+                    label=f'Assist {assist} - Bot 1')
+            plt.plot(assist_data['lag'], assist_data['bot2_completion_time'], 'o-',
+                    label=f'Assist {assist} - Bot 2')
+        plt.title('Completion Time vs Lag by Assistance Level')
+        plt.xlabel('Lag (ms)')
+        plt.ylabel('Completion Time (seconds)')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / 'overall_completion_time.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 2: Control Effort vs Lag (all assistance levels)
+        plt.figure(figsize=(12, 6))
+        for assist in self.assist_values:
+            assist_data = df[df['assist'] == assist]
+            plt.plot(assist_data['lag'], assist_data['avg_control'], 'o-',
+                    label=f'Assist {assist}')
+        plt.title('Average Control Effort vs Lag by Assistance Level')
+        plt.xlabel('Lag (ms)')
+        plt.ylabel('Average Control Value')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / 'overall_control.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Plot 3: Average Angle Error vs Lag (all assistance levels)
+        plt.figure(figsize=(12, 6))
+        for assist in self.assist_values:
+            assist_data = df[df['assist'] == assist]
+            plt.plot(assist_data['lag'], assist_data['avg_angle_error'], 'o-',
+                    label=f'Assist {assist}')
+        plt.title('Average Angle Error vs Lag by Assistance Level')
+        plt.xlabel('Lag (ms)')
+        plt.ylabel('Average Angle Error (degrees)')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(output_dir / 'overall_angle_error.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Create heatmap
+        plt.figure(figsize=(10, 6))
+        pivot = df.pivot_table(index='lag', values=['bot1_completion_time', 'bot2_completion_time', 'avg_control', 'avg_angle_error'])
+        sns.heatmap(pivot, annot=True, fmt=".2f", cmap="YlGnBu")
+        plt.title('Overall Lag Analysis Heatmap')
+        plt.savefig(output_dir / 'overall_lag_heatmap.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # Save combined metrics
+        df.to_csv(output_dir / 'overall_lag_metrics.csv', index=False)
 
     def _convert_game_time(self, time_str):
         """Convert game time string (MM:SS.ms) to seconds."""

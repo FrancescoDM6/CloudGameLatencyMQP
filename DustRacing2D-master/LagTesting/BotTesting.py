@@ -52,8 +52,8 @@ class GameTester:
         
         # Generate lag values from 0 to 150 in steps of 10
         # Set to 11 for testing
-        for run_number, lag in enumerate(range(0, 11, 10), 1):
-            for i in range(0, 2):
+        for lag in range(0, 11, 10):
+            for run_number in range(1, self.config.num_runs + 1):
                 test_case = {
                     'steering_assist': assist_value,
                     'lag': lag,
