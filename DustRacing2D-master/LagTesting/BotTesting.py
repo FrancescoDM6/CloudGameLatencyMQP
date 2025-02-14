@@ -22,7 +22,7 @@ class GameTestConfig:
         # self.test_cases_file = config_path or Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
         self.init_wait_time = 7  # seconds
         self.test_duration = 60  # seconds
-        self.num_runs = 0
+        self.num_runs = 2
 
 class GameTester:
     def __init__(self, config: GameTestConfig):
@@ -46,19 +46,18 @@ class GameTester:
         return result.returncode == 0
 
     def generate_test_cases(self):
-        """Generate test cases for a single assist value with varying lag values"""
+        """Generate test cases with specified number of runs per lag value"""
         test_cases = []
         assist_value = 1.0  # Fixed assist value
         
-        # Generate lag values from 0 to 150 in steps of 10
-        # Set to 11 for testing
-        for lag in range(0, 11, 10):
+        # Generate test cases for each lag value
+        for lag in range(0, 11, 10):  # 0 to 10 in steps of 10
             for run_number in range(1, self.config.num_runs + 1):
                 test_case = {
                     'steering_assist': assist_value,
                     'lag': lag,
                     'run_number': run_number,
-                    'name': f"Assist {assist_value} - Lag {lag}ms"
+                    'name': f"Assist {assist_value} - Lag {lag}ms (Run {run_number})"
                 }
                 test_cases.append(test_case)
         
@@ -71,16 +70,29 @@ class GameTester:
         Args:
             test_case (dict): The test case containing assist value, lag value, and run number
         """
+        # Create target directories
         assist_dir = self.config.log_directory / f"assist_{test_case['steering_assist']}"
         assist_dir.mkdir(parents=True, exist_ok=True)
-        lag_dir = self.config.lag_log_directory / f"lag_{test_case['lag']}"
+        
+        lag_dir = assist_dir / f"lag_{test_case['lag']}"
         lag_dir.mkdir(parents=True, exist_ok=True)
         
-        # Move all .log files into the assist directory
-        for log_file in self.config.log_directory.glob("*.log"):
-            new_filename = log_file.name
-            shutil.move(log_file, lag_dir / new_filename)
-            print(f"Moved {log_file} to {lag_dir}/{new_filename}")
+        # Move all log files with the correct run number
+        log_files = [
+            'cardata.log',
+            'botdata.log',
+            'laptime.log',
+            'logfile.log'
+        ]
+        
+        for log_file in log_files:
+            src = self.config.log_directory / log_file
+            if src.exists():
+                # Rename with run number
+                new_name = log_file.replace('.log', f'_{test_case["run_number"]}.log')
+                dest = lag_dir / new_name
+                shutil.move(src, dest)
+                print(f"Moved {src} to {dest}")
 
     def run_test_case(self, test_case):
         """
