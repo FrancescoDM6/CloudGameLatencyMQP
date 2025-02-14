@@ -22,7 +22,7 @@ class GameTestConfig:
         # self.test_cases_file = config_path or Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
         self.init_wait_time = 7  # seconds
         self.test_duration = 60  # seconds
-        self.num_runs = 0
+        self.num_runs = 1
 
 class GameTester:
     def __init__(self, config: GameTestConfig):
