@@ -22,7 +22,7 @@ class GameTestConfig:
         # self.test_cases_file = config_path or Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
         self.init_wait_time = 7  # seconds
         self.test_duration = 60  # seconds
-        self.num_runs = 2
+        self.num_runs = 3
 
 class GameTester:
     def __init__(self, config: GameTestConfig):
@@ -51,7 +51,7 @@ class GameTester:
         assist_value = 1.0  # Fixed assist value
         
         # Generate test cases for each lag value
-        for lag in range(0, 11, 10):  # 0 to 10 in steps of 10
+        for lag in range(0, 151, 10):  # 0 to 150 in steps of 10
             for run_number in range(1, self.config.num_runs + 1):
                 test_case = {
                     'steering_assist': assist_value,
@@ -110,29 +110,24 @@ class GameTester:
             print(f"Starting test case: {test_case['name']} (Run {test_case['run_number']})")
             process = subprocess.Popen(command, cwd=self.config.directory)
             
-            # time.sleep(self.config.init_wait_time)
-            time.sleep(10)
+            # Wait for game to initialize
+            time.sleep(self.config.init_wait_time)
             
             try:
                 self.config.keyboard.press(Key.enter)
-                print(f"Hurray!")
                 self.config.keyboard.release(Key.enter)
             except Exception as e:
                 print(f"Failed to simulate keyboard input: {e}")
                 raise
             
+            # Wait for test duration
             time.sleep(self.config.test_duration)
             
+            # Terminate the process
             process.terminate()
             process.wait(timeout=5)
-
-            self.config.num_runs += 1
             
-            if self.config.num_runs == 3:
-                # Move the logs immediately after the run while we know which configuration it was
-                self.move_run_logs(test_case)
-                print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
-                self.config.num_runs = 0
+            print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
             
             # Add a small delay between runs
             time.sleep(2)
@@ -143,6 +138,57 @@ class GameTester:
                 process.terminate()
             raise
 
+    def run_all_test_cases(self):
+        """Run all test cases and handle log file movement."""
+        test_cases = self.generate_test_cases()
+        current_lag = None
+        lag_test_cases = []
+        
+        for test_case in test_cases:
+            # If we're starting a new lag condition, move previous logs
+            if current_lag is not None and test_case['lag'] != current_lag:
+                self._move_lag_logs(current_lag, lag_test_cases)
+                lag_test_cases = []
+            
+            current_lag = test_case['lag']
+            lag_test_cases.append(test_case)
+            
+            # Run the test case
+            self.run_test_case(test_case)
+        
+        # Move logs for the last lag condition
+        if lag_test_cases:
+            self._move_lag_logs(current_lag, lag_test_cases)
+
+    def _move_lag_logs(self, lag, test_cases):
+        """Move all log files for a specific lag condition."""
+        assist_value = test_cases[0]['steering_assist']
+        
+        # Create target directories
+        assist_dir = self.config.log_directory / f"assist_{assist_value}"
+        assist_dir.mkdir(parents=True, exist_ok=True)
+        
+        lag_dir = assist_dir / f"lag_{lag}"
+        lag_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Move all log files for this lag condition
+        for test_case in test_cases:
+            log_files = [
+                'cardata.log',
+                'botdata.log',
+                'laptime.log',
+                'logfile.log'
+            ]
+            
+            for log_file in log_files:
+                src = self.config.log_directory / log_file
+                if src.exists():
+                    # Rename with run number
+                    new_name = log_file.replace('.log', f'_{test_case["run_number"]}.log')
+                    dest = lag_dir / new_name
+                    shutil.move(src, dest)
+                    print(f"Moved {src} to {dest}")
+
 def main():
     try:
         config = GameTestConfig()
@@ -151,13 +197,8 @@ def main():
         if not tester.compile_game():
             return
         
-        test_cases = tester.generate_test_cases()
-        for test_case in test_cases:
-            try:
-                tester.run_test_case(test_case)
-            except Exception as e:
-                print(f"Failed to run test case {test_case['name']}: {e}")
-                continue
+        # Run all test cases with proper log handling
+        tester.run_all_test_cases()
 
     except Exception as e:
         print(f"Test execution failed: {e}")
