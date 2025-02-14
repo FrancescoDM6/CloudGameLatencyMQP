@@ -77,6 +77,11 @@ class GameTester:
         lag_dir = assist_dir / f"lag_{test_case['lag']}"
         lag_dir.mkdir(parents=True, exist_ok=True)
         
+        # Get the highest existing run number for this lag condition
+        existing_runs = [int(f.name.split('_')[-1].split('.')[0]) 
+                        for f in lag_dir.glob('*data_*.log')]
+        run_number = max(existing_runs) + 1 if existing_runs else 1
+        
         # Move all log files with the correct run number
         log_files = [
             'cardata.log',
@@ -89,7 +94,7 @@ class GameTester:
             src = self.config.log_directory / log_file
             if src.exists():
                 # Rename with run number
-                new_name = log_file.replace('.log', f'_{test_case["run_number"]}.log')
+                new_name = log_file.replace('.log', f'_{run_number}.log')
                 dest = lag_dir / new_name
                 shutil.move(src, dest)
                 print(f"Moved {src} to {dest}")
@@ -107,7 +112,7 @@ class GameTester:
         ]
         
         try:
-            print(f"Starting test case: {test_case['name']} (Run {test_case['run_number']})")
+            print(f"Starting test case: {test_case['name']}")
             process = subprocess.Popen(command, cwd=self.config.directory)
             
             # Wait for game to initialize
@@ -127,7 +132,9 @@ class GameTester:
             process.terminate()
             process.wait(timeout=5)
             
-            print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
+            # Move the logs immediately after the run
+            self.move_run_logs(test_case)
+            print(f"Completed test case: {test_case['name']}")
             
             # Add a small delay between runs
             time.sleep(2)
