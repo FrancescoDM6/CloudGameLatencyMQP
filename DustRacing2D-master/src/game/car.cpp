@@ -439,10 +439,10 @@ void Car::steerAssist() {
                     m_continuousTargetAngle = newTargetAngle;
                 }
 
-            // Log the continuous angles
-            LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
-                "Continuous angles: target=%f, current=%f\n",
-                m_continuousTargetAngle, rawCurrentAngle);
+            // Log the continuous angles (No longer logging due to overlap with track assistance recordings)
+            // LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA,
+            //     "Continuous angles: target=%f, current=%f\n",
+            //     m_continuousTargetAngle, rawCurrentAngle);
 
                 // Now proceed with normalized calculations for steering
                 // const float angle = static_cast<int>(newTargetAngle) % 180;
@@ -479,12 +479,12 @@ void Car::steerAssist() {
             if (diff < -maxDelta)
             {
                 steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
-                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control %f\n", control);
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering RIGHT with control= %f\n", control);
             }
             else if (diff > maxDelta)
             {
                 steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
-                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control %f\n", control);
+                LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control= %f\n", control);
             }
             });
 
