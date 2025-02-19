@@ -29,6 +29,8 @@ std::string LogManager::getLogPrefix(LogType type) const
     switch(type) {
         case LogType::DEFAULT:
             return "logfile_";
+        case LogType::COLLISION_DATA:
+            return "collisiondata_";
         case LogType::CAR_DATA:
             return "cardata_";
         case LogType::BOT_DATA:
