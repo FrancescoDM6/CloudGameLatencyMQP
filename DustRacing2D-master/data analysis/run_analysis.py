@@ -155,7 +155,7 @@ class DataAnalyzer:
         }
         
         try:
-            with open(log_file, "r") as file:
+            with open(log_file, "r", encoding='utf-8') as file:  # Ensure proper encoding
                 current_time = None
                 current_set = {}
                 
@@ -166,17 +166,13 @@ class DataAnalyzer:
                         current_time = self._convert_game_time(time_match.group(1))
                         
                         # Extract different types of data based on line content
-                        if 'Continuous angles:' in line:
-                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                            if angles_match:
-                                current_set['target_angle'] = float(angles_match.group(1))
-                                current_set['current_angle'] = float(angles_match.group(2))
-                                
-                        elif 'Track assistance:' in line:
-                            assist_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                        if 'Track assistance:' in line:
+                            assist_match = re.search(r'angle=([\d\.-]+), cur=([\d\.-]+), diff=([\d\.-]+), control=([\d\.-]+)', line)
                             if assist_match:
-                                current_set['diff'] = float(assist_match.group(1))
-                                current_set['control'] = float(assist_match.group(2))
+                                current_set['target_angle'] = float(assist_match.group(1))
+                                current_set['current_angle'] = float(assist_match.group(2))
+                                current_set['diff'] = float(assist_match.group(3))
+                                current_set['control'] = float(assist_match.group(4))
                                 
                         elif 'Steering' in line:
                             direction_match = re.search(r'Steering (LEFT|RIGHT)', line)
@@ -211,7 +207,7 @@ class DataAnalyzer:
         }
         
         try:
-            with open(log_file, "r") as file:
+            with open(log_file, "r", encoding='utf-8') as file:  # Ensure proper encoding
                 current_time = None
                 current_set = {}
                 
@@ -222,17 +218,13 @@ class DataAnalyzer:
                         current_time = self._convert_game_time(time_match.group(1))
                         
                         # Extract different types of data based on line content
-                        if 'Continuous angles:' in line:
-                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                            if angles_match:
-                                current_set['target_angle'] = float(angles_match.group(1))
-                                current_set['current_angle'] = float(angles_match.group(2))
-                                
-                        elif 'steerControl:' in line:
-                            assist_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                        if 'steerControl:' in line:
+                            assist_match = re.search(r'angle=([\d\.-]+), cur=([\d\.-]+), diff=([\d\.-]+), control=([\d\.-]+)', line)
                             if assist_match:
-                                current_set['diff'] = float(assist_match.group(1))
-                                current_set['control'] = float(assist_match.group(2))
+                                current_set['target_angle'] = float(assist_match.group(1))
+                                current_set['current_angle'] = float(assist_match.group(2))
+                                current_set['diff'] = float(assist_match.group(3))
+                                current_set['control'] = float(assist_match.group(4))
                                 
                         elif 'Car turned/is turning' in line:
                             direction_match = re.search(r'Car turned/is turning (LEFT|RIGHT)', line)
@@ -590,7 +582,7 @@ class BotAnalyzer:
         }
         
         try:
-            with open(log_file, "r") as file:
+            with open(log_file, "r", encoding='utf-8') as file:  # Ensure proper encoding
                 current_time = None
                 current_set = {}
                 
@@ -601,17 +593,13 @@ class BotAnalyzer:
                         current_time = self._convert_game_time(time_match.group(1))
                         
                         # Extract different types of data based on line content
-                        if 'Continuous angles:' in line:
-                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                            if angles_match:
-                                current_set['target_angle'] = float(angles_match.group(1))
-                                current_set['current_angle'] = float(angles_match.group(2))
-                                
-                        elif 'Track assistance:' in line:
-                            assist_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                        if 'Track assistance:' in line:
+                            assist_match = re.search(r'angle=([\d\.-]+), cur=([\d\.-]+), diff=([\d\.-]+), control=([\d\.-]+)', line)
                             if assist_match:
-                                current_set['diff'] = float(assist_match.group(1))
-                                current_set['control'] = float(assist_match.group(2))
+                                current_set['target_angle'] = float(assist_match.group(1))
+                                current_set['current_angle'] = float(assist_match.group(2))
+                                current_set['diff'] = float(assist_match.group(3))
+                                current_set['control'] = float(assist_match.group(4))
                                 
                         elif 'Steering' in line:
                             direction_match = re.search(r'Steering (LEFT|RIGHT)', line)
@@ -646,7 +634,7 @@ class BotAnalyzer:
         }
         
         try:
-            with open(log_file, "r") as file:
+            with open(log_file, "r", encoding='utf-8') as file:  # Ensure proper encoding
                 current_time = None
                 current_set = {}
                 
@@ -657,17 +645,13 @@ class BotAnalyzer:
                         current_time = self._convert_game_time(time_match.group(1))
                         
                         # Extract different types of data based on line content
-                        if 'Continuous angles:' in line:
-                            angles_match = re.search(r'target=([\d\.-]+), current=([\d\.-]+)', line)
-                            if angles_match:
-                                current_set['target_angle'] = float(angles_match.group(1))
-                                current_set['current_angle'] = float(angles_match.group(2))
-                                
-                        elif 'steerControl:' in line:
-                            assist_match = re.search(r'angle=[\d\.-]+, cur=[\d\.-]+, diff=([\d\.-]+), control=([\d\.-]+)', line)
+                        if 'steerControl:' in line:
+                            assist_match = re.search(r'angle=([\d\.-]+), cur=([\d\.-]+), diff=([\d\.-]+), control=([\d\.-]+)', line)
                             if assist_match:
-                                current_set['diff'] = float(assist_match.group(1))
-                                current_set['control'] = float(assist_match.group(2))
+                                current_set['target_angle'] = float(assist_match.group(1))
+                                current_set['current_angle'] = float(assist_match.group(2))
+                                current_set['diff'] = float(assist_match.group(3))
+                                current_set['control'] = float(assist_match.group(4))
                                 
                         elif 'Car turned/is turning' in line:
                             direction_match = re.search(r'Car turned/is turning (LEFT|RIGHT)', line)
@@ -713,35 +697,46 @@ class BotAnalyzer:
             print(f"Error parsing laptime log {log_file}: {e}")
             return None, None
 
-    def _create_comprehensive_plots(self, bot1_data, bot2_data, completion_times, lag_values):
-        """Create comprehensive analysis plots with error bars."""
+    def _create_comprehensive_plots(self, all_bot1_data, all_bot2_data, completion_times, lag_values):
+        """Create comprehensive analysis plots."""
         # Create DataFrame for analysis
         df = pd.DataFrame({
             'Lag': lag_values,
             'Bot1_Time': [t[0] for t in completion_times],
             'Bot2_Time': [t[1] for t in completion_times],
-            'Bot1_Control': [data['control'].abs().mean() for data in bot1_data],
-            'Bot2_Control': [data['control'].abs().mean() for data in bot2_data],
-            'Bot1_Angle_Error': [(data['target_angle'] - data['current_angle']).abs().mean() for data in bot1_data],
-            'Bot2_Angle_Error': [(data['target_angle'] - data['current_angle']).abs().mean() for data in bot2_data]
+            'Bot1_Steering_Effort': [data['control'].abs().mean() for data in all_bot1_data],
+            'Bot2_Steering_Effort': [data['control'].abs().mean() for data in all_bot2_data],
+            'Bot1_Angle_Error': [(data['target_angle'] - data['current_angle']).abs().mean() for data in all_bot1_data],
+            'Bot2_Angle_Error': [(data['target_angle'] - data['current_angle']).abs().mean() for data in all_bot2_data]
         })
         
         # Group by lag and calculate statistics
         grouped = df.groupby('Lag').agg({
             'Bot1_Time': ['mean', 'std'],
             'Bot2_Time': ['mean', 'std'],
-            'Bot1_Control': ['mean', 'std'],
-            'Bot2_Control': ['mean', 'std'],
+            'Bot1_Steering_Effort': ['mean', 'std'],
+            'Bot2_Steering_Effort': ['mean', 'std'],
             'Bot1_Angle_Error': ['mean', 'std'],
             'Bot2_Angle_Error': ['mean', 'std']
         })
         
-        # Plot 1: Laptime vs Lag with error bars
+        # Plot 1: Laptime vs Lag with trendline
         plt.figure(figsize=(12, 6))
+        
+        # Bot 1
         plt.errorbar(grouped.index, grouped['Bot1_Time']['mean'], 
-                    yerr=grouped['Bot1_Time']['std'], fmt='bo-', capsize=5, label='Bot 1')
+                    yerr=grouped['Bot1_Time']['std'], fmt='bo-', capsize=5, label='Bot 1 Time')
+        z1 = np.polyfit(grouped.index, grouped['Bot1_Time']['mean'], 1)
+        p1 = np.poly1d(z1)
+        plt.plot(grouped.index, p1(grouped.index), 'b--', label='Bot 1 Trend')
+        
+        # Bot 2
         plt.errorbar(grouped.index, grouped['Bot2_Time']['mean'], 
-                    yerr=grouped['Bot2_Time']['std'], fmt='ro-', capsize=5, label='Bot 2')
+                    yerr=grouped['Bot2_Time']['std'], fmt='ro-', capsize=5, label='Bot 2 Time')
+        z2 = np.polyfit(grouped.index, grouped['Bot2_Time']['mean'], 1)
+        p2 = np.poly1d(z2)
+        plt.plot(grouped.index, p2(grouped.index), 'r--', label='Bot 2 Trend')
+        
         plt.title('Lap Time vs Lag')
         plt.xlabel('Lag (ms)')
         plt.ylabel('Lap Time (seconds)')
@@ -750,26 +745,37 @@ class BotAnalyzer:
         plt.savefig(self.analysis_dir / 'laptime_vs_lag.png', dpi=300, bbox_inches='tight')
         plt.close()
         
-        # Plot 2: Control Effort vs Lag
+        # Plot 2: Steering Effort vs Lag with trendline
         plt.figure(figsize=(12, 6))
-        plt.errorbar(grouped.index, grouped['Bot1_Control']['mean'], 
-                    yerr=grouped['Bot1_Control']['std'], fmt='go-', capsize=5, label='Bot 1')
-        plt.errorbar(grouped.index, grouped['Bot2_Control']['mean'], 
-                    yerr=grouped['Bot2_Control']['std'], fmt='mo-', capsize=5, label='Bot 2')
-        plt.title('Control Effort vs Lag')
+        
+        # Bot 1
+        plt.errorbar(grouped.index, grouped['Bot1_Steering_Effort']['mean'], 
+                    yerr=grouped['Bot1_Steering_Effort']['std'], fmt='go-', capsize=5, label='Bot 1 Steering Effort')
+        z1 = np.polyfit(grouped.index, grouped['Bot1_Steering_Effort']['mean'], 1)
+        p1 = np.poly1d(z1)
+        plt.plot(grouped.index, p1(grouped.index), 'g--', label='Bot 1 Trend')
+        
+        # Bot 2
+        plt.errorbar(grouped.index, grouped['Bot2_Steering_Effort']['mean'], 
+                    yerr=grouped['Bot2_Steering_Effort']['std'], fmt='mo-', capsize=5, label='Bot 2 Steering Effort')
+        z2 = np.polyfit(grouped.index, grouped['Bot2_Steering_Effort']['mean'], 1)
+        p2 = np.poly1d(z2)
+        plt.plot(grouped.index, p2(grouped.index), 'm--', label='Bot 2 Trend')
+        
+        plt.title('Steering Effort vs Lag')
         plt.xlabel('Lag (ms)')
-        plt.ylabel('Average Control Value')
+        plt.ylabel('Average Steering Effort')
         plt.legend()
         plt.grid(True)
-        plt.savefig(self.analysis_dir / 'control_vs_lag.png', dpi=300, bbox_inches='tight')
+        plt.savefig(self.analysis_dir / 'steering_effort_vs_lag.png', dpi=300, bbox_inches='tight')
         plt.close()
         
         # Plot 3: Angle Error vs Lag
         plt.figure(figsize=(12, 6))
         plt.errorbar(grouped.index, grouped['Bot1_Angle_Error']['mean'], 
-                    yerr=grouped['Bot1_Angle_Error']['std'], fmt='co-', capsize=5, label='Bot 1')
+                    yerr=grouped['Bot1_Angle_Error']['std'], fmt='co-', capsize=5, label='Bot 1 Angle Error')
         plt.errorbar(grouped.index, grouped['Bot2_Angle_Error']['mean'], 
-                    yerr=grouped['Bot2_Angle_Error']['std'], fmt='yo-', capsize=5, label='Bot 2')
+                    yerr=grouped['Bot2_Angle_Error']['std'], fmt='yo-', capsize=5, label='Bot 2 Angle Error')
         plt.title('Angle Error vs Lag')
         plt.xlabel('Lag (ms)')
         plt.ylabel('Average Angle Error (degrees)')
@@ -808,12 +814,20 @@ class BotAnalyzer:
         overall_dir = self.analysis_dir / 'overall'
         overall_dir.mkdir(parents=True, exist_ok=True)
         
-        # Plot 1: Overall Laptime vs Lag
+        # Plot 1: Overall Laptime vs Lag with trendline
         plt.figure(figsize=(12, 6))
         for bot in ['Bot1', 'Bot2']:
             grouped = combined_stats.groupby('Lag')[f'{bot}_Time'].agg(['mean', 'std'])
+            
+            # Plot data points
             plt.errorbar(grouped.index, grouped['mean'], 
                         yerr=grouped['std'], fmt='o-', capsize=5, label=f'{bot} Time')
+            
+            # Add trendline
+            z = np.polyfit(grouped.index, grouped['mean'], 1)
+            p = np.poly1d(z)
+            plt.plot(grouped.index, p(grouped.index), "--", label=f'{bot} Trend')
+            
         plt.title('Overall Lap Time vs Lag')
         plt.xlabel('Lag (ms)')
         plt.ylabel('Lap Time (seconds)')
@@ -871,24 +885,57 @@ class LagAnalyzer(BotAnalyzer):
 
     def _create_lag_impact_plots(self):
         """Create plots specifically analyzing lag impact."""
-        # Load previously saved statistics
-        stats = pd.read_csv(self.analysis_dir / 'summary_statistics.csv', index_col=0)
-        
-        # Plot 1: Lag Impact on Performance
-        plt.figure(figsize=(12, 6))
-        plt.errorbar(stats.index, stats['Bot1_Time']['mean'], 
-                    yerr=stats['Bot1_Time']['std'], fmt='bo-', capsize=5, label='Bot 1 Time')
-        plt.errorbar(stats.index, stats['Bot1_Control']['mean'], 
-                    yerr=stats['Bot1_Control']['std'], fmt='go-', capsize=5, label='Bot 1 Control')
-        plt.errorbar(stats.index, stats['Bot1_Angle_Error']['mean'], 
-                    yerr=stats['Bot1_Angle_Error']['std'], fmt='co-', capsize=5, label='Bot 1 Angle Error')
-        plt.title('Lag Impact on Bot Performance')
-        plt.xlabel('Lag (ms)')
-        plt.ylabel('Performance Metrics')
-        plt.legend()
-        plt.grid(True)
-        plt.savefig(self.analysis_dir / 'lag_impact.png', dpi=300, bbox_inches='tight')
-        plt.close()
+        try:
+            # Load previously saved statistics
+            stats = pd.read_csv(self.analysis_dir / 'summary_statistics.csv', index_col=0)
+            
+            # Ensure data is properly aggregated
+            if not isinstance(stats, pd.DataFrame):
+                print("Error: Statistics data is not in the expected format")
+                return
+            
+            # Plot 1: Lag Impact on Performance with trendline
+            plt.figure(figsize=(12, 6))
+            metrics = {
+                'Bot1_Time': ('bo-', 'Bot 1 Time'),
+                'Bot1_Control': ('go-', 'Bot 1 Control'),
+                'Bot1_Angle_Error': ('co-', 'Bot 1 Angle Error')
+            }
+            
+            for metric, (style, label) in metrics.items():
+                # Check if metric exists in stats
+                if metric not in stats.columns:
+                    print(f"Warning: Metric {metric} not found in statistics")
+                    continue
+                
+                # Get mean and std values
+                mean_values = stats[metric].mean() if isinstance(stats[metric], pd.DataFrame) else stats[metric]
+                std_values = stats[metric].std() if isinstance(stats[metric], pd.DataFrame) else 0
+                
+                # Ensure mean_values and std_values are numeric
+                if not pd.api.types.is_numeric_dtype(mean_values):
+                    print(f"Warning: Metric {metric} contains non-numeric data")
+                    continue
+                
+                # Plot data points
+                plt.errorbar(stats.index, mean_values, 
+                            yerr=std_values, fmt=style, capsize=5, label=label)
+                
+                # Add trendline
+                z = np.polyfit(stats.index, mean_values, 1)
+                p = np.poly1d(z)
+                plt.plot(stats.index, p(stats.index), "--", label=f'{label} Trend')
+                
+            plt.title('Lag Impact on Bot Performance')
+            plt.xlabel('Lag (ms)')
+            plt.ylabel('Performance Metrics')
+            plt.legend()
+            plt.grid(True)
+            plt.savefig(self.analysis_dir / 'lag_impact.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+        except Exception as e:
+            print(f"Error creating lag impact plots: {e}")
 
 def run_analysis():
     """Run the complete analysis pipeline."""
