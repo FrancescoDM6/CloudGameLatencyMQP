@@ -13,6 +13,7 @@ public:
     // Enum for different log types
     enum class LogType {
         DEFAULT,
+        COLLISION_DATA,
         CAR_DATA,
         BOT_DATA,
         LAP_TIME,
