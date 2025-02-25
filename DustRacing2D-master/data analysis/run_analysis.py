@@ -709,7 +709,7 @@ class BotAnalyzer:
             return None, None
 
     def _create_comprehensive_plots(self, all_bot1_data, all_bot2_data, completion_times, lag_values):
-        """Create comprehensive analysis plots."""
+        """Create comprehensive analysis plots with confidence intervals."""
         # Create DataFrame for analysis
         df = pd.DataFrame({
             'Lag': lag_values,
@@ -723,27 +723,33 @@ class BotAnalyzer:
         
         # Group by lag and calculate statistics
         grouped = df.groupby('Lag').agg({
-            'Bot1_Time': ['mean', 'std'],
-            'Bot2_Time': ['mean', 'std'],
-            'Bot1_Steering_Effort': ['mean', 'std'],
-            'Bot2_Steering_Effort': ['mean', 'std'],
-            'Bot1_Angle_Error': ['mean', 'std'],
-            'Bot2_Angle_Error': ['mean', 'std']
+            'Bot1_Time': ['mean', 'std', 'count'],
+            'Bot2_Time': ['mean', 'std', 'count'],
+            'Bot1_Steering_Effort': ['mean', 'std', 'count'],
+            'Bot2_Steering_Effort': ['mean', 'std', 'count'],
+            'Bot1_Angle_Error': ['mean', 'std', 'count'],
+            'Bot2_Angle_Error': ['mean', 'std', 'count']
         })
-        
+
+        # Calculate 95% confidence intervals
+        def calculate_ci(std, count):
+            return 1.96 * (std / np.sqrt(count))
+
         # Plot 1: Laptime vs Lag with trendline
         plt.figure(figsize=(12, 6))
         
         # Bot 1
+        bot1_ci = calculate_ci(grouped['Bot1_Time']['std'], grouped['Bot1_Time']['count'])
         plt.errorbar(grouped.index, grouped['Bot1_Time']['mean'], 
-                    yerr=grouped['Bot1_Time']['std'], fmt='bo-', capsize=5, label='Bot 1 Time')
+                    yerr=bot1_ci, fmt='bo-', capsize=5, label='Bot 1 Time')
         z1 = np.polyfit(grouped.index, grouped['Bot1_Time']['mean'], 1)
         p1 = np.poly1d(z1)
         plt.plot(grouped.index, p1(grouped.index), 'b--', label='Bot 1 Trend')
         
         # Bot 2
+        bot2_ci = calculate_ci(grouped['Bot2_Time']['std'], grouped['Bot2_Time']['count'])
         plt.errorbar(grouped.index, grouped['Bot2_Time']['mean'], 
-                    yerr=grouped['Bot2_Time']['std'], fmt='ro-', capsize=5, label='Bot 2 Time')
+                    yerr=bot2_ci, fmt='ro-', capsize=5, label='Bot 2 Time')
         z2 = np.polyfit(grouped.index, grouped['Bot2_Time']['mean'], 1)
         p2 = np.poly1d(z2)
         plt.plot(grouped.index, p2(grouped.index), 'r--', label='Bot 2 Trend')
@@ -760,15 +766,17 @@ class BotAnalyzer:
         plt.figure(figsize=(12, 6))
         
         # Bot 1
+        bot1_steering_ci = calculate_ci(grouped['Bot1_Steering_Effort']['std'], grouped['Bot1_Steering_Effort']['count'])
         plt.errorbar(grouped.index, grouped['Bot1_Steering_Effort']['mean'], 
-                    yerr=grouped['Bot1_Steering_Effort']['std'], fmt='go-', capsize=5, label='Bot 1 Steering Effort')
+                    yerr=bot1_steering_ci, fmt='go-', capsize=5, label='Bot 1 Steering Effort')
         z1 = np.polyfit(grouped.index, grouped['Bot1_Steering_Effort']['mean'], 1)
         p1 = np.poly1d(z1)
         plt.plot(grouped.index, p1(grouped.index), 'g--', label='Bot 1 Trend')
         
         # Bot 2
+        bot2_steering_ci = calculate_ci(grouped['Bot2_Steering_Effort']['std'], grouped['Bot2_Steering_Effort']['count'])
         plt.errorbar(grouped.index, grouped['Bot2_Steering_Effort']['mean'], 
-                    yerr=grouped['Bot2_Steering_Effort']['std'], fmt='mo-', capsize=5, label='Bot 2 Steering Effort')
+                    yerr=bot2_steering_ci, fmt='mo-', capsize=5, label='Bot 2 Steering Effort')
         z2 = np.polyfit(grouped.index, grouped['Bot2_Steering_Effort']['mean'], 1)
         p2 = np.poly1d(z2)
         plt.plot(grouped.index, p2(grouped.index), 'm--', label='Bot 2 Trend')
@@ -783,10 +791,17 @@ class BotAnalyzer:
         
         # Plot 3: Angle Error vs Lag
         plt.figure(figsize=(12, 6))
+        
+        # Bot 1
+        bot1_angle_ci = calculate_ci(grouped['Bot1_Angle_Error']['std'], grouped['Bot1_Angle_Error']['count'])
         plt.errorbar(grouped.index, grouped['Bot1_Angle_Error']['mean'], 
-                    yerr=grouped['Bot1_Angle_Error']['std'], fmt='co-', capsize=5, label='Bot 1 Angle Error')
+                    yerr=bot1_angle_ci, fmt='co-', capsize=5, label='Bot 1 Angle Error')
+        
+        # Bot 2
+        bot2_angle_ci = calculate_ci(grouped['Bot2_Angle_Error']['std'], grouped['Bot2_Angle_Error']['count'])
         plt.errorbar(grouped.index, grouped['Bot2_Angle_Error']['mean'], 
-                    yerr=grouped['Bot2_Angle_Error']['std'], fmt='yo-', capsize=5, label='Bot 2 Angle Error')
+                    yerr=bot2_angle_ci, fmt='yo-', capsize=5, label='Bot 2 Angle Error')
+        
         plt.title('Angle Error vs Lag')
         plt.xlabel('Lag (ms)')
         plt.ylabel('Average Angle Error (degrees)')
