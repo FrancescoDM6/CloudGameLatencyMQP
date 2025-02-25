@@ -43,6 +43,22 @@ void Timing::setLapCompleted(size_t index, bool isHuman)
     times.lastLapTime = elapsed - times.raceTime;
     times.raceTime = elapsed;
 
+    if (isHuman)
+    {
+        LogManager::getInstance().writeLog(LogManager::LogType::LAP_TIME, "Player lap time: %f\n", times.raceTime);
+
+        if (times.raceTime < m_raceRecord || m_raceRecord == -1)
+        {
+            m_raceRecord = times.raceTime;
+
+            emit raceRecordAchieved(m_raceRecord);
+        }
+    }
+
+    if (!isHuman) {
+        LogManager::getInstance().writeLog(LogManager::LogType::LAP_TIME, "Bot lap time: %f\n", times.raceTime);
+    }
+
     juzzlin::L().debug() << "Lap (" << times.lap << ") completed for car index=" << index << ": " << times.lastLapTime;
     juzzlin::L().debug() << "Current personal best time: " << times.recordLapTime;
 
