@@ -537,6 +537,7 @@ class BotAnalyzer:
         all_bot2_data = []
         completion_times = []
         lag_values = []
+        incomplete_runs = {lag: 0 for lag in self.lag_values}  # Track incomplete runs
         
         for lag in self.lag_values:
             lag_dir = self.logs_dir / f'lag_{lag}'
@@ -556,6 +557,11 @@ class BotAnalyzer:
                     bot2_data = self._process_bot_log(bot2_log)
                     bot1_time, bot2_time = self._parse_laptime_log(laptime_log)
                     
+                    # Skip incomplete runs (where either bot did not finish)
+                    if bot1_time is None or bot2_time is None:
+                        incomplete_runs[lag] += 1
+                        continue
+                    
                     if bot1_data is not None and bot2_data is not None:
                         all_bot1_data.append(bot1_data)
                         all_bot2_data.append(bot2_data)
@@ -569,6 +575,11 @@ class BotAnalyzer:
         if all_bot1_data:
             # Create comprehensive analysis plots
             self._create_comprehensive_plots(all_bot1_data, all_bot2_data, completion_times, lag_values)
+        
+        # Print incomplete run statistics
+        print("\nIncomplete Runs Statistics:")
+        for lag, count in incomplete_runs.items():
+            print(f"Lag {lag}ms: {count} incomplete runs")
 
     def _process_player_log(self, log_file):
         """Process a player log file."""
@@ -839,28 +850,93 @@ class BotAnalyzer:
         # Save combined statistics
         combined_stats.to_csv(overall_dir / 'overall_statistics.csv', index=False)
 
+    def analyze_collisions(self):
+        """Analyze collision events per lag value."""
+        collision_counts = {}
+        lag_values = sorted([int(f.name.split('_')[1]) for f in self.logs_dir.glob('lag_*')])
 
-def run_bot_analysis():
-    """Run the complete bot vs bot analysis pipeline."""
-    start_time = time.time()
+        for lag in lag_values:
+            lag_dir = self.logs_dir / f'lag_{lag}'
+            if not lag_dir.exists():
+                print(f"Warning: Directory for lag {lag}ms does not exist: {lag_dir}")
+                continue
+
+            collision_count = 0
+            for run_num in range(1, 31):  # Assuming max 30 runs per lag
+                log_file = lag_dir / f'logfile_{run_num}.log'
+                if not log_file.exists():
+                    print(f"Warning: Log file for lag {lag}ms, run {run_num} does not exist: {log_file}")
+                    continue
+
+                with open(log_file, 'r') as f:
+                    lines = f.readlines()
+                    prev_line_was_collision = False
+                    for line in lines:
+                        if 'Collision event' in line:
+                            if not prev_line_was_collision:
+                                collision_count += 1
+                                prev_line_was_collision = True
+                        else:
+                            prev_line_was_collision = False
+
+            collision_counts[lag] = collision_count
+            print(f"Lag {lag}ms: {collision_count} collision events")
+
+        return collision_counts
+
+    def plot_collisions(self):
+        """Plot the number of collision events per lag value."""
+        collision_counts = self.analyze_collisions()
+        if not collision_counts:
+            print("Error: No collision events found.")
+            return
+
+        lags = sorted(collision_counts.keys())
+        counts = [collision_counts[lag] for lag in lags]
+
+        overall_dir = self.analysis_dir / 'overall'
+        overall_dir.mkdir(parents=True, exist_ok=True)
+
+        # Verify analysis_dir path
+        print(f"Saving plot to: {overall_dir / 'collisions_vs_lag.png'}")
+
+        try:
+            plt.figure(figsize=(12, 6))
+            plt.bar(lags, counts, color='red', alpha=0.7)
+            plt.title('Collision Events vs Lag')
+            plt.xlabel('Lag (ms)')
+            plt.ylabel('Number of Collision Events')
+            plt.grid(True)
+            plt.savefig(overall_dir / 'collisions_vs_lag.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            print("Plot saved successfully.")
+        except Exception as e:
+            print(f"Error saving plot: {e}")
+
+# def run_bot_analysis():
+#     """Run the complete bot vs bot analysis pipeline."""
+#     start_time = time.time()
     
-    print("=== Starting Bot vs Bot Analysis ===")
+#     print("=== Starting Bot vs Bot Analysis ===")
     
-    analyzer = BotAnalyzer()
-    print("\n1. Setting up directory structure...")
-    analyzer.setup_directories()
+#     analyzer = BotAnalyzer()
+#     print("\n1. Setting up directory structure...")
+#     analyzer.setup_directories()
     
-    print("\n2. Analyzing individual assistance levels...")
-    analyzer.analyze_all_lag_conditions()
+#     print("\n2. Analyzing individual assistance levels...")
+#     analyzer.analyze_all_lag_conditions()
+
+#     print("\n2.5. plotting collisions...")
+#     analyzer.plot_collisions()
     
-    print("\n3. Creating overall analysis...")
-    analyzer.create_overall_analysis()
+#     print("\n3. Creating overall analysis...")
+#     analyzer.create_overall_analysis()
     
-    end_time = time.time()
-    duration = end_time - start_time
+#     end_time = time.time()
+#     duration = end_time - start_time
     
-    print("\n=== Analysis Complete ===")
-    print(f"Total processing time: {duration:.2f} seconds")
+#     print("\n=== Analysis Complete ===")
+#     print(f"Total processing time: {duration:.2f} seconds")
 
 
 import pandas as pd
@@ -946,6 +1022,9 @@ def run_analysis():
     bot_analyzer = BotAnalyzer()
     print("\n1. Analyzing bot performance...")
     bot_analyzer.analyze_all_lag_conditions()
+
+    print("\n.1.5 analyze collisions...")
+    bot_analyzer.plot_collisions()
     
     lag_analyzer = LagAnalyzer()
     print("\n2. Analyzing lag impact...")
