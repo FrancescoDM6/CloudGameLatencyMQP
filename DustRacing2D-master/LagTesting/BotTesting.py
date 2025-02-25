@@ -56,15 +56,32 @@ class GameTester:
        assist_value = 1.0  # Fixed assist value
       
        # Generate lag values from 0 to 150 in steps of 10
-       # Set to 11 for testing
-       for run_number, lag in enumerate(range(0, 151, 10), 1):
-           for i in range(0, 30):
+       # Set to 11 for testing'
+       for i in range(0, 50):
+        onems_test_case = {
+                    'steering_assist': assist_value,
+                    'lag': 1,
+                    'run_number': run_number,
+                    'name': f"Assist {assist_value} - Lag {lag}ms"
+                }
+        fivems_test_case = {
+                    'steering_assist': assist_value,
+                    'lag': 5,
+                    'run_number': run_number,
+                    'name': f"Assist {assist_value} - Lag {lag}ms"
+                }
+        
+        test_cases.append(fivems_test_case)
+        test_cases.append(onems_test_case)
+       for run_number, lag in enumerate(range(0, 201, 10), 1):
+           for i in range(0, 50):
                test_case = {
                    'steering_assist': assist_value,
                    'lag': lag,
                    'run_number': run_number,
                    'name': f"Assist {assist_value} - Lag {lag}ms"
                }
+               
                print(f"{lag}")
                test_cases.append(test_case)
       

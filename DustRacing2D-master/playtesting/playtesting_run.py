@@ -5,10 +5,11 @@ import os
 import shutil
 import subprocess
 import time
-import cv2
+import gspread
+import requests
+from oauth2client.service_account import ServiceAccountCredentials
 from pathlib import Path
 from pynput.keyboard import Controller, Key
-
 
 class GameTestConfig:
    
@@ -26,12 +27,18 @@ class GameTestConfig:
        self.init_wait_time = 7  # seconds
        self.test_duration = 60  # seconds
        self.num_runs = 0
+       
 
 
 class GameTester:
    def __init__(self, config: GameTestConfig):
        self.config = config
        self.ensure_directories()
+       self.scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive", "https://www.googleapis.com/auth/spreadsheets"]
+       self.creds = ServiceAccountCredentials.from_json_keyfile_name("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/universal-team-451821-f3-3f572ea732c1.json")
+       self.client = gspread.authorize(self.creds)
+       self.spreadsheet = self.client.open("Playtesting Survey")
+       self.sheet = self.spreadsheet.sheet1
 
 
    def ensure_directories(self):
@@ -60,7 +67,7 @@ class GameTester:
        # Generate lag values from 0 to 150 in steps of 10
        # Set to 11 for testing
        for run_number, lag in enumerate(range(0, 151, 10), 1):
-           for i in range(0, 1):
+           for i in range(0, 11):
                test_case = {
                    'steering_assist': assist_value,
                    'lag': lag,
@@ -91,6 +98,32 @@ class GameTester:
            shutil.move(log_file, lag_dir / new_filename)
            print(f"Moved {log_file} to {lag_dir}/{new_filename}")
 
+   def window_exists(self, name):
+       result = os.popen(f"wmctrl -l | grep '{name}'").read()
+       return name in result
+   
+   def monitor_sheet(self, poll_interval=1):
+       print("no problem")
+       last_row_count = len(self.sheet.get_all_values())
+       print(f"{last_row_count}")
+       time.sleep(5)
+       
+       while True:
+        try:
+            current_rows = self.sheet.get_all_values()
+            current_row_count = len(current_rows)
+            print(f"{current_row_count}")
+
+            if current_row_count > last_row_count:
+                last_row_count = current_row_count
+                return True
+            
+            time.sleep(poll_interval)
+            return False
+        except Exception as e:
+            print("Error")
+            time.sleep(poll_interval)
+            return False
 
    def run_test_case(self, test_case):
        """
@@ -103,32 +136,50 @@ class GameTester:
            "./dustrac-game",
            "--lagassist", f"{test_case['lag']}:{test_case['steering_assist']}"
        ]
-      
-       try:
-           print(f"Starting test case: {test_case['name']} (Run {test_case['run_number']})")
-           process = subprocess.Popen(command, cwd=self.config.directory)
-           time.sleep(10)
-          
-           if cv2.getWindowProperty('DustRacing2D 2.1.1', cv2.WND_PROP_VISIBLE) == -1:
+
+       url = "https://docs.google.com/forms/d/e/1FAIpQLSetSCdvxYuVnnXDkr3iABTVI7jyy5CWpMY4SzpGFokm4Wy2TA/viewform"
+       if not self.window_exists('Dust Racing 2D 2.1.1') and not self.window_exists('Playtesting Survey — Mozilla Firefox'):
+        try:
+            print(f"Starting test case: {test_case['name']} (Run {test_case['run_number']})")
+            process = subprocess.Popen(command, cwd=self.config.directory)
+            time.sleep(10)
+            
+            while True:
+                if not self.window_exists('Dust Racing 2D 2.1.1'):
+                    process.terminate()
+                    process.wait(timeout=5)
+                    break
+            
+            self.config.num_runs += 1
+            
+            if self.config.num_runs == 30:
+                # Move the logs immediately after the run while we know which configuration it was
+                # self.move_run_logs(test_case)
+                print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
+                self.config.num_runs = 0
+            
+            # Add a small delay between runs
+            time.sleep(2)
+
+            print("We here")
+            process = subprocess.Popen(["xdg-open", url])
+            time.sleep(5)
+            print("We made it!")
+            while True:
+                print("are we checking???")
+                if self.monitor_sheet():
+                    print("in monitor sheet checking")
+                    window = 'Playtesting Survey — Mozilla Firefox'
+                    window.destroy()
+                    process.terminate()
+                    process.wait()
+                    break
+            
+        except Exception as e:
+            print(f"Test case failed: {test_case['name']} - {str(e)}")
+            if 'process' in locals():
                 process.terminate()
-                process.wait(timeout=5)
-           
-           self.config.num_runs += 1
-          
-           if self.config.num_runs == 30:
-               # Move the logs immediately after the run while we know which configuration it was
-               # self.move_run_logs(test_case)
-               print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
-               self.config.num_runs = 0
-          
-           # Add a small delay between runs
-           time.sleep(2)
-          
-       except Exception as e:
-           print(f"Test case failed: {test_case['name']} - {str(e)}")
-           if 'process' in locals():
-               process.terminate()
-           raise
+            raise
 
 
 def main():
@@ -142,8 +193,7 @@ def main():
        test_cases = tester.generate_test_cases()
        for test_case in test_cases:
            try:
-               # if cv2.getWindowProperty('Dust Racing 2D 2.1.1', cv2.WND_PROP_VISIBLE) == -1:
-                    tester.run_test_case(test_case)
+                tester.run_test_case(test_case)
            except Exception as e:
                print(f"Failed to run test case {test_case['name']}: {e}")
                continue

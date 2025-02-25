@@ -173,3 +173,11 @@ DifficultyProfile::Difficulty Settings::loadDifficulty() const
 
     return difficulty;
 }
+
+// void Settings::loadLapCount(){
+//     return loadValue(Settings::lapCountKey(), 2);
+// }
+
+// void Settings::initialize(){
+//     instance().saveValue(Settings::lapCountKey(), 2);
+// }
