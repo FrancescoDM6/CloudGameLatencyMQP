@@ -460,7 +460,7 @@ void Car::steerAssist() {
             const float maxControl = 1.5;
             control = control < 0 ? -control : control;
             control = control > maxControl ? maxControl : control;
-            // Should be std::stof(multiplier), set to an int for testing
+            // Should be std::stof(multiplier), set to an int for tets
             control = control * 1.0;
             if (control < 0)
             {
@@ -474,13 +474,10 @@ void Car::steerAssist() {
 
             // More aggressive steering response
             const float maxDelta = 3.0f;  // Reduced threshold to steer more often
-            // const char* evlag = m_game.getEvLag();
-            // std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
-            // std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
             const char* evlag = m_game.getEvLag();
-            int lagMs = std::stoi(evlag);
-            if (lagMs % 50 != 0) {  // Avoid multiples of 50ms
-                std::this_thread::sleep_for(std::chrono::milliseconds(lagMs));
+            std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
+            if (std::stoi(evlag) % 50 != 0) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
             }
             if (diff < -maxDelta)
             {
@@ -495,7 +492,7 @@ void Car::steerAssist() {
             });
 
             // // Detach the thread so it runs independently
-            // delayedUpdate.detach();
+            delayedUpdate.detach();
 
             m_lastDiff = diff;
             
@@ -518,13 +515,10 @@ void Car::accelerationAssist() {
 
             // The following speed limits are experimentally defined.
             float scale = 0.9f;
-            // const char* evlag = m_game.getEvLag();
-            // std::thread delayedUpdate([this, absspeed, scale, &currentTile, evlag]() {
-            // std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
             const char* evlag = m_game.getEvLag();
-            int lagMs = std::stoi(evlag);
-            if (lagMs % 50 != 0) {  // Avoid multiples of 50ms
-                std::this_thread::sleep_for(std::chrono::milliseconds(lagMs));
+            std::thread delayedUpdate([this, absspeed, scale, &currentTile, evlag]() {
+            if (std::stoi(evlag) % 50 != 0) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
             }
             if (currentTile.computerHint() == TrackTile::ComputerHint::Brake)
             {
@@ -785,7 +779,7 @@ void Car::updateTireWear(int step)
 
 void Car::collisionEvent(MCCollisionEvent & event)
 {
-    if (!event.collidingObject().isTriggerObject() &&)
+    if (!event.collidingObject().isTriggerObject())
     {
         m_collisionEffectStack.push_back({ &event.collidingObject(), event.contactPoint() });
         LogManager::getInstance().writeLog("Collision event\n");

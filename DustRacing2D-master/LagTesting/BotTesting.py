@@ -55,24 +55,26 @@ class GameTester:
        test_cases = []
        assist_value = 1.0  # Fixed assist value
       
-       # Generate lag values from 0 to 150 in steps of 10
-       # Set to 11 for testing'
+       
        for i in range(0, 50):
         onems_test_case = {
                     'steering_assist': assist_value,
                     'lag': 1,
-                    'run_number': run_number,
-                    'name': f"Assist {assist_value} - Lag {lag}ms"
+                    'run_number': 0,
+                    'name': f"Assist {assist_value} - Lag 1ms"
                 }
         fivems_test_case = {
                     'steering_assist': assist_value,
                     'lag': 5,
-                    'run_number': run_number,
-                    'name': f"Assist {assist_value} - Lag {lag}ms"
+                    'run_number': 0,
+                    'name': f"Assist {assist_value} - Lag 5ms"
                 }
         
         test_cases.append(fivems_test_case)
         test_cases.append(onems_test_case)
+
+       # Generate lag values from 0 to 150 in steps of 10
+       # Set to 11 for testing'
        for run_number, lag in enumerate(range(0, 201, 10), 1):
            for i in range(0, 50):
                test_case = {
@@ -142,7 +144,7 @@ class GameTester:
 
            self.config.num_runs += 1
           
-           if self.config.num_runs == 30:
+           if self.config.num_runs == 50:
                # Move the logs immediately after the run while we know which configuration it was
                self.move_run_logs(test_case)
                print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
