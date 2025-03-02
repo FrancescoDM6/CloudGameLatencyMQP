@@ -17,7 +17,7 @@ class GameTestConfig:
        self.log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs")
        # self.log_directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/logs")
        # Temporary, only for no steering sharpness change
-       self.lag_log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/logs/assist_1.0")
+       self.lag_log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/logs/assist_1.50")
        # self.lag_log_directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/logs/assist_1.0")
        self.test_cases_file = config_path or Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
        # self.test_cases_file = config_path or Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
@@ -53,7 +53,7 @@ class GameTester:
    def generate_test_cases(self):
        """Generate test cases for a single assist value with varying lag values"""
        test_cases = []
-       assist_value = 1.0  # Fixed assist value
+       assist_value = 1.50  # Fixed assist value
       
        
        for i in range(0, 50):
@@ -70,8 +70,8 @@ class GameTester:
                     'name': f"Assist {assist_value} - Lag 5ms"
                 }
         
-        test_cases.append(fivems_test_case)
         test_cases.append(onems_test_case)
+        test_cases.append(fivems_test_case)
 
        # Generate lag values from 0 to 150 in steps of 10
        # Set to 11 for testing'

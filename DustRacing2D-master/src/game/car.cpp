@@ -460,8 +460,8 @@ void Car::steerAssist() {
             const float maxControl = 1.5;
             control = control < 0 ? -control : control;
             control = control > maxControl ? maxControl : control;
-            // Should be std::stof(multiplier), set to an int for tets
-            control = control * 1.0;
+            // Should be std::stof(multiplier), set to a float for tets
+            control = control * 1.5;
             if (control < 0)
             {
                 control = -control;

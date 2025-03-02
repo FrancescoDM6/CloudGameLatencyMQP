@@ -2,6 +2,7 @@
 import datetime
 import json
 import os
+import random
 import shutil
 import subprocess
 import time
@@ -9,6 +10,7 @@ import gspread
 import requests
 from oauth2client.service_account import ServiceAccountCredentials
 from pathlib import Path
+import tkinter as tk
 from pynput.keyboard import Controller, Key
 
 class GameTestConfig:
@@ -66,8 +68,8 @@ class GameTester:
       
        # Generate lag values from 0 to 150 in steps of 10
        # Set to 11 for testing
-       for run_number, lag in enumerate(range(0, 151, 10), 1):
-           for i in range(0, 11):
+       for i in range(0, 31):
+            for run_number, lag in enumerate(range(0, 151, 10), 1):
                test_case = {
                    'steering_assist': assist_value,
                    'lag': lag,
@@ -76,6 +78,8 @@ class GameTester:
                }
                print(f"{lag}")
                test_cases.append(test_case)
+
+       random.shuffle(test_cases)
       
        return test_cases
 
@@ -102,24 +106,19 @@ class GameTester:
        result = os.popen(f"wmctrl -l | grep '{name}'").read()
        return name in result
    
-   def monitor_sheet(self, poll_interval=1):
-       print("no problem")
+   def monitor_sheet(self, poll_interval=2):
        last_row_count = len(self.sheet.get_all_values())
-       print(f"{last_row_count}")
-       time.sleep(5)
        
        while True:
         try:
             current_rows = self.sheet.get_all_values()
             current_row_count = len(current_rows)
-            print(f"{current_row_count}")
 
             if current_row_count > last_row_count:
                 last_row_count = current_row_count
                 return True
             
             time.sleep(poll_interval)
-            return False
         except Exception as e:
             print("Error")
             time.sleep(poll_interval)
@@ -161,16 +160,11 @@ class GameTester:
             # Add a small delay between runs
             time.sleep(2)
 
-            print("We here")
             process = subprocess.Popen(["xdg-open", url])
-            time.sleep(5)
-            print("We made it!")
+            time.sleep(2)
             while True:
-                print("are we checking???")
                 if self.monitor_sheet():
-                    print("in monitor sheet checking")
-                    window = 'Playtesting Survey — Mozilla Firefox'
-                    window.destroy()
+                    subprocess.run(['xdotool', 'search', '--name', 'Playtesting Survey — Mozilla Firefox', 'windowfocus', 'key', 'Ctrl+w'], check=True)
                     process.terminate()
                     process.wait()
                     break
