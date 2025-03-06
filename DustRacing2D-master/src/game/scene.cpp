@@ -496,149 +496,149 @@ void Scene::processUserInput(InputHandler & handler)
         }    
     }
     else {
-        // m_cars.at(i)->steerAssist();
-        // m_cars.at(i)->accelerationAssist();
-        if (std::stof(m_game.getAssist()) == 0.0) {
-            m_cars.at(i)->steerAssist();
-            m_cars.at(i)->accelerationAssist();
-        }
-        else if (std::stof(m_game.getAssist()) == 0.1) {
-            if (tickCount % 10 == 0) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 0.2) {
-            if (tickCount % 10 == 0 || tickCount % 10 == 5) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 0.3) {
-            if (tickCount % 10 == 2 || tickCount % 10 == 5 || tickCount % 10 == 8) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 0.4) {
-            if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 0.5) {
-            if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 0.6) {
-            if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4 || tickCount % 10 == 5) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 0.7) {
-            if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4 || tickCount % 10 == 5
-            || tickCount % 10 == 6) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 0.8) {
-            if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4 || tickCount % 10 == 5
-            || tickCount % 10 == 6 || tickCount % 10 == 7) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 0.9) {
-            if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4 || tickCount % 10 == 5
-            || tickCount % 10 == 6 || tickCount % 10 == 7 || tickCount % 10 == 8) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-            }
-            else {
-                m_cars.at(i)->steerAssist();
-                m_cars.at(i)->accelerationAssist();
-            }
-        }
-        else if (std::stof(m_game.getAssist()) == 1.0) {
-                const char* evlag = m_game.getEvLag();
-                std::thread delayedUpdate([this, evlag, i]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-                    m_cars.at(i)->steerAssist();
-                    m_cars.at(i)->accelerationAssist();
-                });
-        }
+        m_cars.at(i)->steerAssist();
+        m_cars.at(i)->accelerationAssist();
+        // if (std::stof(m_game.getAssist()) == 0.0) {
+        //     m_cars.at(i)->steerAssist();
+        //     m_cars.at(i)->accelerationAssist();
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.1) {
+        //     if (tickCount % 10 == 0) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.2) {
+        //     if (tickCount % 10 == 0 || tickCount % 10 == 5) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.3) {
+        //     if (tickCount % 10 == 2 || tickCount % 10 == 5 || tickCount % 10 == 8) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.4) {
+        //     if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.5) {
+        //     if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.6) {
+        //     if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4 || tickCount % 10 == 5) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.7) {
+        //     if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4 || tickCount % 10 == 5
+        //     || tickCount % 10 == 6) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.8) {
+        //     if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4 || tickCount % 10 == 5
+        //     || tickCount % 10 == 6 || tickCount % 10 == 7) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 0.9) {
+        //     if (tickCount % 10 == 0 || tickCount % 10 == 1 || tickCount % 10 == 2 || tickCount % 10 == 3 || tickCount % 10 == 4 || tickCount % 10 == 5
+        //     || tickCount % 10 == 6 || tickCount % 10 == 7 || tickCount % 10 == 8) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        //     }
+        //     else {
+        //         m_cars.at(i)->steerAssist();
+        //         m_cars.at(i)->accelerationAssist();
+        //     }
+        // }
+        // else if (std::stof(m_game.getAssist()) == 1.0) {
+        //         const char* evlag = m_game.getEvLag();
+        //         std::thread delayedUpdate([this, evlag, i]() {
+        //         std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+        //             m_cars.at(i)->steerAssist();
+        //             m_cars.at(i)->accelerationAssist();
+        //         });
+        // }
     }
 }
 }

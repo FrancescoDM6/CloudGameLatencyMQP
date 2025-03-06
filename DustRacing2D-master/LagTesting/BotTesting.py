@@ -17,7 +17,7 @@ class GameTestConfig:
        self.log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs")
        # self.log_directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/logs")
        # Temporary, only for no steering sharpness change
-       self.lag_log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/logs/assist_0.75")
+       self.lag_log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/logs/assist_1.75")
        # self.lag_log_directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/logs/assist_1.0")
        self.test_cases_file = config_path or Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
        # self.test_cases_file = config_path or Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/LagTesting/test_cases.json")
@@ -53,10 +53,10 @@ class GameTester:
    def generate_test_cases(self):
        """Generate test cases for a single assist value with varying lag values"""
        test_cases = []
-    #    assist_value = 0.75  # Fixed assist value
+       assist_value = 1.75  # Fixed assist value
       
-       for assist_value in enumerate(range(0, 1.0, 0.1)):
-        for i in range(0, 50):
+    #    for assist_value in enumerate(range(0, 1.0, 0.1)):
+       for i in range(0, 50):
             onems_test_case = {
                         'steering_assist': assist_value,
                         'lag': 1,
@@ -75,8 +75,8 @@ class GameTester:
 
        # Generate lag values from 0 to 150 in steps of 10
        # Set to 11 for testing'
-       for assist_value in enumerate(range(0, 1.0, 0.1)):
-        for run_number, lag in enumerate(range(0, 201, 10), 1):
+    #    for assist_value in enumerate(range(0, 1.0, 0.1)):
+       for run_number, lag in enumerate(range(0, 201, 10), 1):
             for i in range(0, 50):
                 test_case = {
                     'steering_assist': assist_value,
