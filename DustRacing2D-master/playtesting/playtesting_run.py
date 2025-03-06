@@ -19,7 +19,8 @@ class GameTestConfig:
        self.keyboard = Controller()
        self.directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/build")
        # self.directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/build")
-       self.log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/playtesting/logs")
+       self.log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/logs")
+       self.playtesting_log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/playtesting/logs")
        # self.log_directory = Path("/home/parallels/Desktop/CloudGameLatencyMQP/CloudGameLatencyMQP/DustRacing2D-master/logs")
        # Temporary, only for no steering sharpness change
        self.lag_log_directory = Path("/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/playtesting/logs/assist_1.0")
@@ -62,26 +63,26 @@ class GameTester:
 
 
    def generate_test_cases(self):
-       """Generate test cases for a single assist value with varying lag values"""
-       test_cases = []
-       assist_value = 1.0  # Fixed assist value
-      
-       # Generate lag values from 0 to 150 in steps of 10
-       # Set to 11 for testing
-       for i in range(0, 31):
-            for run_number, lag in enumerate(range(0, 151, 10), 1):
-               test_case = {
-                   'steering_assist': assist_value,
-                   'lag': lag,
-                   'run_number': run_number,
-                   'name': f"Assist {assist_value} - Lag {lag}ms"
-               }
-               print(f"{lag}")
-               test_cases.append(test_case)
+        test_cases = []
+        assist_values = [1.0, 1.25, 1.5]  # Three assist values
+        lag_values = range(0, 201, 10)  # Lag values from 0 to 200 in steps of 10
 
-       random.shuffle(test_cases)
-      
-       return test_cases
+        # We need a total of 30 test cases, so we will iterate over assist values and lag values
+        # to create combinations. Since we have 3 assist values, we'll pick 10 lag values per assist value
+        for assist_value in assist_values:
+            selected_lags = random.sample(lag_values, 10)  # Randomly select 10 lag values
+            for run_number, lag in enumerate(selected_lags, 1):
+                test_case = {
+                    'steering_assist': assist_value,
+                    'lag': lag,
+                    'run_number': run_number,
+                    'name': f"Assist {assist_value} - Lag {lag}ms"
+                }
+                test_cases.append(test_case)
+
+        random.shuffle(test_cases)  # Shuffle the test cases to randomize their order
+        
+        return test_cases
 
 
    def move_run_logs(self, test_case):
@@ -91,16 +92,18 @@ class GameTester:
        Args:
            test_case (dict): The test case containing assist value, lag value, and run number
        """
-       assist_dir = self.config.log_directory / f"assist_{test_case['steering_assist']}"
+       assist_dir = self.config.playtesting_log_directory / f"assist_{test_case['steering_assist']}"
        assist_dir.mkdir(parents=True, exist_ok=True)
-       lag_dir = self.config.lag_log_directory / f"lag_{test_case['lag']}"
+
+        # Directory for the specific lag value under the assist directory
+       lag_dir = assist_dir / f"lag_{test_case['lag']}"
        lag_dir.mkdir(parents=True, exist_ok=True)
       
        # Move all .log files into the assist directory
        for log_file in self.config.log_directory.glob("*.log"):
-           new_filename = log_file.name
-           shutil.move(log_file, lag_dir / new_filename)
-           print(f"Moved {log_file} to {lag_dir}/{new_filename}")
+        new_filename = log_file.name
+        shutil.move(log_file, lag_dir / new_filename)
+        print(f"Moved {log_file} to {lag_dir}/{new_filename}")
 
    def window_exists(self, name):
        result = os.popen(f"wmctrl -l | grep '{name}'").read()
@@ -151,9 +154,9 @@ class GameTester:
             
             self.config.num_runs += 1
             
-            if self.config.num_runs == 30:
+            if self.config.num_runs == 1:
                 # Move the logs immediately after the run while we know which configuration it was
-                # self.move_run_logs(test_case)
+                self.move_run_logs(test_case)
                 print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
                 self.config.num_runs = 0
             
