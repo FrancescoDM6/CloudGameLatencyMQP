@@ -14,7 +14,7 @@ from pathlib import Path
 import tkinter as tk
 from pynput.keyboard import Controller, Key
 
-LatinSquare = "D:\Senior Year\MQP\CloudGameLatencyMQP\Latin Square Setup.csv"
+LatinSquare = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/Latin Square Setup.csv"
 
 class GameTestConfig:
    
@@ -104,7 +104,7 @@ class GameTester:
 
 
 
-    def run_test_case(self, test_case, rounds):
+    def run_test_case(self, rounds):
         """
         Run a single test case with the given configuration.
         
@@ -167,7 +167,6 @@ class GameTester:
             url = "https://docs.google.com/forms/d/e/1FAIpQLSetSCdvxYuVnnXDkr3iABTVI7jyy5CWpMY4SzpGFokm4Wy2TA/viewform"
             if not self.window_exists('Dust Racing 2D 2.1.1') and not self.window_exists('Playtesting Survey — Mozilla Firefox'):
                 try:
-                    print(f"Starting test case: {test_case['name']} (Run {test_case['run_number']})")
                     process = subprocess.Popen(command, cwd=self.config.directory)
                     time.sleep(10)
 
@@ -181,7 +180,6 @@ class GameTester:
 
                     if self.config.num_runs == 1:
                         self.move_run_logs(test_case)
-                        print(f"Completed test case: {test_case['name']} (Run {test_case['run_number']})")
                         self.config.num_runs = 0
 
                     time.sleep(2)
@@ -199,7 +197,6 @@ class GameTester:
                             break
 
                 except Exception as e:
-                    print(f"Test case failed: {test_case['name']} - {str(e)}")
                     if 'process' in locals():
                         process.terminate()
                     raise
@@ -215,7 +212,7 @@ def read_rounds(player_id):
     raise ValueError(f"Player id {player_id} not found in CSV file.")
 
 def main():
-    player_id = 0
+    player_id = 1
     set = read_rounds(player_id)
     try:
         config = GameTestConfig()
@@ -224,13 +221,7 @@ def main():
         if not tester.compile_game():
             return
         
-        test_cases = tester.generate_test_cases()
-        for test_case in test_cases:
-            try:
-                tester.run_test_case(test_case, set)
-            except Exception as e:
-                print(f"Failed to run test case {test_case['name']}: {e}")
-                continue
+        tester.run_test_case(set)
 
 
     except Exception as e:
