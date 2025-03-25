@@ -14,7 +14,7 @@ from pathlib import Path
 import tkinter as tk
 from pynput.keyboard import Controller, Key
 
-LatinSquare = "/home/claypool/Desktop/CloudGameLatencyMQP/DustRacing2D-master/Latin Square Setup.csv"
+LatinSquare = "/home/claypool/Desktop/CloudGameLatencyMQP/Latin Square Setup(1).csv"
 
 class GameTestConfig:
    
@@ -105,6 +105,7 @@ class GameTester:
     def generate_test_case(self, rounds):
         """Generate test cases for a single assist value with varying lag values"""
         test_cases = []
+        #Codes cannot be multiples of 50 at least while the bot is steering
         code_mapping = {
             1: (0, 0),
             2: (0, 2),
@@ -118,14 +119,14 @@ class GameTester:
             10: (150, 2),
             11: (150, 4),
             12: (150, 6),
-            13: (200, 0),
+            13: (190, 0),
             14: (200, 2),
             15: (200, 4),
             16: (200, 6)
         }
 
     #    for assist_value in enumerate(range(0, 1.0, 0.1)):
-        for i in range(1, 19):
+        for i in range(1, 21):
             round_key = f"Round {i}"
             round_value = int(rounds[round_key])
 
@@ -145,7 +146,7 @@ class GameTester:
                         # 'tick_value': tick_value,
                         'steering_assist': 1,
                         'lag': lag_value,
-                        'run_number': 0,
+                        'run_number': i,
                         # 'name': f"Assist {tick} - Lag 1ms"
                     }
             print("Broke after 145")
