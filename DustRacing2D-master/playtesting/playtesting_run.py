@@ -102,6 +102,56 @@ class GameTester:
                 time.sleep(poll_interval)
                 return False
 
+    def generate_test_case(self, rounds):
+        """Generate test cases for a single assist value with varying lag values"""
+        test_cases = []
+        code_mapping = {
+            1: (0, 0),
+            2: (0, 2),
+            3: (0, 4),
+            4: (0, 6),
+            5: (100, 0),
+            6: (100, 2),
+            7: (100, 4),
+            8: (100, 6),
+            9: (150, 0),
+            10: (150, 2),
+            11: (150, 4),
+            12: (150, 6),
+            13: (200, 0),
+            14: (200, 2),
+            15: (200, 4),
+            16: (200, 6)
+        }
+
+    #    for assist_value in enumerate(range(0, 1.0, 0.1)):
+        for i in range(1, 19):
+            round_key = f"Round {i}"
+            round_value = int(rounds[round_key])
+
+            print(f"Round {i}:", round_value)
+
+
+            print("Round value:", round_value)
+
+            lag_value = int(code_mapping[round_value][0])
+            tick_value = int(code_mapping[round_value][1])
+
+            print("Lag value:", lag_value)
+            print("Tick value:", tick_value)
+            print("Broke after 141")
+
+            setup = {
+                        # 'tick_value': tick_value,
+                        'steering_assist': 1,
+                        'lag': lag_value,
+                        'run_number': 0,
+                        # 'name': f"Assist {tick} - Lag 1ms"
+                    }
+            print("Broke after 145")
+            test_cases.append(setup)
+            print("Broke after 147")
+        return test_cases
 
 
     def run_test_case(self, rounds):
@@ -116,53 +166,21 @@ class GameTester:
 
         
         # Define the dictionary of 16 codes once
-        code_mapping = {
-            "1": (0, 0),
-            "2": (0, 2),
-            "3": (0, 4),
-            "4": (0, 6),
-            "5": (100, 0),
-            "6": (100, 2),
-            "7": (100, 4),
-            "8": (100, 6),
-            "9": (150, 0),
-            "10": (150, 2),
-            "11": (150, 4),
-            "12": (150, 6),
-            "13": (200, 0),
-            "14": (200, 2),
-            "15": (200, 4),
-            "16": (200, 6)
-        }
-
+        
+        test_cases = self.generate_test_case(rounds)
         
         # Process rounds (for example, from Round 3 to Round 21)
-        for i in range(3, 22):
-            round_key = f"Round {i}"
-            print(f"Round {i}: {rounds[round_key]}")
+        print(test_cases)
+        print("broke after command")
 
-            round_value = int(rounds[round_key])
-
-            lag_value = int(code_mapping[round_key][0])
-            tick_value = int(code_mapping[round_key][1])
-
+        for test_case in test_cases:
+            print(test_case)
             command = [
             "./dustrac-game",
-            "--lagassist", f"{lag_value}:{tick_value}"
+            "--lagassist", f"{test_case['lag']}:{test_case['steering_assist']}"
             ]
             
-            # Convert round_value to a string to match keys in code_mapping.
-            # This assumes that the code you want to look up is the same as round_value.
-            code_key = str(round_value)
-            if code_key in code_mapping:
-                additional_values = code_mapping[code_key]
-                print(f"Additional values for code {code_key}: {additional_values}")
-                # Here you can integrate the additional_values as needed.
-                # For example, you might add them to the test_case dictionary,
-                # or use them to fill out fields on your form.
-            else:
-                print(f"No mapping for round value {round_value}")
-        
+            print("broke during command")
             # Continue with existing logic to load the URL/form
             url = "https://docs.google.com/forms/d/e/1FAIpQLSetSCdvxYuVnnXDkr3iABTVI7jyy5CWpMY4SzpGFokm4Wy2TA/viewform"
             if not self.window_exists('Dust Racing 2D 2.1.1') and not self.window_exists('Playtesting Survey — Mozilla Firefox'):
@@ -214,6 +232,7 @@ def read_rounds(player_id):
 def main():
     player_id = 1
     set = read_rounds(player_id)
+    print(set)
     try:
         config = GameTestConfig()
         tester = GameTester(config)
