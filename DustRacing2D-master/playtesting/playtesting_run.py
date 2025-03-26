@@ -119,7 +119,7 @@ class GameTester:
             10: (150, 2),
             11: (150, 4),
             12: (150, 6),
-            13: (190, 0),
+            13: (200, 0),
             14: (200, 2),
             15: (200, 4),
             16: (200, 6)
@@ -144,7 +144,7 @@ class GameTester:
 
             setup = {
                         # 'tick_value': tick_value,
-                        'steering_assist': 1,
+                        'steering_assist': tick_value,
                         'lag': lag_value,
                         'run_number': i,
                         # 'name': f"Assist {tick} - Lag 1ms"
@@ -175,17 +175,31 @@ class GameTester:
         print("broke after command")
 
         for test_case in test_cases:
-            print(test_case)
             command = [
             "./dustrac-game",
             "--lagassist", f"{test_case['lag']}:{test_case['steering_assist']}"
             ]
+            command_evlag = [
+                "gnome-terminal",
+                "--disable-factory",
+                "--title=evlag_terminal",
+                "--",
+                "bash",
+                "-c",
+                f"sudo evlag -d /dev/input/event3 -l {test_case['lag']}; exit"
+            ]
+
+            print(command_evlag)
             
             print("broke during command")
             # Continue with existing logic to load the URL/form
             url = "https://docs.google.com/forms/d/e/1FAIpQLSetSCdvxYuVnnXDkr3iABTVI7jyy5CWpMY4SzpGFokm4Wy2TA/viewform"
             if not self.window_exists('Dust Racing 2D 2.1.1') and not self.window_exists('Playtesting Survey — Mozilla Firefox'):
                 try:
+    
+                    # Launch the evlag command in a new terminal window
+                    evlag_process = subprocess.Popen(command_evlag)
+                    time.sleep(1)
                     process = subprocess.Popen(command, cwd=self.config.directory)
                     time.sleep(10)
 
@@ -193,6 +207,9 @@ class GameTester:
                         if not self.window_exists('Dust Racing 2D 2.1.1'):
                             process.terminate()
                             process.wait(timeout=5)
+                            evlag_process.terminate()  # Terminate the evlag process
+                            evlag_process.wait()
+                            subprocess.run(["wmctrl", "-c", "evlag_terminal"])
                             break
 
                     self.config.num_runs += 1
@@ -213,6 +230,7 @@ class GameTester:
                             )
                             process.terminate()
                             process.wait()
+
                             break
 
                 except Exception as e:

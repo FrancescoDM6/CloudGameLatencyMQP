@@ -210,9 +210,9 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
 
     const float maxDelta = 3.0;
 
-    const char* evlag = m_game.getEvLag();
-    std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(0));
+    // const char* evlag = m_game.getEvLag();
+    // std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
+    // std::this_thread::sleep_for(std::chrono::milliseconds(0));
 
     // Store the last difference
     m_lastDiff = diff;
@@ -232,11 +232,11 @@ void AI::steerControl(TargetNodeBasePtr targetNode)
         LogManager::getInstance().writeLog(LogManager::LogType::BOT_DATA,
                     "Steering LEFT with control= %f\n", control);
     }   
-    });
+//     });
 
 
-   // Detach the thread so it runs independently
-   delayedUpdate.detach();
+//    // Detach the thread so it runs independently
+//    delayedUpdate.detach();
 }
 
 void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
@@ -305,9 +305,9 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         }
     }
 
-    const char* evlag = m_game.getEvLag();
-    std::thread delayedUpdate([this, brake, accelerate, evlag]() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(0));
+    // const char* evlag = m_game.getEvLag();
+    // std::thread delayedUpdate([this, brake, accelerate, evlag]() {
+    // std::this_thread::sleep_for(std::chrono::milliseconds(0));
     if (brake)
     {
         m_car.setAcceleratorEnabled(false);
@@ -323,11 +323,11 @@ void AI::speedControl(TrackTile & currentTile, bool isRaceCompleted)
         m_car.setAcceleratorEnabled(false);
         m_car.setBrakeEnabled(false);
     }
-    });
+//     });
 
 
-   // Detach the thread so it runs independently
-   delayedUpdate.detach();
+//    // Detach the thread so it runs independently
+//    delayedUpdate.detach();
 }
 
 void AI::setTrack(std::shared_ptr<Track> track)
