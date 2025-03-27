@@ -378,7 +378,7 @@ void Scene::processUserInput(InputHandler & handler)
         // Uncomment to enable acceleration assistance
         // Change to 0 to get back to default settings
         float assistValue = std::stof(m_game.getAssist());
-        if (assistValue < 1.1) {
+        if (assistValue < 0.1) {
             // Handle accelerating / braking
             // if (n_press % 2 != 0) {
             // if (tickCount % 10 != 0) {
@@ -421,7 +421,7 @@ void Scene::processUserInput(InputHandler & handler)
                 }
             }
 
-            else if (assistValue < 3.1) {
+            else if (assistValue < 2.1) {
             // Handle accelerating / braking
             // if (n_press % 2 != 0) {
             if (tickCount % 5 != 0) {
@@ -469,7 +469,55 @@ void Scene::processUserInput(InputHandler & handler)
             }
             }
 
-            else if (assistValue < 5.1) {
+            else if (assistValue < 3.1) {
+            // Handle accelerating / braking
+            // if (n_press % 2 != 0) {
+            if (tickCount % 10 < 7) {
+                if (handler.getActionState(i, InputHandler::Action::Down))
+                {
+                    if (!m_race->timing().raceCompleted(i))
+                    {
+                        m_cars.at(i)->setBrakeEnabled(true);
+                    }
+                }
+                else
+                {
+                    m_cars.at(i)->setBrakeEnabled(false);
+                }
+
+                if (handler.getActionState(i, InputHandler::Action::Up))
+                {
+                    if (!m_race->timing().raceCompleted(i))
+                    {
+                        m_cars.at(i)->setAcceleratorEnabled(true);
+                    }
+                }
+                else
+                {
+                    m_cars.at(i)->setAcceleratorEnabled(false);
+                }
+
+                if (handler.getActionState(i, InputHandler::Action::Left))
+                {
+                    m_cars.at(i)->steer(Car::Steer::Left);
+                }
+                else if (handler.getActionState(i, InputHandler::Action::Right))
+                {
+                    m_cars.at(i)->steer(Car::Steer::Right);
+                }
+                else
+                {
+                    m_cars.at(i)->steer(Car::Steer::Neutral);
+                }
+            }
+            // // Assistance active
+            else {
+                m_cars.at(i)->accelerationAssist();
+                m_cars.at(i)->steerAssist();
+            }
+            }
+
+            else if (assistValue < 4.1) {
             // Handle accelerating / braking
             // if (n_press % 2 != 0) {
             if (tickCount % 10 < 6) {
@@ -517,7 +565,7 @@ void Scene::processUserInput(InputHandler & handler)
             }
             }
 
-            else if (assistValue < 7.1) {
+            else if (assistValue < 6.1) {
             // Handle accelerating / braking
             // if (n_press % 2 != 0) {
             if (tickCount % 10 < 4) {

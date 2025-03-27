@@ -16,6 +16,8 @@ from pynput.keyboard import Controller, Key
 
 LatinSquare = "/home/claypool/Desktop/CloudGameLatencyMQP/Latin Square Setup(1).csv"
 
+player_id = 2
+
 class GameTestConfig:
    
    def __init__(self, config_path=None):
@@ -45,6 +47,7 @@ class GameTester:
         self.client = gspread.authorize(self.creds)
         self.spreadsheet = self.client.open("Playtesting Survey")
         self.sheet = self.spreadsheet.sheet1
+        # self.player_id = 1
 
     def ensure_directories(self):
         self.config.log_directory.mkdir(parents=True, exist_ok=True)
@@ -69,16 +72,19 @@ class GameTester:
         Args:
             test_case (dict): The test case containing assist value, lag value, and run number
         """
-        assist_dir = self.config.playtesting_log_directory / f"assist_{test_case['steering_assist']}"
-        assist_dir.mkdir(parents=True, exist_ok=True)
+        # assist_dir = self.config.playtesting_log_directory / f"assist_{test_case['steering_assist']}"
+        # assist_dir.mkdir(parents=True, exist_ok=True)
 
-        lag_dir = assist_dir / f"lag_{test_case['lag']}"
-        lag_dir.mkdir(parents=True, exist_ok=True)
+        # lag_dir = assist_dir / f"lag_{test_case['lag']}"
+        # lag_dir.mkdir(parents=True, exist_ok=True)
+
+        id_dir = self.config.playtesting_log_directory / f"playerid{player_id}"
+        id_dir.mkdir(parents=True, exist_ok=True)
 
         for log_file in self.config.log_directory.glob("*.log"):
             new_filename = log_file.name
-            shutil.move(log_file, lag_dir / new_filename)
-            print(f"Moved {log_file} to {lag_dir}/{new_filename}")
+            shutil.move(log_file, id_dir / new_filename)
+            print(f"Moved {log_file} to {id_dir}/{new_filename}")
 
     def window_exists(self, name):
         result = os.popen(f"wmctrl -l | grep '{name}'").read()
@@ -199,7 +205,7 @@ class GameTester:
     
                     # Launch the evlag command in a new terminal window
                     evlag_process = subprocess.Popen(command_evlag)
-                    time.sleep(1)
+                    time.sleep(.1)
                     process = subprocess.Popen(command, cwd=self.config.directory)
                     time.sleep(10)
 
@@ -214,7 +220,7 @@ class GameTester:
 
                     self.config.num_runs += 1
 
-                    if self.config.num_runs == 1:
+                    if self.config.num_runs == 20:
                         self.move_run_logs(test_case)
                         self.config.num_runs = 0
 
@@ -249,7 +255,6 @@ def read_rounds(player_id):
     raise ValueError(f"Player id {player_id} not found in CSV file.")
 
 def main():
-    player_id = 1
     set = read_rounds(player_id)
     print(set)
     try:
