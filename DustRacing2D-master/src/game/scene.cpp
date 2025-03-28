@@ -421,6 +421,54 @@ void Scene::processUserInput(InputHandler & handler)
                 }
             }
 
+            else if (assistValue < 1.1) {
+            // Handle accelerating / braking
+            // if (n_press % 2 != 0) {
+            if (tickCount % 10 != 0) {
+                if (handler.getActionState(i, InputHandler::Action::Down))
+                {
+                    if (!m_race->timing().raceCompleted(i))
+                    {
+                        m_cars.at(i)->setBrakeEnabled(true);
+                    }
+                }
+                else
+                {
+                    m_cars.at(i)->setBrakeEnabled(false);
+                }
+
+                if (handler.getActionState(i, InputHandler::Action::Up))
+                {
+                    if (!m_race->timing().raceCompleted(i))
+                    {
+                        m_cars.at(i)->setAcceleratorEnabled(true);
+                    }
+                }
+                else
+                {
+                    m_cars.at(i)->setAcceleratorEnabled(false);
+                }
+
+                if (handler.getActionState(i, InputHandler::Action::Left))
+                {
+                    m_cars.at(i)->steer(Car::Steer::Left);
+                }
+                else if (handler.getActionState(i, InputHandler::Action::Right))
+                {
+                    m_cars.at(i)->steer(Car::Steer::Right);
+                }
+                else
+                {
+                    m_cars.at(i)->steer(Car::Steer::Neutral);
+                }
+            }
+            // // Assistance active
+            else {
+                m_cars.at(i)->accelerationAssist();
+                m_cars.at(i)->steerAssist();
+            }
+            }
+
             else if (assistValue < 2.1) {
             // Handle accelerating / braking
             // if (n_press % 2 != 0) {

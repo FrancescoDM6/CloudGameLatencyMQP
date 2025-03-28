@@ -16,7 +16,7 @@ from pynput.keyboard import Controller, Key
 
 LatinSquare = "/home/claypool/Desktop/CloudGameLatencyMQP/Latin Square Setup(1).csv"
 
-player_id = 6
+player_id = 1
 
 class GameTestConfig:
    
@@ -111,24 +111,23 @@ class GameTester:
     def generate_test_case(self, rounds):
         """Generate test cases for a single assist value with varying lag values"""
         test_cases = []
-        #Codes cannot be multiples of 50 at least while the bot is steering
         code_mapping = {
             1: (0, 0),
-            2: (0, 2),
-            3: (0, 4),
-            4: (0, 6),
-            5: (100, 0),
-            6: (100, 2),
-            7: (100, 4),
-            8: (100, 6),
+            2: (0, 1),
+            3: (0, 2),
+            4: (0, 3),
+            5: (75, 0),
+            6: (75, 1),
+            7: (75, 2),
+            8: (75, 3),
             9: (150, 0),
-            10: (150, 2),
-            11: (150, 4),
-            12: (150, 6),
-            13: (200, 0),
-            14: (200, 2),
-            15: (200, 4),
-            16: (200, 6)
+            10: (150, 1),
+            11: (150, 2),
+            12: (150, 3),
+            13: (225, 0),
+            14: (225, 1),
+            15: (225, 2),
+            16: (225, 3)
         }
 
     #    for assist_value in enumerate(range(0, 1.0, 0.1)):
