@@ -20,6 +20,7 @@
 #include "database.hpp"
 #include "game.hpp"
 #include "layers.hpp"
+#include "logmanager.hpp"
 #include "offtrackdetector.hpp"
 #include "renderer.hpp"
 #include "settings.hpp"
@@ -375,6 +376,10 @@ void Race::update()
     {
         emit finished();
         m_isfinishedSignalSent = true;
+        m_game.exitGame();
+    }
+
+    if (!isRaceFinished() && m_timing.raceTime() >= 60000) {
         m_game.exitGame();
     }
 
