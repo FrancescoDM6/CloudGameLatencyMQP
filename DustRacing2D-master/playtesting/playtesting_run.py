@@ -1,4 +1,5 @@
 # #EVLag input: sudo evlag -d /dev/input/event3 -l 100
+# Link for survey: https://docs.google.com/forms/d/e/1FAIpQLSfm0YFOO7FThiGeUU0znvlpNp-hrbmTQT_HHskD10qAZQtXGA/viewform?usp=header
 import csv
 import datetime
 import json
@@ -16,7 +17,7 @@ from pynput.keyboard import Controller, Key
 
 LatinSquare = "/home/claypool/Desktop/CloudGameLatencyMQP/Latin Square Setup(1).csv"
 
-player_id = 1
+player_id = 2
 
 class GameTestConfig:
    
