@@ -17,7 +17,7 @@ from pynput.keyboard import Controller, Key
 
 LatinSquare = "/home/claypool/Desktop/CloudGameLatencyMQP/Latin Square Setup(1).csv"
 
-player_id = 2
+player_id = 3
 
 class GameTestConfig:
    
