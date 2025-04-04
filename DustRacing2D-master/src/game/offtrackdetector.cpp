@@ -35,7 +35,7 @@ void OffTrackDetector::setTrack(std::shared_ptr<Track> track)
 
 void OffTrackDetector::update()
 {
-    fprintf(stderr, "OffTrackDetector update\n");
+    // fprintf(stderr, "OffTrackDetector update\n");
     {
         const auto leftFrontTirePos(m_car.leftFrontTireLocation());
         const auto tile = m_track->trackTileAtLocation(leftFrontTirePos.i(), leftFrontTirePos.j());
@@ -44,7 +44,7 @@ void OffTrackDetector::update()
 
         if (isOffTrack(leftFrontTirePos, *tile))
         {
-            fprintf(stderr, "Left side off track\n");
+            // fprintf(stderr, "Left side off track\n");
             m_car.setLeftSideOffTrack(true);
         }
     }
@@ -57,7 +57,7 @@ void OffTrackDetector::update()
 
         if (isOffTrack(rightFrontTirePos, *tile))
         {
-            fprintf(stderr, "Right side off track\n");
+            // fprintf(stderr, "Right side off track\n");
             m_car.setRightSideOffTrack(true);
         }
     }

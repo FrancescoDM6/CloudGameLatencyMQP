@@ -192,10 +192,12 @@ class GameTester:
                 "--",
                 "bash",
                 "-c",
-                f"sudo evlag -d /dev/input/event3 -l {test_case['lag']}; exit"
+                f"sudo evlag -d /dev/input/event3 -l {test_case['lag']};"
             ]
 
+            print(command)
             print(command_evlag)
+            print({test_case['steering_assist']})
             
             print("broke during command")
             # Continue with existing logic to load the URL/form
