@@ -474,11 +474,11 @@ void Car::steerAssist() {
 
             // More aggressive steering response
             const float maxDelta = 3.0f;  // Reduced threshold to steer more often
-            const char* evlag = m_game.getEvLag();
-            std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
-            if (std::stoi(evlag) % 50 != 0) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-            }
+            // const char* evlag = m_game.getEvLag();
+            // std::thread delayedUpdate([this, control, diff, maxDelta, cur, angle, evlag]() {
+            // if (std::stoi(evlag) % 50 != 0) {
+            //     std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+            // }
             if (diff < -maxDelta)
             {
                 steer(Steer::Right, control /*+ 0.5f*/);  // Add base steering amount
@@ -489,10 +489,10 @@ void Car::steerAssist() {
                 steer(Steer::Left, control /*+ 0.5f*/);   // Add base steering amount
                 LogManager::getInstance().writeLog(LogManager::LogType::CAR_DATA, "Steering LEFT with control= %f\n", control);
             }
-            });
+            // });
 
             // // Detach the thread so it runs independently
-            delayedUpdate.detach();
+            // delayedUpdate.detach();
 
             m_lastDiff = diff;
             
@@ -515,11 +515,11 @@ void Car::accelerationAssist() {
 
             // The following speed limits are experimentally defined.
             float scale = 0.9f;
-            const char* evlag = m_game.getEvLag();
-            std::thread delayedUpdate([this, absspeed, scale, &currentTile, evlag]() {
-            if (std::stoi(evlag) % 50 != 0) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
-            }
+            // const char* evlag = m_game.getEvLag();
+            // std::thread delayedUpdate([this, absspeed, scale, &currentTile, evlag]() {
+            // if (std::stoi(evlag) % 50 != 0) {
+            //     std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(evlag)));
+            // }
             if (currentTile.computerHint() == TrackTile::ComputerHint::Brake)
             {
                 if (absspeed > 14.0f * scale)
@@ -560,11 +560,11 @@ void Car::accelerationAssist() {
                     setBrakeEnabled(false);
                 }
             }
-            });
+            // });
 
 
-            // // Detach the thread so it runs independently
-            delayedUpdate.detach();
+            // // // Detach the thread so it runs independently
+            // delayedUpdate.detach();
         }
     // }
 }
