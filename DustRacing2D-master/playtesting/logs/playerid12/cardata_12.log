@@ -1,0 +1,705 @@
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.14] updateTireWear: car Location i= 228.894043
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.14] updateTireWear: car Location j= -38.672363
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.14] Track assistance: angle=-9.589738, cur=0.000000, diff=-9.589738, control=0.839102
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.14] Steering RIGHT with control= 0.839102
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.30] updateTireWear: car Location i= 221.629395
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.30] updateTireWear: car Location j= -38.599548
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.30] Track assistance: angle=-9.879683, cur=0.000000, diff=-9.879683, control=0.444921
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.30] Steering RIGHT with control= 0.444921
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.46] updateTireWear: car Location i= 209.957031
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.46] updateTireWear: car Location j= -38.469727
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.46] Track assistance: angle=-10.382944, cur=0.000000, diff=-10.382944, control=0.476271
+[SYS: 2025-04-08 18:16:51][GAME: 00:00.46] Steering RIGHT with control= 0.476271
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.62] updateTireWear: car Location i= 194.118408
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.62] updateTireWear: car Location j= -38.213745
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.62] Track assistance: angle=-11.136724, cur=0.000000, diff=-11.136724, control=0.520209
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.62] Steering RIGHT with control= 0.520209
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.78] updateTireWear: car Location i= 174.153809
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.78] updateTireWear: car Location j= -37.743225
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.78] Track assistance: angle=-12.228233, cur=-1.000000, diff=-11.228233, control=0.495239
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.78] Steering RIGHT with control= 0.495239
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.94] updateTireWear: car Location i= 150.107178
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.94] updateTireWear: car Location j= -36.928467
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.94] Track assistance: angle=-13.821095, cur=-2.000000, diff=-11.821095, control=0.543111
+[SYS: 2025-04-08 18:16:52][GAME: 00:00.94] Steering RIGHT with control= 0.543111
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.10] updateTireWear: car Location i= 382.035645
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.10] updateTireWear: car Location j= -28.580261
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.10] Track assistance: angle=-4.278354, cur=-3.000000, diff=-1.278354, control=0.405317
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.26] updateTireWear: car Location i= 349.941650
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.26] updateTireWear: car Location j= -26.717468
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.26] Track assistance: angle=-4.365968, cur=-3.000000, diff=-1.365968, control=0.063594
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.42] updateTireWear: car Location i= 313.858887
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.42] updateTireWear: car Location j= -24.332642
+[SYS: 2025-04-08 18:16:52][GAME: 00:01.42] Track assistance: angle=-4.433121, cur=-4.000000, diff=-0.433121, control=0.021863
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.58] updateTireWear: car Location i= 273.824951
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.58] updateTireWear: car Location j= -21.516785
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.58] Track assistance: angle=-4.492990, cur=-4.000000, diff=-0.492990, control=0.024188
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.74] updateTireWear: car Location i= 229.859863
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.74] updateTireWear: car Location j= -18.636963
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.74] Track assistance: angle=-4.635383, cur=-4.000000, diff=-0.635383, control=0.034028
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.90] updateTireWear: car Location i= 182.509033
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.90] updateTireWear: car Location j= -21.275940
+[SYS: 2025-04-08 18:16:53][GAME: 00:01.90] Track assistance: angle=-6.649227, cur=-7.000000, diff=0.350773, control=0.058491
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.06] updateTireWear: car Location i= 1060.859863
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.06] updateTireWear: car Location j= -18.403198
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.06] Track assistance: angle=-0.993835, cur=-6.000000, diff=5.006165, control=0.422693
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.06] Steering LEFT with control= 0.422693
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.22] updateTireWear: car Location i= 1006.546875
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.22] updateTireWear: car Location j= -17.692688
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.22] Track assistance: angle=-1.007019, cur=-2.000000, diff=0.992981, control=0.132134
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.38] updateTireWear: car Location i= 948.577393
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.38] updateTireWear: car Location j= -16.352844
+[SYS: 2025-04-08 18:16:53][GAME: 00:02.38] Track assistance: angle=-0.987643, cur=-1.000000, diff=0.012357, control=0.042362
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.54] updateTireWear: car Location i= 886.961670
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.54] updateTireWear: car Location j= -15.691895
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.54] Track assistance: angle=-1.013556, cur=0.000000, diff=-1.013556, control=0.089227
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.70] updateTireWear: car Location i= 821.768799
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.70] updateTireWear: car Location j= -15.080200
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.70] Track assistance: angle=-1.051311, cur=0.000000, diff=-1.051311, control=0.047647
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.86] updateTireWear: car Location i= 753.048340
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.86] updateTireWear: car Location j= -14.604126
+[SYS: 2025-04-08 18:16:54][GAME: 00:02.86] Track assistance: angle=-1.111017, cur=0.000000, diff=-1.111017, control=0.051219
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.02] updateTireWear: car Location i= 681.110840
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.02] updateTireWear: car Location j= -13.203735
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.02] Track assistance: angle=-1.110573, cur=-4.000000, diff=2.889427, control=0.301432
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.18] updateTireWear: car Location i= 607.520508
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.18] updateTireWear: car Location j= -7.333923
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.18] Track assistance: angle=-0.691635, cur=-16.000000, diff=15.308365, control=1.213070
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.18] Steering LEFT with control= 1.213070
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.34] updateTireWear: car Location i= 532.970703
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.34] updateTireWear: car Location j= 0.630493
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.34] Track assistance: angle=0.067780, cur=-14.000000, diff=14.067780, control=0.561190
+[SYS: 2025-04-08 18:16:54][GAME: 00:03.34] Steering LEFT with control= 0.561190
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.50] updateTireWear: car Location i= 456.723633
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.50] updateTireWear: car Location j= 10.093506
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.50] Track assistance: angle=1.266020, cur=-8.000000, diff=9.266020, control=0.195311
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.50] Steering LEFT with control= 0.195311
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.66] updateTireWear: car Location i= 377.481201
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.66] updateTireWear: car Location j= 18.351990
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.66] Track assistance: angle=2.783355, cur=-4.000000, diff=6.783355, control=0.188155
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.66] Steering LEFT with control= 0.188155
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.82] updateTireWear: car Location i= 295.464844
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.82] updateTireWear: car Location j= 26.404785
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.82] Track assistance: angle=5.106782, cur=-9.000000, diff=14.106782, control=0.937572
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.82] Steering LEFT with control= 0.937572
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.98] updateTireWear: car Location i= 212.956787
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.98] updateTireWear: car Location j= 41.666565
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.98] Track assistance: angle=11.070489, cur=-23.000000, diff=34.070488, control=2.363996
+[SYS: 2025-04-08 18:16:55][GAME: 00:03.98] Steering LEFT with control= 2.363996
+[SYS: 2025-04-08 18:16:55][GAME: 00:04.14] updateTireWear: car Location i= 470.201416
+[SYS: 2025-04-08 18:16:55][GAME: 00:04.14] updateTireWear: car Location j= 128.562927
+[SYS: 2025-04-08 18:16:55][GAME: 00:04.14] Track assistance: angle=15.292105, cur=-24.000000, diff=39.292107, control=1.947476
+[SYS: 2025-04-08 18:16:55][GAME: 00:04.14] Steering LEFT with control= 1.947476
+[SYS: 2025-04-08 18:16:55][GAME: 00:04.30] updateTireWear: car Location i= 386.648193
+[SYS: 2025-04-08 18:16:55][GAME: 00:04.30] updateTireWear: car Location j= 153.128235
+[SYS: 2025-04-08 18:16:55][GAME: 00:04.30] Track assistance: angle=21.605556, cur=-5.000000, diff=26.605556, control=0.608956
+[SYS: 2025-04-08 18:16:55][GAME: 00:04.30] Steering LEFT with control= 0.608956
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.46] updateTireWear: car Location i= 300.570801
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.46] updateTireWear: car Location j= 165.848145
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.46] Track assistance: angle=28.888916, cur=14.000000, diff=14.888916, control=0.138787
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.46] Steering LEFT with control= 0.138787
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.62] updateTireWear: car Location i= 215.082031
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.62] updateTireWear: car Location j= 161.771545
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.62] Track assistance: angle=36.948246, cur=19.000000, diff=17.948246, control=0.919081
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.62] Steering LEFT with control= 0.919081
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.78] updateTireWear: car Location i= 335.698730
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.78] updateTireWear: car Location j= 327.805115
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.78] Track assistance: angle=44.318390, cur=20.000000, diff=24.318390, control=1.342623
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.78] Steering LEFT with control= 1.342623
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.94] updateTireWear: car Location i= 253.750488
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.94] updateTireWear: car Location j= 303.906860
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.94] Track assistance: angle=50.139420, cur=22.000000, diff=28.139420, control=1.398270
+[SYS: 2025-04-08 18:16:56][GAME: 00:04.94] Steering LEFT with control= 1.398270
+[SYS: 2025-04-08 18:16:56][GAME: 00:05.10] updateTireWear: car Location i= 174.883789
+[SYS: 2025-04-08 18:16:56][GAME: 00:05.10] updateTireWear: car Location j= 271.125610
+[SYS: 2025-04-08 18:16:56][GAME: 00:05.10] Track assistance: angle=57.176823, cur=37.000000, diff=20.176823, control=0.534372
+[SYS: 2025-04-08 18:16:56][GAME: 00:05.10] Steering LEFT with control= 0.534372
+[SYS: 2025-04-08 18:16:56][GAME: 00:05.26] updateTireWear: car Location i= 105.483887
+[SYS: 2025-04-08 18:16:56][GAME: 00:05.26] updateTireWear: car Location j= 225.888855
+[SYS: 2025-04-08 18:16:56][GAME: 00:05.26] Track assistance: angle=64.968719, cur=58.000000, diff=6.968719, control=0.272973
+[SYS: 2025-04-08 18:16:56][GAME: 00:05.26] Steering LEFT with control= 0.272973
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.42] updateTireWear: car Location i= 50.389648
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.42] updateTireWear: car Location j= 168.766479
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.42] Track assistance: angle=73.375626, cur=67.000000, diff=6.375626, control=0.252986
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.42] Steering LEFT with control= 0.252986
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.58] updateTireWear: car Location i= 8.841797
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.58] updateTireWear: car Location j= 294.706421
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.58] Track assistance: angle=88.281525, cur=67.000000, diff=21.281525, control=1.583200
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.58] Steering LEFT with control= 1.583200
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.74] updateTireWear: car Location i= -28.033203
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.74] updateTireWear: car Location j= 223.215942
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.74] Track assistance: angle=97.158165, cur=69.000000, diff=28.158165, control=1.532773
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.74] Steering LEFT with control= 1.532773
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.90] updateTireWear: car Location i= -55.507324
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.90] updateTireWear: car Location j= 147.607910
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.90] Track assistance: angle=110.608551, cur=86.000000, diff=24.608551, control=0.921329
+[SYS: 2025-04-08 18:16:57][GAME: 00:05.90] Steering LEFT with control= 0.921329
+[SYS: 2025-04-08 18:16:57][GAME: 00:06.06] updateTireWear: car Location i= -201.289551
+[SYS: 2025-04-08 18:16:57][GAME: 00:06.06] updateTireWear: car Location j= 255.074463
+[SYS: 2025-04-08 18:16:57][GAME: 00:06.06] Track assistance: angle=128.278397, cur=108.000000, diff=20.278397, control=0.697736
+[SYS: 2025-04-08 18:16:57][GAME: 00:06.06] Steering LEFT with control= 0.697736
+[SYS: 2025-04-08 18:16:57][GAME: 00:06.22] updateTireWear: car Location i= -192.210938
+[SYS: 2025-04-08 18:16:57][GAME: 00:06.22] updateTireWear: car Location j= 182.144653
+[SYS: 2025-04-08 18:16:57][GAME: 00:06.22] Track assistance: angle=136.540283, cur=118.000000, diff=18.540283, control=0.735095
+[SYS: 2025-04-08 18:16:57][GAME: 00:06.22] Steering LEFT with control= 0.735095
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.38] updateTireWear: car Location i= -168.462402
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.38] updateTireWear: car Location j= 113.106445
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.38] Track assistance: angle=146.122406, cur=121.000000, diff=25.122406, control=1.387073
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.38] Steering LEFT with control= 1.387073
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.54] updateTireWear: car Location i= -483.963379
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.54] updateTireWear: car Location j= 186.946533
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.54] Track assistance: angle=158.879318, cur=128.000000, diff=30.879318, control=1.602835
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.54] Steering LEFT with control= 1.602835
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.70] updateTireWear: car Location i= -440.097656
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.70] updateTireWear: car Location j= 126.565063
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.70] Track assistance: angle=163.955597, cur=140.000000, diff=23.955597, control=0.745145
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.70] Steering LEFT with control= 0.745145
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.86] updateTireWear: car Location i= -385.922363
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.86] updateTireWear: car Location j= 77.237183
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.86] Track assistance: angle=168.682541, cur=159.000000, diff=9.682541, control=0.200835
+[SYS: 2025-04-08 18:16:58][GAME: 00:06.86] Steering LEFT with control= 0.200835
+[SYS: 2025-04-08 18:16:58][GAME: 00:07.02] updateTireWear: car Location i= -324.037109
+[SYS: 2025-04-08 18:16:58][GAME: 00:07.02] updateTireWear: car Location j= 45.201538
+[SYS: 2025-04-08 18:16:58][GAME: 00:07.02] Track assistance: angle=172.058762, cur=177.000000, diff=-4.941238, control=0.855969
+[SYS: 2025-04-08 18:16:58][GAME: 00:07.02] Steering RIGHT with control= 0.855969
+[SYS: 2025-04-08 18:16:58][GAME: 00:07.18] updateTireWear: car Location i= -257.823242
+[SYS: 2025-04-08 18:16:58][GAME: 00:07.18] updateTireWear: car Location j= 29.425171
+[SYS: 2025-04-08 18:16:58][GAME: 00:07.18] Track assistance: angle=173.489044, cur=182.000000, diff=-8.510956, control=0.528530
+[SYS: 2025-04-08 18:16:58][GAME: 00:07.18] Steering RIGHT with control= 0.528530
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.34] updateTireWear: car Location i= -188.292480
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.34] updateTireWear: car Location j= 23.732910
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.34] Track assistance: angle=172.816147, cur=180.000000, diff=-7.183853, control=0.256233
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.34] Steering RIGHT with control= 0.256233
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.50] updateTireWear: car Location i= -1028.339355
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.50] updateTireWear: car Location j= 39.481812
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.50] Track assistance: angle=177.801285, cur=178.000000, diff=-0.198715, control=0.296906
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.66] updateTireWear: car Location i= -952.387695
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.66] updateTireWear: car Location j= 39.281616
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.66] Track assistance: angle=177.638153, cur=184.000000, diff=-6.361847, control=0.547968
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.66] Steering RIGHT with control= 0.547968
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.82] updateTireWear: car Location i= -873.885254
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.82] updateTireWear: car Location j= 43.746094
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.82] Track assistance: angle=177.134201, cur=189.000000, diff=-11.865799, control=0.759927
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.82] Steering RIGHT with control= 0.759927
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.98] updateTireWear: car Location i= -792.724365
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.98] updateTireWear: car Location j= 52.691895
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.98] Track assistance: angle=176.197159, cur=189.000000, diff=-12.802841, control=0.601120
+[SYS: 2025-04-08 18:16:59][GAME: 00:07.98] Steering RIGHT with control= 0.601120
+[SYS: 2025-04-08 18:16:59][GAME: 00:08.14] updateTireWear: car Location i= -708.624268
+[SYS: 2025-04-08 18:16:59][GAME: 00:08.14] updateTireWear: car Location j= 63.041016
+[SYS: 2025-04-08 18:16:59][GAME: 00:08.14] Track assistance: angle=174.916199, cur=184.000000, diff=-9.083801, control=0.234708
+[SYS: 2025-04-08 18:16:59][GAME: 00:08.14] Steering RIGHT with control= 0.234708
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.30] updateTireWear: car Location i= -621.771729
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.30] updateTireWear: car Location j= 68.177979
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.30] Track assistance: angle=173.742447, cur=173.000000, diff=0.742447, control=0.462380
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.46] updateTireWear: car Location i= -532.445557
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.46] updateTireWear: car Location j= 65.890991
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.46] Track assistance: angle=172.945404, cur=170.000000, diff=2.945404, control=0.225241
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.62] updateTireWear: car Location i= -440.849365
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.62] updateTireWear: car Location j= 59.569824
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.62] Track assistance: angle=172.304520, cur=178.000000, diff=-5.695480, control=0.627216
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.62] Steering RIGHT with control= 0.627216
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.78] updateTireWear: car Location i= -346.645264
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.78] updateTireWear: car Location j= 56.929077
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.78] Track assistance: angle=170.673645, cur=187.000000, diff=-16.326355, control=1.179379
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.78] Steering RIGHT with control= 1.179379
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.94] updateTireWear: car Location i= -250.124023
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.94] updateTireWear: car Location j= 60.452026
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.94] Track assistance: angle=166.412842, cur=187.000000, diff=-20.587158, control=1.087098
+[SYS: 2025-04-08 18:17:00][GAME: 00:08.94] Steering RIGHT with control= 1.087098
+[SYS: 2025-04-08 18:17:00][GAME: 00:09.10] updateTireWear: car Location i= -151.164795
+[SYS: 2025-04-08 18:17:00][GAME: 00:09.10] updateTireWear: car Location j= 66.663940
+[SYS: 2025-04-08 18:17:00][GAME: 00:09.10] Track assistance: angle=156.202438, cur=181.000000, diff=-24.797562, control=1.269098
+[SYS: 2025-04-08 18:17:00][GAME: 00:09.10] Steering RIGHT with control= 1.269098
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.26] updateTireWear: car Location i= -1737.202148
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.26] updateTireWear: car Location j= 60.273560
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.26] Track assistance: angle=178.012863, cur=168.000000, diff=10.012863, control=1.961019
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.26] Steering LEFT with control= 1.961019
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.42] updateTireWear: car Location i= -1634.947998
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.42] updateTireWear: car Location j= 52.968872
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.42] Track assistance: angle=178.144379, cur=168.000000, diff=10.144379, control=0.449570
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.42] Steering LEFT with control= 0.449570
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.58] updateTireWear: car Location i= -1530.606934
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.58] updateTireWear: car Location j= 43.268433
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.58] Track assistance: angle=178.380753, cur=179.000000, diff=-0.619247, control=0.498001
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.74] updateTireWear: car Location i= -1423.339355
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.74] updateTireWear: car Location j= 37.005371
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.74] Track assistance: angle=178.510696, cur=183.000000, diff=-4.489304, control=0.365722
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.74] Steering RIGHT with control= 0.365722
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.90] updateTireWear: car Location i= -1313.447998
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.90] updateTireWear: car Location j= 36.118164
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.90] Track assistance: angle=178.424835, cur=183.000000, diff=-4.575165, control=0.203920
+[SYS: 2025-04-08 18:17:01][GAME: 00:09.90] Steering RIGHT with control= 0.203920
+[SYS: 2025-04-08 18:17:01][GAME: 00:10.06] updateTireWear: car Location i= -1200.905273
+[SYS: 2025-04-08 18:17:01][GAME: 00:10.06] updateTireWear: car Location j= 38.502930
+[SYS: 2025-04-08 18:17:01][GAME: 00:10.06] Track assistance: angle=178.163635, cur=182.000000, diff=-3.836365, control=0.135518
+[SYS: 2025-04-08 18:17:01][GAME: 00:10.06] Steering RIGHT with control= 0.135518
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.22] updateTireWear: car Location i= -1085.582520
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.22] updateTireWear: car Location j= 41.714722
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.22] Track assistance: angle=177.799423, cur=181.000000, diff=-3.200577, control=0.112210
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.22] Steering RIGHT with control= 0.112210
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.38] updateTireWear: car Location i= -967.478271
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.38] updateTireWear: car Location j= 44.463013
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.38] Track assistance: angle=177.368683, cur=180.000000, diff=-2.631317, control=0.090215
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.54] updateTireWear: car Location i= -846.643311
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.54] updateTireWear: car Location j= 46.459961
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.54] Track assistance: angle=176.859024, cur=180.000000, diff=-3.140976, control=0.159715
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.54] Steering RIGHT with control= 0.159715
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.70] updateTireWear: car Location i= -723.606689
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.70] updateTireWear: car Location j= 46.013428
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.70] Track assistance: angle=176.361526, cur=173.000000, diff=3.361526, control=0.431551
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.70] Steering LEFT with control= 0.431551
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.86] updateTireWear: car Location i= -598.968872
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.86] updateTireWear: car Location j= 39.450562
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.86] Track assistance: angle=176.231705, cur=168.000000, diff=8.231705, control=0.573207
+[SYS: 2025-04-08 18:17:02][GAME: 00:10.86] Steering LEFT with control= 0.573207
+[SYS: 2025-04-08 18:17:02][GAME: 00:11.02] updateTireWear: car Location i= -472.973145
+[SYS: 2025-04-08 18:17:02][GAME: 00:11.02] updateTireWear: car Location j= 26.534668
+[SYS: 2025-04-08 18:17:02][GAME: 00:11.02] Track assistance: angle=176.788971, cur=171.000000, diff=5.788971, control=0.146398
+[SYS: 2025-04-08 18:17:02][GAME: 00:11.02] Steering LEFT with control= 0.146398
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.18] updateTireWear: car Location i= -344.817993
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.18] updateTireWear: car Location j= 14.143188
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.18] Track assistance: angle=177.651245, cur=182.000000, diff=-4.348755, control=0.633784
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.18] Steering RIGHT with control= 0.633784
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.34] updateTireWear: car Location i= -214.280029
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.34] updateTireWear: car Location j= 7.415405
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.34] Track assistance: angle=178.018005, cur=185.000000, diff=-6.981995, control=0.420666
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.34] Steering RIGHT with control= 0.420666
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.50] updateTireWear: car Location i= -362.696289
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.50] updateTireWear: car Location j= -9.029419
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.50] Track assistance: angle=-178.573898, cur=183.000000, diff=-1.573914, control=0.167745
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.66] updateTireWear: car Location i= -228.176758
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.66] updateTireWear: car Location j= -5.245972
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.66] Track assistance: angle=-178.682953, cur=185.000000, diff=-3.682953, control=0.253400
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.66] Steering RIGHT with control= 0.253400
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.82] updateTireWear: car Location i= -359.212402
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.82] updateTireWear: car Location j= -142.359253
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.82] Track assistance: angle=-158.381104, cur=203.000000, diff=-1.381104, control=0.040283
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.98] updateTireWear: car Location i= -236.630371
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.98] updateTireWear: car Location j= -112.566895
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.98] Track assistance: angle=-154.559204, cur=226.000000, diff=-20.559204, control=1.738507
+[SYS: 2025-04-08 18:17:03][GAME: 00:11.98] Steering RIGHT with control= 1.738507
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.14] updateTireWear: car Location i= -233.012024
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.14] updateTireWear: car Location j= -207.168091
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.14] Track assistance: angle=-138.360092, cur=243.000000, diff=-21.360107, control=0.969544
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.14] Steering RIGHT with control= 0.969544
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.30] updateTireWear: car Location i= -161.223938
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.30] updateTireWear: car Location j= -146.699707
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.30] Track assistance: angle=-137.700546, cur=256.000000, diff=-33.700562, control=2.014294
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.30] Steering RIGHT with control= 2.014294
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.46] updateTireWear: car Location i= -118.269714
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.46] updateTireWear: car Location j= -254.461670
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.46] Track assistance: angle=-114.928253, cur=265.000000, diff=-19.928253, control=0.269323
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.46] Steering RIGHT with control= 0.269323
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.62] updateTireWear: car Location i= -90.608032
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.62] updateTireWear: car Location j= -183.606323
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.62] Track assistance: angle=-116.265907, cur=271.000000, diff=-27.265900, control=1.513905
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.62] Steering RIGHT with control= 1.513905
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.78] updateTireWear: car Location i= 98.757202
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.78] updateTireWear: car Location j= -305.272461
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.78] Track assistance: angle=-72.073341, cur=268.000000, diff=19.926666, control=2.625000
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.78] Steering LEFT with control= 2.625000
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.94] updateTireWear: car Location i= 106.837585
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.94] updateTireWear: car Location j= -228.185120
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.94] Track assistance: angle=-64.910736, cur=268.000000, diff=27.089264, control=1.498519
+[SYS: 2025-04-08 18:17:04][GAME: 00:12.94] Steering LEFT with control= 1.498519
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.10] updateTireWear: car Location i= 421.388000
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.10] updateTireWear: car Location j= -221.842468
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.10] Track assistance: angle=-27.764856, cur=281.000000, diff=51.235138, control=2.625000
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.10] Steering LEFT with control= 2.625000
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.26] updateTireWear: car Location i= 408.544678
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.26] updateTireWear: car Location j= -146.774292
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.26] Track assistance: angle=-19.761398, cur=302.000000, diff=38.238586, control=1.104339
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.26] Steering LEFT with control= 1.104339
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.42] updateTireWear: car Location i= 378.745605
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.42] updateTireWear: car Location j= -80.903992
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.42] Track assistance: angle=-12.057757, cur=318.000000, diff=29.942230, control=0.947007
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.42] Steering LEFT with control= 0.947007
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.58] updateTireWear: car Location i= 333.486450
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.58] updateTireWear: car Location j= -28.959290
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.58] Track assistance: angle=-4.962999, cur=328.000000, diff=27.036987, control=1.055764
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.58] Steering LEFT with control= 1.055764
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.74] updateTireWear: car Location i= 277.281006
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.74] updateTireWear: car Location j= 7.182007
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.74] Track assistance: angle=1.483717, cur=343.000000, diff=18.483704, control=0.434456
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.74] Steering LEFT with control= 0.434456
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.90] updateTireWear: car Location i= 215.046936
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.90] updateTireWear: car Location j= 34.101807
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.90] Track assistance: angle=9.010843, cur=349.000000, diff=20.010834, control=0.942286
+[SYS: 2025-04-08 18:17:05][GAME: 00:13.90] Steering LEFT with control= 0.942286
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.06] updateTireWear: car Location i= 148.195679
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.06] updateTireWear: car Location j= 54.580200
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.06] Track assistance: angle=20.218660, cur=342.000000, diff=38.218658, control=2.468659
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.06] Steering LEFT with control= 2.468659
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.22] updateTireWear: car Location i= 667.114746
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.22] updateTireWear: car Location j= 44.448730
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.22] Track assistance: angle=3.811887, cur=337.000000, diff=26.811890, control=0.673974
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.22] Steering LEFT with control= 0.673974
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.38] updateTireWear: car Location i= 591.487061
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.38] updateTireWear: car Location j= 56.275024
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.38] Track assistance: angle=5.434853, cur=351.000000, diff=14.434845, control=0.090029
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.38] Steering LEFT with control= 0.090029
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.54] updateTireWear: car Location i= 511.980713
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.54] updateTireWear: car Location j= 62.731628
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.54] Track assistance: angle=6.985479, cur=0.000000, diff=6.985479, control=0.020295
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.54] Steering LEFT with control= 0.020295
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.70] updateTireWear: car Location i= 429.214111
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.70] updateTireWear: car Location j= 63.753540
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.70] Track assistance: angle=8.448686, cur=2.000000, diff=6.448686, control=0.258645
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.70] Steering LEFT with control= 0.258645
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.86] updateTireWear: car Location i= 343.418457
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.86] updateTireWear: car Location j= 60.309937
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.86] Track assistance: angle=9.960513, cur=2.000000, diff=7.960513, control=0.414415
+[SYS: 2025-04-08 18:17:06][GAME: 00:14.86] Steering LEFT with control= 0.414415
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.02] updateTireWear: car Location i= 254.418579
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.02] updateTireWear: car Location j= 54.892822
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.02] Track assistance: angle=12.175381, cur=2.000000, diff=10.175381, control=0.542073
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.02] Steering LEFT with control= 0.542073
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.18] updateTireWear: car Location i= 162.388062
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.18] updateTireWear: car Location j= 49.437012
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.18] Track assistance: angle=16.932215, cur=4.000000, diff=12.932215, control=0.686396
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.18] Steering LEFT with control= 0.686396
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.34] updateTireWear: car Location i= 720.374878
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.34] updateTireWear: car Location j= 37.827454
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.34] Track assistance: angle=3.005886, cur=5.000000, diff=-1.994114, control=0.740269
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.50] updateTireWear: car Location i= 622.697998
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.50] updateTireWear: car Location j= 32.403442
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.50] Track assistance: angle=2.978823, cur=359.000000, diff=3.978821, control=0.435389
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.50] Steering LEFT with control= 0.435389
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.66] updateTireWear: car Location i= 522.119629
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.66] updateTireWear: car Location j= 30.019836
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.66] Track assistance: angle=3.290660, cur=356.000000, diff=7.290649, control=0.463858
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.66] Steering LEFT with control= 0.463858
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.82] updateTireWear: car Location i= 418.756470
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.82] updateTireWear: car Location j= 30.857117
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.82] Track assistance: angle=4.214365, cur=358.000000, diff=6.214355, control=0.224790
+[SYS: 2025-04-08 18:17:07][GAME: 00:15.82] Steering LEFT with control= 0.224790
+[SYS: 2025-04-08 18:17:08][GAME: 00:15.98] updateTireWear: car Location i= 312.925537
+[SYS: 2025-04-08 18:17:08][GAME: 00:15.98] updateTireWear: car Location j= 30.372498
+[SYS: 2025-04-08 18:17:08][GAME: 00:15.98] Track assistance: angle=5.543753, cur=5.000000, diff=0.543753, control=0.224300
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.14] updateTireWear: car Location i= 204.563477
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.14] updateTireWear: car Location j= 25.881714
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.14] Track assistance: angle=7.210844, cur=7.000000, diff=0.210844, control=0.005340
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.30] updateTireWear: car Location i= 358.832520
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.30] updateTireWear: car Location j= 17.121460
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.30] Track assistance: angle=2.731759, cur=7.000000, diff=-4.268241, control=0.382696
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.30] Steering RIGHT with control= 0.382696
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.46] updateTireWear: car Location i= 245.535400
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.46] updateTireWear: car Location j= 5.980347
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.46] Track assistance: angle=1.395240, cur=6.000000, diff=-4.604760, control=0.216181
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.46] Steering RIGHT with control= 0.216181
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.62] updateTireWear: car Location i= 129.473389
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.62] updateTireWear: car Location j= -5.724792
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.62] Track assistance: angle=-2.531740, cur=4.000000, diff=-6.531740, control=0.370069
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.62] Steering RIGHT with control= 0.370069
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.78] updateTireWear: car Location i= 270.633789
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.78] updateTireWear: car Location j= -9.595093
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.78] Track assistance: angle=-2.030523, cur=3.000000, diff=-5.030523, control=0.154407
+[SYS: 2025-04-08 18:17:08][GAME: 00:16.78] Steering RIGHT with control= 0.154407
+[SYS: 2025-04-08 18:17:09][GAME: 00:16.94] updateTireWear: car Location i= 149.420654
+[SYS: 2025-04-08 18:17:09][GAME: 00:16.94] updateTireWear: car Location j= -16.503296
+[SYS: 2025-04-08 18:17:09][GAME: 00:16.94] Track assistance: angle=-6.302691, cur=356.000000, diff=-2.302704, control=0.018599
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.10] updateTireWear: car Location i= 954.824219
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.10] updateTireWear: car Location j= -15.075684
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.10] Track assistance: angle=-0.904566, cur=355.000000, diff=4.095428, control=0.459093
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.10] Steering LEFT with control= 0.459093
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.26] updateTireWear: car Location i= 828.989990
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.26] updateTireWear: car Location j= -12.101990
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.26] Track assistance: angle=-0.836372, cur=356.000000, diff=3.163635, control=0.097643
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.26] Steering LEFT with control= 0.097643
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.42] updateTireWear: car Location i= 700.716064
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.42] updateTireWear: car Location j= -7.122131
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.42] Track assistance: angle=-0.582339, cur=357.000000, diff=2.417664, control=0.073137
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.58] updateTireWear: car Location i= 569.908691
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.58] updateTireWear: car Location j= -2.043396
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.58] Track assistance: angle=-0.205432, cur=358.000000, diff=1.794556, control=0.051251
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.74] updateTireWear: car Location i= 436.591064
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.74] updateTireWear: car Location j= 2.446533
+[SYS: 2025-04-08 18:17:09][GAME: 00:17.74] Track assistance: angle=0.321066, cur=358.000000, diff=2.321075, control=0.124582
+[SYS: 2025-04-08 18:17:10][GAME: 00:17.90] updateTireWear: car Location i= 300.813477
+[SYS: 2025-04-08 18:17:10][GAME: 00:17.90] updateTireWear: car Location j= 6.385681
+[SYS: 2025-04-08 18:17:10][GAME: 00:17.90] Track assistance: angle=1.216095, cur=358.000000, diff=3.216095, control=0.179861
+[SYS: 2025-04-08 18:17:10][GAME: 00:17.90] Steering LEFT with control= 0.179861
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.06] updateTireWear: car Location i= 162.975342
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.06] updateTireWear: car Location j= 8.540588
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.06] Track assistance: angle=2.999794, cur=4.000000, diff=-1.000206, control=0.228222
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.22] updateTireWear: car Location i= 362.818604
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.22] updateTireWear: car Location j= 67.452881
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.22] Track assistance: angle=10.531818, cur=12.000000, diff=-1.468182, control=0.084707
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.38] updateTireWear: car Location i= 228.981689
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.38] updateTireWear: car Location j= 50.913269
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.38] Track assistance: angle=12.535591, cur=27.000000, diff=-14.464409, control=1.201403
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.38] Steering RIGHT with control= 1.201403
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.54] updateTireWear: car Location i= 312.806152
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.54] updateTireWear: car Location j= 200.389221
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.54] Track assistance: angle=32.644352, cur=45.000000, diff=-12.355648, control=0.448301
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.54] Steering RIGHT with control= 0.448301
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.70] updateTireWear: car Location i= 209.853027
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.70] updateTireWear: car Location j= 148.947144
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.70] Track assistance: angle=35.365944, cur=58.000000, diff=-22.634056, control=1.439920
+[SYS: 2025-04-08 18:17:10][GAME: 00:18.70] Steering RIGHT with control= 1.439920
+[SYS: 2025-04-08 18:17:11][GAME: 00:18.86] updateTireWear: car Location i= 125.856934
+[SYS: 2025-04-08 18:17:11][GAME: 00:18.86] updateTireWear: car Location j= 275.378296
+[SYS: 2025-04-08 18:17:11][GAME: 00:18.86] Track assistance: angle=65.438042, cur=57.000000, diff=8.438042, control=1.728569
+[SYS: 2025-04-08 18:17:11][GAME: 00:18.86] Steering LEFT with control= 1.728569
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.02] updateTireWear: car Location i= 52.037109
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.02] updateTireWear: car Location j= 199.726624
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.02] Track assistance: angle=75.396713, cur=59.000000, diff=16.396713, control=1.065548
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.02] Steering LEFT with control= 1.065548
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.18] updateTireWear: car Location i= -143.272461
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.18] updateTireWear: car Location j= 300.432251
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.18] Track assistance: angle=115.495903, cur=74.000000, diff=41.495903, control=2.625000
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.18] Steering LEFT with control= 2.625000
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.34] updateTireWear: car Location i= -183.423340
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.34] updateTireWear: car Location j= 213.253296
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.34] Track assistance: angle=130.699463, cur=96.000000, diff=34.699463, control=1.220757
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.34] Steering LEFT with control= 1.220757
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.50] updateTireWear: car Location i= -196.579590
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.50] updateTireWear: car Location j= 130.730957
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.50] Track assistance: angle=146.374969, cur=119.000000, diff=27.374969, control=0.877208
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.50] Steering LEFT with control= 0.877208
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.66] updateTireWear: car Location i= -182.488281
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.66] updateTireWear: car Location j= 63.566772
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.66] Track assistance: angle=160.795044, cur=137.000000, diff=23.795044, control=0.884411
+[SYS: 2025-04-08 18:17:11][GAME: 00:19.66] Steering LEFT with control= 0.884411
+[SYS: 2025-04-08 18:17:12][GAME: 00:19.82] updateTireWear: car Location i= -149.481445
+[SYS: 2025-04-08 18:17:12][GAME: 00:19.82] updateTireWear: car Location j= 15.664307
+[SYS: 2025-04-08 18:17:12][GAME: 00:19.82] Track assistance: angle=174.017761, cur=152.000000, diff=22.017761, control=0.885521
+[SYS: 2025-04-08 18:17:12][GAME: 00:19.82] Steering LEFT with control= 0.885521
+[SYS: 2025-04-08 18:17:12][GAME: 00:19.98] updateTireWear: car Location i= -455.068359
+[SYS: 2025-04-08 18:17:12][GAME: 00:19.98] updateTireWear: car Location j= 121.142944
+[SYS: 2025-04-08 18:17:12][GAME: 00:19.98] Track assistance: angle=165.093094, cur=157.000000, diff=8.093094, control=0.255131
+[SYS: 2025-04-08 18:17:12][GAME: 00:19.98] Steering LEFT with control= 0.255131
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.14] updateTireWear: car Location i= -403.797363
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.14] updateTireWear: car Location j= 94.047729
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.14] Track assistance: angle=166.889069, cur=157.000000, diff=9.889069, control=0.511221
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.14] Steering LEFT with control= 0.511221
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.30] updateTireWear: car Location i= -347.836426
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.30] updateTireWear: car Location j= 68.531982
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.30] Track assistance: angle=168.854126, cur=157.000000, diff=11.854126, control=0.604589
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.30] Steering LEFT with control= 0.604589
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.46] updateTireWear: car Location i= -287.696777
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.46] updateTireWear: car Location j= 45.075073
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.46] Track assistance: angle=171.095535, cur=164.000000, diff=7.095535, control=0.102241
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.46] Steering LEFT with control= 0.102241
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.62] updateTireWear: car Location i= -223.049316
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.62] updateTireWear: car Location j= 25.524292
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.62] Track assistance: angle=173.471848, cur=170.000000, diff=3.471848, control=0.006643
+[SYS: 2025-04-08 18:17:12][GAME: 00:20.62] Steering LEFT with control= 0.006643
+[SYS: 2025-04-08 18:17:13][GAME: 00:20.78] updateTireWear: car Location i= -154.446777
+[SYS: 2025-04-08 18:17:13][GAME: 00:20.78] updateTireWear: car Location j= 11.987915
+[SYS: 2025-04-08 18:17:13][GAME: 00:20.78] Track assistance: angle=175.561691, cur=177.000000, diff=-1.438309, control=0.277745
+[SYS: 2025-04-08 18:17:13][GAME: 00:20.94] updateTireWear: car Location i= -995.428223
+[SYS: 2025-04-08 18:17:13][GAME: 00:20.94] updateTireWear: car Location j= 23.421265
+[SYS: 2025-04-08 18:17:13][GAME: 00:20.94] Track assistance: angle=178.652130, cur=182.000000, diff=-3.347870, control=0.230013
+[SYS: 2025-04-08 18:17:13][GAME: 00:20.94] Steering RIGHT with control= 0.230013
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.10] updateTireWear: car Location i= -920.185791
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.10] updateTireWear: car Location j= 22.295898
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.10] Track assistance: angle=178.612000, cur=182.000000, diff=-3.388000, control=0.149981
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.10] Steering RIGHT with control= 0.149981
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.26] updateTireWear: car Location i= -841.719971
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.26] updateTireWear: car Location j= 23.758911
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.26] Track assistance: angle=178.383148, cur=181.000000, diff=-2.616852, control=0.080750
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.42] updateTireWear: car Location i= -759.972900
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.42] updateTireWear: car Location j= 25.854736
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.42] Track assistance: angle=178.051514, cur=181.000000, diff=-2.948486, control=0.143505
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.58] updateTireWear: car Location i= -675.564941
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.58] updateTireWear: car Location j= 25.262573
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.58] Track assistance: angle=177.858444, cur=173.000000, diff=4.858444, control=0.554110
+[SYS: 2025-04-08 18:17:13][GAME: 00:21.58] Steering LEFT with control= 0.554110
+[SYS: 2025-04-08 18:17:14][GAME: 00:21.74] updateTireWear: car Location i= -588.658203
+[SYS: 2025-04-08 18:17:14][GAME: 00:21.74] updateTireWear: car Location j= 19.691772
+[SYS: 2025-04-08 18:17:14][GAME: 00:21.74] Track assistance: angle=178.084045, cur=170.000000, diff=8.084045, control=0.494797
+[SYS: 2025-04-08 18:17:14][GAME: 00:21.74] Steering LEFT with control= 0.494797
+[SYS: 2025-04-08 18:17:14][GAME: 00:21.90] updateTireWear: car Location i= -499.270508
+[SYS: 2025-04-08 18:17:14][GAME: 00:21.90] updateTireWear: car Location j= 11.145630
+[SYS: 2025-04-08 18:17:14][GAME: 00:21.90] Track assistance: angle=178.721146, cur=176.000000, diff=2.721146, control=0.115577
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.06] updateTireWear: car Location i= -407.094971
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.06] updateTireWear: car Location j= 6.326294
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.06] Track assistance: angle=179.109695, cur=185.000000, diff=-5.890305, control=0.634452
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.06] Steering RIGHT with control= 0.634452
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.22] updateTireWear: car Location i= -312.375000
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.22] updateTireWear: car Location j= 7.864502
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.22] Track assistance: angle=178.557800, cur=186.000000, diff=-7.442200, control=0.393492
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.22] Steering RIGHT with control= 0.393492
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.38] updateTireWear: car Location i= -215.079346
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.38] updateTireWear: car Location j= 13.875610
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.38] Track assistance: angle=176.308746, cur=185.000000, diff=-8.691254, control=0.434888
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.38] Steering RIGHT with control= 0.434888
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.54] updateTireWear: car Location i= -1801.864014
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.54] updateTireWear: car Location j= 14.185425
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.54] Track assistance: angle=179.548935, cur=183.000000, diff=-3.451065, control=0.078274
+[SYS: 2025-04-08 18:17:14][GAME: 00:22.54] Steering RIGHT with control= 0.078274
+[SYS: 2025-04-08 18:17:15][GAME: 00:22.70] updateTireWear: car Location i= -1698.611328
+[SYS: 2025-04-08 18:17:15][GAME: 00:22.70] updateTireWear: car Location j= 21.027222
+[SYS: 2025-04-08 18:17:15][GAME: 00:22.70] Track assistance: angle=179.290756, cur=182.000000, diff=-2.709244, control=0.086075
+[SYS: 2025-04-08 18:17:15][GAME: 00:22.86] updateTireWear: car Location i= -1592.356934
+[SYS: 2025-04-08 18:17:15][GAME: 00:22.86] updateTireWear: car Location j= 26.998779
+[SYS: 2025-04-08 18:17:15][GAME: 00:22.86] Track assistance: angle=179.028610, cur=182.000000, diff=-2.971390, control=0.141467
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.02] updateTireWear: car Location i= -1483.656494
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.02] updateTireWear: car Location j= 29.991699
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.02] Track assistance: angle=178.841949, cur=175.000000, diff=3.841949, control=0.466169
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.02] Steering LEFT with control= 0.466169
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.18] updateTireWear: car Location i= -1372.597900
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.18] updateTireWear: car Location j= 28.074463
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.18] Track assistance: angle=178.828247, cur=173.000000, diff=5.828247, control=0.341886
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.18] Steering LEFT with control= 0.341886
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.34] updateTireWear: car Location i= -1259.244629
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.34] updateTireWear: car Location j= 21.423096
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.34] Track assistance: angle=179.025330, cur=173.000000, diff=6.025330, control=0.272231
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.34] Steering LEFT with control= 0.272231
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.50] updateTireWear: car Location i= -1143.433105
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.50] updateTireWear: car Location j= 13.175171
+[SYS: 2025-04-08 18:17:15][GAME: 00:23.50] Track assistance: angle=179.339828, cur=178.000000, diff=1.339828, control=0.146373
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.66] updateTireWear: car Location i= -1025.301270
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.66] updateTireWear: car Location j= 8.767700
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.66] Track assistance: angle=179.510056, cur=185.000000, diff=-5.489944, control=0.538988
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.66] Steering RIGHT with control= 0.538988
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.82] updateTireWear: car Location i= -905.031250
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.82] updateTireWear: car Location j= 10.526855
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.82] Track assistance: angle=179.333603, cur=186.000000, diff=-6.666397, control=0.343125
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.82] Steering RIGHT with control= 0.343125
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.98] updateTireWear: car Location i= -782.615479
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.98] updateTireWear: car Location j= 17.014282
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.98] Track assistance: angle=178.754562, cur=185.000000, diff=-6.245438, control=0.254821
+[SYS: 2025-04-08 18:17:16][GAME: 00:23.98] Steering RIGHT with control= 0.254821
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.14] updateTireWear: car Location i= -657.698608
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.14] updateTireWear: car Location j= 25.130249
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.14] Track assistance: angle=177.811829, cur=183.000000, diff=-5.188171, control=0.180727
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.14] Steering RIGHT with control= 0.180727
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.30] updateTireWear: car Location i= -530.152466
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.30] updateTireWear: car Location j= 32.825439
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.30] Track assistance: angle=176.456940, cur=182.000000, diff=-5.543060, control=0.258035
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.30] Steering RIGHT with control= 0.258035
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.46] updateTireWear: car Location i= -400.008667
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.46] updateTireWear: car Location j= 39.300049
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.46] Track assistance: angle=174.388824, cur=181.000000, diff=-6.611176, control=0.335969
+[SYS: 2025-04-08 18:17:16][GAME: 00:24.46] Steering RIGHT with control= 0.335969
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.62] updateTireWear: car Location i= -267.341064
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.62] updateTireWear: car Location j= 44.366211
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.62] Track assistance: angle=170.577438, cur=180.000000, diff=-9.422562, control=0.535235
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.62] Steering RIGHT with control= 0.535235
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.78] updateTireWear: car Location i= -413.246948
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.78] updateTireWear: car Location j= 31.803223
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.78] Track assistance: angle=175.599228, cur=179.000000, diff=-3.400772, control=0.114670
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.78] Steering RIGHT with control= 0.114670
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.94] updateTireWear: car Location i= -275.767212
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.94] updateTireWear: car Location j= 33.544067
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.94] Track assistance: angle=173.064682, cur=179.000000, diff=-5.935318, control=0.370557
+[SYS: 2025-04-08 18:17:17][GAME: 00:24.94] Steering RIGHT with control= 0.370557
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.10] updateTireWear: car Location i= -401.614136
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.10] updateTireWear: car Location j= -113.487183
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.10] Track assistance: angle=-164.220886, cur=187.000000, diff=8.779114, control=1.027843
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.10] Steering LEFT with control= 1.027843
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.26] updateTireWear: car Location i= -267.604858
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.26] updateTireWear: car Location j= -98.978027
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.26] Track assistance: angle=-159.702271, cur=211.000000, diff=-10.702271, control=1.320535
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.26] Steering RIGHT with control= 1.320535
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.42] updateTireWear: car Location i= -149.121338
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.42] updateTireWear: car Location j= -65.647461
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.42] Track assistance: angle=-156.239532, cur=231.000000, diff=-27.239532, control=1.915235
+[SYS: 2025-04-08 18:17:17][GAME: 00:25.42] Steering RIGHT with control= 1.915235
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.58] updateTireWear: car Location i= -150.145203
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.58] updateTireWear: car Location j= -156.752197
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.58] Track assistance: angle=-133.766708, cur=245.000000, diff=-18.766724, control=0.450359
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.58] Steering RIGHT with control= 0.450359
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.74] updateTireWear: car Location i= -86.463562
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.74] updateTireWear: car Location j= -268.519287
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.74] Track assistance: angle=-107.848618, cur=257.000000, diff=-4.848633, control=0.396789
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.74] Steering RIGHT with control= 0.396789
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.90] updateTireWear: car Location i= -45.764587
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.90] updateTireWear: car Location j= -198.877686
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.90] Track assistance: angle=-102.958977, cur=269.000000, diff=-11.958984, control=0.834283
+[SYS: 2025-04-08 18:17:18][GAME: 00:25.90] Steering RIGHT with control= 0.834283
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.06] updateTireWear: car Location i= 145.297913
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.06] updateTireWear: car Location j= -324.312256
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.06] Track assistance: angle=-65.866730, cur=282.000000, diff=12.133270, control=1.584867
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.06] Steering LEFT with control= 1.584867
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.22] updateTireWear: car Location i= 140.075256
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.22] updateTireWear: car Location j= -258.482056
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.22] Track assistance: angle=-61.546078, cur=299.000000, diff=-0.546082, control=0.578613
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.38] updateTireWear: car Location i= 116.145813
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.38] updateTireWear: car Location j= -202.134338
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.38] Track assistance: angle=-60.118446, cur=316.000000, diff=-16.118439, control=1.386472
+[SYS: 2025-04-08 18:17:18][GAME: 00:26.38] Steering RIGHT with control= 1.386472
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.54] updateTireWear: car Location i= 393.260742
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.54] updateTireWear: car Location j= -228.194214
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.54] Track assistance: angle=-30.124958, cur=327.000000, diff=2.875031, control=0.956747
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.70] updateTireWear: car Location i= 347.686279
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.70] updateTireWear: car Location j= -188.798035
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.70] Track assistance: angle=-28.502518, cur=329.000000, diff=2.497498, control=0.092748
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.86] updateTireWear: car Location i= 296.068909
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.86] updateTireWear: car Location j= -152.237488
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.86] Track assistance: angle=-27.212053, cur=328.000000, diff=4.787933, control=0.309679
+[SYS: 2025-04-08 18:17:19][GAME: 00:26.86] Steering LEFT with control= 0.309679
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.02] updateTireWear: car Location i= 240.118713
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.02] updateTireWear: car Location j= -115.702942
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.02] Track assistance: angle=-25.727428, cur=328.000000, diff=6.272583, control=0.339379
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.02] Steering LEFT with control= 0.339379
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.18] updateTireWear: car Location i= 180.593323
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.18] updateTireWear: car Location j= -78.029846
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.18] Track assistance: angle=-23.367962, cur=328.000000, diff=8.632050, control=0.480879
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.18] Steering LEFT with control= 0.480879
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.34] updateTireWear: car Location i= 707.649292
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.34] updateTireWear: car Location j= -65.139709
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.34] Track assistance: angle=-5.259303, cur=329.000000, diff=25.740692, control=1.874658
+[SYS: 2025-04-08 18:17:19][GAME: 00:27.34] Steering LEFT with control= 1.874658
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.50] updateTireWear: car Location i= 640.457642
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.50] updateTireWear: car Location j= -29.150330
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.50] Track assistance: angle=-2.606010, cur=341.000000, diff=16.393982, control=0.308318
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.50] Steering LEFT with control= 0.308318
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.66] updateTireWear: car Location i= 568.309814
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.66] updateTireWear: car Location j= -3.678101
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.66] Track assistance: angle=-0.370813, cur=0.000000, diff=-0.370813, control=0.749683
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.82] updateTireWear: car Location i= 492.799072
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.82] updateTireWear: car Location j= 7.948730
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.82] Track assistance: angle=0.924087, cur=7.000000, diff=-6.075913, control=0.515419
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.82] Steering RIGHT with control= 0.515419
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.98] updateTireWear: car Location i= 414.997070
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.98] updateTireWear: car Location j= 8.685303
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.98] Track assistance: angle=1.198945, cur=6.000000, diff=-4.801055, control=0.154271
+[SYS: 2025-04-08 18:17:20][GAME: 00:27.98] Steering RIGHT with control= 0.154271
+[SYS: 2025-04-08 18:17:20][GAME: 00:28.14] updateTireWear: car Location i= 334.531494
+[SYS: 2025-04-08 18:17:20][GAME: 00:28.14] updateTireWear: car Location j= 5.829895
+[SYS: 2025-04-08 18:17:20][GAME: 00:28.14] Track assistance: angle=0.998395, cur=359.000000, diff=1.998383, control=0.384905
+[SYS: 2025-04-08 18:17:20][GAME: 00:28.30] updateTireWear: car Location i= 251.138184
+[SYS: 2025-04-08 18:17:20][GAME: 00:28.30] updateTireWear: car Location j= 5.793274
+[SYS: 2025-04-08 18:17:20][GAME: 00:28.30] Track assistance: angle=1.321469, cur=354.000000, diff=7.321472, control=0.553200
+[SYS: 2025-04-08 18:17:20][GAME: 00:28.30] Steering LEFT with control= 0.553200
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.46] updateTireWear: car Location i= 164.892090
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.46] updateTireWear: car Location j= 9.908386
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.46] Track assistance: angle=3.438776, cur=354.000000, diff=9.438782, control=0.505579
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.46] Steering LEFT with control= 0.505579
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.62] updateTireWear: car Location i= 728.666992
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.62] updateTireWear: car Location j= 11.263000
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.62] Track assistance: angle=0.885550, cur=355.000000, diff=5.885559, control=0.102040
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.62] Steering LEFT with control= 0.102040
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.78] updateTireWear: car Location i= 636.581665
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.78] updateTireWear: car Location j= 16.363281
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.78] Track assistance: angle=1.472459, cur=1.000000, diff=0.472459, control=0.216153
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.94] updateTireWear: car Location i= 541.805054
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.94] updateTireWear: car Location j= 16.778625
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.94] Track assistance: angle=1.773769, cur=6.000000, diff=-4.226231, control=0.390465
+[SYS: 2025-04-08 18:17:21][GAME: 00:28.94] Steering RIGHT with control= 0.390465
+[SYS: 2025-04-08 18:17:21][GAME: 00:29.10] updateTireWear: car Location i= 444.460449
+[SYS: 2025-04-08 18:17:21][GAME: 00:29.10] updateTireWear: car Location j= 12.132874
+[SYS: 2025-04-08 18:17:21][GAME: 00:29.10] Track assistance: angle=1.563671, cur=6.000000, diff=-4.436329, control=0.203281
+[SYS: 2025-04-08 18:17:21][GAME: 00:29.10] Steering RIGHT with control= 0.203281
+[SYS: 2025-04-08 18:17:21][GAME: 00:29.26] updateTireWear: car Location i= 344.363281
+[SYS: 2025-04-08 18:17:21][GAME: 00:29.26] updateTireWear: car Location j= 4.613159
+[SYS: 2025-04-08 18:17:21][GAME: 00:29.26] Track assistance: angle=0.767500, cur=5.000000, diff=-4.232500, control=0.176254
+[SYS: 2025-04-08 18:17:21][GAME: 00:29.26] Steering RIGHT with control= 0.176254
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.42] updateTireWear: car Location i= 241.483887
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.42] updateTireWear: car Location j= -2.729858
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.42] Track assistance: angle=-0.647673, cur=0.000000, diff=-0.647673, control=0.128500
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.58] updateTireWear: car Location i= 401.063965
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.58] updateTireWear: car Location j= -5.711121
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.58] Track assistance: angle=-0.815832, cur=354.000000, diff=5.184174, control=0.481951
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.58] Steering LEFT with control= 0.481951
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.74] updateTireWear: car Location i= 293.235840
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.74] updateTireWear: car Location j= -3.109009
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.74] Track assistance: angle=-0.607451, cur=353.000000, diff=6.392548, control=0.332540
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.74] Steering LEFT with control= 0.332540
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.90] updateTireWear: car Location i= 183.044434
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.90] updateTireWear: car Location j= 2.165283
+[SYS: 2025-04-08 18:17:22][GAME: 00:29.90] Track assistance: angle=0.677736, cur=359.000000, diff=1.677734, control=0.132872
