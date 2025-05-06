@@ -1,0 +1,1593 @@
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.00] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.00] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.00] steerControl: car Location i= 2432.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.00] steerControl: car Location j= 597.333313
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.00] steerControl: angle=10.061829, cur=0.000000, diff=10.061829, control=0.503091
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.00] Steering LEFT with control= 0.503091
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.01] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.01] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.01] steerControl: car Location i= 2432.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.01] steerControl: car Location j= 597.333313
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.01] steerControl: angle=10.061829, cur=0.000000, diff=10.061829, control=0.251546
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.01] Steering LEFT with control= 0.251546
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.03] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.03] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.03] steerControl: car Location i= 2432.065430
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.03] steerControl: car Location j= 597.333313
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.03] steerControl: angle=10.064282, cur=0.000000, diff=10.064282, control=0.251668
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.03] Steering LEFT with control= 0.251668
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.04] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.04] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.04] steerControl: car Location i= 2432.194580
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.04] steerControl: car Location j= 597.335388
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.04] steerControl: angle=10.068688, cur=0.000000, diff=10.068688, control=0.251827
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.04] Steering LEFT with control= 0.251827
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.06] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.06] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.06] steerControl: car Location i= 2432.386475
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.06] steerControl: car Location j= 597.338013
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.06] steerControl: angle=10.075340, cur=0.000000, diff=10.075340, control=0.252050
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.06] Steering LEFT with control= 0.252050
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.08] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.08] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.08] steerControl: car Location i= 2432.640137
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.08] steerControl: car Location j= 597.341797
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.08] steerControl: angle=10.084080, cur=0.000000, diff=10.084080, control=0.252320
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.08] Steering LEFT with control= 0.252320
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.09] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.09] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.09] steerControl: car Location i= 2432.954102
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.09] steerControl: car Location j= 597.346863
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.09] steerControl: angle=10.094840, cur=0.000000, diff=10.094840, control=0.252640
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.09] Steering LEFT with control= 0.252640
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.11] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.11] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.11] steerControl: car Location i= 2433.327637
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.11] steerControl: car Location j= 597.354919
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.11] steerControl: angle=10.107244, cur=0.000000, diff=10.107244, control=0.252991
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.11] Steering LEFT with control= 0.252991
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.12] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.12] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.12] steerControl: car Location i= 2433.759277
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.12] steerControl: car Location j= 597.363892
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.12] steerControl: angle=10.121691, cur=0.000000, diff=10.121691, control=0.253403
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.12] Steering LEFT with control= 0.253403
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.14] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.14] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.14] steerControl: car Location i= 2434.248047
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.14] steerControl: car Location j= 597.374146
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.14] steerControl: angle=10.138087, cur=0.000000, diff=10.138087, control=0.253862
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.14] Steering LEFT with control= 0.253862
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.16] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.16] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.16] steerControl: car Location i= 2434.792725
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.16] steerControl: car Location j= 597.385742
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.16] steerControl: angle=10.156393, cur=0.000000, diff=10.156393, control=0.254367
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.16] Steering LEFT with control= 0.254367
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.17] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.17] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.17] steerControl: car Location i= 2435.392578
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.17] steerControl: car Location j= 597.400635
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.17] steerControl: angle=10.176187, cur=0.000000, diff=10.176187, control=0.254900
+[SYS: 2025-04-25 13:44:40][GAME: 00:00.17] Steering LEFT with control= 0.254900
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.19] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.19] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.19] steerControl: car Location i= 2436.046387
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.19] steerControl: car Location j= 597.418396
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.19] steerControl: angle=10.197534, cur=0.000000, diff=10.197534, control=0.255472
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.19] Steering LEFT with control= 0.255472
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.20] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.20] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.20] steerControl: car Location i= 2436.752930
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.20] steerControl: car Location j= 597.437134
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.20] steerControl: angle=10.220819, cur=0.000000, diff=10.220819, control=0.256103
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.20] Steering LEFT with control= 0.256103
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.22] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.22] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.22] steerControl: car Location i= 2437.511719
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.22] steerControl: car Location j= 597.459167
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.22] steerControl: angle=10.245554, cur=0.000000, diff=10.245554, control=0.256757
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.22] Steering LEFT with control= 0.256757
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.24] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.24] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.24] steerControl: car Location i= 2438.321289
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.24] steerControl: car Location j= 597.482239
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.24] steerControl: angle=10.272195, cur=0.000000, diff=10.272195, control=0.257471
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.24] Steering LEFT with control= 0.257471
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.25] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.25] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.25] steerControl: car Location i= 2439.180908
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.25] steerControl: car Location j= 597.508789
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.25] steerControl: angle=10.300218, cur=0.000000, diff=10.300218, control=0.258206
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.25] Steering LEFT with control= 0.258206
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.27] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.27] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.27] steerControl: car Location i= 2440.089600
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.27] steerControl: car Location j= 597.538696
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.27] steerControl: angle=10.329639, cur=0.000000, diff=10.329639, control=0.258977
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.27] Steering LEFT with control= 0.258977
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.28] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.28] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.28] steerControl: car Location i= 2441.046387
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.28] steerControl: car Location j= 597.572021
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.28] steerControl: angle=10.360438, cur=0.000000, diff=10.360438, control=0.259781
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.28] Steering LEFT with control= 0.259781
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.30] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.30] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.30] steerControl: car Location i= 2442.050293
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.30] steerControl: car Location j= 597.608765
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.30] steerControl: angle=10.392611, cur=0.000000, diff=10.392611, control=0.260620
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.30] Steering LEFT with control= 0.260620
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.32] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.32] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.32] steerControl: car Location i= 2443.100586
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.32] steerControl: car Location j= 597.646729
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.32] steerControl: angle=10.426640, cur=1.000000, diff=9.426640, control=0.211517
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.32] Steering LEFT with control= 0.211517
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.33] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.33] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.33] steerControl: car Location i= 2444.197998
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.33] steerControl: car Location j= 597.690125
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.33] steerControl: angle=10.461669, cur=1.000000, diff=9.461669, control=0.237417
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.33] Steering LEFT with control= 0.237417
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.35] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.35] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.35] steerControl: car Location i= 2445.341553
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.35] steerControl: car Location j= 597.735291
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.35] steerControl: angle=10.498502, cur=1.000000, diff=9.498502, control=0.238383
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.35] Steering LEFT with control= 0.238383
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.36] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.36] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.36] steerControl: car Location i= 2446.531982
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.36] steerControl: car Location j= 597.785950
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.36] steerControl: angle=10.536385, cur=1.000000, diff=9.536385, control=0.239357
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.36] Steering LEFT with control= 0.239357
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.38] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.38] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.38] steerControl: car Location i= 2447.768799
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.38] steerControl: car Location j= 597.840515
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.38] steerControl: angle=10.575686, cur=1.000000, diff=9.575686, control=0.240375
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.38] Steering LEFT with control= 0.240375
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.40] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.40] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.40] steerControl: car Location i= 2449.052246
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.40] steerControl: car Location j= 597.899170
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.40] steerControl: angle=10.616421, cur=1.000000, diff=9.616421, control=0.241429
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.40] Steering LEFT with control= 0.241429
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.41] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.41] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.41] steerControl: car Location i= 2450.382080
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.41] steerControl: car Location j= 597.961975
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.41] steerControl: angle=10.658606, cur=1.000000, diff=9.658606, control=0.242520
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.41] Steering LEFT with control= 0.242520
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.43] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.43] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.43] steerControl: car Location i= 2451.758057
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.43] steerControl: car Location j= 598.029175
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.43] steerControl: angle=10.702225, cur=1.000000, diff=9.702225, control=0.243646
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.43] Steering LEFT with control= 0.243646
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.44] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.44] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.44] steerControl: car Location i= 2453.180420
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.44] steerControl: car Location j= 598.100891
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.44] steerControl: angle=10.747308, cur=1.000000, diff=9.747308, control=0.244810
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.44] Steering LEFT with control= 0.244810
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.46] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.46] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.46] steerControl: car Location i= 2454.648926
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.46] steerControl: car Location j= 598.179016
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.46] steerControl: angle=10.793459, cur=2.000000, diff=8.793459, control=0.195990
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.46] Steering LEFT with control= 0.195990
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.48] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.48] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.48] steerControl: car Location i= 2456.163574
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.48] steerControl: car Location j= 598.262390
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.48] steerControl: angle=10.840993, cur=2.000000, diff=8.840993, control=0.222213
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.48] Steering LEFT with control= 0.222213
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.49] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.49] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.49] steerControl: car Location i= 2457.724365
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.49] steerControl: car Location j= 598.350952
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.49] steerControl: angle=10.889978, cur=2.000000, diff=8.889978, control=0.223474
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.49] Steering LEFT with control= 0.223474
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.51] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.51] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.51] steerControl: car Location i= 2459.331543
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.51] steerControl: car Location j= 598.442078
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.51] steerControl: angle=10.941095, cur=2.000000, diff=8.941095, control=0.224805
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.51] Steering LEFT with control= 0.224805
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.52] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.52] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.52] steerControl: car Location i= 2460.984619
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.52] steerControl: car Location j= 598.540649
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.52] steerControl: angle=10.993244, cur=2.000000, diff=8.993244, control=0.226135
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.52] Steering LEFT with control= 0.226135
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.54] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.54] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.54] steerControl: car Location i= 2462.683594
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.54] steerControl: car Location j= 598.646057
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.54] steerControl: angle=11.046620, cur=2.000000, diff=9.046620, control=0.227500
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.54] Steering LEFT with control= 0.227500
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.56] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.56] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.56] steerControl: car Location i= 2464.428467
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.56] steerControl: car Location j= 598.759583
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.56] steerControl: angle=11.100976, cur=2.000000, diff=9.100976, control=0.228883
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.56] Steering LEFT with control= 0.228883
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.57] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.57] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.57] steerControl: car Location i= 2466.218994
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.57] steerControl: car Location j= 598.880005
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.57] steerControl: angle=11.156648, cur=3.000000, diff=8.156648, control=0.180308
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.57] Steering LEFT with control= 0.180308
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.59] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.59] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.59] steerControl: car Location i= 2468.055176
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.59] steerControl: car Location j= 599.008728
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.59] steerControl: angle=11.213357, cur=3.000000, diff=8.213357, control=0.206752
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.59] Steering LEFT with control= 0.206752
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.60] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.60] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.60] steerControl: car Location i= 2469.937012
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.60] steerControl: car Location j= 599.144714
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.60] steerControl: angle=11.271420, cur=3.000000, diff=8.271420, control=0.208237
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.60] Steering LEFT with control= 0.208237
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.62] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.62] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.62] steerControl: car Location i= 2471.864990
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.62] steerControl: car Location j= 599.284973
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.62] steerControl: angle=11.331665, cur=3.000000, diff=8.331665, control=0.209798
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.62] Steering LEFT with control= 0.209798
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.64] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.64] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.64] steerControl: car Location i= 2473.838135
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.64] steerControl: car Location j= 599.434143
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.64] steerControl: angle=11.392980, cur=3.000000, diff=8.392980, control=0.211357
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.64] Steering LEFT with control= 0.211357
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.65] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.65] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.65] steerControl: car Location i= 2475.856689
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.65] steerControl: car Location j= 599.593140
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.65] steerControl: angle=11.455215, cur=3.000000, diff=8.455215, control=0.212936
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.65] Steering LEFT with control= 0.212936
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.67] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.67] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.67] steerControl: car Location i= 2477.920654
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.67] steerControl: car Location j= 599.762329
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.67] steerControl: angle=11.518343, cur=4.000000, diff=7.518343, control=0.164537
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.67] Steering LEFT with control= 0.164537
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.68] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.68] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.68] steerControl: car Location i= 2480.029785
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.68] steerControl: car Location j= 599.942017
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.68] steerControl: angle=11.582335, cur=4.000000, diff=7.582335, control=0.191158
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.68] Steering LEFT with control= 0.191158
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.70] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.70] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.70] steerControl: car Location i= 2482.184082
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.70] steerControl: car Location j= 600.130981
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.70] steerControl: angle=11.647574, cur=4.000000, diff=7.647574, control=0.192820
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.70] Steering LEFT with control= 0.192820
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.72] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.72] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.72] steerControl: car Location i= 2484.384033
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.72] steerControl: car Location j= 600.325989
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.72] steerControl: angle=11.715009, cur=4.000000, diff=7.715009, control=0.194561
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.72] Steering LEFT with control= 0.194561
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.73] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.73] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.73] steerControl: car Location i= 2486.629395
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.73] steerControl: car Location j= 600.528625
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.73] steerControl: angle=11.784319, cur=4.000000, diff=7.784319, control=0.196341
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.73] Steering LEFT with control= 0.196341
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.75] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.75] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.75] steerControl: car Location i= 2488.919922
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.75] steerControl: car Location j= 600.740112
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.75] steerControl: angle=11.855271, cur=4.000000, diff=7.855271, control=0.198156
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.75] Steering LEFT with control= 0.198156
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.76] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.76] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.76] steerControl: car Location i= 2491.255615
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.76] steerControl: car Location j= 600.959900
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.76] steerControl: angle=11.928115, cur=4.000000, diff=7.928115, control=0.200024
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.76] Steering LEFT with control= 0.200024
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.78] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.78] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.78] steerControl: car Location i= 2493.636475
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.78] steerControl: car Location j= 601.188049
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.78] steerControl: angle=12.002943, cur=5.000000, diff=7.002943, control=0.151944
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.78] Steering LEFT with control= 0.151944
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.80] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.80] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.80] steerControl: car Location i= 2496.062256
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.80] steerControl: car Location j= 601.426025
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.80] steerControl: angle=12.079462, cur=5.000000, diff=7.079462, control=0.178900
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.80] Steering LEFT with control= 0.178900
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.81] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.81] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.81] steerControl: car Location i= 2498.532227
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.81] steerControl: car Location j= 601.678955
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.81] steerControl: angle=12.156310, cur=5.000000, diff=7.156310, control=0.180829
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.81] Steering LEFT with control= 0.180829
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.83] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.83] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.83] steerControl: car Location i= 2501.047119
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.83] steerControl: car Location j= 601.940918
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.83] steerControl: angle=12.235268, cur=5.000000, diff=7.235268, control=0.182856
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.83] Steering LEFT with control= 0.182856
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.84] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.84] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.84] steerControl: car Location i= 2503.606934
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.84] steerControl: car Location j= 602.213318
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.84] steerControl: angle=12.316072, cur=5.000000, diff=7.316072, control=0.184922
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.84] Steering LEFT with control= 0.184922
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.86] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.86] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.86] steerControl: car Location i= 2506.211426
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.86] steerControl: car Location j= 602.495605
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.86] steerControl: angle=12.398997, cur=5.000000, diff=7.398997, control=0.187048
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.86] Steering LEFT with control= 0.187048
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.88] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.88] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.88] steerControl: car Location i= 2508.860596
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.88] steerControl: car Location j= 602.789124
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.88] steerControl: angle=12.483793, cur=6.000000, diff=6.483793, control=0.139215
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.88] Steering LEFT with control= 0.139215
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.89] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.89] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.89] steerControl: car Location i= 2511.554199
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.89] steerControl: car Location j= 603.093201
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.89] steerControl: angle=12.570786, cur=6.000000, diff=6.570786, control=0.166444
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.89] Steering LEFT with control= 0.166444
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.91] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.91] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.91] steerControl: car Location i= 2514.292236
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.91] steerControl: car Location j= 603.409119
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.91] steerControl: angle=12.659750, cur=6.000000, diff=6.659750, control=0.168718
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.91] Steering LEFT with control= 0.168718
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.92] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.92] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.92] steerControl: car Location i= 2517.074463
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.92] steerControl: car Location j= 603.737610
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.92] steerControl: angle=12.750598, cur=6.000000, diff=6.750598, control=0.171036
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.92] Steering LEFT with control= 0.171036
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.94] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.94] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.94] steerControl: car Location i= 2519.900879
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.94] steerControl: car Location j= 604.077881
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.94] steerControl: angle=12.843733, cur=6.000000, diff=6.843733, control=0.173422
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.94] Steering LEFT with control= 0.173422
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.96] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.96] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.96] steerControl: car Location i= 2522.771240
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.96] steerControl: car Location j= 604.431030
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.96] steerControl: angle=12.938974, cur=6.000000, diff=6.938974, control=0.175855
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.96] Steering LEFT with control= 0.175855
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.97] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.97] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.97] steerControl: car Location i= 2525.685547
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.97] steerControl: car Location j= 604.797668
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.97] steerControl: angle=13.036302, cur=7.000000, diff=6.036302, control=0.128341
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.97] Steering LEFT with control= 0.128341
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.99] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.99] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.99] steerControl: car Location i= 2528.643799
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.99] steerControl: car Location j= 605.177063
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.99] steerControl: angle=13.136141, cur=7.000000, diff=6.136141, control=0.155899
+[SYS: 2025-04-25 13:44:41][GAME: 00:00.99] Steering LEFT with control= 0.155899
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.00] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.00] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.00] steerControl: car Location i= 2531.645752
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.00] steerControl: car Location j= 605.570190
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.00] steerControl: angle=13.238364, cur=7.000000, diff=6.238364, control=0.158515
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.00] Steering LEFT with control= 0.158515
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.02] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.02] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.02] steerControl: car Location i= 2534.692139
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.02] steerControl: car Location j= 605.973389
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.02] steerControl: angle=13.344483, cur=7.000000, diff=6.344483, control=0.161265
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.02] Steering LEFT with control= 0.161265
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.04] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.04] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.04] steerControl: car Location i= 2537.781982
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.04] steerControl: car Location j= 606.390930
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.04] steerControl: angle=13.453254, cur=7.000000, diff=6.453254, control=0.164051
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.04] Steering LEFT with control= 0.164051
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.05] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.05] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.05] steerControl: car Location i= 2540.915283
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.05] steerControl: car Location j= 606.822266
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.05] steerControl: angle=13.565119, cur=7.000000, diff=6.565119, control=0.166925
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.05] Steering LEFT with control= 0.166925
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.07] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.07] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.07] steerControl: car Location i= 2544.092041
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.07] steerControl: car Location j= 607.268372
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.07] steerControl: angle=13.680013, cur=8.000000, diff=5.680013, control=0.119873
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.07] Steering LEFT with control= 0.119873
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.08] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.08] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.08] steerControl: car Location i= 2547.312012
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.08] steerControl: car Location j= 607.729858
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.08] steerControl: angle=13.797983, cur=8.000000, diff=5.797983, control=0.147899
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.08] Steering LEFT with control= 0.147899
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.10] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.10] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.10] steerControl: car Location i= 2550.574951
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.10] steerControl: car Location j= 608.207153
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.10] steerControl: angle=13.919162, cur=8.000000, diff=5.919162, control=0.151009
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.10] Steering LEFT with control= 0.151009
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.12] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.12] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.12] steerControl: car Location i= 2553.881836
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.12] steerControl: car Location j= 608.695251
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.12] steerControl: angle=14.045875, cur=8.000000, diff=6.045875, control=0.154315
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.12] Steering LEFT with control= 0.154315
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.13] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.13] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.13] steerControl: car Location i= 2557.231445
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.13] steerControl: car Location j= 609.199890
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.13] steerControl: angle=14.176274, cur=8.000000, diff=6.176274, control=0.157667
+[SYS: 2025-04-25 13:44:41][GAME: 00:01.13] Steering LEFT with control= 0.157667
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.15] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.15] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.15] steerControl: car Location i= 2560.623779
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.15] steerControl: car Location j= 609.721497
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.15] steerControl: angle=14.310581, cur=8.000000, diff=6.310581, control=0.161122
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.15] Steering LEFT with control= 0.161122
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.16] steerControl: targetNode X= 2695.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.16] steerControl: targetNode Y= 644.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.16] steerControl: car Location i= 2564.058838
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.16] steerControl: car Location j= 610.259216
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.16] steerControl: angle=14.449581, cur=9.000000, diff=5.449581, control=0.114715
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.16] Steering LEFT with control= 0.114715
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.18] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.18] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.18] steerControl: car Location i= 2567.536377
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.18] steerControl: car Location j= 610.813782
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.18] steerControl: angle=5.767328, cur=9.000000, diff=-3.232672, control=0.297873
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.18] Steering RIGHT with control= 0.297873
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.20] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.20] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.20] steerControl: car Location i= 2571.056396
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.20] steerControl: car Location j= 611.385681
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.20] steerControl: angle=5.732484, cur=9.000000, diff=-3.267516, control=0.082559
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.20] Steering RIGHT with control= 0.082559
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.21] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.21] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.21] steerControl: car Location i= 2574.619629
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.21] steerControl: car Location j= 611.969910
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.21] steerControl: angle=5.695627, cur=9.000000, diff=-3.304373, control=0.083531
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.21] Steering RIGHT with control= 0.083531
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.23] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.23] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.23] steerControl: car Location i= 2578.228027
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.23] steerControl: car Location j= 612.546753
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.23] steerControl: angle=5.659955, cur=9.000000, diff=-3.340045, control=0.084393
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.23] Steering RIGHT with control= 0.084393
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.24] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.24] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.24] steerControl: car Location i= 2581.880371
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.24] steerControl: car Location j= 613.131897
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.24] steerControl: angle=5.622864, cur=9.000000, diff=-3.377136, control=0.085356
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.24] Steering RIGHT with control= 0.085356
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.26] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.26] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.26] steerControl: car Location i= 2585.576660
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.26] steerControl: car Location j= 613.724915
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.26] steerControl: angle=5.584364, cur=9.000000, diff=-3.415636, control=0.086353
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.26] Steering RIGHT with control= 0.086353
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.28] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.28] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.28] steerControl: car Location i= 2589.316650
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.28] steerControl: car Location j= 614.325684
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.28] steerControl: angle=5.544411, cur=9.000000, diff=-3.455589, control=0.087389
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.28] Steering RIGHT with control= 0.087389
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.29] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.29] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.29] steerControl: car Location i= 2593.100586
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.29] steerControl: car Location j= 614.934082
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.29] steerControl: angle=5.502964, cur=9.000000, diff=-3.497036, control=0.088462
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.29] Steering RIGHT with control= 0.088462
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.31] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.31] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.31] steerControl: car Location i= 2596.928223
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.31] steerControl: car Location j= 615.550049
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.31] steerControl: angle=5.459960, cur=9.000000, diff=-3.540040, control=0.089576
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.31] Steering RIGHT with control= 0.089576
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.32] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.32] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.32] steerControl: car Location i= 2600.799805
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.32] steerControl: car Location j= 616.172241
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.32] steerControl: angle=5.415566, cur=9.000000, diff=-3.584434, control=0.090721
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.32] Steering RIGHT with control= 0.090721
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.34] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.34] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.34] steerControl: car Location i= 2604.715332
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.34] steerControl: car Location j= 616.799805
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.34] steerControl: angle=5.369865, cur=9.000000, diff=-3.630135, control=0.091896
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.34] Steering RIGHT with control= 0.091896
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.36] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.36] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.36] steerControl: car Location i= 2608.674805
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.36] steerControl: car Location j= 617.433105
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.36] steerControl: angle=5.322722, cur=9.000000, diff=-3.677278, control=0.093111
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.36] Steering RIGHT with control= 0.093111
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.37] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.37] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.37] steerControl: car Location i= 2612.678223
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.37] steerControl: car Location j= 618.071167
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.37] steerControl: angle=5.274243, cur=9.000000, diff=-3.725757, control=0.094356
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.37] Steering RIGHT with control= 0.094356
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.39] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.39] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.39] steerControl: car Location i= 2616.725830
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.39] steerControl: car Location j= 618.713196
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.39] steerControl: angle=5.224503, cur=9.000000, diff=-3.775497, control=0.095631
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.39] Steering RIGHT with control= 0.095631
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.40] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.40] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.40] steerControl: car Location i= 2620.817383
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.40] steerControl: car Location j= 619.358582
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.40] steerControl: angle=5.173540, cur=9.000000, diff=-3.826460, control=0.096936
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.40] Steering RIGHT with control= 0.096936
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.42] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.42] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.42] steerControl: car Location i= 2624.953125
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.42] steerControl: car Location j= 620.006775
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.42] steerControl: angle=5.121392, cur=8.000000, diff=-2.878608, control=0.048269
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.44] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.44] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.44] steerControl: car Location i= 2629.133057
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.44] steerControl: car Location j= 620.657227
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.44] steerControl: angle=5.068088, cur=8.000000, diff=-2.931912, control=0.074630
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.45] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.45] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.45] steerControl: car Location i= 2633.356934
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.45] steerControl: car Location j= 621.309570
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.45] steerControl: angle=5.013623, cur=8.000000, diff=-2.986377, control=0.076021
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.47] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.47] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.47] steerControl: car Location i= 2637.625000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.47] steerControl: car Location j= 621.963379
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.47] steerControl: angle=4.958011, cur=8.000000, diff=-3.041989, control=0.077440
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.47] Steering RIGHT with control= 0.077440
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.48] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.48] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.48] steerControl: car Location i= 2641.937012
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.48] steerControl: car Location j= 622.618225
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.48] steerControl: angle=4.901253, cur=8.000000, diff=-3.098747, control=0.078888
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.48] Steering RIGHT with control= 0.078888
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.50] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.50] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.50] steerControl: car Location i= 2646.293457
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.50] steerControl: car Location j= 623.272644
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.50] steerControl: angle=4.843579, cur=8.000000, diff=-3.156421, control=0.080352
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.50] Steering RIGHT with control= 0.080352
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.52] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.52] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.52] steerControl: car Location i= 2650.693848
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.52] steerControl: car Location j= 623.926636
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.52] steerControl: angle=4.784909, cur=8.000000, diff=-3.215091, control=0.081844
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.52] Steering RIGHT with control= 0.081844
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.53] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.53] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.53] steerControl: car Location i= 2655.138428
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.53] steerControl: car Location j= 624.580017
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.53] steerControl: angle=4.725208, cur=8.000000, diff=-3.274792, control=0.083362
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.53] Steering RIGHT with control= 0.083362
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.55] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.55] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.55] steerControl: car Location i= 2659.626953
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.55] steerControl: car Location j= 625.232544
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.55] steerControl: angle=4.664441, cur=8.000000, diff=-3.335559, control=0.084908
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.55] Steering RIGHT with control= 0.084908
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.56] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.56] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.56] steerControl: car Location i= 2664.159668
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.56] steerControl: car Location j= 625.884094
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.56] steerControl: angle=4.602554, cur=7.000000, diff=-2.397446, control=0.036483
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.58] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.58] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.58] steerControl: car Location i= 2668.736328
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.58] steerControl: car Location j= 626.534546
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.58] steerControl: angle=4.539479, cur=7.000000, diff=-2.460521, control=0.063090
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.60] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.60] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.60] steerControl: car Location i= 2673.356689
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.60] steerControl: car Location j= 627.183655
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.60] steerControl: angle=4.475167, cur=7.000000, diff=-2.524833, control=0.064729
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.61] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.61] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.61] steerControl: car Location i= 2678.020996
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.61] steerControl: car Location j= 627.831299
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.61] steerControl: angle=4.409548, cur=7.000000, diff=-2.590452, control=0.066402
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.63] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.63] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.63] steerControl: car Location i= 2682.729248
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.63] steerControl: car Location j= 628.476135
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.63] steerControl: angle=4.342827, cur=7.000000, diff=-2.657173, control=0.068097
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.64] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.64] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.64] steerControl: car Location i= 2687.481201
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.64] steerControl: car Location j= 629.118225
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.64] steerControl: angle=4.274882, cur=7.000000, diff=-2.725118, control=0.069827
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.66] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.66] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.66] steerControl: car Location i= 2692.276855
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.66] steerControl: car Location j= 629.757568
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.66] steerControl: angle=4.205600, cur=7.000000, diff=-2.794400, control=0.071592
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.68] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.68] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.68] steerControl: car Location i= 2697.116211
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.68] steerControl: car Location j= 630.394104
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.68] steerControl: angle=4.134871, cur=7.000000, diff=-2.865129, control=0.073396
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.69] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.69] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.69] steerControl: car Location i= 2701.999268
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.69] steerControl: car Location j= 631.027710
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.69] steerControl: angle=4.062588, cur=6.000000, diff=-1.937412, control=0.025242
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.71] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.71] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.71] steerControl: car Location i= 2706.926025
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.71] steerControl: car Location j= 631.657104
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.71] steerControl: angle=3.988944, cur=6.000000, diff=-2.011056, control=0.052118
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.72] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.72] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.72] steerControl: car Location i= 2711.896240
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.72] steerControl: car Location j= 632.282532
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.72] steerControl: angle=3.913723, cur=6.000000, diff=-2.086277, control=0.054037
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.74] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.74] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.74] steerControl: car Location i= 2716.909912
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.74] steerControl: car Location j= 632.903931
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.74] steerControl: angle=3.836786, cur=6.000000, diff=-2.163214, control=0.056004
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.76] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.76] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.76] steerControl: car Location i= 2721.967041
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.76] steerControl: car Location j= 633.521301
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.76] steerControl: angle=3.757952, cur=6.000000, diff=-2.242048, control=0.058022
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.77] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.77] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.77] steerControl: car Location i= 2727.067627
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.77] steerControl: car Location j= 634.133423
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.77] steerControl: angle=3.677378, cur=6.000000, diff=-2.322622, control=0.060080
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.79] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.79] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.79] steerControl: car Location i= 2732.211426
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.79] steerControl: car Location j= 634.740479
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.79] steerControl: angle=3.594811, cur=6.000000, diff=-2.405189, control=0.062194
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.80] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.80] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.80] steerControl: car Location i= 2737.398438
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.80] steerControl: car Location j= 635.342529
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.80] steerControl: angle=3.510010, cur=6.000000, diff=-2.489990, control=0.064370
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.82] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.82] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.82] steerControl: car Location i= 2742.628662
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.82] steerControl: car Location j= 635.939575
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.82] steerControl: angle=3.422721, cur=5.000000, diff=-1.577279, control=0.016614
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.84] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.84] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.84] steerControl: car Location i= 2747.901855
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.84] steerControl: car Location j= 636.530457
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.84] steerControl: angle=3.333031, cur=5.000000, diff=-1.666969, control=0.043916
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.85] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.85] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.85] steerControl: car Location i= 2753.218262
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.85] steerControl: car Location j= 637.115356
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.85] steerControl: angle=3.240592, cur=5.000000, diff=-1.759408, control=0.046296
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.87] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.87] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.87] steerControl: car Location i= 2758.577637
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.87] steerControl: car Location j= 637.694397
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.87] steerControl: angle=3.145019, cur=5.000000, diff=-1.854981, control=0.048764
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.88] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.88] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.88] steerControl: car Location i= 2763.979736
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.88] steerControl: car Location j= 638.267578
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.88] steerControl: angle=3.045914, cur=5.000000, diff=-1.954086, control=0.051330
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.90] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.90] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.90] steerControl: car Location i= 2769.424805
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.90] steerControl: car Location j= 638.833679
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.90] steerControl: angle=2.943280, cur=5.000000, diff=-2.056720, control=0.053984
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.92] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.92] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.92] steerControl: car Location i= 2774.912598
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.92] steerControl: car Location j= 639.393005
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.92] steerControl: angle=2.836519, cur=5.000000, diff=-2.163481, control=0.056756
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.93] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.93] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.93] steerControl: car Location i= 2780.443115
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.93] steerControl: car Location j= 639.945618
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.93] steerControl: angle=2.725035, cur=5.000000, diff=-2.274965, control=0.059661
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.95] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.95] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.95] steerControl: car Location i= 2786.016357
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.95] steerControl: car Location j= 640.490356
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.95] steerControl: angle=2.608636, cur=4.000000, diff=-1.391364, control=0.012694
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.96] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.96] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.96] steerControl: car Location i= 2791.632080
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.96] steerControl: car Location j= 641.027527
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.96] steerControl: angle=2.486449, cur=4.000000, diff=-1.513551, control=0.040893
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.98] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.98] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.98] steerControl: car Location i= 2797.290283
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.98] steerControl: car Location j= 641.557190
+[SYS: 2025-04-25 13:44:42][GAME: 00:01.98] steerControl: angle=2.357548, cur=4.000000, diff=-1.642452, control=0.044284
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.00] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.00] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.00] steerControl: car Location i= 2802.990967
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.00] steerControl: car Location j= 642.078247
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.00] steerControl: angle=2.221372, cur=4.000000, diff=-1.778628, control=0.047870
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.01] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.01] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.01] steerControl: car Location i= 2808.733887
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.01] steerControl: car Location j= 642.591003
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.01] steerControl: angle=2.076529, cur=4.000000, diff=-1.923471, control=0.051708
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.03] steerControl: targetNode X= 2955.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.03] steerControl: targetNode Y= 651.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.03] steerControl: car Location i= 2814.519043
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.03] steerControl: car Location j= 643.095520
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.03] steerControl: angle=1.921445, cur=4.000000, diff=-2.078556, control=0.055841
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.04] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.04] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.04] steerControl: car Location i= 2820.346436
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.04] steerControl: car Location j= 643.590759
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.04] steerControl: angle=-1.121041, cur=4.000000, diff=-5.121040, control=0.204088
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.04] Steering RIGHT with control= 0.204088
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.06] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.06] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.06] steerControl: car Location i= 2826.215820
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.06] steerControl: car Location j= 644.076965
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.06] steerControl: angle=-1.153822, cur=4.000000, diff=-5.153822, control=0.129665
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.06] Steering RIGHT with control= 0.129665
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.08] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.08] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.08] steerControl: car Location i= 2832.127197
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.08] steerControl: car Location j= 644.554321
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.08] steerControl: angle=-1.186533, cur=3.000000, diff=-4.186533, control=0.080481
+[SYS: 2025-04-25 13:44:42][GAME: 00:02.08] Steering RIGHT with control= 0.080481
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.09] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.09] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.09] steerControl: car Location i= 2838.080566
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.09] steerControl: car Location j= 645.012878
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.09] steerControl: angle=-1.218628, cur=3.000000, diff=-4.218628, control=0.106268
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.09] Steering RIGHT with control= 0.106268
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.11] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.11] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.11] steerControl: car Location i= 2844.075684
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.11] steerControl: car Location j= 645.462585
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.11] steerControl: angle=-1.250652, cur=3.000000, diff=-4.250652, control=0.107067
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.11] Steering RIGHT with control= 0.107067
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.12] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.12] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.12] steerControl: car Location i= 2850.112549
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.12] steerControl: car Location j= 645.902344
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.12] steerControl: angle=-1.282547, cur=3.000000, diff=-4.282547, control=0.107861
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.12] Steering RIGHT with control= 0.107861
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.14] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.14] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.14] steerControl: car Location i= 2856.190918
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.14] steerControl: car Location j= 646.331238
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.14] steerControl: angle=-1.314261, cur=3.000000, diff=-4.314261, control=0.108649
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.14] Steering RIGHT with control= 0.108649
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.16] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.16] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.16] steerControl: car Location i= 2862.311035
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.16] steerControl: car Location j= 646.749634
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.16] steerControl: angle=-1.345818, cur=3.000000, diff=-4.345818, control=0.109434
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.16] Steering RIGHT with control= 0.109434
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.17] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.17] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.17] steerControl: car Location i= 2868.472656
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.17] steerControl: car Location j= 647.156433
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.17] steerControl: angle=-1.377155, cur=2.000000, diff=-3.377155, control=0.060212
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.17] Steering RIGHT with control= 0.060212
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.19] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.19] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.19] steerControl: car Location i= 2874.675537
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.19] steerControl: car Location j= 647.550903
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.19] steerControl: angle=-1.408230, cur=2.000000, diff=-3.408230, control=0.085983
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.19] Steering RIGHT with control= 0.085983
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.20] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.20] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.20] steerControl: car Location i= 2880.919678
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.20] steerControl: car Location j= 647.933411
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.20] steerControl: angle=-1.439062, cur=2.000000, diff=-3.439062, control=0.086747
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.20] Steering RIGHT with control= 0.086747
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.22] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.22] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.22] steerControl: car Location i= 2887.205078
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.22] steerControl: car Location j= 648.307495
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.22] steerControl: angle=-1.469857, cur=2.000000, diff=-3.469857, control=0.087516
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.22] Steering RIGHT with control= 0.087516
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.24] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.24] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.24] steerControl: car Location i= 2893.531494
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.24] steerControl: car Location j= 648.668701
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.24] steerControl: angle=-1.500358, cur=2.000000, diff=-3.500358, control=0.088271
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.24] Steering RIGHT with control= 0.088271
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.25] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.25] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.25] steerControl: car Location i= 2899.898926
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.25] steerControl: car Location j= 649.017334
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.25] steerControl: angle=-1.530579, cur=2.000000, diff=-3.530579, control=0.089020
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.25] Steering RIGHT with control= 0.089020
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.27] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.27] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.27] steerControl: car Location i= 2906.307373
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.27] steerControl: car Location j= 649.352478
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.27] steerControl: angle=-1.560467, cur=2.000000, diff=-3.560467, control=0.089759
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.27] Steering RIGHT with control= 0.089759
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.28] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.28] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.28] steerControl: car Location i= 2912.756592
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.28] steerControl: car Location j= 649.674500
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.28] steerControl: angle=-1.590038, cur=1.000000, diff=-2.590038, control=0.040490
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.30] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.30] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.30] steerControl: car Location i= 2919.246338
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.30] steerControl: car Location j= 649.983704
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.30] steerControl: angle=-1.619309, cur=1.000000, diff=-2.619309, control=0.066215
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.32] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.32] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.32] steerControl: car Location i= 2925.776855
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.32] steerControl: car Location j= 650.279114
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.32] steerControl: angle=-1.648219, cur=1.000000, diff=-2.648219, control=0.066928
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.33] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.33] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.33] steerControl: car Location i= 2932.347900
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.33] steerControl: car Location j= 650.561157
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.33] steerControl: angle=-1.676790, cur=1.000000, diff=-2.676790, control=0.067634
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.35] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.35] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.35] steerControl: car Location i= 2938.959229
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.35] steerControl: car Location j= 650.828857
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.35] steerControl: angle=-1.704957, cur=1.000000, diff=-2.704957, control=0.068328
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.36] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.36] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.36] steerControl: car Location i= 2945.610840
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.36] steerControl: car Location j= 651.082642
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.36] steerControl: angle=-1.732743, cur=1.000000, diff=-2.732743, control=0.069013
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.38] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.38] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.38] steerControl: car Location i= 2952.302490
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.38] steerControl: car Location j= 651.322754
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.38] steerControl: angle=-1.760157, cur=1.000000, diff=-2.760157, control=0.069689
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.40] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.40] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.40] steerControl: car Location i= 2959.034424
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.40] steerControl: car Location j= 651.548218
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.40] steerControl: angle=-1.787135, cur=0.000000, diff=-1.787135, control=0.020353
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.41] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.41] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.41] steerControl: car Location i= 2965.806152
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.41] steerControl: car Location j= 651.759460
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.41] steerControl: angle=-1.813696, cur=0.000000, diff=-1.813696, control=0.046006
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.43] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.43] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.43] steerControl: car Location i= 2972.617920
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.43] steerControl: car Location j= 651.955505
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.43] steerControl: angle=-1.839774, cur=0.000000, diff=-1.839774, control=0.046646
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.44] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.44] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.44] steerControl: car Location i= 2979.469238
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.44] steerControl: car Location j= 652.136719
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.44] steerControl: angle=-1.865382, cur=0.000000, diff=-1.865382, control=0.047275
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.46] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.46] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.46] steerControl: car Location i= 2986.360352
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.46] steerControl: car Location j= 652.302246
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.46] steerControl: angle=-1.890460, cur=0.000000, diff=-1.890460, control=0.047888
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.48] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.48] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.48] steerControl: car Location i= 2993.290771
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.48] steerControl: car Location j= 652.452454
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.48] steerControl: angle=-1.915021, cur=0.000000, diff=-1.915021, control=0.048490
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.49] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.49] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.49] steerControl: car Location i= 3000.260742
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.49] steerControl: car Location j= 652.587585
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.49] steerControl: angle=-1.939072, cur=0.000000, diff=-1.939072, control=0.049078
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.51] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.51] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.51] steerControl: car Location i= 3007.270020
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.51] steerControl: car Location j= 652.706726
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.51] steerControl: angle=-1.962544, cur=0.000000, diff=-1.962544, control=0.049650
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.52] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.52] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.52] steerControl: car Location i= 3014.318359
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.52] steerControl: car Location j= 652.810242
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.52] steerControl: angle=-1.985450, cur=0.000000, diff=-1.985450, control=0.050209
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.54] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.54] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.54] steerControl: car Location i= 3021.405762
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.54] steerControl: car Location j= 652.897156
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.54] steerControl: angle=-2.007713, cur=0.000000, diff=-2.007713, control=0.050749
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.56] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.56] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.56] steerControl: car Location i= 3028.532227
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.56] steerControl: car Location j= 652.967957
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.56] steerControl: angle=-2.029354, cur=0.000000, diff=-2.029354, control=0.051275
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.57] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.57] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.57] steerControl: car Location i= 3035.697510
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.57] steerControl: car Location j= 653.021667
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.57] steerControl: angle=-2.050292, cur=0.000000, diff=-2.050292, control=0.051781
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.59] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.59] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.59] steerControl: car Location i= 3042.901367
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.59] steerControl: car Location j= 653.058716
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.59] steerControl: angle=-2.070542, cur=0.000000, diff=-2.070542, control=0.052270
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.60] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.60] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.60] steerControl: car Location i= 3050.143799
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.60] steerControl: car Location j= 653.078186
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.60] steerControl: angle=-2.090025, cur=0.000000, diff=-2.090025, control=0.052738
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.62] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.62] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.62] steerControl: car Location i= 3057.424805
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.62] steerControl: car Location j= 653.080505
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.62] steerControl: angle=-2.108752, cur=-1.000000, diff=-1.108752, control=0.003187
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.64] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.64] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.64] steerControl: car Location i= 3064.744141
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.64] steerControl: car Location j= 653.064819
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.64] steerControl: angle=-2.126646, cur=-1.000000, diff=-1.126646, control=0.028614
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.65] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.65] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.65] steerControl: car Location i= 3072.101807
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.65] steerControl: car Location j= 653.031555
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.65] steerControl: angle=-2.143717, cur=-1.000000, diff=-1.143717, control=0.029020
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.67] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.67] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.67] steerControl: car Location i= 3079.497559
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.67] steerControl: car Location j= 652.981018
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.67] steerControl: angle=-2.159966, cur=-1.000000, diff=-1.159966, control=0.029405
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.68] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.68] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.68] steerControl: car Location i= 3086.931396
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.68] steerControl: car Location j= 652.912292
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.68] steerControl: angle=-2.175305, cur=-1.000000, diff=-1.175305, control=0.029766
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.70] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.70] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.70] steerControl: car Location i= 3094.403320
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.70] steerControl: car Location j= 652.824646
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.70] steerControl: angle=-2.189658, cur=-1.000000, diff=-1.189658, control=0.030100
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.72] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.72] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.72] steerControl: car Location i= 3101.913086
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.72] steerControl: car Location j= 652.718567
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.72] steerControl: angle=-2.203034, cur=-1.000000, diff=-1.203034, control=0.030410
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.73] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.73] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.73] steerControl: car Location i= 3109.460693
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.73] steerControl: car Location j= 652.594421
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.73] steerControl: angle=-2.215433, cur=-2.000000, diff=-0.215433, control=0.019304
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.75] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.75] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.75] steerControl: car Location i= 3117.046143
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.75] steerControl: car Location j= 652.451294
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.75] steerControl: angle=-2.226759, cur=-2.000000, diff=-0.226759, control=0.005952
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.76] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.76] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.76] steerControl: car Location i= 3124.669434
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.76] steerControl: car Location j= 652.289612
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.76] steerControl: angle=-2.237014, cur=-2.000000, diff=-0.237014, control=0.006182
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.78] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.78] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.78] steerControl: car Location i= 3132.330078
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.78] steerControl: car Location j= 652.108521
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.78] steerControl: angle=-2.246099, cur=-2.000000, diff=-0.246099, control=0.006380
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.80] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.80] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.80] steerControl: car Location i= 3140.028320
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.80] steerControl: car Location j= 651.907288
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.80] steerControl: angle=-2.253923, cur=-2.000000, diff=-0.253923, control=0.006544
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.81] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.81] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.81] steerControl: car Location i= 3147.763916
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.81] steerControl: car Location j= 651.686401
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.81] steerControl: angle=-2.260485, cur=-2.000000, diff=-0.260485, control=0.006676
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.83] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.83] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.83] steerControl: car Location i= 3155.536865
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.83] steerControl: car Location j= 651.446228
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.83] steerControl: angle=-2.265775, cur=-3.000000, diff=0.734225, control=0.043223
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.84] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.84] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.84] steerControl: car Location i= 3163.346924
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.84] steerControl: car Location j= 651.185852
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.84] steerControl: angle=-2.269677, cur=-3.000000, diff=0.730323, control=0.018161
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.86] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.86] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.86] steerControl: car Location i= 3171.194092
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.86] steerControl: car Location j= 650.904541
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.86] steerControl: angle=-2.272087, cur=-3.000000, diff=0.727913, control=0.018138
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.88] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.88] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.88] steerControl: car Location i= 3179.078369
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.88] steerControl: car Location j= 650.602844
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.88] steerControl: angle=-2.272999, cur=-3.000000, diff=0.727001, control=0.018152
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.89] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.89] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.89] steerControl: car Location i= 3186.999512
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.89] steerControl: car Location j= 650.279907
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.89] steerControl: angle=-2.272291, cur=-3.000000, diff=0.727709, control=0.018210
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.91] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.91] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.91] steerControl: car Location i= 3194.957520
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.91] steerControl: car Location j= 649.936279
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.91] steerControl: angle=-2.269953, cur=-3.000000, diff=0.730047, control=0.018310
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.92] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.92] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.92] steerControl: car Location i= 3202.952393
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.92] steerControl: car Location j= 649.572266
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.92] steerControl: angle=-2.265951, cur=-3.000000, diff=0.734049, control=0.018451
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.94] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.94] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.94] steerControl: car Location i= 3210.983887
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.94] steerControl: car Location j= 649.186951
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.94] steerControl: angle=-2.260146, cur=-4.000000, diff=1.739854, control=0.068641
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.96] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.96] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.96] steerControl: car Location i= 3219.051758
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.96] steerControl: car Location j= 648.779663
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.96] steerControl: angle=-2.252411, cur=-4.000000, diff=1.747589, control=0.043883
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.97] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.97] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.97] steerControl: car Location i= 3227.156250
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.97] steerControl: car Location j= 648.350891
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.97] steerControl: angle=-2.242718, cur=-4.000000, diff=1.757282, control=0.044174
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.99] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.99] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.99] steerControl: car Location i= 3235.296875
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.99] steerControl: car Location j= 647.899841
+[SYS: 2025-04-25 13:44:43][GAME: 00:02.99] steerControl: angle=-2.230917, cur=-4.000000, diff=1.769083, control=0.044522
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.00] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.00] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.00] steerControl: car Location i= 3243.473877
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.00] steerControl: car Location j= 647.426941
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.00] steerControl: angle=-2.216964, cur=-4.000000, diff=1.783036, control=0.044925
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.02] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.02] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.02] steerControl: car Location i= 3251.686768
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.02] steerControl: car Location j= 646.931458
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.02] steerControl: angle=-2.200704, cur=-4.000000, diff=1.799296, control=0.045389
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.04] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.04] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.04] steerControl: car Location i= 3259.935791
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.04] steerControl: car Location j= 646.413818
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.04] steerControl: angle=-2.182082, cur=-5.000000, diff=2.817918, control=0.095914
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.05] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.05] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.05] steerControl: car Location i= 3268.220703
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.05] steerControl: car Location j= 645.873230
+[SYS: 2025-04-25 13:44:43][GAME: 00:03.05] steerControl: angle=-2.160922, cur=-5.000000, diff=2.839078, control=0.071506
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.07] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.07] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.07] steerControl: car Location i= 3276.541504
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.07] steerControl: car Location j= 645.310120
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.07] steerControl: angle=-2.137157, cur=-5.000000, diff=2.862843, control=0.072165
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.08] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.08] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.08] steerControl: car Location i= 3284.897949
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.08] steerControl: car Location j= 644.723755
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.08] steerControl: angle=-2.110600, cur=-5.000000, diff=2.889400, control=0.072899
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.10] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.10] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.10] steerControl: car Location i= 3293.290039
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.10] steerControl: car Location j= 644.114563
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.10] steerControl: angle=-2.081168, cur=-5.000000, diff=2.918832, control=0.073707
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.12] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.12] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.12] steerControl: car Location i= 3301.717529
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.12] steerControl: car Location j= 643.481750
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.12] steerControl: angle=-2.048650, cur=-5.000000, diff=2.951350, control=0.074597
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.13] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.13] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.13] steerControl: car Location i= 3310.180420
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.13] steerControl: car Location j= 642.825745
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.13] steerControl: angle=-2.012943, cur=-5.000000, diff=2.987057, control=0.075569
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.15] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.15] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.15] steerControl: car Location i= 3318.678711
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.15] steerControl: car Location j= 642.145813
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.15] steerControl: angle=-1.973822, cur=-6.000000, diff=4.026178, control=0.126632
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.15] Steering LEFT with control= 0.126632
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.16] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.16] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.16] steerControl: car Location i= 3327.212158
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.16] steerControl: car Location j= 641.442383
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.16] steerControl: angle=-1.931162, cur=-6.000000, diff=4.068838, control=0.102787
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.16] Steering LEFT with control= 0.102787
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.18] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.18] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.18] steerControl: car Location i= 3335.780762
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.18] steerControl: car Location j= 640.714661
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.18] steerControl: angle=-1.884705, cur=-6.000000, diff=4.115295, control=0.104044
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.18] Steering LEFT with control= 0.104044
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.20] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.20] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.20] steerControl: car Location i= 3344.385498
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.20] steerControl: car Location j= 639.971802
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.20] steerControl: angle=-1.835244, cur=-6.000000, diff=4.164756, control=0.105355
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.20] Steering LEFT with control= 0.105355
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.21] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.21] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.21] steerControl: car Location i= 3353.026367
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.21] steerControl: car Location j= 639.213623
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.21] steerControl: angle=-1.782601, cur=-6.000000, diff=4.217399, control=0.106751
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.21] Steering LEFT with control= 0.106751
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.23] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.23] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.23] steerControl: car Location i= 3361.703125
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.23] steerControl: car Location j= 638.439819
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.23] steerControl: angle=-1.726570, cur=-6.000000, diff=4.273429, control=0.108237
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.23] Steering LEFT with control= 0.108237
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.24] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.24] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.24] steerControl: car Location i= 3370.415771
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.24] steerControl: car Location j= 637.650146
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.24] steerControl: angle=-1.666937, cur=-6.000000, diff=4.333063, control=0.109817
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.24] Steering LEFT with control= 0.109817
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.26] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.26] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.26] steerControl: car Location i= 3379.164551
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.26] steerControl: car Location j= 636.845581
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.26] steerControl: angle=-1.603612, cur=-6.000000, diff=4.396388, control=0.111493
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.26] Steering LEFT with control= 0.111493
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.28] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.28] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.28] steerControl: car Location i= 3387.949463
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.28] steerControl: car Location j= 636.027954
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.28] steerControl: angle=-1.536597, cur=-6.000000, diff=4.463403, control=0.113260
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.28] Steering LEFT with control= 0.113260
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.29] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.29] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.29] steerControl: car Location i= 3396.770508
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.29] steerControl: car Location j= 635.197876
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.29] steerControl: angle=-1.465746, cur=-6.000000, diff=4.534254, control=0.115128
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.29] Steering LEFT with control= 0.115128
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.31] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.31] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.31] steerControl: car Location i= 3405.627686
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.31] steerControl: car Location j= 634.355835
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.31] steerControl: angle=-1.390887, cur=-6.000000, diff=4.609113, control=0.117099
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.31] Steering LEFT with control= 0.117099
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.32] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.32] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.32] steerControl: car Location i= 3414.521240
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.32] steerControl: car Location j= 633.503540
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.32] steerControl: angle=-1.311984, cur=-6.000000, diff=4.688016, control=0.119173
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.32] Steering LEFT with control= 0.119173
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.34] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.34] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.34] steerControl: car Location i= 3423.451172
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.34] steerControl: car Location j= 632.642517
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.34] steerControl: angle=-1.228972, cur=-6.000000, diff=4.771028, control=0.121351
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.34] Steering LEFT with control= 0.121351
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.36] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.36] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.36] steerControl: car Location i= 3432.417725
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.36] steerControl: car Location j= 631.774109
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.36] steerControl: angle=-1.141757, cur=-6.000000, diff=4.858243, control=0.123636
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.36] Steering LEFT with control= 0.123636
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.37] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.37] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.37] steerControl: car Location i= 3441.420898
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.37] steerControl: car Location j= 630.900696
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.37] steerControl: angle=-1.050370, cur=-5.000000, diff=3.949630, control=0.076025
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.37] Steering LEFT with control= 0.076025
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.39] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.39] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.39] steerControl: car Location i= 3450.460938
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.39] steerControl: car Location j= 630.023376
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.39] steerControl: angle=-0.954670, cur=-5.000000, diff=4.045330, control=0.103526
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.39] Steering LEFT with control= 0.103526
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.40] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.40] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.40] steerControl: car Location i= 3459.537842
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.40] steerControl: car Location j= 629.143250
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.40] steerControl: angle=-0.854505, cur=-5.000000, diff=4.145495, control=0.106142
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.40] Steering LEFT with control= 0.106142
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.42] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.42] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.42] steerControl: car Location i= 3468.651611
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.42] steerControl: car Location j= 628.262390
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.42] steerControl: angle=-0.749839, cur=-5.000000, diff=4.250161, control=0.108871
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.42] Steering LEFT with control= 0.108871
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.44] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.44] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.44] steerControl: car Location i= 3477.802490
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.44] steerControl: car Location j= 627.382751
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.44] steerControl: angle=-0.640616, cur=-5.000000, diff=4.359384, control=0.111715
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.44] Steering LEFT with control= 0.111715
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.45] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.45] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.45] steerControl: car Location i= 3486.990479
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.45] steerControl: car Location j= 626.505005
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.45] steerControl: angle=-0.526584, cur=-5.000000, diff=4.473416, control=0.114686
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.45] Steering LEFT with control= 0.114686
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.47] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.47] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.47] steerControl: car Location i= 3496.215576
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.47] steerControl: car Location j= 625.630981
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.47] steerControl: angle=-0.407636, cur=-4.000000, diff=3.592364, control=0.067783
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.47] Steering LEFT with control= 0.067783
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.48] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.48] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.48] steerControl: car Location i= 3505.477783
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.48] steerControl: car Location j= 624.762390
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.48] steerControl: angle=-0.283635, cur=-4.000000, diff=3.716365, control=0.096009
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.48] Steering LEFT with control= 0.096009
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.50] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.50] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.50] steerControl: car Location i= 3514.777344
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.50] steerControl: car Location j= 623.900757
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.50] steerControl: angle=-0.154398, cur=-4.000000, diff=3.845603, control=0.099371
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.50] Steering LEFT with control= 0.099371
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.52] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.52] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.52] steerControl: car Location i= 3524.114014
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.52] steerControl: car Location j= 623.047546
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.52] steerControl: angle=-0.019707, cur=-4.000000, diff=3.980293, control=0.102875
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.52] Steering LEFT with control= 0.102875
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.53] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.53] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.53] steerControl: car Location i= 3533.488037
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.53] steerControl: car Location j= 622.204224
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.53] steerControl: angle=0.120679, cur=-4.000000, diff=4.120679, control=0.106527
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.53] Steering LEFT with control= 0.106527
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.55] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.55] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.55] steerControl: car Location i= 3542.899170
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.55] steerControl: car Location j= 621.370911
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.55] steerControl: angle=0.267266, cur=-4.000000, diff=4.267266, control=0.110346
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.55] Steering LEFT with control= 0.110346
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.56] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.56] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.56] steerControl: car Location i= 3552.347412
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.56] steerControl: car Location j= 620.549072
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.56] steerControl: angle=0.420383, cur=-3.000000, diff=3.420383, control=0.064338
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.56] Steering LEFT with control= 0.064338
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.58] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.58] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.58] steerControl: car Location i= 3561.832764
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.58] steerControl: car Location j= 619.739929
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.58] steerControl: angle=0.580448, cur=-3.000000, diff=3.580448, control=0.093513
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.58] Steering LEFT with control= 0.093513
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.60] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.60] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.60] steerControl: car Location i= 3571.355225
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.60] steerControl: car Location j= 618.944641
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.60] steerControl: angle=0.747947, cur=-3.000000, diff=3.747947, control=0.097886
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.60] Steering LEFT with control= 0.097886
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.61] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.61] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.61] steerControl: car Location i= 3580.914551
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.61] steerControl: car Location j= 618.159912
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.61] steerControl: angle=0.924296, cur=-3.000000, diff=3.924296, control=0.102516
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.61] Steering LEFT with control= 0.102516
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.63] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.63] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.63] steerControl: car Location i= 3590.510986
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.63] steerControl: car Location j= 617.391479
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.63] steerControl: angle=1.109298, cur=-3.000000, diff=4.109298, control=0.107357
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.63] Steering LEFT with control= 0.107357
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.64] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.64] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.64] steerControl: car Location i= 3600.144287
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.64] steerControl: car Location j= 616.640320
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.64] steerControl: angle=1.303721, cur=-2.000000, diff=3.303721, control=0.062454
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.64] Steering LEFT with control= 0.062454
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.66] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.66] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.66] steerControl: car Location i= 3609.814209
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.66] steerControl: car Location j= 615.907410
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.66] steerControl: angle=1.508449, cur=-2.000000, diff=3.508449, control=0.092829
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.66] Steering LEFT with control= 0.092829
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.68] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.68] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.68] steerControl: car Location i= 3619.520752
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.68] steerControl: car Location j= 615.192505
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.68] steerControl: angle=1.724782, cur=-2.000000, diff=3.724782, control=0.098528
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.68] Steering LEFT with control= 0.098528
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.69] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.69] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.69] steerControl: car Location i= 3629.263916
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.69] steerControl: car Location j= 614.492188
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.69] steerControl: angle=1.954965, cur=-2.000000, diff=3.954965, control=0.104629
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.69] Steering LEFT with control= 0.104629
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.71] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.71] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.71] steerControl: car Location i= 3639.043457
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.71] steerControl: car Location j= 613.812012
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.71] steerControl: angle=2.199456, cur=-2.000000, diff=4.199456, control=0.111099
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.71] Steering LEFT with control= 0.111099
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.72] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.72] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.72] steerControl: car Location i= 3648.859375
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.72] steerControl: car Location j= 613.151672
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.72] steerControl: angle=2.460280, cur=-2.000000, diff=4.460280, control=0.118028
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.72] Steering LEFT with control= 0.118028
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.74] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.74] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.74] steerControl: car Location i= 3658.711426
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.74] steerControl: car Location j= 612.512085
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.74] steerControl: angle=2.739514, cur=-1.000000, diff=3.739514, control=0.075469
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.74] Steering LEFT with control= 0.075469
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.76] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.76] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.76] steerControl: car Location i= 3668.599609
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.76] steerControl: car Location j= 611.892883
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.76] steerControl: angle=3.040000, cur=-1.000000, diff=4.040000, control=0.108512
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.76] Steering LEFT with control= 0.108512
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.77] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.77] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.77] steerControl: car Location i= 3678.523926
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.77] steerControl: car Location j= 611.295044
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.77] steerControl: angle=3.364774, cur=-1.000000, diff=4.364774, control=0.117239
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.77] Steering LEFT with control= 0.117239
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.79] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.79] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.79] steerControl: car Location i= 3688.484131
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.79] steerControl: car Location j= 610.718201
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.79] steerControl: angle=3.717933, cur=-1.000000, diff=4.717933, control=0.126777
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.79] Steering LEFT with control= 0.126777
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.80] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.80] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.80] steerControl: car Location i= 3698.479980
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.80] steerControl: car Location j= 610.163208
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.80] steerControl: angle=4.104120, cur=-1.000000, diff=5.104120, control=0.137258
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.80] Steering LEFT with control= 0.137258
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.82] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.82] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.82] steerControl: car Location i= 3708.511475
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.82] steerControl: car Location j= 609.630920
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.82] steerControl: angle=4.529109, cur=-1.000000, diff=5.529109, control=0.148852
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.82] Steering LEFT with control= 0.148852
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.84] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.84] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.84] steerControl: car Location i= 3718.578369
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.84] steerControl: car Location j= 609.120911
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.84] steerControl: angle=5.000616, cur=0.000000, diff=5.000616, control=0.111803
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.84] Steering LEFT with control= 0.111803
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.85] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.85] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.85] steerControl: car Location i= 3728.680420
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.85] steerControl: car Location j= 608.638489
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.85] steerControl: angle=5.526271, cur=0.000000, diff=5.526271, control=0.151298
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.85] Steering LEFT with control= 0.151298
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.87] steerControl: targetNode X= 3884.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.87] steerControl: targetNode Y= 654.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.87] steerControl: car Location i= 3738.817383
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.87] steerControl: car Location j= 608.184204
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.87] steerControl: angle=6.117927, cur=0.000000, diff=6.117927, control=0.167740
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.87] Steering LEFT with control= 0.167740
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.88] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.88] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.88] steerControl: car Location i= 3748.989258
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.88] steerControl: car Location j= 607.754028
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.88] steerControl: angle=15.592469, cur=0.000000, diff=15.592469, control=0.626675
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.88] Steering LEFT with control= 0.626675
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.90] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.90] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.90] steerControl: car Location i= 3759.195801
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.90] steerControl: car Location j= 607.351990
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.90] steerControl: angle=15.988307, cur=0.000000, diff=15.988307, control=0.409604
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.90] Steering LEFT with control= 0.409604
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.92] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.92] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.92] steerControl: car Location i= 3769.436768
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.92] steerControl: car Location j= 606.979858
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.92] steerControl: angle=16.399010, cur=0.000000, diff=16.399010, control=0.420243
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.92] Steering LEFT with control= 0.420243
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.93] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.93] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.93] steerControl: car Location i= 3779.704834
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.93] steerControl: car Location j= 606.668640
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.93] steerControl: angle=16.821457, cur=0.000000, diff=16.821457, control=0.431098
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.93] Steering LEFT with control= 0.431098
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.95] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.95] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.95] steerControl: car Location i= 3790.003662
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.95] steerControl: car Location j= 606.406555
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.95] steerControl: angle=17.258202, cur=0.000000, diff=17.258202, control=0.442374
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.95] Steering LEFT with control= 0.442374
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.96] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.96] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.96] steerControl: car Location i= 3800.332764
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.96] steerControl: car Location j= 606.195129
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.96] steerControl: angle=17.710121, cur=1.000000, diff=16.710121, control=0.404051
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.96] Steering LEFT with control= 0.404051
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.98] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.98] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.98] steerControl: car Location i= 3810.691406
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.98] steerControl: car Location j= 606.038208
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.98] steerControl: angle=18.177862, cur=2.000000, diff=16.177862, control=0.391140
+[SYS: 2025-04-25 13:44:44][GAME: 00:03.98] Steering LEFT with control= 0.391140
+[SYS: 2025-04-25 13:44:44][GAME: 00:04.00] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:04.00] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:44][GAME: 00:04.00] steerControl: car Location i= 3821.078613
+[SYS: 2025-04-25 13:44:44][GAME: 00:04.00] steerControl: car Location j= 605.939209
+[SYS: 2025-04-25 13:44:44][GAME: 00:04.00] steerControl: angle=18.662178, cur=2.000000, diff=16.662178, control=0.428662
+[SYS: 2025-04-25 13:44:44][GAME: 00:04.00] Steering LEFT with control= 0.428662
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.01] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.01] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.01] steerControl: car Location i= 3831.493408
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.01] steerControl: car Location j= 605.902283
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.01] steerControl: angle=19.163809, cur=3.000000, diff=16.163809, control=0.391636
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.01] Steering LEFT with control= 0.391636
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.03] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.03] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.03] steerControl: car Location i= 3841.935791
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.03] steerControl: car Location j= 605.927002
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.03] steerControl: angle=19.684288, cur=4.000000, diff=15.684288, control=0.380119
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.03] Steering LEFT with control= 0.380119
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.04] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.04] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.04] steerControl: car Location i= 3852.403076
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.04] steerControl: car Location j= 606.022644
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.04] steerControl: angle=20.223740, cur=5.000000, diff=15.223740, control=0.369080
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.04] Steering LEFT with control= 0.369080
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.06] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.06] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.06] steerControl: car Location i= 3862.550781
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.06] steerControl: car Location j= 606.181458
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.06] steerControl: angle=20.765316, cur=5.000000, diff=15.765316, control=0.407672
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.06] Steering LEFT with control= 0.407672
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.08] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.08] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.08] steerControl: car Location i= 3872.377930
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.08] steerControl: car Location j= 606.405396
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.08] steerControl: angle=21.307440, cur=6.000000, diff=15.307440, control=0.371239
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.08] Steering LEFT with control= 0.371239
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.09] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.09] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.09] steerControl: car Location i= 3881.884033
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.09] steerControl: car Location j= 606.695740
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.09] steerControl: angle=21.848488, cur=7.000000, diff=14.848488, control=0.359738
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.09] Steering LEFT with control= 0.359738
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.11] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.11] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.11] steerControl: car Location i= 3891.067627
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.11] steerControl: car Location j= 607.057190
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.11] steerControl: angle=22.386061, cur=8.000000, diff=14.386061, control=0.348091
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.11] Steering LEFT with control= 0.348091
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.12] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.12] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.12] steerControl: car Location i= 3899.930908
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.12] steerControl: car Location j= 607.484253
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.12] steerControl: angle=22.919472, cur=8.000000, diff=14.919472, control=0.386322
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.12] Steering LEFT with control= 0.386322
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.14] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.14] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.14] steerControl: car Location i= 3908.474121
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.14] steerControl: car Location j= 607.976685
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.14] steerControl: angle=23.446959, cur=9.000000, diff=14.446959, control=0.349361
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.14] Steering LEFT with control= 0.349361
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.16] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.16] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.16] steerControl: car Location i= 3916.697754
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.16] steerControl: car Location j= 608.532593
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.16] steerControl: angle=23.966930, cur=10.000000, diff=13.966930, control=0.337173
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.16] Steering LEFT with control= 0.337173
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.17] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.17] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.17] steerControl: car Location i= 3924.939941
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.17] steerControl: car Location j= 609.178406
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.17] steerControl: angle=24.499722, cur=10.000000, diff=14.499722, control=0.375813
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.17] Steering LEFT with control= 0.375813
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.19] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.19] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.19] steerControl: car Location i= 3933.199707
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.19] steerControl: car Location j= 609.914917
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.19] steerControl: angle=25.046345, cur=11.000000, diff=14.046345, control=0.339824
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.19] Steering LEFT with control= 0.339824
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.20] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.20] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.20] steerControl: car Location i= 3941.475830
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.20] steerControl: car Location j= 610.742859
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.20] steerControl: angle=25.607927, cur=12.000000, diff=13.607927, control=0.329238
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.20] Steering LEFT with control= 0.329238
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.22] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.22] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.22] steerControl: car Location i= 3949.767090
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.22] steerControl: car Location j= 611.662842
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.22] steerControl: angle=26.185743, cur=13.000000, diff=13.185743, control=0.319089
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.22] Steering LEFT with control= 0.319089
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.24] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.24] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.24] steerControl: car Location i= 3958.072266
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.24] steerControl: car Location j= 612.675476
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.24] steerControl: angle=26.781231, cur=13.000000, diff=13.781231, control=0.359418
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.24] Steering LEFT with control= 0.359418
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.25] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.25] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.25] steerControl: car Location i= 3966.392090
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.25] steerControl: car Location j= 613.777527
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.25] steerControl: angle=27.396971, cur=14.000000, diff=13.396971, control=0.325318
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.25] Steering LEFT with control= 0.325318
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.27] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.27] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.27] steerControl: car Location i= 3974.725586
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.27] steerControl: car Location j= 614.969910
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.27] steerControl: angle=28.034838, cur=15.000000, diff=13.034838, control=0.316818
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.27] Steering LEFT with control= 0.316818
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.28] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.28] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.28] steerControl: car Location i= 3983.069092
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.28] steerControl: car Location j= 616.257141
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.28] steerControl: angle=28.695932, cur=15.000000, diff=13.695932, control=0.358926
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.28] Steering LEFT with control= 0.358926
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.30] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.30] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.30] steerControl: car Location i= 3991.423584
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.30] steerControl: car Location j= 617.636047
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.30] steerControl: angle=29.383692, cur=16.000000, diff=13.383692, control=0.326786
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.30] Steering LEFT with control= 0.326786
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.32] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.32] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.32] steerControl: car Location i= 3999.787842
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.32] steerControl: car Location j= 619.107361
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.32] steerControl: angle=30.100914, cur=17.000000, diff=13.100914, control=0.320453
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.32] Steering LEFT with control= 0.320453
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.33] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.33] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.33] steerControl: car Location i= 4008.158691
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.33] steerControl: car Location j= 620.674377
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.33] steerControl: angle=30.849974, cur=17.000000, diff=13.849974, control=0.364976
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.33] Steering LEFT with control= 0.364976
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.35] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.35] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.35] steerControl: car Location i= 4016.537109
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.35] steerControl: car Location j= 622.334167
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.35] steerControl: angle=31.635654, cur=18.000000, diff=13.635654, control=0.335533
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.35] Steering LEFT with control= 0.335533
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.36] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.36] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.36] steerControl: car Location i= 4024.921875
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.36] steerControl: car Location j= 624.087402
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.36] steerControl: angle=32.462322, cur=19.000000, diff=13.462322, control=0.332225
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.36] Steering LEFT with control= 0.332225
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.38] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.38] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.38] steerControl: car Location i= 4033.309570
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.38] steerControl: car Location j= 625.937317
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.38] steerControl: angle=33.334064, cur=19.000000, diff=14.334064, control=0.380145
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.38] Steering LEFT with control= 0.380145
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.40] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.40] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.40] steerControl: car Location i= 4041.698975
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.40] steerControl: car Location j= 627.884399
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.40] steerControl: angle=34.256763, cur=20.000000, diff=14.256763, control=0.354487
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.40] Steering LEFT with control= 0.354487
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.41] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.41] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.41] steerControl: car Location i= 4050.091064
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.41] steerControl: car Location j= 629.925659
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.41] steerControl: angle=35.238693, cur=21.000000, diff=14.238693, control=0.355516
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.41] Steering LEFT with control= 0.355516
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.43] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.43] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.43] steerControl: car Location i= 4058.482666
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.43] steerControl: car Location j= 632.064209
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.43] steerControl: angle=36.287189, cur=21.000000, diff=15.287189, control=0.408392
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.43] Steering LEFT with control= 0.408392
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.44] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.44] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.44] steerControl: car Location i= 4066.561279
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.44] steerControl: car Location j= 634.212769
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.44] steerControl: angle=37.369797, cur=22.000000, diff=15.369797, control=0.386310
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.44] Steering LEFT with control= 0.386310
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.46] steerControl: targetNode X= 4223.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.46] steerControl: targetNode Y= 717.000000
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.46] steerControl: car Location i= 4074.328125
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.46] steerControl: car Location j= 636.368164
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.46] steerControl: angle=38.486950, cur=23.000000, diff=15.486950, control=0.390103
+[SYS: 2025-04-25 13:44:45][GAME: 00:04.46] Steering LEFT with control= 0.390103
